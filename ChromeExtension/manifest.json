@@ -1,0 +1,74 @@
+{
+	"name": "Surviv.io-Cheats",
+	"version": "1.0.62",
+	"author": "https://github.com/Najlepszy56/Surviv.io-Cheats",
+	"description": "Surviv.io-Cheats chrome extension",
+	"manifest_version": 2,
+	"permissions": [
+		"tabs",
+		"storage",
+		"*://*/*",
+		"declarativeContent",
+		"webRequest",
+		"webRequestBlocking"
+	],
+
+	"externally_connectable": {
+  		"matches": [
+  			"*://*.surviv.io/",
+  			"*://*.surviv2.io/",
+  			"*://*.2dbattleroyale.com/",
+  			"*://*.2dbattleroyale.org/"
+  		]
+	},
+
+	"content_security_policy":  "script-src 'self' 'unsafe-eval'; object-src 'self'",
+
+	"background": {
+		"scripts": [
+			"init.js",
+			"autoAim.js",
+			"autoHeal.js",
+			"autoLoot.js",
+			"autoOpeningDoors.js",
+			"bigMapManager.js",
+			"grenadeTimer.js",
+			"laserPointer.js",
+			"linesToPlayers.js",
+			"autoFire.js",
+			"fpsCounter.js",
+			"zoomRadiusManager.js",
+			"smokeAlphaManager.js",
+			"airDropTracking.js",
+			"menu.js",
+			"background.js"
+		],
+		"persistent": true
+	},
+	"content_scripts": [{
+		"matches": [
+			"*://*.surviv.io/*",
+  			"*://*.surviv2.io/*",
+  			"*://*.2dbattleroyale.com/*",
+  			"*://*.2dbattleroyale.org/*"
+		],
+		"css": [
+			"style.css"
+		],
+		"run_at": "document_start"
+	}],
+	"page_action": {
+		"default_icon": {
+			"16": "images/goal16.png",
+			"32": "images/goal32.png",
+			"48": "images/goal48.png",
+			"128": "images/goal128.png"
+		}
+	},
+	"icons": {
+		"16": "images/goal16.png",
+		"32": "images/goal32.png",
+		"48": "images/goal48.png",
+		"128": "images/goal128.png"
+	}
+}

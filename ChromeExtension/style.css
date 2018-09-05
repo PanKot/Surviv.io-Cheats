@@ -1,0 +1,489 @@
+/* Glitch Logo */
+#start-row-header::before {
+	content: '';
+	background-image: url(http://surviv.io/img/surviv_logo_full.png);
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-repeat: no-repeat;
+	background-position: 50%;
+	background-size: inherit;
+	top: 0px;
+	filter: drop-shadow(4px 4px 0px #f00);
+	animation: glitch-loop-1 0.7s infinite ease-in-out;
+}
+
+#start-row-header::after {
+	content: '';
+	background-image: url(http://surviv.io/img/surviv_logo_full.png);
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-repeat: no-repeat;
+	background-position: 50%;
+	background-size: inherit;
+	top: 0px;
+	filter: drop-shadow(5px -5px 0px #00f);
+	animation: glitch-loop-2 0.3s infinite ease-in-out alternate-reverse;
+}
+
+@keyframes glitch-loop-1 {
+	0% {
+		clip-path: inset(100% 100%)
+	}
+	1% {
+		left: -1.0%;
+		clip-path: inset(15% 0% 80% 0%)
+	}
+	5% {
+		left: 0.0%;
+		clip-path: inset(25% 0% 70% 0%)
+	}
+	5.1% {
+		clip-path: inset(100% 100%)
+	}
+	11% {
+		left: 1.0%;
+		clip-path: inset(90% 0% 10% 0%)
+	}
+	15% {
+		left: 0.5%;
+		clip-path: inset(85% 0% -20% 0%)
+	}
+	15.1% {
+		clip-path: inset(100% 100%)
+	}
+	31% {
+		left: -1.0%;
+		clip-path: inset(40% 0% 50% 0%)
+	}
+	35% {
+		left: -0.5%;
+		clip-path: inset(50% 0% 40% 0%)
+	}
+	35.1% {
+		clip-path: inset(100% 100%)
+	}
+	41% {
+		left: -0.5%;
+		clip-path: inset(-500% 0% 95% 0%)
+	}
+	45% {
+		left: 1.5%;
+		clip-path: inset(500% 0% 85% 0%)
+	}
+	45.1% {
+		clip-path: inset(100% 100%)
+	}
+	61% {
+		left: -1.5%;
+		clip-path: inset(40% 0% 50% 0%)
+	}
+	65% {
+		left: 0.5%;
+		clip-path: inset(30% 0% 45% 0%)
+	}
+	65.1% {
+		clip-path: inset(100% 100%)
+	}
+	81% {
+		left: 0.5%;
+		clip-path: inset(66% 0% 11% 0%)
+	}
+	85% {
+		left: 1.0%;
+		clip-path: inset(77% 0% 77% 0%)
+	}
+	85.1% {
+		clip-path: inset(100% 100%)
+	}
+	100% {
+		clip-path: inset(100% 100%)
+	}
+}
+
+@keyframes glitch-loop-2 {
+	0% {
+		clip-path: inset(100% 100%)
+	}
+	1% {
+		left: 1.0%;
+		clip-path: inset(55% 0% 33% 0%)
+	}
+	5% {
+		left: 0.5%;
+		clip-path: inset(66% 0% 33% 0%)
+	}
+	5.1% {
+		clip-path: inset(100% 100%)
+	}
+	11% {
+		left: -1.0%;
+		clip-path: inset(-200% 0% 300% 0%)
+	}
+	15% {
+		left: 0.5%;
+		clip-path: inset(70% 0% 23% 0%)
+	}
+	15.1% {
+		clip-path: inset(100% 100%)
+	}
+	31% {
+		left: 1.0%;
+		clip-path: inset(10% 0% 74% 0%)
+	}
+	35% {
+		left: 0.5%;
+		clip-path: inset(30% 0% 70% 0%)
+	}
+	35.1% {
+		clip-path: inset(100% 100%)
+	}
+	41% {
+		left: 1.0%;
+		clip-path: inset(200% 0% -100% 0%)
+	}
+	45% {
+		left: -1.5%;
+		clip-path: inset(30% 0% 500% 0%)
+	}
+	45.1% {
+		clip-path: inset(100% 100%)
+	}
+	61% {
+		left: 1.5%;
+		clip-path: inset(56% 0% 36% 0%)
+	}
+	65% {
+		left: -0.5%;
+		clip-path: inset(60% 0% 31% 0%)
+	}
+	65.1% {
+		clip-path: inset(100% 100%)
+	}
+	81% {
+		left: -0.5%;
+		clip-path: inset(90% 0% 0% 0%)
+	}
+	85% {
+		left: -1.0%;
+		clip-path: inset(200% 0% 0% 0%)
+	}
+	85.1% {
+		clip-path: inset(100% 100%)
+	}
+	100% {
+		clip-path: inset(100% 100%)
+	}
+}
+
+/* Cheat Menu */
+
+.ui-game-menu {
+	background-color: rgba(0, 0, 0, .5);
+	border-radius: 5px;
+	box-sizing: border-box;
+	display: none;
+	margin: 10px auto;
+	padding: 10px 15px
+}
+
+@media screen and (max-width:850px) {
+	.ui-game-menu {
+		height: auto;
+		padding: 4px 10px;
+		width: 190px
+	}
+}
+
+@media (max-width:850px) and (max-height:300px) {
+	.ui-game-menu {
+		margin-top: 0
+	}
+}
+
+.ui-game-menu p {
+	bottom: 4px;
+	display: inline-block;
+	font-size: 14px;
+	position: relative
+}
+
+@media screen and (max-width:850px) {
+	.ui-game-menu p {
+		bottom: 0;
+		font-size: 12px;
+		margin-bottom: 8px;
+		margin-top: 6px
+	}
+}
+
+.ui-game-menu-desktop {
+	height: 495px;
+	width: 350px
+}
+
+.btns-game-double-row {
+	display: flex;
+	position: relative
+}
+
+.btns-game-double-row>.btn-game-container {
+	position: relative;
+	width: 100%
+}
+
+.btns-game-double-row>.btn-game-container>.btn-double-row {
+	display: inline-block
+}
+
+.btns-game-double-row>div:not(:last-child) {
+	margin-right: 2px
+}
+
+.btn-grey {
+	background-color: grey !important;
+	border-bottom: 2px solid #3e3e3e !important;
+	box-shadow: inset 0 -2px #3c3c3c !important;
+}
+
+.btn-game-tabs>.btn-game-container>.btn-game-menu {
+	text-align: center;
+	color: #fff;
+	line-height: 36px;
+	font-size: 16px;
+	background-color: transparent;
+	border: 2px solid;
+	border-color: #fff;
+	box-shadow: none;
+	cursor: pointer;
+	flex: 1
+}
+
+.btn-game-tabs>.btn-game-container>.btn-game-menu-selected {
+	border: 2px solid!important;
+	border-color: #0f0!important;
+	background-color: rgba(0, 0, 0, .35)
+}
+
+.ui-list {
+	overflow-y: auto;
+}
+
+.ui-list > div {
+	width: 98%;
+}
+
+.ui-game-tab-settings {
+	display: block;
+	height: auto;
+}
+
+.ui-game-tab-settings-desktop {
+	height: 340px
+}
+
+.full-height {
+	height: 422px !important;
+}
+
+.btn-game-menu {
+	text-align: center;
+	line-height: 38px;
+	display: block;
+	width: 100%;
+	height: 40px;
+	border: 0;
+	border-radius: 5px;
+	box-sizing: border-box;
+	position: relative;
+	margin: auto;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	color: #fff;
+	font-size: 16px;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, .25);
+	background-color: #50afab;
+	border-bottom: 2px solid #387c79;
+	box-shadow: inset 0 -2px #387c79;
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+
+#ui-game-menu,
+.ui-game-menu {
+	float: left !important;
+	margin: 20px !important;
+}
+
+#ui-center {
+	width: max-content !important;
+}
+
+.info-container {
+	text-align: center;
+}
+
+.info-text {
+	font-size: 20px !important;
+	color: white;
+}
+
+.slider-current-value {
+	display: block;
+	background: #ffffff38;
+	border-radius: 2px;
+	padding: 6px 10px;
+}
+
+.center {
+	text-align: center;
+}
+
+.left {
+	float: left;
+	text-align: left;
+}
+
+.right {
+	float: right;
+}
+
+.ui-green {
+	background: #2b4013;
+}
+
+.notification {
+	position: fixed;
+	top: 230px;
+	color: yellow;
+	font-size: 32px;
+	width: 100vw;
+	text-align: center;
+	text-shadow: 2px 2px 0px #000000;
+	font-weight: bold;
+	opacity: 0;
+}
+
+.fadeInAndOut {
+	-webkit-animation: fadeinout 4s linear forwards;
+	animation: fadeinout 4s linear forwards;
+}
+
+.fadeInAndOut:active {
+	-webkit-animation: fadeinout 4s linear forwards;
+	animation: fadeinout 4s linear forwards;
+}
+
+@-webkit-keyframes fadeinout {
+	0%,100% { opacity: 0; }
+	50% { opacity: 1; }
+}
+
+@keyframes fadeinout {
+	0%,100% { opacity: 0; }
+	50% { opacity: 1; }
+}
+
+/* Reset Select */
+select[class^="select-cheat"] {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	appearance: none;
+	outline: 0;
+	box-shadow: none;
+	border: 0 !important;
+	background: rgba(0, 0, 0, 0.68) !important;
+	background-image: none;
+}
+
+
+/* Custom Select */
+.select-cheat {
+	position: relative;
+	display: block;
+	background: rgba(0, 0, 0, 0.68) !important;
+	overflow: hidden;
+	border-radius: .25em;
+}
+
+select[class^="select-cheat"] {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 15px;
+	color: #fff;
+	cursor: pointer;
+}
+
+select[class^="select-cheat"]::-ms-expand {
+	display: none;
+}
+
+
+/* Arrow */
+.select::after {
+	content: '\25BC';
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	padding: 0 1em;
+	background: #34495e;
+	pointer-events: none;
+}
+
+
+/* Transition */
+.select:hover::after {
+	color: #f39c12;
+}
+
+.select::after {
+	-webkit-transition: .25s all ease;
+	-o-transition: .25s all ease;
+	transition: .25s all ease;
+}
+
+/* Enemy container */
+.ui-cheat-enemy-info {
+	position: absolute;
+	width: 200px;
+	padding: 4px;
+	margin-bottom: 8px;
+	color: white;
+	top: calc(50% - 119px);
+	margin-left: 10px;
+}
+
+#ui-cheat-info {
+	width: auto !important;
+}
+
+#ui-cheat-armor-container {
+	margin-top: 66px;
+	margin: 0 !important;
+	display: inline-block;
+	padding-top: 26px !important;
+	display: block;
+	pointer-events: auto;
+}
+
+.ui-cheat-armor-counter {
+	float: left;
+	position: relative !important;
+	margin-left: 4px;
+	margin-right: 4px;
+}
+
+.ui-cheat-team-member-name {
+	width: 100%;
+	text-align: center;
+	max-width: initial !important;
+}
+
+.ui-cheat-armor-image {
+	transform: scale(1, 1);
+	display: none;
+}
