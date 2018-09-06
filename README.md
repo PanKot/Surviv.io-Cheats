@@ -52,9 +52,9 @@ After fixing the error, the data is deleted. We do not collect any private data.
 ## Warning!
 All actions you take at your own risk. The author is not responsible for the consequences of your actions.
 
-## Donation
-If this project help you reduce time to develop, you can give me a cup of coffee :)
+## :moneybag: Donation
+If this project help you reduce time to develop, you can give me a cup of coffee &nbsp;<img src="http://oi68.tinypic.com/2pzmjk8.jpg" width=25px>
 
-ETH: 0x522e2be4b3f15d9e9e877e449cc13701b4bc91d7
+<img src="http://oi67.tinypic.com/33de4r4.jpg" width=25px> ETH: 0x522e2be4b3f15d9e9e877e449cc13701b4bc91d7
 
-BTC: 35zjJBGpn2fVd9Dtx5NmrhAXmPYK5r9sMZ
+<img src="http://oi64.tinypic.com/2ekrt69.jpg" width=25px> BTC: 35zjJBGpn2fVd9Dtx5NmrhAXmPYK5r9sMZ
