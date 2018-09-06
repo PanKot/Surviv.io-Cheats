@@ -10,25 +10,6 @@ var variableNames = {
 	smokeAlpha: generateVaribaleName()
 }
 
-var options = null;
-
-var moduleNames = [
-	"autoAim",
-	"autoLoot",
-	"autoHeal",
-	"autoOpeningDoors",
-	"bigMapManager",
-	"grenadeTimer",
-	"laserPointer",
-	"autoFire",
-	"fpsCounter",
-	"menu",
-	"linesToPlayers",
-	"smokeAlphaManager",
-	"zoomRadiusManager",
-	"airDropTracking"
-];
-
 /*
 	When you working with options, its need to repatching code every time.
 */
@@ -53,21 +34,6 @@ var patchManifestCode = function(manifestCode) {
 	return manifestCode;
 }
 
-var stringifyModules = function(moduleNames) {
-	var modulesObj = '';
-
-	modulesObj = '{';
-
-	moduleNames.forEach(function(name, index) {
-		modulesObj = modulesObj + name + ':';
-		modulesObj = modulesObj + window[name] + ',';
-	});
-
-	modulesObj += '}';
-
-	return modulesObj;
-}
-
 var wrapAppCode = function(appCode) {
 	/*
 		game: 		 		actual game state
@@ -77,9 +43,6 @@ var wrapAppCode = function(appCode) {
 	*/
 	
 	var wrapCode = '';
-
-	// Exporting modules from extension files
-	var modules = stringifyModules(moduleNames);
 
 	wrapCode = '(function(';
 
@@ -93,13 +56,12 @@ var wrapAppCode = function(appCode) {
 	appCode = wrapCode + appCode;
 
 	// init from init.js
-	wrapCode = '\n(' + init + ')(';
+	wrapCode = '\nwindow.init(';
 	wrapCode = wrapCode + variableNames.game + ',';
 	wrapCode = wrapCode + variableNames.exports + ',';
 	wrapCode = wrapCode + variableNames.interactionEmitter + ',';
 	wrapCode = wrapCode + variableNames.emitActionCb + ',';
 	wrapCode = wrapCode + variableNames.smokeAlpha + ',';
-	wrapCode = wrapCode + modules + ',';
 	wrapCode = wrapCode + JSON.stringify(options) + ',';
 	wrapCode = wrapCode + "\"" + chrome.runtime.id + "\"" + ');';
 	wrapCode = wrapCode + '})({}, window["' + variableNames.exports + '"], {}, {}, {}, {});'; 
@@ -159,7 +121,12 @@ function patchAppCode(appCode) {
 		}
 	});
 
-	appCode = wrapAppCode(appCode);
+	// Add init.js script
+	var url = chrome.extension.getURL('init.js');
+	return fetch(url)
+		.then((response) => response.text())
+		.then((text) => { return text + appCode; })
+		.then((code) => { return wrapAppCode(code); });
 
 	return appCode;
 }
@@ -250,10 +217,11 @@ var codeInjector = (function(){
 	}
 
 	var handleAppCode = function(appCode, tabId) {
-		var patchedAppCode = patchAppCode(appCode);
-		codeInjector.setAppCode(patchedAppCode);
-		appCodeUpdating = false;
-		codeInjector.tryToInjectCode(tabId);
+		patchAppCode(appCode).then(function(patchedAppCode) {
+			codeInjector.setAppCode(patchedAppCode);
+			appCodeUpdating = false;
+			codeInjector.tryToInjectCode(tabId);
+		});
 	}
 
 	var injectCode = function(tabId, code) {

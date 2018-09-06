@@ -1,7 +1,7 @@
 {
 	"name": "Surviv.io-Cheats",
-	"version": "1.0.62",
-	"author": "https://github.com/Najlepszy56/Surviv.io-Cheats",
+	"version": "1.0.63",
+	"author": "https://github.com/PowerOfUniverse/Surviv.io-Cheats",
 	"description": "Surviv.io-Cheats chrome extension",
 	"manifest_version": 2,
 	"permissions": [
@@ -27,36 +27,10 @@
 	"background": {
 		"scripts": [
 			"init.js",
-			"autoAim.js",
-			"autoHeal.js",
-			"autoLoot.js",
-			"autoOpeningDoors.js",
-			"bigMapManager.js",
-			"grenadeTimer.js",
-			"laserPointer.js",
-			"linesToPlayers.js",
-			"autoFire.js",
-			"fpsCounter.js",
-			"zoomRadiusManager.js",
-			"smokeAlphaManager.js",
-			"airDropTracking.js",
-			"menu.js",
 			"background.js"
 		],
 		"persistent": true
 	},
-	"content_scripts": [{
-		"matches": [
-			"*://*.surviv.io/*",
-  			"*://*.surviv2.io/*",
-  			"*://*.2dbattleroyale.com/*",
-  			"*://*.2dbattleroyale.org/*"
-		],
-		"css": [
-			"style.css"
-		],
-		"run_at": "document_start"
-	}],
 	"page_action": {
 		"default_icon": {
 			"16": "images/goal16.png",
