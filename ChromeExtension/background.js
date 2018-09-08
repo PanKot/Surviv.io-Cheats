@@ -76,8 +76,8 @@ function patchAppCode(appCode) {
 	var patchRules = [
 		{
 			name: "Export game scope",
-			from: /var ([a-z]),([a-z])=this.pixi.renderer/,
-			to: variableNames.game + '.scope=this;var $1,$2=this.pixi.renderer'
+			from: /this.canvasMode=this.pixi.renderer/,
+			to: variableNames.game + '.scope=this;this.canvasMode=this.pixi.renderer'
 		},
 		{
 			name: "Action emitter export",
