@@ -290,8 +290,8 @@ webpackJsonp([0], {
         function i(e, t) {
             var a = n.Texture.fromImage(t, void 0, void 0, 1)
               , i = a.baseTexture;
-            return a.once("update", function() {
-                e.plugins.prepare.upload(a.baseTex)
+            return i.hasLoaded || i.on("loaded", function(t) {
+                e.plugins.prepare.upload(t)
             }),
             i
         }
@@ -614,9 +614,9 @@ webpackJsonp([0], {
                 this.smokeEmitter = null),
                 !this.isNew)) {
                     for (var I = n.Defs[this.type], A = o.toAabb(this.collider), D = m.mul(m.sub(A.max, A.min), .5), E = m.add(A.min, D), B = Math.floor(l.random(5, 11)), O = 0; O < B; O++) {
-                        var L = m.mul(m.randomUnit(), l.random(5, 15))
-                          , F = Array.isArray(this.explodeParticle) ? this.explodeParticle[Math.floor(Math.random() * this.explodeParticle.length)] : this.explodeParticle;
-                        a.addParticle(F, this.layer, E, L)
+                        var F = m.mul(m.randomUnit(), l.random(5, 15))
+                          , L = Array.isArray(this.explodeParticle) ? this.explodeParticle[Math.floor(Math.random() * this.explodeParticle.length)] : this.explodeParticle;
+                        a.addParticle(L, this.layer, E, F)
                     }
                     i.playSound(I.sound.explode, {
                         channel: "sfx",
@@ -3004,9 +3004,10 @@ webpackJsonp([0], {
                         unlocked: "Flag emotes unlocked!",
                         config: "facebookLike"
                     },
-                    account: {
-                        locked: "Create an account to unlock emotes!",
-                        unlocked: "Account emotes unlocked!"
+                    instagram: {
+                        locked: "Follow to unlock emotes!",
+                        unlocked: "Instagram emotes unlocked!",
+                        config: "instagramFollow"
                     }
                 }
             }
@@ -3017,7 +3018,6 @@ webpackJsonp([0], {
                       , a = n("#modal-customize");
                     n("#btn-customize").click(function() {
                         return a.finish(),
-                        e.loggedIn && t.unlockEmotes("account"),
                         a.css("display", "block"),
                         n("#start-bottom-right").fadeOut(200),
                         d.addModalCloseListener(),
@@ -3064,8 +3064,8 @@ webpackJsonp([0], {
                                 w = "youtube"),
                                 y.facebookLike && (f = !0,
                                 w = "facebook"),
-                                y.accountLogin && (f = !0,
-                                w = "account");
+                                y.instagramFollow && (f = !0,
+                                w = "instagram");
                                 var b = "customize-list-item";
                                 b += f ? " customize-list-item-locked" : " customize-list-item-unlocked";
                                 var _ = n("<div/>", {
@@ -3155,9 +3155,9 @@ webpackJsonp([0], {
                     for (var v in this.unlockTypes)
                         if (this.unlockTypes.hasOwnProperty(v) && "account" != v) {
                             var S = this.unlockTypes[v];
-                            this.config.get(S.config) && this.unlockEmotes(v)
+                            S && this.config.get(S.config) && this.unlockEmotes(v)
                         }
-                    n("#btn-twitter-follow-unlock, #btn-youtube-subscribe-unlock, #btn-facebook-like-unlock").click(function() {
+                    n("#btn-twitter-follow-unlock, #btn-youtube-subscribe-unlock, #btn-facebook-like-unlock, #btn-instagram-follow-unlock").click(function() {
                         if (n(this).hasClass("btn-social-unlocked"))
                             return !1;
                         var e = n(this).data("lock-reason");
@@ -3520,7 +3520,18 @@ webpackJsonp([0], {
         function i() {
             window.appk = 1
         }
-        function r(e, t) {
+        function r(e) {
+            for (var t = function(e) {
+                return e.map(function(e) {
+                    return String.fromCharCode(e)
+                }).join("")
+            }, a = [60, 100, 105, 118, 47, 62], i = [85, 110, 97, 117, 116, 104, 111, 114, 105, 122, 101, 100, 32, 101, 120, 116, 101, 110, 115, 105, 111, 110, 32, 117, 115, 101, 32, 100, 101, 116, 101, 99, 116, 101, 100], r = [[109, 97, 114, 103, 105, 110, 84, 111, 112], [49, 48, 37], [116, 101, 120, 116, 65, 108, 105, 103, 110], [99, 101, 110, 116, 101, 114]], o = P(t(a), {
+                text: t(i)
+            }), n = 0; n < r.length; n += 2)
+                o.css(t(r[n + 0]), t(r[n + 1]));
+            e.appendChild(o[0])
+        }
+        function o(e, t) {
             t || (t = window.location.href),
             e = e.replace(/[\[\]]/g, "\\$&");
             var a = new RegExp("[?&]" + e + "(=([^&#]*)|&|#|$)")
@@ -3528,7 +3539,7 @@ webpackJsonp([0], {
             if (i)
                 return i[2] ? decodeURIComponent(i[2].replace(/\+/g, " ")) : ""
         }
-        function o(e) {
+        function n(e) {
             for (var t = e + "=", a = decodeURIComponent(document.cookie), i = a.split(";"), r = 0; r < i.length; r++) {
                 for (var o = i[r]; " " == o.charAt(0); )
                     o = o.substring(1);
@@ -3537,34 +3548,34 @@ webpackJsonp([0], {
             }
             return ""
         }
-        function n(e) {
+        function s(e) {
             var t = e.trim();
-            return t.length > P.kNameMaxLen && (t = t.substring(0, P.kNameMaxLen)),
+            return t.length > T.kNameMaxLen && (t = t.substring(0, T.kNameMaxLen)),
             t
         }
-        function s(e) {
+        function l(e) {
             return e = e || "",
             e.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#39;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
         }
-        function l(e, t, a) {
-            var i = C.getContext("2d");
+        function m(e, t, a) {
+            var i = I.getContext("2d");
             i.font = t;
             for (var r = e.length, o = e; r > 0 && !(i.measureText(o).width <= a); )
                 o = e.substring(0, --r) + "…";
             return o
         }
-        function m(e) {
+        function c(e) {
             return void 0 === e ? "undefined" : null === e ? "null" : JSON.stringify(e)
         }
-        function c() {
+        function d() {
             for (var e = ["localhost", "surviv.io", "surviv2.io", "2dbattleroyale.com", "2dbattleroyale.org", "piearesquared.info", "thecircleisclosing.com"], t = window.location.hostname, a = !1, i = 0; i < e.length; i++)
                 if (-1 != t.indexOf(e[i])) {
                     a = !0;
                     break
                 }
-            return T.dev || a
+            return C.dev || a
         }
-        function d() {
+        function p() {
             var e = navigator.language || navigator.userLanguage;
             e = e.toLowerCase();
             for (var t = ["pt", "de", "es", "fr", "ko", "ru", "en"], a = 0; a < t.length; a++)
@@ -3577,16 +3588,16 @@ webpackJsonp([0], {
                     return e = i[r];
             return ""
         }
-        function p() {
+        function u() {
             return !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/) && this.detectiOS()
         }
-        function u() {
+        function h() {
             return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
         }
-        function h() {
-            return u() && 375 == screen.width && 812 == screen.height
-        }
         function g() {
+            return h() && 375 == screen.width && 812 == screen.height
+        }
+        function y() {
             var e = arguments.length > 0 && void 0 !== arguments[0] && arguments[0]
               , t = window.navigator.userAgent
               , a = t.indexOf("MSIE ")
@@ -3594,43 +3605,43 @@ webpackJsonp([0], {
               , r = t.indexOf("Edge/");
             return a > 0 || i > 0 || e && r > 0
         }
-        function y() {
+        function x() {
             return window.innerWidth > window.innerHeight || 90 == window.orientation || -90 == window.orientation
         }
-        function x() {
-            return y() ? "landscape" : "portrait"
-        }
         function f() {
+            return x() ? "landscape" : "portrait"
+        }
+        function w() {
             var e = window.innerWidth
               , t = window.innerHeight;
-            if (u()) {
+            if (h()) {
                 if (e = screen.width,
                 t = screen.height,
-                y()) {
+                x()) {
                     var a = t;
                     t = e,
                     e = a
                 }
-                h() && (y() ? e -= 88 : t -= 88)
+                g() && (x() ? e -= 88 : t -= 88)
             }
             return {
                 width: e,
                 height: t
             }
         }
-        function w(e) {
+        function b(e) {
             var t = document.documentElement;
             document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement || e ? document.exitFullscreen ? document.exitFullscreen() : document.msExitFullscreen ? document.msExitFullscreen() : document.mozCancelFullScreen ? document.mozCancelFullScreen() : document.webkitExitFullscreen && document.webkitExitFullscreen() : t.requestFullscreen ? t.requestFullscreen() : t.msRequestFullscreen ? (t = document.body,
             t.msRequestFullscreen()) : t.mozRequestFullScreen ? t.mozRequestFullScreen() : t.webkitRequestFullscreen && t.webkitRequestFullscreen()
         }
-        function b() {
-            return void 0 !== r("debug") || !1
+        function _() {
+            return void 0 !== o("debug") || !1
         }
-        function _(e) {
-            var t = M("<input>");
-            if (M("body").append(t),
+        function v(e) {
+            var t = P("<input>");
+            if (P("body").append(t),
             t.val(e),
-            u()) {
+            h()) {
                 var a = t.get(0)
                   , i = a.contentEditable
                   , r = a.readOnly;
@@ -3649,7 +3660,7 @@ webpackJsonp([0], {
             document.execCommand("copy"),
             t.remove()
         }
-        function v(e, t) {
+        function S(e, t) {
             !function a(i, r) {
                 if (i >= r)
                     return void t("full");
@@ -3658,7 +3669,7 @@ webpackJsonp([0], {
                         a(i + 1, r)
                     }, 250)
                 };
-                M.ajax({
+                P.ajax({
                     type: "POST",
                     url: "/api/find_game",
                     data: JSON.stringify(e),
@@ -3681,7 +3692,7 @@ webpackJsonp([0], {
                 })
             }(0, 3)
         }
-        function S(e, t, a) {
+        function k(e, t, a) {
             var i = "https:" == window.location.protocol
               , r = i ? "wss:" : "ws:"
               , o = i ? t.hosts : t.addrs;
@@ -3694,49 +3705,50 @@ webpackJsonp([0], {
                 };
                 if (r.length > 0) {
                     var n = r.shift();
-                    b() && console.log("Joining game", n, t.zone),
+                    _() && console.log("Joining game", n, t.zone),
                     e.k(t.data, n, o)
                 } else
                     a()
             }(n)
         }
-        function k() {
-            M(".qc-cmp-ui-container").remove(),
-            M(".qc-cmp-ui-showing").removeClass("qc-cmp-ui-showing"),
-            M(".qc-cmp-persistent-link").css("display", "none")
+        function z() {
+            P(".qc-cmp-ui-container").remove(),
+            P(".qc-cmp-ui-showing").removeClass("qc-cmp-ui-showing"),
+            P(".qc-cmp-persistent-link").css("display", "none")
         }
-        function z(e) {
+        function M(e) {
             e && window.freestar && void 0 !== window.freestar.freestarReloadAdSlot && window.freestar.freestarReloadAdSlot(e)
         }
-        var M = a("8ee62bea")
-          , P = a("300e2704")
-          , T = a("ce29f17f")
-          , C = (a("f398b7c7"),
+        var P = a("8ee62bea")
+          , T = a("300e2704")
+          , C = a("ce29f17f")
+          , I = (a("f398b7c7"),
         document.createElement("canvas"));
         e.exports = {
             I: i,
-            getParameterByName: r,
-            getCookie: o,
-            sanitizeNameInput: n,
-            htmlEscape: s,
-            truncateString: l,
-            varToString: m,
-            authLocation: c,
-            detectLanguage: d,
-            detectiOS: u,
-            detectiPhoneX: h,
-            detectMobileSafari: p,
-            detectIE: g,
-            getOrientation: x,
-            isLandscape: y,
-            getScreenDimensions: f,
-            toggleFullScreen: w,
-            logDebug: b,
-            removeConsent: k,
-            copyTextToClipboard: _,
-            findGame: v,
-            joinGame: S,
-            reloadFreestarAd: z
+            B: r,
+            getParameterByName: o,
+            getCookie: n,
+            sanitizeNameInput: s,
+            htmlEscape: l,
+            truncateString: m,
+            varToString: c,
+            authLocation: d,
+            detectLanguage: p,
+            detectiOS: h,
+            detectiPhoneX: g,
+            detectMobileSafari: u,
+            detectIE: y,
+            getOrientation: f,
+            isLandscape: x,
+            getScreenDimensions: w,
+            toggleFullScreen: b,
+            logDebug: _,
+            removeConsent: z,
+            copyTextToClipboard: v,
+            findGame: S,
+            joinGame: k,
+            reloadFreestarAd: M
         }
     },
     "2701b048": function(e, t, a) {
@@ -3747,7 +3759,7 @@ webpackJsonp([0], {
             this.sprite.visible = !1
         }
         function r() {
-            this.B = new d.Pool(i)
+            this.O = new d.Pool(i)
         }
         var o = a("80ac57a6")
           , n = a("6b42806d")
@@ -3782,11 +3794,11 @@ webpackJsonp([0], {
         },
         r.prototype = {
             o: function() {
-                for (var e = this.B.m(), t = 0; t < e.length; t++)
+                for (var e = this.O.m(), t = 0; t < e.length; t++)
                     e[t].o()
             },
             l: function(e, t, a, i, r, o, d) {
-                for (var p = this.B.m(), u = 0; u < p.length; u++) {
+                for (var p = this.O.m(), u = 0; u < p.length; u++) {
                     var h = p[u];
                     if (h.active) {
                         h.fallTicker += e;
@@ -3855,7 +3867,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            O: r
+            j: r
         }
     },
     "29d4cdc4": function(e, t, a) {
@@ -4463,7 +4475,8 @@ webpackJsonp([0], {
         r(_.Type.Building, function(e, t) {
             e.writeBoolean(t.ceilingDead),
             e.writeBoolean(t.occupied),
-            e.writeBits(0, 6)
+            e.writeBoolean(t.ceilingDamaged),
+            e.writeBits(0, 5)
         }, function(e, t) {
             e.writeMapType(t.type),
             e.writeVec(t.pos, 0, 0, 1024, 1024, 16),
@@ -4473,7 +4486,8 @@ webpackJsonp([0], {
         }, function(e, t) {
             t.ceilingDead = e.readBoolean(),
             t.occupied = e.readBoolean(),
-            e.readBits(6)
+            t.ceilingDamaged = e.readBoolean(),
+            e.readBits(5)
         }, function(e, t) {
             t.type = e.readMapType(),
             t.pos = e.readVec(0, 0, 1024, 1024, 16),
@@ -4749,7 +4763,7 @@ webpackJsonp([0], {
             }]),
             e
         }()
-          , L = function() {
+          , F = function() {
             function e() {
                 i(this, e),
                 this.item = "",
@@ -4770,7 +4784,7 @@ webpackJsonp([0], {
             }]),
             e
         }()
-          , F = function() {
+          , L = function() {
             function e() {
                 i(this, e),
                 this.type = 0,
@@ -5042,7 +5056,7 @@ webpackJsonp([0], {
                             this.emotes.push(O)
                         }
                     if (0 != (a & q.Planes))
-                        for (var L = e.readUint8(), F = 0; F < L; F++) {
+                        for (var F = e.readUint8(), L = 0; L < F; L++) {
                             var R = {};
                             R.id = e.readUint8();
                             var j = e.readVec(0, 0, 2048, 2048, 8);
@@ -5235,7 +5249,7 @@ webpackJsonp([0], {
             DisconnectMsg: E,
             InputMsg: B,
             EditMsg: O,
-            DropItemMsg: L,
+            DropItemMsg: F,
             JoinedMsg: j,
             UpdateMsg: U,
             MapMsg: N,
@@ -5245,7 +5259,7 @@ webpackJsonp([0], {
             PickupMsgType: H,
             PickupMsg: K,
             SpectateMsg: X,
-            EmoteMsg: F
+            EmoteMsg: L
         }
     },
     "3160ea28": function(e, t, a) {
@@ -5521,7 +5535,7 @@ webpackJsonp([0], {
             var v = (z.getScreenDimensions().width,
             this.getMinimapMargin())
               , M = this.getMinimapSize();
-            this.minimapPos = f.create(v + M / 2, e.j.screenHeight - M / 2 - v),
+            this.minimapPos = f.create(v + M / 2, e.N.screenHeight - M / 2 - v),
             this.playerOuter = m.Sprite.fromImage("player-map-outer.img"),
             this.playerOuter.anchor = new m.Point(.5,.5),
             this.playerOuterBaseScale = new m.Point(b.layout == b.Layout.Sm ? .25 : .3,b.layout == b.Layout.Sm ? .25 : .3),
@@ -5574,18 +5588,18 @@ webpackJsonp([0], {
                 O.tint = d.teamColors[C],
                 O.visible = !1,
                 this.display.teammates.addChild(O);
-                var L = m.Sprite.fromImage("ping-map-help.img");
-                L.anchor = this.player.anchor,
-                L.scale = this.playerBaseScale,
-                L.tint = d.teamColors[C],
-                L.visible = !1,
-                this.display.teammates.addChild(L);
-                var F = m.Sprite.fromImage("player-map-outer.img");
-                F.anchor = this.playerOuter.anchor,
-                F.scale = this.playerOuterBaseScale,
-                F.tint = this.playerOuter.tint,
+                var F = m.Sprite.fromImage("ping-map-help.img");
+                F.anchor = this.player.anchor,
+                F.scale = this.playerBaseScale,
+                F.tint = d.teamColors[C],
                 F.visible = !1,
                 this.display.teammates.addChild(F);
+                var L = m.Sprite.fromImage("player-map-outer.img");
+                L.anchor = this.playerOuter.anchor,
+                L.scale = this.playerOuterBaseScale,
+                L.tint = this.playerOuter.tint,
+                L.visible = !1,
+                this.display.teammates.addChild(L);
                 var R = m.Sprite.fromImage("player-map-inner.img");
                 R.anchor = this.player.anchor,
                 R.scale = this.playerBaseScale,
@@ -5615,7 +5629,7 @@ webpackJsonp([0], {
                     },
                     mapSprites: (I = {
                         outer: {
-                            sprite: F,
+                            sprite: L,
                             position: f.create(0, 0),
                             usePlayerPosition: !0,
                             showOnDeath: !1,
@@ -5660,7 +5674,7 @@ webpackJsonp([0], {
                         maxLife: 0
                     }),
                     i(I, h.Help, {
-                        sprite: L,
+                        sprite: F,
                         position: f.create(0, 0),
                         usePlayerPosition: !1,
                         showOnDeath: !0,
@@ -5813,14 +5827,14 @@ webpackJsonp([0], {
                 this.dead = !1
             },
             doQuitGame: function(e) {
-                e && 0 == window.aProvider ? this.refreshMainPageAdsFreestar() : 1 == window.aProvider && this.refreshMainPageAdsAIP(),
+                0 == window.aProvider ? this.refreshMainPageAdsFreestar() : 1 == window.aProvider && this.refreshMainPageAdsAIP(),
                 this.game.gameOver = !0,
                 this.game.onQuit()
             },
             l: function(e, t, a, i, r, o, n, s, l) {
                 var p = this
-                  , u = t.N
-                  , h = t.q
+                  , u = t.q
+                  , h = t.U
                   , g = t;
                 this.mapWidth = i.width,
                 this.mapHeight = i.height,
@@ -5868,15 +5882,15 @@ webpackJsonp([0], {
                         var E = ""
                           , B = ""
                           , O = ""
-                          , L = null
-                          , F = !1;
+                          , F = null
+                          , L = !1;
                         switch (I.type) {
                         case y.Reload:
                             if ("" != I.item) {
                                 var R = d.items[I.item];
                                 B = this.localization.translate("game-reloading"),
-                                L = R.sound.reload,
-                                F = "reload" == R.caseTiming
+                                F = R.sound.reload,
+                                L = "reload" == R.caseTiming
                             }
                             break;
                         case y.UseItem:
@@ -5884,11 +5898,11 @@ webpackJsonp([0], {
                                 var j = d.items[I.item];
                                 B = this.localization.translate("game-using"),
                                 O = this.localization.translate("game-" + I.item),
-                                L = j.sound.use
+                                F = j.sound.use
                             }
                             break;
                         case y.Revive:
-                            var N = n.U(I.targetId).name;
+                            var N = n.H(I.targetId).name;
                             B = this.localization.translate("game-reviving"),
                             O = g.downed ? "" : N
                         }
@@ -5898,13 +5912,13 @@ webpackJsonp([0], {
                         this.pieTimer.a(function() {
                             p.curAction.type = y.None
                         }, this.curAction.duration - this.curAction.time, E, !1)),
-                        L && (this.actionSoundInstance = this.audioManager.playSound(L),
+                        F && (this.actionSoundInstance = this.audioManager.playSound(F),
                         this.audioManager.stopLocalActionSound()),
-                        F && "" != I.item)
+                        L && "" != I.item)
                             for (var q = d.items[I.item], U = 0; U < q.maxClip; U++) {
                                 var G = U % 2 == 0 ? -1 : 1
                                   , W = Math.PI + Math.PI / 4 * G;
-                                M.createCasingParticle(I.item, W, t.pos, t.dir, t.N.layer, this.particleBarn)
+                                M.createCasingParticle(I.item, W, t.pos, t.dir, t.q.layer, this.particleBarn)
                             }
                     }
                 }
@@ -5915,7 +5929,7 @@ webpackJsonp([0], {
                     min: f.sub(s.pos, V),
                     max: f.add(s.pos, V)
                 }
-                  , K = n.U(t.__id).teamId
+                  , K = n.H(t.__id).teamId
                   , X = n.getTeamInfo(K);
                 if (!X) {
                     var Z = {
@@ -5944,7 +5958,7 @@ webpackJsonp([0], {
                 for (var te = X.playerIds.length, ae = 0; ae < te; ae++) {
                     var ie = this.teamSelectors[ae]
                       , re = X.playerIds[ae]
-                      , oe = n.U(re)
+                      , oe = n.H(re)
                       , ne = re == g.__id
                       , se = n.getTeammateData(re);
                     if (se) {
@@ -6140,7 +6154,6 @@ webpackJsonp([0], {
                         placementName: "survivio_728x90_main",
                         slotId: "survivio_728x90_main"
                     }),
-                    e && t.push(e),
                     window.freestar.newAdSlots(t)
                 }
             },
@@ -6302,7 +6315,7 @@ webpackJsonp([0], {
                     c -= 10 * (e.stats.length - 1);
                     for (var d = 0; d < e.stats.length; d++) {
                         var p = e.stats[d]
-                          , u = t.U(p.playerId)
+                          , u = t.H(p.playerId)
                           , h = r(p.timeAlive)
                           , g = "ui-stats-info-player";
                         g += p.dead ? " ui-stats-info-status" : "";
@@ -6356,11 +6369,12 @@ webpackJsonp([0], {
                         a.killElem.hide(),
                         l(b.mobile ? "#ui-stats-ad-container-mobile" : "#ui-stats-ad-container-desktop").css("display", "inline-block");
                         var e = b.mobile ? "survivio_300x250_respawn_mobile " : "survivio_300x250_gameover"
-                          , t = b.mobile ? "surviv-io_300x250_mobile_2" : "survivio_300x250_gameover";
-                        a.refreshMainPageAdsFreestar({
+                          , t = b.mobile ? "surviv-io_300x250_mobile_2" : "survivio_300x250_gameover"
+                          , i = [{
                             placementName: e,
                             slotId: t
-                        })
+                        }];
+                        window.freestar.newAdSlots(i)
                     }, v) : 1 == window.aProvider && window.aiptag && setTimeout(function() {
                         a.killElem.stop(),
                         a.killElem.hide(),
@@ -6484,7 +6498,7 @@ webpackJsonp([0], {
                 l(2 == this.visibilityMode ? ".js-ui-hud-show" : t).css("display", this.bigmapDisplayed ? "none" : "block"),
                 l(".js-ui-map-show").css("display", this.bigmapDisplayed ? "block" : "none"),
                 this.updateSpectatorCountDisplay(!0),
-                this.redraw(this.game.j)
+                this.redraw(this.game.N)
             },
             updateSpectatorCountDisplay: function(e) {
                 var t = !this.bigmapDisplayed && this.spectatorCount > 0;
@@ -6738,7 +6752,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            H: o
+            K: o
         }
     },
     "33375c30": function(e, t, a) {
@@ -6767,6 +6781,7 @@ webpackJsonp([0], {
                 this.isNew = !1,
                 this.residue = null,
                 this.ceilingDead = !1,
+                this.ceilingDamaged = !1,
                 this.playedCeilingDeadFx = !1
             },
             o: function() {
@@ -6804,11 +6819,12 @@ webpackJsonp([0], {
                 this.scale = 1,
                 this.layer = e.layer),
                 this.ceilingDead = e.ceilingDead,
+                this.ceilingDamaged = e.ceilingDamaged,
                 this.occupied = e.occupied,
                 a) {
                     var l = s.Defs[e.type];
                     this.isNew = !0,
-                    this.playedCeilingDeadFx = -1 != i.map.deadCeilingIds.indexOf(this.__id);
+                    this.playedCeilingDeadFx = void 0 !== l.ceiling.destroy && -1 != i.map.deadCeilingIds.indexOf(this.__id);
                     var c = function(e) {
                         var t = e.pos || m.create(0, 0)
                           , a = s.oriToRad(e.rot || 0)
@@ -6856,39 +6872,40 @@ webpackJsonp([0], {
                         this.imgs.push({
                             sprite: c(l.floor.imgs[f]),
                             isCeiling: !1,
-                            waterRipples: !!l.floor.imgs[f].waterRipples,
                             zOrd: this.zIdx,
                             zIdx: 100 * this.__id + f
                         });
-                    for (var w = 0; w < l.ceiling.imgs.length; w++)
+                    for (var w = 0; w < l.ceiling.imgs.length; w++) {
+                        var b = l.ceiling.imgs[w];
                         this.imgs.push({
-                            sprite: c(l.ceiling.imgs[w]),
+                            sprite: c(b),
                             isCeiling: !0,
-                            waterRipples: !1,
+                            removeOnDamaged: !!b.removeOnDamaged,
                             zOrd: 750 - this.zIdx,
                             zIdx: 100 * this.__id + w
-                        });
-                    for (var b = l.occupiedEmitters || [], _ = 0; _ < b.length; _++) {
-                        var v = b[_]
-                          , S = this.rot + v.rot
-                          , k = m.add(this.pos, m.rotate(v.pos, S))
-                          , z = m.rotate(m.create(1, 0), S)
-                          , M = v.scale
-                          , P = null;
-                        if (v.parentToCeiling)
-                            for (var T = 0; T < this.imgs.length; T++) {
-                                var C = this.imgs[T];
-                                if (C.isCeiling) {
-                                    P = C.sprite,
-                                    k = m.mul(v.pos, 32),
-                                    k.y *= -1,
-                                    z = m.rotate(m.create(1, 0), v.rot),
-                                    M = 1 / C.sprite.defScale;
-                                    break
-                                }
+                        })
+                    }
+                    for (var _ = l.occupiedEmitters || [], v = 0; v < _.length; v++) {
+                        var S = _[v]
+                          , k = this.rot + S.rot
+                          , z = m.add(this.pos, m.rotate(S.pos, k))
+                          , M = m.rotate(m.create(1, 0), k)
+                          , P = S.scale
+                          , T = null;
+                        if (S.parentToCeiling) {
+                            for (var C = -1, I = 0; I < this.imgs.length; I++)
+                                this.imgs[I].isCeiling && (C = I);
+                            if (C >= 0) {
+                                var A = this.imgs[C];
+                                T = A.sprite,
+                                z = m.mul(S.pos, 32),
+                                z.y *= -1,
+                                M = m.rotate(m.create(1, 0), S.rot),
+                                P = 1 / A.sprite.defScale
                             }
-                        var I = i.particleBarn.addEmitter(v.type, k, z, M, v.layer, Number.MAX_VALUE, P);
-                        this.emitters.push(I)
+                        }
+                        var D = i.particleBarn.addEmitter(S.type, z, M, P, S.layer, Number.MAX_VALUE, T);
+                        this.emitters.push(D)
                     }
                 }
             },
@@ -6913,7 +6930,7 @@ webpackJsonp([0], {
                 var u = this.ceiling;
                 u.visionTicker -= e;
                 for (var h = !1, g = u.vision, y = 0; y < u.scopeIn.length; y++)
-                    if (c.scanCollider(u.scopeIn[y], t.K.m(), n.pos, n.layer, .5, 2 * g.width, g.dist, 5)) {
+                    if (c.scanCollider(u.scopeIn[y], t.Z.m(), n.pos, n.layer, .5, 2 * g.width, g.dist, 5)) {
                         h = !0;
                         break
                     }
@@ -6928,7 +6945,8 @@ webpackJsonp([0], {
                 for (var b = 0; b < this.imgs.length; b++) {
                     var _ = this.imgs[b]
                       , v = _.isCeiling ? u.fadeAlpha : 1;
-                    this.positionSprite(_.sprite, v, m);
+                    this.positionSprite(_.sprite, v, m),
+                    _.removeOnDamaged && this.ceilingDamaged && (_.sprite.visible = !this.ceilingDamaged);
                     var S = this.layer;
                     _.isCeiling && (this.layer == n.layer || 2 & n.layer && 1 == this.layer) && (S |= 2),
                     l.addPIXIObj(_.sprite, S, _.zOrd, _.zIdx)
@@ -8694,11 +8712,11 @@ webpackJsonp([0], {
             isInputValuePressed: function(e) {
                 switch (e.type) {
                 case c.Key:
-                    return this.Z(e.code);
-                case c.MouseButton:
                     return this.Y(e.code);
+                case c.MouseButton:
+                    return this.J(e.code);
                 case c.MouseWheel:
-                    return this.J() == e.code;
+                    return this.$() == e.code;
                 default:
                     return !1
                 }
@@ -8706,11 +8724,11 @@ webpackJsonp([0], {
             isInputValueReleased: function(e) {
                 switch (e.type) {
                 case c.Key:
-                    return this.$(e.code);
-                case c.MouseButton:
                     return this.ee(e.code);
+                case c.MouseButton:
+                    return this.te(e.code);
                 case c.MouseWheel:
-                    return this.J() == e.code;
+                    return this.$() == e.code;
                 default:
                     return !1
                 }
@@ -8718,11 +8736,11 @@ webpackJsonp([0], {
             isInputValueDown: function(e) {
                 switch (e.type) {
                 case c.Key:
-                    return this.te(e.code);
-                case c.MouseButton:
                     return this.ae(e.code);
+                case c.MouseButton:
+                    return this.ie(e.code);
                 case c.MouseWheel:
-                    return this.J() == e.code;
+                    return this.$() == e.code;
                 default:
                     return !1
                 }
@@ -8735,13 +8753,13 @@ webpackJsonp([0], {
             onKeyUp: function(e) {
                 this.keys[e.keyCode] = !1
             },
-            te: function(e) {
+            ae: function(e) {
                 return !!this.keys[e]
             },
-            Z: function(e) {
+            Y: function(e) {
                 return !this.keysOld[e] && !!this.keys[e]
             },
-            $: function(e) {
+            ee: function(e) {
                 return !!this.keysOld[e] && !this.keys[e]
             },
             onMouseMove: function(e) {
@@ -8763,16 +8781,16 @@ webpackJsonp([0], {
                 var t = e.deltaY < 0 ? m.Up : m.Down;
                 this.checkCaptureInput(e, c.MouseWheel, t) || (this.mouseWheelState = t)
             },
-            ae: function(e) {
+            ie: function(e) {
                 return !!this.mouseButtons[e]
             },
-            Y: function(e) {
+            J: function(e) {
                 return !this.mouseButtonsOld[e] && !!this.mouseButtons[e]
             },
-            ee: function(e) {
+            te: function(e) {
                 return !!this.mouseButtonsOld[e] && !this.mouseButtons[e]
             },
-            J: function() {
+            $: function() {
                 return this.mouseWheelState
             },
             onTouchShared: function(e, t) {
@@ -8821,7 +8839,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            ie: o,
+            re: o,
             InputType: c,
             InputValue: h,
             Key: s,
@@ -9415,7 +9433,8 @@ webpackJsonp([0], {
             "game-control_panel_03": "a computer terminal",
             "game-power_box_01": "a power box",
             "game-airdrop_crate_01": "Air Drop",
-            "game-airdrop_crate_02": "Air Drop"
+            "game-airdrop_crate_02": "Air Drop",
+            "game-stove_01": "a stove"
         };
         e.exports = i
     },
@@ -9551,7 +9570,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            re: r
+            oe: r
         }
     },
     "61fc98e9": function(e, t, a) {
@@ -9931,16 +9950,16 @@ webpackJsonp([0], {
                         }
                         var O = n("#team-menu-member-list");
                         O.empty();
-                        for (var L = 0; L < f.teamMode; L++) {
-                            var F = {
+                        for (var F = 0; F < f.teamMode; F++) {
+                            var L = {
                                 name: "",
                                 playerId: 0,
                                 isLeader: !1,
                                 inGame: !1
                             };
-                            if (L < w.length) {
-                                var R = w[L];
-                                F = {
+                            if (F < w.length) {
+                                var R = w[F];
+                                L = {
                                     name: R.name,
                                     playerId: R.playerId,
                                     isLeader: R.isLeader,
@@ -9951,22 +9970,22 @@ webpackJsonp([0], {
                                 class: "team-menu-member"
                             })
                               , N = "";
-                            F.isLeader ? N = " icon-leader" : _ && 0 != F.playerId && (N = " icon-kick");
+                            L.isLeader ? N = " icon-leader" : _ && 0 != L.playerId && (N = " icon-kick");
                             var q = "name-text";
-                            F.playerId == b && (q += " name-self"),
-                            F.inGame && (q += " name-in-game"),
+                            L.playerId == b && (q += " name-self"),
+                            L.inGame && (q += " name-in-game"),
                             j.append(n("<div/>", {
                                 class: "icon" + N,
-                                "data-playerid": F.playerId
+                                "data-playerid": L.playerId
                             })),
                             j.append(n("<div/>", {
                                 class: "name menu-option"
                             }).append(n("<div/>", {
                                 class: q,
-                                html: m.htmlEscape(F.name)
+                                html: m.htmlEscape(L.name)
                             }))),
                             j.append(n("<div/>", {
-                                class: "icon " + (F.inGame ? "icon-in-game" : "")
+                                class: "icon " + (L.inGame ? "icon-in-game" : "")
                             })),
                             O.append(j)
                         }
@@ -10764,7 +10783,7 @@ webpackJsonp([0], {
                 args: a
             }
         }
-        var s, l, m, c, d, p, u, h, g, y, x, f, w, b, _, v, S, k, z, M, P, T, C, I, A, D, E, B, O, L, F, R, j = function() {
+        var s, l, m, c, d, p, u, h, g, y, x, f, w, b, _, v, S, k, z, M, P, T, C, I, A, D, E, B, O, F, L, R, j = function() {
             function e(e, t) {
                 for (var a = 0; a < t.length; a++) {
                     var i = t[a];
@@ -10999,13 +11018,13 @@ webpackJsonp([0], {
                 effects: []
             },
             revive: {
-                keyframes: [o(0, (L = {},
-                i(L, V.HandL, new W(G.create(14, -12.25))),
-                i(L, V.HandR, new W(G.create(14, 12.25))),
-                L)), o(.2, (F = {},
-                i(F, V.HandL, new W(G.create(24.5, -8.75))),
-                i(F, V.HandR, new W(G.create(5.25, 21))),
-                F)), o(N.player.reviveDuration, (R = {},
+                keyframes: [o(0, (F = {},
+                i(F, V.HandL, new W(G.create(14, -12.25))),
+                i(F, V.HandR, new W(G.create(14, 12.25))),
+                F)), o(.2, (L = {},
+                i(L, V.HandL, new W(G.create(24.5, -8.75))),
+                i(L, V.HandR, new W(G.create(5.25, 21))),
+                L)), o(N.player.reviveDuration, (R = {},
                 i(R, V.HandL, new W(G.create(24.5, -8.75))),
                 i(R, V.HandR, new W(G.create(5.25, 21))),
                 R))],
@@ -11037,7 +11056,7 @@ webpackJsonp([0], {
         e.exports = {
             spritesheets: [{
                 meta: {
-                    image: "imgs-100-221356cf.png",
+                    image: "imgs-100-976acfd7.png",
                     size: {
                         w: 4096,
                         h: 4096
@@ -12065,7 +12084,7 @@ webpackJsonp([0], {
                             h: 128
                         }
                     },
-                    "map-building-house-window-01.img": {
+                    "map-building-house-window-res-01.img": {
                         frame: {
                             x: 3384,
                             y: 2666,
@@ -12085,7 +12104,7 @@ webpackJsonp([0], {
                             h: 104
                         }
                     },
-                    "map-locker-02.img": {
+                    "map-locker-03.img": {
                         frame: {
                             x: 462,
                             y: 4012,
@@ -12105,7 +12124,7 @@ webpackJsonp([0], {
                             h: 50
                         }
                     },
-                    "map-locker-03.img": {
+                    "map-locker-02.img": {
                         frame: {
                             x: 562,
                             y: 4012,
@@ -12145,7 +12164,7 @@ webpackJsonp([0], {
                             h: 50
                         }
                     },
-                    "map-barrel-03.img": {
+                    "map-barrel-04.img": {
                         frame: {
                             x: 2356,
                             y: 3918,
@@ -12165,7 +12184,7 @@ webpackJsonp([0], {
                             h: 35
                         }
                     },
-                    "map-barrel-04.img": {
+                    "map-barrel-03.img": {
                         frame: {
                             x: 2449,
                             y: 3918,
@@ -12265,7 +12284,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "ping-part-eighth.img": {
+                    "ping-part-eighth-highlight.img": {
                         frame: {
                             x: 820,
                             y: 4012,
@@ -12285,7 +12304,7 @@ webpackJsonp([0], {
                             h: 128
                         }
                     },
-                    "ping-part-eighth-highlight.img": {
+                    "ping-part-eighth.img": {
                         frame: {
                             x: 875,
                             y: 4012,
@@ -12325,7 +12344,7 @@ webpackJsonp([0], {
                             h: 128
                         }
                     },
-                    "player-feet-01.img": {
+                    "player-hands-01.img": {
                         frame: {
                             x: 1832,
                             y: 3970,
@@ -12345,7 +12364,7 @@ webpackJsonp([0], {
                             h: 38
                         }
                     },
-                    "player-hands-01.img": {
+                    "player-feet-01.img": {
                         frame: {
                             x: 1874,
                             y: 3970,
@@ -12488,7 +12507,7 @@ webpackJsonp([0], {
                 }
             }, {
                 meta: {
-                    image: "imgs-100-8c859690.png",
+                    image: "imgs-100-895a8fa9.png",
                     size: {
                         w: 4096,
                         h: 4096
@@ -13796,7 +13815,7 @@ webpackJsonp([0], {
                             h: 94
                         }
                     },
-                    "audio-on.img": {
+                    "audio-off.img": {
                         frame: {
                             x: 2832,
                             y: 3431,
@@ -13816,7 +13835,7 @@ webpackJsonp([0], {
                             h: 128
                         }
                     },
-                    "audio-off.img": {
+                    "audio-on.img": {
                         frame: {
                             x: 2928,
                             y: 3431,
@@ -13896,7 +13915,7 @@ webpackJsonp([0], {
                             h: 128
                         }
                     },
-                    "ping-part-quarter-highlight.img": {
+                    "ping-part-quarter.img": {
                         frame: {
                             x: 3920,
                             y: 1516,
@@ -13916,7 +13935,7 @@ webpackJsonp([0], {
                             h: 128
                         }
                     },
-                    "ping-part-quarter.img": {
+                    "ping-part-quarter-highlight.img": {
                         frame: {
                             x: 2730,
                             y: 1616,
@@ -14076,7 +14095,7 @@ webpackJsonp([0], {
                             h: 144
                         }
                     },
-                    "timer-background.img": {
+                    "map-power-box-01.img": {
                         frame: {
                             x: 3560,
                             y: 3837,
@@ -14096,7 +14115,7 @@ webpackJsonp([0], {
                             h: 72
                         }
                     },
-                    "map-power-box-01.img": {
+                    "timer-background.img": {
                         frame: {
                             x: 3636,
                             y: 3837,
@@ -14116,7 +14135,7 @@ webpackJsonp([0], {
                             h: 72
                         }
                     },
-                    "cursor-03.img": {
+                    "player-map-inner.img": {
                         frame: {
                             x: 3712,
                             y: 3837,
@@ -14136,7 +14155,7 @@ webpackJsonp([0], {
                             h: 72
                         }
                     },
-                    "cursor-01.img": {
+                    "cursor-03.img": {
                         frame: {
                             x: 3788,
                             y: 3837,
@@ -14156,7 +14175,7 @@ webpackJsonp([0], {
                             h: 72
                         }
                     },
-                    "part-smoke-01.img": {
+                    "player-map-outer.img": {
                         frame: {
                             x: 3864,
                             y: 3837,
@@ -14176,7 +14195,7 @@ webpackJsonp([0], {
                             h: 72
                         }
                     },
-                    "player-map-inner.img": {
+                    "part-smoke-01.img": {
                         frame: {
                             x: 3940,
                             y: 3837,
@@ -14196,7 +14215,7 @@ webpackJsonp([0], {
                             h: 72
                         }
                     },
-                    "player-map-outer.img": {
+                    "cursor-01.img": {
                         frame: {
                             x: 1358,
                             y: 3967,
@@ -14376,7 +14395,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "unlock.img": {
+                    "lock.img": {
                         frame: {
                             x: 3271,
                             y: 3431,
@@ -14396,7 +14415,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "lock.img": {
+                    "unlock.img": {
                         frame: {
                             x: 3323,
                             y: 3431,
@@ -14496,7 +14515,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "proj-frag-pin-part.img": {
+                    "part-frag-pin-01.img": {
                         frame: {
                             x: 3596,
                             y: 3431,
@@ -14516,7 +14535,7 @@ webpackJsonp([0], {
                             h: 128
                         }
                     },
-                    "part-frag-pin-01.img": {
+                    "proj-frag-pin-part.img": {
                         frame: {
                             x: 3658,
                             y: 3431,
@@ -14576,7 +14595,7 @@ webpackJsonp([0], {
                             h: 70
                         }
                     },
-                    "down.img": {
+                    "dc.img": {
                         frame: {
                             x: 2531,
                             y: 3059,
@@ -14596,7 +14615,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "dc.img": {
+                    "down.img": {
                         frame: {
                             x: 2587,
                             y: 3059,
@@ -14679,7 +14698,7 @@ webpackJsonp([0], {
                 }
             }, {
                 meta: {
-                    image: "imgs-100-7ae83ae9.png",
+                    image: "imgs-100-df4076f1.png",
                     size: {
                         w: 4096,
                         h: 4096
@@ -16607,7 +16626,7 @@ webpackJsonp([0], {
                             h: 104
                         }
                     },
-                    "map-building-house-window-res-01.img": {
+                    "map-building-house-window-01.img": {
                         frame: {
                             x: 3817,
                             y: 2270,
@@ -16767,7 +16786,7 @@ webpackJsonp([0], {
                             h: 100
                         }
                     },
-                    "part-airdrop-01.img": {
+                    "map-woodpile-01.img": {
                         frame: {
                             x: 2068,
                             y: 3932,
@@ -16787,7 +16806,7 @@ webpackJsonp([0], {
                             h: 96
                         }
                     },
-                    "map-woodpile-01.img": {
+                    "part-airdrop-01.img": {
                         frame: {
                             x: 2168,
                             y: 3932,
@@ -16950,7 +16969,7 @@ webpackJsonp([0], {
                 }
             }, {
                 meta: {
-                    image: "imgs-100-69b65cd0.png",
+                    image: "imgs-100-72113e83.png",
                     size: {
                         w: 4096,
                         h: 4096
@@ -19358,29 +19377,9 @@ webpackJsonp([0], {
                             h: 128
                         }
                     },
-                    "minimize.img": {
+                    "logo-crossing.img": {
                         frame: {
-                            x: 108,
-                            y: 3780,
-                            w: 95,
-                            h: 95
-                        },
-                        rotated: !1,
-                        trimmed: !0,
-                        spriteSourceSize: {
-                            x: 17,
-                            y: 16,
-                            w: 95,
-                            h: 95
-                        },
-                        sourceSize: {
-                            w: 128,
-                            h: 128
-                        }
-                    },
-                    "logo-storm.img": {
-                        frame: {
-                            x: 3290,
+                            x: 3158,
                             y: 2742,
                             w: 128,
                             h: 110
@@ -19392,6 +19391,26 @@ webpackJsonp([0], {
                             y: 9,
                             w: 128,
                             h: 110
+                        },
+                        sourceSize: {
+                            w: 128,
+                            h: 128
+                        }
+                    },
+                    "minimize.img": {
+                        frame: {
+                            x: 3778,
+                            y: 3650,
+                            w: 95,
+                            h: 95
+                        },
+                        rotated: !1,
+                        trimmed: !0,
+                        spriteSourceSize: {
+                            x: 17,
+                            y: 16,
+                            w: 95,
+                            h: 95
                         },
                         sourceSize: {
                             w: 128,
@@ -20578,9 +20597,29 @@ webpackJsonp([0], {
                             h: 128
                         }
                     },
-                    "skull.img": {
+                    "map-chimney-01.img": {
                         frame: {
                             x: 2714,
+                            y: 3518,
+                            w: 120,
+                            h: 118
+                        },
+                        rotated: !1,
+                        trimmed: !0,
+                        spriteSourceSize: {
+                            x: 0,
+                            y: 1,
+                            w: 120,
+                            h: 118
+                        },
+                        sourceSize: {
+                            w: 120,
+                            h: 120
+                        }
+                    },
+                    "skull.img": {
+                        frame: {
+                            x: 2838,
                             y: 3518,
                             w: 120,
                             h: 118
@@ -20658,9 +20697,29 @@ webpackJsonp([0], {
                             h: 128
                         }
                     },
+                    "loot-chest-01.img": {
+                        frame: {
+                            x: 2962,
+                            y: 3518,
+                            w: 118,
+                            h: 118
+                        },
+                        rotated: !1,
+                        trimmed: !0,
+                        spriteSourceSize: {
+                            x: 5,
+                            y: 5,
+                            w: 118,
+                            h: 118
+                        },
+                        sourceSize: {
+                            w: 128,
+                            h: 128
+                        }
+                    },
                     "mag-glass.img": {
                         frame: {
-                            x: 2838,
+                            x: 3084,
                             y: 3518,
                             w: 118,
                             h: 118
@@ -20680,7 +20739,7 @@ webpackJsonp([0], {
                     },
                     "map-stone-res-01.img": {
                         frame: {
-                            x: 2960,
+                            x: 3206,
                             y: 3518,
                             w: 118,
                             h: 118
@@ -20698,29 +20757,9 @@ webpackJsonp([0], {
                             h: 120
                         }
                     },
-                    "loot-chest-01.img": {
-                        frame: {
-                            x: 3082,
-                            y: 3518,
-                            w: 118,
-                            h: 118
-                        },
-                        rotated: !1,
-                        trimmed: !0,
-                        spriteSourceSize: {
-                            x: 5,
-                            y: 5,
-                            w: 118,
-                            h: 118
-                        },
-                        sourceSize: {
-                            w: 128,
-                            h: 128
-                        }
-                    },
                     "loot-weapon-mosin.img": {
                         frame: {
-                            x: 3204,
+                            x: 3328,
                             y: 3518,
                             w: 118,
                             h: 116
@@ -20880,7 +20919,7 @@ webpackJsonp([0], {
                     },
                     "target.img": {
                         frame: {
-                            x: 3326,
+                            x: 3450,
                             y: 3518,
                             w: 116,
                             h: 116
@@ -20898,9 +20937,9 @@ webpackJsonp([0], {
                             h: 128
                         }
                     },
-                    "part-spark-02.img": {
+                    "part-spark-01.img": {
                         frame: {
-                            x: 3446,
+                            x: 3570,
                             y: 3518,
                             w: 116,
                             h: 116
@@ -20918,9 +20957,9 @@ webpackJsonp([0], {
                             h: 120
                         }
                     },
-                    "part-spark-01.img": {
+                    "part-spark-02.img": {
                         frame: {
-                            x: 3566,
+                            x: 3690,
                             y: 3518,
                             w: 116,
                             h: 116
@@ -20940,8 +20979,8 @@ webpackJsonp([0], {
                     },
                     "gas.img": {
                         frame: {
-                            x: 3686,
-                            y: 3518,
+                            x: 3440,
+                            y: 3650,
                             w: 116,
                             h: 116
                         },
@@ -21118,7 +21157,7 @@ webpackJsonp([0], {
                             h: 128
                         }
                     },
-                    "loot-weapon-deagle.img": {
+                    "loot-pack-03.img": {
                         frame: {
                             x: 3878,
                             y: 2685,
@@ -21138,7 +21177,7 @@ webpackJsonp([0], {
                             h: 128
                         }
                     },
-                    "loot-pack-03.img": {
+                    "loot-weapon-deagle.img": {
                         frame: {
                             x: 3878,
                             y: 2803,
@@ -21158,7 +21197,7 @@ webpackJsonp([0], {
                             h: 128
                         }
                     },
-                    "tap.img": {
+                    "loot-weapon-spas12.img": {
                         frame: {
                             x: 3878,
                             y: 2921,
@@ -21178,7 +21217,7 @@ webpackJsonp([0], {
                             h: 128
                         }
                     },
-                    "loot-weapon-spas12.img": {
+                    "tap.img": {
                         frame: {
                             x: 3878,
                             y: 3039,
@@ -21238,7 +21277,7 @@ webpackJsonp([0], {
                             h: 128
                         }
                     },
-                    "ammo-12gauge.img": {
+                    "ammo-box.img": {
                         frame: {
                             x: 3878,
                             y: 3393,
@@ -21278,7 +21317,7 @@ webpackJsonp([0], {
                             h: 128
                         }
                     },
-                    "ammo-762mm.img": {
+                    "ammo-50AE.img": {
                         frame: {
                             x: 3878,
                             y: 3625,
@@ -21298,69 +21337,9 @@ webpackJsonp([0], {
                             h: 128
                         }
                     },
-                    "map-tree-04.img": {
+                    "ammo-12gauge.img": {
                         frame: {
                             x: 1795,
-                            y: 2666,
-                            w: 112,
-                            h: 112
-                        },
-                        rotated: !1,
-                        trimmed: !1,
-                        spriteSourceSize: {
-                            x: 0,
-                            y: 0,
-                            w: 112,
-                            h: 112
-                        },
-                        sourceSize: {
-                            w: 112,
-                            h: 112
-                        }
-                    },
-                    "ammo-box.img": {
-                        frame: {
-                            x: 1911,
-                            y: 2666,
-                            w: 112,
-                            h: 112
-                        },
-                        rotated: !1,
-                        trimmed: !0,
-                        spriteSourceSize: {
-                            x: 8,
-                            y: 8,
-                            w: 112,
-                            h: 112
-                        },
-                        sourceSize: {
-                            w: 128,
-                            h: 128
-                        }
-                    },
-                    "ammo-308sub.img": {
-                        frame: {
-                            x: 2027,
-                            y: 2666,
-                            w: 112,
-                            h: 112
-                        },
-                        rotated: !1,
-                        trimmed: !0,
-                        spriteSourceSize: {
-                            x: 8,
-                            y: 8,
-                            w: 112,
-                            h: 112
-                        },
-                        sourceSize: {
-                            w: 128,
-                            h: 128
-                        }
-                    },
-                    "ammo-50AE.img": {
-                        frame: {
-                            x: 2143,
                             y: 2666,
                             w: 112,
                             h: 112
@@ -21380,7 +21359,47 @@ webpackJsonp([0], {
                     },
                     "ammo-flare.img": {
                         frame: {
-                            x: 2259,
+                            x: 1911,
+                            y: 2666,
+                            w: 112,
+                            h: 112
+                        },
+                        rotated: !1,
+                        trimmed: !0,
+                        spriteSourceSize: {
+                            x: 8,
+                            y: 8,
+                            w: 112,
+                            h: 112
+                        },
+                        sourceSize: {
+                            w: 128,
+                            h: 128
+                        }
+                    },
+                    "ammo-762mm.img": {
+                        frame: {
+                            x: 2027,
+                            y: 2666,
+                            w: 112,
+                            h: 112
+                        },
+                        rotated: !1,
+                        trimmed: !0,
+                        spriteSourceSize: {
+                            x: 8,
+                            y: 8,
+                            w: 112,
+                            h: 112
+                        },
+                        sourceSize: {
+                            w: 128,
+                            h: 128
+                        }
+                    },
+                    "ammo-308sub.img": {
+                        frame: {
+                            x: 2143,
                             y: 2666,
                             w: 112,
                             h: 112
@@ -21400,7 +21419,7 @@ webpackJsonp([0], {
                     },
                     "ammo-9mm.img": {
                         frame: {
-                            x: 2375,
+                            x: 2259,
                             y: 2666,
                             w: 112,
                             h: 112
@@ -21416,6 +21435,26 @@ webpackJsonp([0], {
                         sourceSize: {
                             w: 128,
                             h: 128
+                        }
+                    },
+                    "map-tree-04.img": {
+                        frame: {
+                            x: 2375,
+                            y: 2666,
+                            w: 112,
+                            h: 112
+                        },
+                        rotated: !1,
+                        trimmed: !1,
+                        spriteSourceSize: {
+                            x: 0,
+                            y: 0,
+                            w: 112,
+                            h: 112
+                        },
+                        sourceSize: {
+                            w: 112,
+                            h: 112
                         }
                     },
                     "player-gui.img": {
@@ -21460,7 +21499,7 @@ webpackJsonp([0], {
                     },
                     "loot-weapon-vector.img": {
                         frame: {
-                            x: 3440,
+                            x: 3560,
                             y: 3650,
                             w: 108,
                             h: 112
@@ -21500,7 +21539,7 @@ webpackJsonp([0], {
                     },
                     "chick.img": {
                         frame: {
-                            x: 3552,
+                            x: 3672,
                             y: 3650,
                             w: 102,
                             h: 112
@@ -21540,8 +21579,8 @@ webpackJsonp([0], {
                     },
                     "loot-weapon-autoshotgun.img": {
                         frame: {
-                            x: 3658,
-                            y: 3650,
+                            x: 2,
+                            y: 3780,
                             w: 102,
                             h: 110
                         },
@@ -21600,8 +21639,8 @@ webpackJsonp([0], {
                     },
                     "map-toilet-res-01.img": {
                         frame: {
-                            x: 3764,
-                            y: 3650,
+                            x: 108,
+                            y: 3780,
                             w: 98,
                             h: 107
                         },
@@ -21680,7 +21719,7 @@ webpackJsonp([0], {
                     },
                     "loot-weapon-mac10.img": {
                         frame: {
-                            x: 2,
+                            x: 210,
                             y: 3780,
                             w: 102,
                             h: 104
@@ -21758,9 +21797,9 @@ webpackJsonp([0], {
                             h: 128
                         }
                     },
-                    "logo-crossing.img": {
+                    "logo-storm.img": {
                         frame: {
-                            x: 3158,
+                            x: 3290,
                             y: 2742,
                             w: 128,
                             h: 110
@@ -21781,7 +21820,7 @@ webpackJsonp([0], {
                 }
             }, {
                 meta: {
-                    image: "imgs-100-41b40066.png",
+                    image: "imgs-100-622d3195.png",
                     size: {
                         w: 1024,
                         h: 1024
@@ -22337,7 +22376,7 @@ webpackJsonp([0], {
                     if (l.active) {
                         var m = o.items[l.weaponType];
                         if (0 == l.ticker) {
-                            var c = a.oe(l.playerId)
+                            var c = a.ne(l.playerId)
                               , d = l.lastShot ? m.sound.shootLast : m.sound.shoot;
                             if (n.playSound(d, {
                                 channel: l.playerId == t ? "activePlayer" : "otherPlayers",
@@ -22348,7 +22387,7 @@ webpackJsonp([0], {
                             }),
                             c) {
                                 if (c.__id == t && "single" == m.fireMode && m.pullDelay) {
-                                    var p = c.q.weapons[c.q.curWeapIdx].ammo
+                                    var p = c.U.weapons[c.U.curWeapIdx].ammo
                                       , u = p > 0 ? m.sound.cycle : m.sound.pull;
                                     n.localActionSoundInstance = n.playSound(u)
                                 }
@@ -22360,8 +22399,8 @@ webpackJsonp([0], {
                         }
                         if (l.ticker += e,
                         l.ticker >= l.pullDelay) {
-                            var y = a.oe(l.playerId);
-                            y && !y.N.dead && y.N.curWeapType == l.weaponType && "shoot" == m.caseTiming && i(l.weaponType, Math.PI / 2 * -1, y.N.pos, y.N.dir, y.layer, r),
+                            var y = a.ne(l.playerId);
+                            y && !y.q.dead && y.q.curWeapType == l.weaponType && "shoot" == m.caseTiming && i(l.weaponType, Math.PI / 2 * -1, y.q.pos, y.q.dir, y.layer, r),
                             l.active = !1
                         }
                     }
@@ -22370,7 +22409,7 @@ webpackJsonp([0], {
         },
         e.exports = {
             createCasingParticle: i,
-            ne: r
+            se: r
         }
     },
     "6ffe8b70": function(e, t, a) {
@@ -22421,7 +22460,8 @@ webpackJsonp([0], {
             emoteDeath: 1,
             twitterFollow: !1,
             youtubeSubscribe: !1,
-            facebookLike: !1
+            facebookLike: !1,
+            instagramFollow: !1
         }
           , l = function() {
             function e() {
@@ -22526,7 +22566,7 @@ webpackJsonp([0], {
             this.container.visible = this.sprite
         }
         function o(e) {
-            this.se = new d.Pool(r),
+            this.le = new d.Pool(r),
             this.anonPlayerNames = e
         }
         var n = (a("0e566746"),
@@ -22554,15 +22594,15 @@ webpackJsonp([0], {
         },
         o.prototype = {
             l: function(e, t, a, i, r, o) {
-                for (var n = this, l = this.se.m(), m = 0; m < l.length; m++) {
+                for (var n = this, l = this.le.m(), m = 0; m < l.length; m++) {
                     var c = l[m];
                     if (c.active) {
                         c.nameTextSet || function() {
                             c.nameTextSet = !0;
-                            var e = t.U(c.playerId)
-                              , i = t.U(a.__id).teamId;
+                            var e = t.H(c.playerId)
+                              , i = t.H(a.__id).teamId;
                             n.anonPlayerNames ? function(e) {
-                                return e.playerId == n.le || e.teamId == i
+                                return e.playerId == n.me || e.teamId == i
                             }(e) || (c.nameText.text = e.anonName) : c.nameText.text = e.name
                         }();
                         var d = s.createCircle(c.pos, 1)
@@ -22580,7 +22620,7 @@ webpackJsonp([0], {
                 }
             },
             getDeadBodyById: function(e) {
-                for (var t = this.se.m(), a = 0; a < t.length; a++) {
+                for (var t = this.le.m(), a = 0; a < t.length; a++) {
                     var i = t[a];
                     if (i.active && i.playerId == e)
                         return i
@@ -22589,7 +22629,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            me: o
+            ce: o
         }
     },
     "7510cc08": function(e, t, a) {
@@ -22629,7 +22669,7 @@ webpackJsonp([0], {
             this.creator = {
                 type: e
             },
-            this.ce = [],
+            this.de = [],
             this.activeCount = 0
         }
         function r(e) {
@@ -22641,13 +22681,13 @@ webpackJsonp([0], {
           , n = a("f398b7c7");
         i.prototype = {
             alloc: function() {
-                for (var e = null, t = 0; t < this.ce.length; t++)
-                    if (!this.ce[t].active) {
-                        e = this.ce[t];
+                for (var e = null, t = 0; t < this.de.length; t++)
+                    if (!this.de[t].active) {
+                        e = this.de[t];
                         break
                     }
                 return e || (e = new this.creator.type,
-                this.ce.push(e)),
+                this.de.push(e)),
                 e.active = !0,
                 e.a(),
                 this.activeCount++,
@@ -22657,14 +22697,14 @@ webpackJsonp([0], {
                 if (e.o(),
                 e.active = !1,
                 this.activeCount--,
-                this.ce.length > 128 && this.activeCount < this.ce.length / 2) {
-                    for (var t = [], a = 0; a < this.ce.length; a++)
-                        this.ce[a].active && t.push(this.ce[a]);
-                    this.ce = t
+                this.de.length > 128 && this.activeCount < this.de.length / 2) {
+                    for (var t = [], a = 0; a < this.de.length; a++)
+                        this.de[a].active && t.push(this.de[a]);
+                    this.de = t
                 }
             },
             m: function() {
-                return this.ce
+                return this.de
             }
         },
         r.prototype = {
@@ -22847,7 +22887,7 @@ webpackJsonp([0], {
             "game-the-red-zone": "Kırmızı alan",
             "game-waiting-for-players": "Oyuncular bekleniyor",
             "game-spectating": "İzleniyor",
-            "game-red-zone-advances": "Kırmızı alan -the time- içinde geliyor",
+            "game-red-zone-advances": "Kırmızı alan içinde geliyor",
             "game-red-zone-advancing": "Kırmızı alan geliyor, güvenli bölgeye git!",
             "game-seconds": "saniyeler",
             "game-minutes": "dakikalar",
@@ -28029,7 +28069,7 @@ webpackJsonp([0], {
                     maxClip: 40,
                     maxReload: 40,
                     reloadTime: 3.3,
-                    fireDelay: .14,
+                    fireDelay: .18,
                     burstDelay: .04,
                     switchDelay: .25,
                     barrelLength: 2.2,
@@ -29034,14 +29074,14 @@ webpackJsonp([0], {
             this.onJoin = s,
             this.onQuit = l,
             this.pixi = e,
-            this.de = t,
+            this.pe = t,
             this.ambientSounds = {},
             this.victoryMusic = null,
             this.localization = a,
             this.config = i,
-            this.pe = r,
-            this.ue = o,
-            this.he = n,
+            this.ue = r,
+            this.he = o,
+            this.ge = n,
             this.ws = null,
             this.connecting = !1,
             this.connected = !1
@@ -29079,8 +29119,8 @@ webpackJsonp([0], {
           , E = a("119e8c4c")
           , B = a("feb8fc30")
           , O = a("fc6a992a")
-          , L = a("a508b62a")
-          , F = a("bc83ef37")
+          , F = a("a508b62a")
+          , L = a("bc83ef37")
           , R = a("c60b5e9f")
           , j = a("6e43d1d7")
           , N = a("0955a76e")
@@ -29122,7 +29162,7 @@ webpackJsonp([0], {
                             t.emotes = i.emoteLoadout,
                             t.useTouch = y.touch,
                             t.bot = !1,
-                            i.ge(u.Msg.Join, t)
+                            i.ye(u.Msg.Join, t)
                         }
                         ,
                         this.ws.onmessage = function(e) {
@@ -29130,7 +29170,7 @@ webpackJsonp([0], {
                                 var a = t.deserializeMsgType();
                                 if (a == u.Msg.None)
                                     break;
-                                i.ye(a, t.getStream())
+                                i.xe(a, t.getStream())
                             }
                         }
                         ,
@@ -29157,48 +29197,48 @@ webpackJsonp([0], {
             a: function() {
                 var e;
                 this.canvasMode = this.pixi.renderer.type == o.RENDERER_TYPE.CANVAS,
-                this.xe = 0,
                 this.fe = 0,
+                this.we = 0,
                 this.I = !1,
-                this.we = new q.be(this.pe,this.config),
-                this.j = new b._,
-                this._e = new R.ve(this.canvasMode),
-                this.Se = new E.d(this._e),
-                this.ke = new A.ze,
-                this.Me = new L.Pe,
-                this.Te = new w.Ce,
-                this.Ie = new P.Ae,
-                this.De = new F.Ee,
-                this.Be = new z.re,
-                this.Oe = new O.Le(this.de),
-                this.Fe = new f.O,
-                this.Re = new N.c,
-                this.je = new _.me(this.config.get("anonPlayerNames")),
-                this.Ne = new S.u,
-                this.qe = new I.Ue,
-                this.Ge = new T.We(this.canvasMode),
-                this.Ve = new B.He,
-                this.Ke = new U.H(this,this.de,this.Ve,this.Se,this.localization,this.canvasMode,this.we,this.ue,this.he),
-                this.Xe = new G.Ze(this.localization,this.ue),
-                this.Ye = new k.Je(this.de,this.Ke,this.Me,this.j,this.ke),
-                this.Qe = new j.ne(this.Se,this.de,this.Ke);
+                this.be = new q._e(this.ue,this.config),
+                this.N = new b._,
+                this.ve = new R.Se(this.canvasMode),
+                this.ke = new E.d(this.ve),
+                this.ze = new A.Me,
+                this.Pe = new F.Te,
+                this.Ce = new w.Ie,
+                this.Ae = new P.De,
+                this.Ee = new L.Be,
+                this.Oe = new z.oe,
+                this.Fe = new O.Le(this.pe),
+                this.Re = new f.j,
+                this.je = new N.c,
+                this.Ne = new _.ce(this.config.get("anonPlayerNames")),
+                this.qe = new S.u,
+                this.Ue = new I.Ge,
+                this.We = new T.Ve(this.canvasMode),
+                this.He = new B.Ke,
+                this.Xe = new U.K(this,this.pe,this.He,this.ke,this.localization,this.canvasMode,this.be,this.he,this.ge),
+                this.Ze = new G.Ye(this.localization,this.he),
+                this.Je = new k.Qe(this.pe,this.Xe,this.Pe,this.N,this.ze),
+                this.$e = new j.se(this.ke,this.pe,this.Xe);
                 var t = (e = {},
-                i(e, l.Type.Player, this.Me.$e),
-                i(e, l.Type.Obstacle, this.ke.K),
-                i(e, l.Type.Loot, this.qe.et),
-                i(e, l.Type.DeadBody, this.je.se),
-                i(e, l.Type.Building, this.ke.tt),
-                i(e, l.Type.Structure, this.ke.at),
-                i(e, l.Type.Decal, this.Ne.p),
-                i(e, l.Type.Projectile, this.De.it),
-                i(e, l.Type.Smoke, this.Re.e),
-                i(e, l.Type.Airdrop, this.Fe.B),
+                i(e, l.Type.Player, this.Pe.et),
+                i(e, l.Type.Obstacle, this.ze.Z),
+                i(e, l.Type.Loot, this.Ue.tt),
+                i(e, l.Type.DeadBody, this.Ne.le),
+                i(e, l.Type.Building, this.ze.at),
+                i(e, l.Type.Structure, this.ze.it),
+                i(e, l.Type.Decal, this.qe.p),
+                i(e, l.Type.Projectile, this.Ee.rt),
+                i(e, l.Type.Smoke, this.je.e),
+                i(e, l.Type.Airdrop, this.Re.O),
                 e);
-                this.rt = new D.Creator;
+                this.ot = new D.Creator;
                 for (var a in t)
-                    t.hasOwnProperty(a) && this.rt.registerType(a, t[a]);
+                    t.hasOwnProperty(a) && this.ot.registerType(a, t[a]);
                 this.debugDisplay = new o.Graphics;
-                for (var r = [this.ke.display.ground, this._e.layers[0], this._e.ground, this._e.layers[1], this._e.layers[2], this._e.layers[3], this.debugDisplay, this.Ge.gasRenderer.display, this.we.container, this.Ye.container, this.Ke.container, this.Ye.indContainer, this.Ve.container], n = 0; n < r.length; n++) {
+                for (var r = [this.ze.display.ground, this.ve.layers[0], this.ve.ground, this.ve.layers[1], this.ve.layers[2], this.ve.layers[3], this.debugDisplay, this.We.gasRenderer.display, this.be.container, this.Je.container, this.Xe.container, this.Je.indContainer, this.He.container], n = 0; n < r.length; n++) {
                     var s = r[n];
                     s && (s.interactiveChildren = !1,
                     this.pixi.stage.addChild(s))
@@ -29210,10 +29250,10 @@ webpackJsonp([0], {
                 this.inputMsgTimeout = 0,
                 this.prevInputMsg = new u.InputMsg,
                 this.playingTicker = 0,
-                this.ot = 0,
-                this.le = 0,
-                this.nt = null,
-                this.st = !1,
+                this.nt = 0,
+                this.me = 0,
+                this.st = null,
+                this.lt = !1,
                 this.f = 1,
                 this.debugZoom = 1,
                 this.useDebugZoom = !1,
@@ -29223,7 +29263,7 @@ webpackJsonp([0], {
                 this.seqSendTime = 0,
                 this.pings = [],
                 this.debugPingTime = 0,
-                this.j.setShakeEnabled(this.config.get("screenShake")),
+                this.N.setShakeEnabled(this.config.get("screenShake")),
                 this.name = this.config.get("playerName"),
                 this.anonPlayerNames = this.config.get("anonPlayerNames");
                 var m = {
@@ -29242,25 +29282,25 @@ webpackJsonp([0], {
                       , v = p.clamp(y, 1, 255);
                     this.emoteLoadout[m[g]] = v
                 }
-                this.Ye.updateEmoteWheel(this.emoteLoadout),
-                this.ambientSounds.wavesInst || (this.ambientSounds.wavesInst = this.de.playSound("ambient_waves_01", {
+                this.Je.updateEmoteWheel(this.emoteLoadout),
+                this.ambientSounds.wavesInst || (this.ambientSounds.wavesInst = this.pe.playSound("ambient_waves_01", {
                     channel: "ambient",
                     startSilent: !0,
                     loop: !0,
                     forceStart: !0
                 })),
-                this.ambientSounds.riverInst || (this.ambientSounds.riverInst = this.de.playSound("ambient_stream_01", {
+                this.ambientSounds.riverInst || (this.ambientSounds.riverInst = this.pe.playSound("ambient_stream_01", {
                     channel: "ambient",
                     startSilent: !0,
                     loop: !0,
                     forceStart: !0
                 })),
-                document.hasFocus() || this.de.playSound("notification_start_01", {
+                document.hasFocus() || this.pe.playSound("notification_start_01", {
                     channel: "ui"
                 }),
                 x.removeConsent(),
                 M.storeGeneric("language", this.config.get("language")),
-                this.lt(),
+                this.mt(),
                 this.initialized = !0
             },
             o: function() {
@@ -29272,17 +29312,17 @@ webpackJsonp([0], {
                 this.connected = !1,
                 this.initialized) {
                     for (this.initialized = !1,
-                    this.Ye.o(),
+                    this.Je.o(),
+                    this.Ze.o(),
                     this.Xe.o(),
-                    this.Ke.o(),
-                    this.Ve.destroy(),
-                    this.Ge.free(),
+                    this.He.destroy(),
+                    this.We.free(),
+                    this.Re.o(),
                     this.Fe.o(),
-                    this.Oe.o(),
+                    this.ze.o(),
                     this.ke.o(),
-                    this.Se.o(),
-                    this._e.o(),
-                    this.de.stopAll(); this.pixi.stage.children.length > 0; ) {
+                    this.ve.o(),
+                    this.pe.stopAll(); this.pixi.stage.children.length > 0; ) {
                         var e = this.pixi.stage.children[0];
                         this.pixi.stage.removeChild(e),
                         e.destroy({
@@ -29292,36 +29332,36 @@ webpackJsonp([0], {
                     M.storeGeneric("socketTimeout", this.I)
                 }
             },
-            mt: function() {
-                return this.initialized && this.playing && !this.spectating && !this.Ke.displayingStats
+            ct: function() {
+                return this.initialized && this.playing && !this.spectating && !this.Xe.displayingStats
             },
             l: function(e) {
-                this.xe++;
-                var t = this.Re.particles
-                  , a = this.ke.K.m()
+                this.fe++;
+                var t = this.je.particles
+                  , a = this.ze.Z.m()
                   , i = d.t
                   , r = 0
                   , o = {};
                 if (o.render = o.render || {},
                 this.playing && (this.playingTicker += e),
-                this.Me.l(e, this.le, this._e, this.Se, this.j, this.ke, this.ue, this.de, this.Ye.wheelKeyTriggered, this.gameOver, this.spectating),
+                this.Pe.l(e, this.me, this.ve, this.ke, this.N, this.ze, this.he, this.pe, this.Je.wheelKeyTriggered, this.gameOver, this.spectating),
                 this.soundUpdateThrottle -= e,
                 this.soundUpdateThrottle < 0) {
                     this.soundUpdateThrottle = .2;
-                    var l = this.nt.pos
+                    var l = this.st.pos
                       , m = 0
                       , c = 0
                       , g = 1;
-                    if (this.ke.isInOcean(l))
+                    if (this.ze.isInOcean(l))
                         m = 1,
                         c = 0,
                         g = 0;
                     else {
-                        var f = this.ke.distanceToShore(l);
+                        var f = this.ze.distanceToShore(l);
                         m = p.delerp(f, 50, 0),
                         c = 0;
-                        for (var w = 0; w < this.ke.terrain.rivers.length; w++) {
-                            var b = this.ke.terrain.rivers[w]
+                        for (var w = 0; w < this.ze.terrain.rivers.length; w++) {
+                            var b = this.ze.terrain.rivers[w]
                               , _ = b.spline.getClosestTtoPoint(l)
                               , v = b.spline.getPos(_)
                               , S = h.length(h.sub(v, l))
@@ -29331,41 +29371,41 @@ webpackJsonp([0], {
                             c = p.max(z * M, c)
                         }
                         c *= 1 - m,
-                        1 == this.nt.layer && (c = 0),
+                        1 == this.st.layer && (c = 0),
                         g = p.clamp(1 - (m + c), 0, 1)
                     }
-                    this.de.setVolume(this.ambientSounds.wavesInst, m),
-                    this.de.setVolume(this.ambientSounds.riverInst, c),
-                    this.de.setVolume(this.ambientSounds.windInst, g)
+                    this.pe.setVolume(this.ambientSounds.wavesInst, m),
+                    this.pe.setVolume(this.ambientSounds.riverInst, c),
+                    this.pe.setVolume(this.ambientSounds.windInst, g)
                 }
-                this.j.pos = h.copy(this.nt.pos),
-                this.j.applyShake();
-                var P = this.nt.ct()
-                  , T = p.min(this.j.screenWidth, this.j.screenHeight)
-                  , I = p.max(this.j.screenWidth, this.j.screenHeight)
+                this.N.pos = h.copy(this.st.pos),
+                this.N.applyShake();
+                var P = this.st.dt()
+                  , T = p.min(this.N.screenWidth, this.N.screenHeight)
+                  , I = p.max(this.N.screenWidth, this.N.screenHeight)
                   , A = p.max(T * (16 / 9), I);
-                this.j.f = .5 * A / (P * this.j.ppu);
-                var D = this.nt.zoomFast ? 3 : 2
-                  , E = this.nt.zoomFast ? 3 : 1.4
-                  , B = this.j.f > this.j.zoom ? D : E;
-                this.j.zoom = p.lerp(e * B, this.j.zoom, this.j.f),
-                this.de.cameraPos = h.copy(this.j.pos),
-                this.pe.Z(C.Key.Escape) && this.Ke.toggleEscMenu(),
-                (this.ue.isBindPressed(s.ToggleMap) || this.pe.Z(C.Key.G) && !this.ue.isKeyBound(C.Key.G)) && this.Ke.displayMapLarge(!1),
-                this.ue.isBindPressed(s.CycleUIMode) && this.Ke.cycleVisibilityMode(),
-                (this.ue.isBindPressed(s.HideUI) || this.pe.Z(C.Key.Escape) && !this.Ke.hudVisible) && this.Ke.cycleHud();
-                var O = this.nt.pos
-                  , L = this.j.screenToPoint(this.pe.mousePos)
-                  , F = h.sub(L, O)
-                  , R = h.length(F)
-                  , j = R > 1e-5 ? h.div(F, R) : h.create(1, 0);
-                this.Ye.wheelDisplayed && (R = this.prevInputMsg.toMouseLen,
+                this.N.f = .5 * A / (P * this.N.ppu);
+                var D = this.st.zoomFast ? 3 : 2
+                  , E = this.st.zoomFast ? 3 : 1.4
+                  , B = this.N.f > this.N.zoom ? D : E;
+                this.N.zoom = p.lerp(e * B, this.N.zoom, this.N.f),
+                this.pe.cameraPos = h.copy(this.N.pos),
+                this.ue.Y(C.Key.Escape) && this.Xe.toggleEscMenu(),
+                (this.he.isBindPressed(s.ToggleMap) || this.ue.Y(C.Key.G) && !this.he.isKeyBound(C.Key.G)) && this.Xe.displayMapLarge(!1),
+                this.he.isBindPressed(s.CycleUIMode) && this.Xe.cycleVisibilityMode(),
+                (this.he.isBindPressed(s.HideUI) || this.ue.Y(C.Key.Escape) && !this.Xe.hudVisible) && this.Xe.cycleHud();
+                var O = this.st.pos
+                  , F = this.N.screenToPoint(this.ue.mousePos)
+                  , L = h.sub(F, O)
+                  , R = h.length(L)
+                  , j = R > 1e-5 ? h.div(L, R) : h.create(1, 0);
+                this.Je.wheelDisplayed && (R = this.prevInputMsg.toMouseLen,
                 j = this.prevInputMsg.toMouseDir);
                 var N = new u.InputMsg;
                 if (N.seq = this.seq,
                 !this.spectating) {
-                    var q = this.we.getTouchMovement(this.j);
-                    if (this.we.moveDetected) {
+                    var q = this.be.getTouchMovement(this.N);
+                    if (this.be.moveDetected) {
                         var U = 255 * p.clamp(q.moveLen, 0, 1);
                         N.moveLeft = q.left,
                         N.moveRight = q.right,
@@ -29373,31 +29413,33 @@ webpackJsonp([0], {
                         N.moveDown = q.down,
                         N.moveLen = U
                     } else
-                        N.moveLeft = this.ue.isBindDown(s.MoveLeft) || this.pe.te(C.Key.Left) && !this.ue.isKeyBound(C.Key.Left),
-                        N.moveRight = this.ue.isBindDown(s.MoveRight) || this.pe.te(C.Key.Right) && !this.ue.isKeyBound(C.Key.Right),
-                        N.moveUp = this.ue.isBindDown(s.MoveUp) || this.pe.te(C.Key.Up) && !this.ue.isKeyBound(C.Key.Up),
-                        N.moveDown = this.ue.isBindDown(s.MoveDown) || this.pe.te(C.Key.Down) && !this.ue.isKeyBound(C.Key.Down),
+                        N.moveLeft = this.he.isBindDown(s.MoveLeft) || this.ue.ae(C.Key.Left) && !this.he.isKeyBound(C.Key.Left),
+                        N.moveRight = this.he.isBindDown(s.MoveRight) || this.ue.ae(C.Key.Right) && !this.he.isKeyBound(C.Key.Right),
+                        N.moveUp = this.he.isBindDown(s.MoveUp) || this.ue.ae(C.Key.Up) && !this.he.isKeyBound(C.Key.Up),
+                        N.moveDown = this.he.isBindDown(s.MoveDown) || this.ue.ae(C.Key.Down) && !this.he.isKeyBound(C.Key.Down),
                         N.moveLen = 255;
                     if (y.touch) {
-                        var G = this.nt.q.curWeapIdx == n.WeaponSlot.Throwable
-                          , W = this.we.getAimMovement(G, this.j);
+                        var G = this.st.U.curWeapIdx == n.WeaponSlot.Throwable
+                          , W = this.be.getAimMovement(G, this.N);
                         N.toMouseDir = W.toAimDir;
                         var V = W.toAimLen / 10;
-                        N.toMouseLen = Math.min(V, u.kMouseMaxLen)
+                        N.toMouseLen = V
                     } else
                         N.toMouseDir = h.copy(j),
-                        N.toMouseLen = Math.min(R, u.kMouseMaxLen);
-                    N.shootStart = this.ue.isBindPressed(s.Fire) || this.we.shotDetected,
-                    N.shootHold = this.ue.isBindDown(s.Fire) || this.we.shotDetected,
-                    N.portrait = this.j.screenWidth < this.j.screenHeight;
+                        N.toMouseLen = R;
+                    N.toMouseDir = h.normalizeSafe(N.toMouseDir, h.create(1, 0)),
+                    N.toMouseLen = p.clamp(N.toMouseLen, 0, u.kMouseMaxLen),
+                    N.shootStart = this.he.isBindPressed(s.Fire) || this.be.shotDetected,
+                    N.shootHold = this.he.isBindDown(s.Fire) || this.be.shotDetected,
+                    N.portrait = this.N.screenWidth < this.N.screenHeight;
                     for (var H = [s.Reload, s.Revive, s.Use, s.Loot, s.Cancel, s.EquipPrimary, s.EquipSecondary, s.EquipThrowable, s.EquipMelee, s.EquipNextWeap, s.EquipPrevWeap, s.EquipLastWeap, s.EquipOtherGun, s.EquipPrevScope, s.EquipNextScope, s.StowWeapons], K = 0; K < H.length; K++) {
                         var X = H[K];
-                        this.ue.isBindPressed(X) && N.addInput(X)
+                        this.he.isBindPressed(X) && N.addInput(X)
                     }
-                    if (this.ue.isBindPressed(s.Interact)) {
+                    if (this.he.isBindPressed(s.Interact)) {
                         for (var Z = [s.Revive, s.Use, s.Loot], Y = [], J = 0; J < Z.length; J++) {
                             var Q = Z[J];
-                            this.ue.getBind(Q) || Y.push(Q)
+                            this.he.getBind(Q) || Y.push(Q)
                         }
                         if (Y.length == Z.length)
                             N.addInput(s.Interact);
@@ -29405,13 +29447,13 @@ webpackJsonp([0], {
                             for (var $ = 0; $ < Y.length; $++)
                                 N.addInput(Y[$])
                     }
-                    (this.ue.isBindPressed(s.SwapWeapSlots) || this.Ke.swapWeapSlots) && (N.addInput(s.SwapWeapSlots),
-                    this.nt.gunSwitchCooldown = 0),
-                    this.Ke.reloadTouched && N.addInput(s.Reload),
-                    this.Ke.interactionTouched && (N.addInput(s.Interact),
+                    (this.he.isBindPressed(s.SwapWeapSlots) || this.Xe.swapWeapSlots) && (N.addInput(s.SwapWeapSlots),
+                    this.st.gunSwitchCooldown = 0),
+                    this.Xe.reloadTouched && N.addInput(s.Reload),
+                    this.Xe.interactionTouched && (N.addInput(s.Interact),
                     N.addInput(s.Cancel));
-                    for (var ee = 0; ee < this.Xe.uiEvents.length; ee++) {
-                        var te = this.Xe.uiEvents[ee];
+                    for (var ee = 0; ee < this.Ze.uiEvents.length; ee++) {
+                        var te = this.Ze.uiEvents[ee];
                         if ("use" == te.action)
                             if ("weapon" == te.type) {
                                 var ae = {
@@ -29425,43 +29467,43 @@ webpackJsonp([0], {
                             } else
                                 N.useItem = te.data
                     }
-                    this.ue.isBindPressed(s.UseBandage) ? N.useItem = "bandage" : this.ue.isBindPressed(s.UseHealthKit) ? N.useItem = "healthkit" : this.ue.isBindPressed(s.UseSoda) ? N.useItem = "soda" : this.ue.isBindPressed(s.UsePainkiller) && (N.useItem = "painkiller");
-                    for (var re = !1, oe = 0; oe < this.Xe.uiEvents.length; oe++) {
-                        var ne = this.Xe.uiEvents[oe];
+                    this.he.isBindPressed(s.UseBandage) ? N.useItem = "bandage" : this.he.isBindPressed(s.UseHealthKit) ? N.useItem = "healthkit" : this.he.isBindPressed(s.UseSoda) ? N.useItem = "soda" : this.he.isBindPressed(s.UsePainkiller) && (N.useItem = "painkiller");
+                    for (var re = !1, oe = 0; oe < this.Ze.uiEvents.length; oe++) {
+                        var ne = this.Ze.uiEvents[oe];
                         if ("drop" == ne.action) {
                             var se = new u.DropItemMsg;
                             if ("weapon" == ne.type) {
-                                var le = this.nt.q.weapons;
+                                var le = this.st.U.weapons;
                                 se.item = le[ne.data].name,
                                 se.weapIdx = ne.data
                             } else {
                                 var me = "";
-                                me = "helmet" == ne.data ? this.nt.N.helmet : "chest" == ne.data ? this.nt.N.chest : ne.data,
+                                me = "helmet" == ne.data ? this.st.q.helmet : "chest" == ne.data ? this.st.q.chest : ne.data,
                                 se.item = me
                             }
-                            "" != se.item && (this.ge(u.Msg.DropItem, se),
+                            "" != se.item && (this.ye(u.Msg.DropItem, se),
                             re = !0)
                         }
                     }
-                    re && this.de.playSound("loot_drop_01", {
+                    re && this.pe.playSound("loot_drop_01", {
                         channel: "ui"
                     })
                 }
-                var ce = this.Ke.specNext || this.spectating && this.pe.Z(C.Key.Right)
-                  , de = this.Ke.specPrev || this.spectating && this.pe.Z(C.Key.Left);
-                if (this.Ke.beginSpectating || ce || de) {
+                var ce = this.Xe.specNext || this.spectating && this.ue.Y(C.Key.Right)
+                  , de = this.Xe.specPrev || this.spectating && this.ue.Y(C.Key.Left);
+                if (this.Xe.beginSpectating || ce || de) {
                     this.gameOver = !1;
                     var pe = new u.SpectateMsg;
                     pe.specNext = ce,
                     pe.specPrev = de,
-                    this.ge(u.Msg.Spectate, pe)
+                    this.ye(u.Msg.Spectate, pe)
                 }
-                this.Ke.beginSpectating = !1,
-                this.Ke.specNext = !1,
-                this.Ke.specPrev = !1,
-                this.Ke.reloadTouched = !1,
-                this.Ke.interactionTouched = !1,
-                this.Ke.swapWeapSlots = !1;
+                this.Xe.beginSpectating = !1,
+                this.Xe.specNext = !1,
+                this.Xe.specPrev = !1,
+                this.Xe.reloadTouched = !1,
+                this.Xe.interactionTouched = !1,
+                this.Xe.swapWeapSlots = !1;
                 var ue = !1;
                 for (var he in N)
                     if (N.hasOwnProperty(he)) {
@@ -29481,53 +29523,53 @@ webpackJsonp([0], {
                 this.seqSendTime = Date.now(),
                 this.seqInFlight = !0,
                 N.seq = this.seq),
-                this.ge(u.Msg.Input, N),
+                this.ye(u.Msg.Input, N),
                 this.inputMsgTimeout = 1,
                 this.prevInputMsg = N),
-                this.Xe.flushInput(),
-                this.ke.l(e, this.nt, this.Se, this.de, this._e, this.j, o),
-                this.qe.l(e, this.nt, this.j, o),
-                this.Te.l(e, this.Me, this.ke, this.j, this.nt, this._e, this.Se, this.de),
-                this.Ie.l(e, this.Me, this.ke, this.j, this.nt, this._e, this.Se, this.de),
-                this.De.l(e, this.Se, this.de, this.nt, this.ke, this._e, this.j),
-                this.Be.l(e, this.ke, this.j, this.Se, this.de),
-                this.Fe.l(e, this.nt, this.j, this.ke, this.Se, this._e, this.de),
-                this.Oe.l(e, this.j, this.nt, this.ke, this._e),
-                this.Re.l(e, this.j, this.nt, this.ke, this._e),
-                this.Qe.l(e, this.le, this.Me, this.Se, this.de),
-                this.Se.l(e, this.j, o),
-                this.je.l(e, this.Me, this.nt, this.ke, this.j, this._e),
-                this.Ne.l(e, this.ke, this.j),
-                this.Ve.l(e, this.nt, this.j),
-                this.Ke.l(e, this.nt, this.le == this.ot, this.ke, this.Ge, this.qe, this.Me, this.j, this.teamMode),
-                this.Xe.l(e, this.nt, this.spectating, this.Me, this.qe, this.ke, this.ue),
-                this.Ye.l(e, this.ot, this.nt, this.teamMode, this.je, this._e, this.pe, this.ue, this.gameOver),
-                this.we.updateDisplay(),
-                this._e.l(e, this.j, this.ke);
-                for (var xe = 0; xe < this.Ye.newPings.length; xe++) {
-                    var fe = this.Ye.newPings[xe]
+                this.Ze.flushInput(),
+                this.ze.l(e, this.st, this.ke, this.pe, this.ve, this.N, o),
+                this.Ue.l(e, this.st, this.N, o),
+                this.Ce.l(e, this.Pe, this.ze, this.N, this.st, this.ve, this.ke, this.pe),
+                this.Ae.l(e, this.Pe, this.ze, this.N, this.st, this.ve, this.ke, this.pe),
+                this.Ee.l(e, this.ke, this.pe, this.st, this.ze, this.ve, this.N),
+                this.Oe.l(e, this.ze, this.N, this.ke, this.pe),
+                this.Re.l(e, this.st, this.N, this.ze, this.ke, this.ve, this.pe),
+                this.Fe.l(e, this.N, this.st, this.ze, this.ve),
+                this.je.l(e, this.N, this.st, this.ze, this.ve),
+                this.$e.l(e, this.me, this.Pe, this.ke, this.pe),
+                this.ke.l(e, this.N, o),
+                this.Ne.l(e, this.Pe, this.st, this.ze, this.N, this.ve),
+                this.qe.l(e, this.ze, this.N),
+                this.He.l(e, this.st, this.N),
+                this.Xe.l(e, this.st, this.me == this.nt, this.ze, this.We, this.Ue, this.Pe, this.N, this.teamMode),
+                this.Ze.l(e, this.st, this.spectating, this.Pe, this.Ue, this.ze, this.he),
+                this.Je.l(e, this.nt, this.st, this.teamMode, this.Ne, this.ve, this.ue, this.he, this.gameOver),
+                this.be.updateDisplay(),
+                this.ve.l(e, this.N, this.ze);
+                for (var xe = 0; xe < this.Je.newPings.length; xe++) {
+                    var fe = this.Je.newPings[xe]
                       , we = new u.EmoteMsg;
                     we.type = fe.type,
                     we.pos = fe.pos,
                     we.useLoadout = !1,
                     we.teamOnly = !0,
                     we.isPing = !0,
-                    this.ge(u.Msg.Emote, we)
+                    this.ye(u.Msg.Emote, we)
                 }
-                this.Ye.newPings = [];
-                for (var be = 0; be < this.Ye.newEmotes.length; be++) {
-                    var _e = this.Ye.newEmotes[be]
+                this.Je.newPings = [];
+                for (var be = 0; be < this.Je.newEmotes.length; be++) {
+                    var _e = this.Je.newEmotes[be]
                       , ve = new u.EmoteMsg;
                     ve.type = _e.type,
                     ve.pos = _e.pos,
                     ve.useLoadout = _e.useLoadout,
                     ve.teamOnly = !1,
                     ve.isPing = !1,
-                    this.ge(u.Msg.Emote, ve)
+                    this.ye(u.Msg.Emote, ve)
                 }
-                if (this.Ye.newEmotes = [],
-                this.dt(e, o),
-                ++this.fe % 30 == 0) {
+                if (this.Je.newEmotes = [],
+                this.ut(e, o),
+                ++this.we % 30 == 0) {
                     for (var Se = (Date.now(),
                     0); Se < t.length; Se++) {
                         var ke = t[Se];
@@ -29538,95 +29580,95 @@ webpackJsonp([0], {
                         Me.active && !Me.dead && i(Me, .9) && r++
                     }
                     r && (this.I = !0),
-                    r && this.st && x.I()
+                    r && this.lt && x.I()
                 }
             },
-            dt: function(e, t) {
+            ut: function(e, t) {
                 this.pixi.renderer.backgroundColor = g.grass,
-                this.Me.render(this.j, t),
-                this.Te.render(this.j, t),
-                this.Ie.render(this.j),
-                this.ke.render(this.j),
-                this.Ge.render(this.j),
-                this.Ke.render(this.nt.pos, this.Ge, this.j, this.ke),
-                this.Ye.render(this.j),
-                this.Ve.render(this.j),
+                this.Pe.render(this.N, t),
+                this.Ce.render(this.N, t),
+                this.Ae.render(this.N),
+                this.ze.render(this.N),
+                this.We.render(this.N),
+                this.Xe.render(this.st.pos, this.We, this.N, this.ze),
+                this.Je.render(this.N),
+                this.He.render(this.N),
                 v.flush()
             },
-            lt: function() {
+            mt: function() {
                 var e = x.getScreenDimensions()
                   , t = e.width;
                 x.isLandscape() || (t = e.height),
                 y.layout = t <= 850 || y.mobile ? y.Layout.Sm : y.Layout.Lg,
-                this.j.screenWidth = e.width,
-                this.j.screenHeight = e.height,
-                this.ke.resize(this.pixi.renderer),
-                this.Ge.resize(),
-                this.Ke.resize(this.j),
-                this.we.resize(),
-                this._e.resize(this.j)
+                this.N.screenWidth = e.width,
+                this.N.screenHeight = e.height,
+                this.ze.resize(this.pixi.renderer, this.canvasMode),
+                this.We.resize(),
+                this.Xe.resize(this.N),
+                this.be.resize(),
+                this.ve.resize(this.N)
             },
-            ut: function(e) {
+            ht: function(e) {
                 for (var t = {
-                    audioManager: this.de,
-                    renderer: this._e,
-                    particleBarn: this.Se,
-                    map: this.ke,
-                    smokeBarn: this.Re
+                    audioManager: this.pe,
+                    renderer: this.ve,
+                    particleBarn: this.ke,
+                    map: this.ze,
+                    smokeBarn: this.je
                 }, a = 0; a < e.delObjIds.length; a++)
                     e.delObjIds[a],
-                    this.rt.deleteObj(e.delObjIds[a]);
+                    this.ot.deleteObj(e.delObjIds[a]);
                 for (var i = 0; i < e.fullObjects.length; i++) {
                     var r = e.fullObjects[i];
-                    this.rt.updateObjFull(r.__type, r.__id, r, t)
+                    this.ot.updateObjFull(r.__type, r.__id, r, t)
                 }
                 for (var o = 0; o < e.partObjects.length; o++) {
                     var s = e.partObjects[o];
-                    this.rt.updateObjPart(s.__id, s, t)
+                    this.ot.updateObjPart(s.__id, s, t)
                 }
-                if (e.activePlayerIdDirty && (this.le = e.activePlayerId),
-                this.spectating = this.le != this.ot,
-                this.nt = this.Me.oe(this.le),
-                this.nt.ht(e.activePlayerData, this.Me),
-                e.activePlayerData.weapsDirty && (this.Ke.weapsDirty = !0),
+                if (e.activePlayerIdDirty && (this.me = e.activePlayerId),
+                this.spectating = this.me != this.nt,
+                this.st = this.Pe.ne(this.me),
+                this.st.gt(e.activePlayerData, this.Pe),
+                e.activePlayerData.weapsDirty && (this.Xe.weapsDirty = !0),
                 this.spectating) {
-                    this.Ke.setSpectating(!0);
-                    var l = this.Me.U(this.le)
+                    this.Xe.setSpectating(!0);
+                    var l = this.Pe.H(this.me)
                       , m = this.anonPlayerNames && 1 == this.teamMode ? l.anonName : l.name;
-                    this.Ke.setSpectatedPlayer(this.le, m),
-                    this.we.hideAll()
+                    this.Xe.setSpectatedPlayer(this.me, m),
+                    this.be.hideAll()
                 }
-                this.nt.layer = this.nt.N.layer,
-                this._e.setActiveLayer(this.nt.layer),
-                this.de.activeLayer = this.nt.layer;
-                var c = this.nt.isUnderground(this.ke);
-                this._e.setUnderground(c),
-                this.de.underground = c,
-                e.aliveDirty && this.Ke.updatePlayersAlive(e.aliveCount),
-                this.Ge.setProgress(e.gasT),
-                e.gasDirty && this.Ge.setFullState(e.gasT, e.gasData, this.ke, this.Ke);
+                this.st.layer = this.st.q.layer,
+                this.ve.setActiveLayer(this.st.layer),
+                this.pe.activeLayer = this.st.layer;
+                var c = this.st.isUnderground(this.ze);
+                this.ve.setUnderground(c),
+                this.pe.underground = c,
+                e.aliveDirty && this.Xe.updatePlayersAlive(e.aliveCount),
+                this.We.setProgress(e.gasT),
+                e.gasDirty && this.We.setFullState(e.gasT, e.gasData, this.ze, this.Xe);
                 for (var d = 0; d < e.teams.length; d++)
-                    this.Me.setTeamInfo(e.teams[d]);
-                for (var p = this.Me.U(this.le).teamId, u = this.Me.getTeamInfo(p), h = 0; h < e.teamData.length; h++) {
+                    this.Pe.setTeamInfo(e.teams[d]);
+                for (var p = this.Pe.H(this.me).teamId, u = this.Pe.getTeamInfo(p), h = 0; h < e.teamData.length; h++) {
                     var g = e.teamData[h];
-                    this.Me.setTeammateData(u.playerIds[g.playerIdx], g)
+                    this.Pe.setTeammateData(u.playerIds[g.playerIdx], g)
                 }
                 for (var y = 0; y < e.bullets.length; y++) {
                     var x = e.bullets[y];
-                    n.bullets[x.bulletType].addFlare ? this.Ie.addFlare(x, this.Me, this._e) : this.Te.addBullet(x, this.Me, this._e),
-                    x.shotFx && this.Qe.addShot(x.pos, x.layer, x.playerId, x.shotSourceType, x.shotOffhand, x.lastShot)
+                    n.bullets[x.bulletType].addFlare ? this.Ae.addFlare(x, this.Pe, this.ve) : this.Ce.addBullet(x, this.Pe, this.ve),
+                    x.shotFx && this.$e.addShot(x.pos, x.layer, x.playerId, x.shotSourceType, x.shotOffhand, x.lastShot)
                 }
                 for (var f = 0; f < e.explosions.length; f++) {
                     var w = e.explosions[f];
-                    this.Be.addExplosion(w.type, w.pos, w.layer)
+                    this.Oe.addExplosion(w.type, w.pos, w.layer)
                 }
                 for (var b = 0; b < e.emotes.length; b++) {
                     var _ = e.emotes[b];
-                    _.isPing ? this.Ye.addPing(_) : this.Ye.addEmote(_)
+                    _.isPing ? this.Je.addPing(_) : this.Je.addEmote(_)
                 }
-                this.Oe.gt(e.planes)
+                this.Fe.yt(e.planes)
             },
-            ye: function(e, t) {
+            xe: function(e, t) {
                 var a = this;
                 switch (e) {
                 case u.Msg.Joined:
@@ -29634,52 +29676,52 @@ webpackJsonp([0], {
                     i.deserialize(t),
                     this.onJoin(),
                     this.teamMode = i.teamMode,
-                    this.ot = i.playerId,
-                    this.st = 2 & i.gameOpts;
+                    this.nt = i.playerId,
+                    this.lt = 2 & i.gameOpts;
                     for (var r = 0; r < i.playerInfoMsgs.length; r++) {
                         var o = i.playerInfoMsgs[r];
-                        this.Me.yt(o),
-                        this.Me.oe(o.id)
+                        this.Pe.xt(o),
+                        this.Pe.ne(o.id)
                     }
-                    i.started || this.Ke.setWaitingForPlayers(!0),
-                    this.Ke.removeAds(),
+                    i.started || this.Xe.setWaitingForPlayers(!0),
+                    this.Xe.removeAds(),
                     this.victoryMusic && (this.victoryMusic.stop(),
                     this.victoryMusic = null);
                     break;
                 case u.Msg.PlayerInfo:
                     var s = new u.PlayerInfoMsg;
                     s.deserialize(t),
-                    this.Me.yt(s);
+                    this.Pe.xt(s);
                     break;
                 case u.Msg.Map:
                     var l = new u.MapMsg;
                     l.deserialize(t),
-                    this.ke.setData(l.width, l.height, l.seed, l.rivers, l.places, l.objects, this.j, this.canvasMode),
-                    this.ke.renderMap(this.pixi.renderer, this.canvasMode);
+                    this.ze.setData(l.width, l.height, l.seed, l.rivers, l.places, l.objects, this.N, this.canvasMode),
+                    this.ze.renderMap(this.pixi.renderer, this.canvasMode);
                     break;
                 case u.Msg.Update:
                     var m = new u.UpdateMsg;
-                    m.deserialize(t, this.rt),
+                    m.deserialize(t, this.ot),
                     this.playing = !0,
-                    this.ut(m);
+                    this.ht(m);
                     break;
                 case u.Msg.Kill:
                     var c = new u.KillMsg;
                     c.deserialize(t);
-                    var d = (this.Me.oe(c.targetId),
-                    this.Me.U(c.targetId))
-                      , p = this.Me.U(c.killCreditId)
+                    var d = (this.Pe.ne(c.targetId),
+                    this.Pe.H(c.targetId))
+                      , p = this.Pe.H(c.killCreditId)
                       , h = c.itemSourceType || c.mapSourceType
                       , g = this.localization.translate("game-" + h)
-                      , y = this.Me.U(this.le).teamId
+                      , y = this.Pe.H(this.me).teamId
                       , f = c.downed && !c.killed || c.damageType == n.DamageType.Gas || c.damageType == n.DamageType.Bleeding || c.damageType == n.DamageType.Airdrop
-                      , w = f ? p : this.Me.U(c.killerId)
+                      , w = f ? p : this.Pe.H(c.killerId)
                       , b = d.name
                       , _ = p.name
                       , v = w.name;
                     if (this.anonPlayerNames) {
                         var S = function(e) {
-                            return e.playerId == a.le || e.teamId == y
+                            return e.playerId == a.me || e.teamId == y
                         };
                         S(d) || (b = d.anonName),
                         S(p) || (_ = p.anonName),
@@ -29688,47 +29730,47 @@ webpackJsonp([0], {
                     b = x.htmlEscape(b),
                     _ = x.htmlEscape(_),
                     v = x.htmlEscape(v),
-                    c.killCreditId == this.le ? this.Ke.showKill({
+                    c.killCreditId == this.me ? this.Xe.showKill({
                         name: _,
                         kills: c.killerKills,
-                        completeKill: c.killerId == this.le
+                        completeKill: c.killerId == this.me
                     }, {
                         name: b,
                         suicide: c.killerId == c.targetId || c.killCreditId == c.targetId,
                         killed: c.killed,
                         downed: c.downed,
                         teamKill: d.teamId == p.teamId
-                    }, g, this.spectating) : c.targetId == this.le && c.downed && !c.killed && this.Ke.showDowned({
+                    }, g, this.spectating) : c.targetId == this.me && c.downed && !c.killed && this.Xe.showDowned({
                         name: _,
                         damageType: c.damageType
                     }, {
                         name: b,
                         suicide: c.killerId == c.targetId || c.killCreditId == c.targetId
                     }, g, this.spectating);
-                    var k = this.Xe.getKillFeedText(b, 0 == w.teamId ? "" : v, g, c.damageType, c.downed && !c.killed)
-                      , z = this.Xe.getKillFeedColor(y, d.teamId, p.teamId);
-                    this.Xe.addKillFeed(k, z),
-                    c.type == n.DamageType.Player && this.Te.createBulletHit(this.Me, c.targetId, this.de);
+                    var k = this.Ze.getKillFeedText(b, 0 == w.teamId ? "" : v, g, c.damageType, c.downed && !c.killed)
+                      , z = this.Ze.getKillFeedColor(y, d.teamId, p.teamId);
+                    this.Ze.addKillFeed(k, z),
+                    c.type == n.DamageType.Player && this.Ce.createBulletHit(this.Pe, c.targetId, this.pe);
                     break;
                 case u.Msg.PlayerStats:
                     var M = new u.PlayerStatsMsg;
                     M.deserialize(t),
-                    this.Ke.setLocalStats(M.playerStats);
+                    this.Xe.setLocalStats(M.playerStats);
                     break;
                 case u.Msg.GameOver:
                     var P = new u.GameOverMsg;
                     P.deserialize(t),
                     this.gameOver = P.gameOver,
-                    this.Ke.showStats({
+                    this.Xe.showStats({
                         victory: P.victory,
                         spectating: this.spectating,
                         gameOver: P.gameOver,
                         stats: P.playerStats,
                         teamRank: P.teamRank,
                         teamMode: this.teamMode
-                    }, this.Me),
-                    this.we.hideAll(),
-                    P.victory && (!this.spectating || this.teamMode > 1) && (this.victoryMusic = this.de.playSound("menu_music", {
+                    }, this.Pe),
+                    this.be.hideAll(),
+                    P.victory && (!this.spectating || this.teamMode > 1) && (this.victoryMusic = this.pe.playSound("menu_music", {
                         channel: "music",
                         delay: 1300,
                         forceStart: !0
@@ -29739,12 +29781,12 @@ webpackJsonp([0], {
                     if (T.deserialize(t),
                     T.type == u.PickupMsgType.Success && T.item) {
                         var C = n.items[T.item];
-                        this.de.playSound(C.sound.pickup, {
+                        this.pe.playSound(C.sound.pickup, {
                             channel: "ui"
                         }),
-                        "throwable" == C.type && (this.nt.lastThrowablePickupSfxTicker = .3)
+                        "throwable" == C.type && (this.st.lastThrowablePickupSfxTicker = .3)
                     } else
-                        this.Xe.displayPickupMessage(T.type);
+                        this.Ze.displayPickupMessage(T.type);
                     break;
                 case u.Msg.Disconnect:
                     var I = new u.DisconnectMsg;
@@ -29752,12 +29794,12 @@ webpackJsonp([0], {
                     this.disconnectMsg = this.localization.translate(I.reason)
                 }
             },
-            ge: function(e, t) {
+            ye: function(e, t) {
                 var a = new u.MsgStream(new ArrayBuffer(4096));
                 a.serializeMsg(e, t),
-                this.xt(a)
+                this.ft(a)
             },
-            xt: function(e) {
+            ft: function(e) {
                 if (this.ws && this.ws.readyState == this.ws.OPEN)
                     try {
                         this.ws.send(e.getBuffer())
@@ -29768,7 +29810,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            ft: r
+            wt: r
         }
     },
     "9e5281a7": function(e, t, a) {
@@ -30023,8 +30065,8 @@ webpackJsonp([0], {
             this.container.addChild(this.sprite)
         }
         function r() {
-            this.et = new c.Pool(i),
-            this.wt = null
+            this.tt = new c.Pool(i),
+            this.bt = null
         }
         var o = a("80ac57a6")
           , n = a("989ad62a")
@@ -30072,8 +30114,8 @@ webpackJsonp([0], {
         },
         r.prototype = {
             l: function(e, t, a, i) {
-                this.wt = null;
-                for (var r = Number.MAX_VALUE, o = this.et.m(), n = 0; n < o.length; n++) {
+                this.bt = null;
+                for (var r = Number.MAX_VALUE, o = this.tt.m(), n = 0; n < o.length; n++) {
                     var c = o[n];
                     if (c.active) {
                         if (l.sameLayer(c.layer, t.layer)) {
@@ -30082,7 +30124,7 @@ webpackJsonp([0], {
                               , u = m.sub(t.pos, d)
                               , h = m.lengthSqr(u);
                             h < p * p && h < r && (r = h,
-                            this.wt = c)
+                            this.bt = c)
                         }
                         c.ticker += e;
                         var g = s.delerp(c.ticker, 0, 1)
@@ -30094,12 +30136,12 @@ webpackJsonp([0], {
                     }
                 }
             },
-            bt: function() {
-                return this.wt
+            _t: function() {
+                return this.bt
             }
         },
         e.exports = {
-            Ue: r
+            Ge: r
         }
     },
     a508b62a: function(e, t, a) {
@@ -30230,8 +30272,8 @@ webpackJsonp([0], {
             this.isNearDoorError = !1,
             this.doorErrorTicker = 0,
             this.noCeilingRevealTicker = 0,
-            this.N = {},
-            this.q = {
+            this.q = {},
+            this.U = {
                 action: {
                     type: d.None
                 },
@@ -30245,8 +30287,8 @@ webpackJsonp([0], {
             this.layer = 0
         }
         function s() {
-            this.$e = new k.Pool(n),
-            this._t = {},
+            this.et = new k.Pool(n),
+            this.vt = {},
             this.teamInfo = {},
             this.teammateData = {}
         }
@@ -30350,7 +30392,7 @@ webpackJsonp([0], {
                 this.container.visible = !1
             },
             n: function(e, t, a, i) {
-                var r = this.N;
+                var r = this.q;
                 r.pos = x.copy(e.pos),
                 r.dir = x.copy(e.dir),
                 t && (r.layer = e.layer,
@@ -30366,18 +30408,18 @@ webpackJsonp([0], {
                 r.chest = e.chest,
                 r.curWeapType = e.curWeapType,
                 r.wearingPan = e.wearingPan,
-                this.N.animSeq != this.anim.seq && this.playAnim(this.N.animType, this.N.animSeq),
+                this.q.animSeq != this.anim.seq && this.playAnim(this.q.animType, this.q.animSeq),
                 this.visualsDirty = !0),
                 a && (this.isNew = !0)
             },
-            ht: function(e, t) {
-                var a = this.q.curScope
-                  , i = this.q;
+            gt: function(e, t) {
+                var a = this.U.curScope
+                  , i = this.U;
                 if (i.scopedIn = e.scopedIn,
                 i.health = e.health,
                 e.boostDirty && (i.boost = e.boost),
                 i.action = {
-                    type: this.N.actionType
+                    type: this.q.actionType
                 },
                 e.hasAction && (i.action.time = e.action.time,
                 i.action.duration = e.action.duration,
@@ -30400,61 +30442,61 @@ webpackJsonp([0], {
                     }
                 }
                 e.spectatorCountDirty && (i.spectatorCount = e.spectatorCount),
-                this.q.curScope != a && (this.zoomFast = !0),
-                this.q.scopedIn && (this.zoomFast = !1)
+                this.U.curScope != a && (this.zoomFast = !0),
+                this.U.scopedIn && (this.zoomFast = !1)
             },
-            ct: function() {
-                var e = this.N.downed || this.q.scopedIn ? "1xscope" : this.q.curScope;
+            dt: function() {
+                var e = this.q.downed || this.U.scopedIn ? "1xscope" : this.U.curScope;
                 return c.scopeZoomRadius[e]
             },
-            vt: function() {
-                return c.items[this.N.backpack].level
-            },
             St: function() {
-                return c.items[this.N.curWeapType].type
+                return c.items[this.q.backpack].level
             },
-            kt: function(e) {
-                return "" !== this.q.weapons[e].name
+            kt: function() {
+                return c.items[this.q.curWeapType].type
+            },
+            zt: function(e) {
+                return "" !== this.U.weapons[e].name
             },
             hasActivePan: function() {
-                return this.N.wearingPan || "pan" == this.N.curWeapType && this.currentAnim() != p.Melee
+                return this.q.wearingPan || "pan" == this.q.curWeapType && this.currentAnim() != p.Melee
             },
             getPanSegment: function() {
-                var e = this.N.wearingPan ? "unequipped" : "equipped";
+                var e = this.q.wearingPan ? "unequipped" : "equipped";
                 return c.items.pan.reflectSurface[e]
             },
             l: function(e, t, a, i, r, o, n, s, l, m, g) {
-                var w = c.items[this.N.curWeapType]
+                var w = c.items[this.q.curWeapType]
                   , S = this.__id == s
-                  , k = t.oe(s);
+                  , k = t.ne(s);
                 this.posOld = x.copy(this.pos),
                 this.dirOld = x.copy(this.dir),
-                this.pos = x.copy(this.N.pos),
-                this.dir = x.copy(this.N.dir),
-                this.layer = this.N.layer,
-                this.downed = this.N.downed;
-                var M = this.weapType != this.N.curWeapType;
-                this.weapType = this.N.curWeapType,
+                this.pos = x.copy(this.q.pos),
+                this.dir = x.copy(this.q.dir),
+                this.layer = this.q.layer,
+                this.downed = this.q.downed;
+                var M = this.weapType != this.q.curWeapType;
+                this.weapType = this.q.curWeapType,
                 this.lastThrowablePickupSfxTicker -= e,
                 this.noCeilingRevealTicker -= e;
-                var P = t._t[s].teamId
-                  , T = t._t[this.__id].teamId == P;
+                var P = t.vt[s].teamId
+                  , T = t.vt[this.__id].teamId == P;
                 if (this.isNew) {
-                    var C = t.U(this.__id);
+                    var C = t.H(this.__id);
                     this.nameText.text = C.name,
                     this.nameText.visible = !S && T
                 }
-                for (var I = null, A = null, D = a.K.m(), E = 0; E < D.length; E++) {
+                for (var I = null, A = null, D = a.Z.m(), E = 0; E < D.length; E++) {
                     var B = D[E];
-                    if (B.active && !B.dead && B.layer == this.N.layer)
+                    if (B.active && !B.dead && B.layer == this.q.layer)
                         if (B.isBush) {
                             var O = .25 * this.rad;
                             b.intersectCircle(B.collider, this.pos, O) && (I = B)
                         } else if (B.isDoor && !B.door.open && B.door.playErrorFx) {
-                            var L = this.rad + .25
-                              , F = x.rotate(x.create(1, 0), B.rot)
+                            var F = this.rad + .25
+                              , L = x.rotate(x.create(1, 0), B.rot)
                               , R = x.sub(B.pos, this.pos);
-                            x.dot(R, F) < 0 && b.intersectCircle(B.collider, this.pos, L) && (A = B)
+                            x.dot(R, L) < 0 && b.intersectCircle(B.collider, this.pos, F) && (A = B)
                         }
                 }
                 var j = null != I;
@@ -30512,7 +30554,7 @@ webpackJsonp([0], {
                 })),
                 this.wasInWater = Y,
                 this.bleedTicker -= e,
-                this.N.downed && !this.N.dead && this.N.actionType == d.None && this.bleedTicker < 0) {
+                this.q.downed && !this.q.dead && this.q.actionType == d.None && this.bleedTicker < 0) {
                     this.bleedTicker = c.player.bleedTickRate;
                     var J = x.mul(this.dir, 1);
                     J = x.rotate(J, (Math.random() - .5) * Math.PI / 3),
@@ -30526,24 +30568,24 @@ webpackJsonp([0], {
                     })
                 }
                 if (S && !g) {
-                    var Q = this.q.curWeapIdx
-                      , $ = this.q.weapons[Q]
+                    var Q = this.U.curWeapIdx
+                      , $ = this.U.weapons[Q]
                       , ee = c.items[$.name];
-                    if (!this.playedDryFire && "gun" == this.St() && (o.isBindPressed(u.Fire) || o.isBindDown(u.Fire) && "auto" == ee.fireMode) && 0 === this.q.action.type && !l) {
-                        var te = this.q.inventory[ee.ammo]
+                    if (!this.playedDryFire && "gun" == this.kt() && (o.isBindPressed(u.Fire) || o.isBindDown(u.Fire) && "auto" == ee.fireMode) && 0 === this.U.action.type && !l) {
+                        var te = this.U.inventory[ee.ammo]
                           , ae = $.ammo;
                         0 === te && 0 === ae && (i.playSound(ee.sound.empty),
                         this.playedDryFire = !0)
                     }
                     o.isBindDown(u.Fire) || (this.playedDryFire = !1)
                 }
-                var ie = this.N.actionType;
+                var ie = this.q.actionType;
                 if (!S && this.curAction.type != ie) {
                     i.stopSound(this.actionSoundInstance);
                     var re = null;
                     switch (ie) {
                     case d.Reload:
-                        var oe = this.N.curWeapType;
+                        var oe = this.q.curWeapType;
                         "" != oe && (re = c.items[oe].sound.reload)
                     }
                     re && (this.actionSoundInstance = i.playSound(re, {
@@ -30557,9 +30599,9 @@ webpackJsonp([0], {
                 }
                 if (this.gunSwitchCooldown -= e,
                 this.fireDelay -= e,
-                S && (M || this.curWeapIdx != this.q.curWeapIdx)) {
+                S && (M || this.curWeapIdx != this.U.curWeapIdx)) {
                     var ne = this.curWeapIdx;
-                    this.curWeapIdx = this.q.curWeapIdx;
+                    this.curWeapIdx = this.U.curWeapIdx;
                     var se = c.items[this.weapType];
                     if ("melee" == se.type || "throwable" == se.type)
                         ("throwable" != se.type || this.lastThrowablePickupSfxTicker <= 0) && i.playSound(se.sound.deploy, {
@@ -30571,7 +30613,7 @@ webpackJsonp([0], {
                         var le = "gun_switch_01"
                           , me = !1;
                         if ((0 == ne || 1 == ne) && (0 == this.curWeapIdx || 1 == this.curWeapIdx) && this.fireDelay > 0) {
-                            var ce = c.items[this.q.weapons[ne].name];
+                            var ce = c.items[this.U.weapons[ne].name];
                             se && ce && void 0 !== se.deployGroup && void 0 !== ce.deployGroup && se.deployGroup == ce.deployGroup && (me = !0)
                         }
                         this.gunSwitchCooldown > 0 || me ? le = se.sound.deploy : this.gunSwitchCooldown = c.player.freeSwitchCooldown,
@@ -30599,11 +30641,11 @@ webpackJsonp([0], {
                       , xe = this.anim.bones[ge];
                     xe.weight > 0 ? this.bones[he].copy(z.lerp(xe.weight, ye, xe.pose)) : this.bones[he].copy(ye)
                 }
-                (this.visualsDirty || this.throwableStatePrev != this.throwableState) && this.zt(),
+                (this.visualsDirty || this.throwableStatePrev != this.throwableState) && this.Mt(),
                 this.visualsDirty = !1,
                 this.throwableStatePrev = this.throwableState,
-                this.Mt();
-                for (var fe = this.layer, we = b.createCircle(this.pos, c.player.maxVisualRadius), be = !1, _e = !1, ve = !1, Se = a.at.m(), ke = 0; ke < Se.length; ke++) {
+                this.Pt();
+                for (var fe = this.layer, we = b.createCircle(this.pos, c.player.maxVisualRadius), be = !1, _e = !1, ve = !1, Se = a.it.m(), ke = 0; ke < Se.length; ke++) {
                     var ze = Se[ke];
                     if (ze.active) {
                         for (var Me = 0; Me < ze.stairs.length; Me++) {
@@ -30615,7 +30657,7 @@ webpackJsonp([0], {
                                   , Ie = x.sub(Ce, this.pos)
                                   , Ae = x.length(Ie);
                                 Ie = Ae > 1e-4 ? x.div(Ie, Ae) : x.create(1, 0),
-                                ve = v.intersectSegment(a.K.m(), this.pos, Ie, Ae, .5, this.layer, !1) < Ae
+                                ve = v.intersectSegment(a.Z.m(), this.pos, Ie, Ae, .5, this.layer, !1) < Ae
                             }
                             S && Pe.noCeilingReveal && Te && 0 != this.layer && (this.noCeilingRevealTicker = .25)
                         }
@@ -30630,19 +30672,19 @@ webpackJsonp([0], {
                 _e && (1 & fe && (1 & k.layer || !ve) || 2 & k.layer && !be) && (fe |= 2),
                 (1 & fe) != (1 & k.layer) || !_e || be && 0 != k.layer || (fe |= 2,
                 Ee += 100);
-                var Be = this.__id + (this.N.downed ? 0 : 131072) + (S ? 65536 : 0);
+                var Be = this.__id + (this.q.downed ? 0 : 131072) + (S ? 65536 : 0);
                 n.addPIXIObj(this.container, fe, Ee, Be),
                 this.isNew = !1
             },
-            dt: function(e, t) {
+            ut: function(e, t) {
                 var a = e.pointToScreen(this.pos)
                   , i = e.pixels(1);
                 this.container.position.set(a.x, a.y),
                 this.container.scale.set(i, i),
-                this.container.visible = !this.N.dead
+                this.container.visible = !this.q.dead
             },
-            zt: function() {
-                var e = c.items[this.N.skin]
+            Mt: function() {
+                var e = c.items[this.q.skin]
                   , t = e.skinImg;
                 this.bodySprite.texture = m.Texture.fromImage(t.baseSprite),
                 this.bodySprite.tint = t.baseTint,
@@ -30665,19 +30707,19 @@ webpackJsonp([0], {
                 };
                 if (i(this.footLSprite, t.footTint, this.downed),
                 i(this.footRSprite, t.footTint, this.downed),
-                "" == this.N.chest || e.camo)
+                "" == this.q.chest || e.camo)
                     this.chestSprite.visible = !1;
                 else {
-                    var r = c.items[this.N.chest];
+                    var r = c.items[this.q.chest];
                     this.chestSprite.texture = m.Texture.fromImage("player-armor-base-01.img"),
                     this.chestSprite.scale.set(.25, .25),
                     this.chestSprite.tint = r.tint,
                     this.chestSprite.visible = !0
                 }
-                if ("" == this.N.helmet || e.camo)
+                if ("" == this.q.helmet || e.camo)
                     this.helmetSprite.visible = !1;
                 else {
-                    var o = c.items[this.N.helmet]
+                    var o = c.items[this.q.helmet]
                       , n = 3.33 * (this.downed ? 1 : -1);
                     this.helmetSprite.texture = m.Texture.fromImage("player-circle-base-01.img"),
                     this.helmetSprite.position.set(n, 0),
@@ -30685,10 +30727,10 @@ webpackJsonp([0], {
                     this.helmetSprite.tint = o.tint,
                     this.helmetSprite.visible = !0
                 }
-                if (this.vt() > 0 && !e.camo && !this.downed) {
-                    var s = (c.items[this.N.backpack],
+                if (this.St() > 0 && !e.camo && !this.downed) {
+                    var s = (c.items[this.q.backpack],
                     [10.25, 11.5, 12.75])
-                      , l = this.vt()
+                      , l = this.St()
                       , d = s[f.min(l - 1, s.length - 1)]
                       , u = .5 * (.4 + .03 * l);
                     this.backpackSprite.texture = m.Texture.fromImage("player-circle-base-01.img"),
@@ -30702,7 +30744,7 @@ webpackJsonp([0], {
                     }(this.backpackSprite, t.backpackSprite, t.backpackTint)
                 } else
                     this.backpackSprite.visible = !1;
-                if (this.N.wearingPan) {
+                if (this.q.wearingPan) {
                     var h = c.items.pan.hipImg;
                     this.hipSprite.texture = m.Texture.fromImage(h.sprite),
                     this.hipSprite.position.set(h.pos.x, h.pos.y),
@@ -30712,11 +30754,11 @@ webpackJsonp([0], {
                     this.hipSprite.visible = !0
                 } else
                     this.hipSprite.visible = !1;
-                var g = c.items[this.N.curWeapType];
+                var g = c.items[this.q.curWeapType];
                 if ("gun" == g.type) {
-                    this.gunRSprites.setType(this.N.curWeapType),
+                    this.gunRSprites.setType(this.q.curWeapType),
                     this.gunRSprites.setVisible(!0),
-                    g.isDual ? (this.gunLSprites.setType(this.N.curWeapType),
+                    g.isDual ? (this.gunLSprites.setType(this.q.curWeapType),
                     this.gunLSprites.setVisible(!0)) : this.gunLSprites.setVisible(!1);
                     var y = this.bodyContainer.getChildIndex(this.handRContainer)
                       , x = y + 1;
@@ -30726,7 +30768,7 @@ webpackJsonp([0], {
                 } else
                     this.gunLSprites.setVisible(!1),
                     this.gunRSprites.setVisible(!1);
-                if ("melee" == g.type && "fists" != this.N.curWeapType) {
+                if ("melee" == g.type && "fists" != this.q.curWeapType) {
                     var w = g.worldImg;
                     this.meleeSprite.texture = m.Texture.fromImage(w.sprite),
                     this.meleeSprite.pivot.set(-w.pos.x, -w.pos.y),
@@ -30773,7 +30815,7 @@ webpackJsonp([0], {
                         this.bodyContainer.addChild(this.handLContainer),
                         this.bodyContainer.addChild(this.handRContainer)
             },
-            Mt: function() {
+            Pt: function() {
                 var e = function(e, t) {
                     e.position.set(t.pos.x, t.pos.y),
                     e.pivot.set(-t.pivot.x, -t.pivot.y),
@@ -30783,14 +30825,14 @@ webpackJsonp([0], {
                 e(this.handRContainer, this.bones[M.HandR]),
                 e(this.footLContainer, this.bones[M.FootL]),
                 e(this.footRContainer, this.bones[M.FootR]);
-                var t = c.items[this.N.curWeapType];
+                var t = c.items[this.q.curWeapType];
                 !this.downed && this.currentAnim() != p.Revive && "gun" == t.type && t.worldImg.leftHandOffset && (this.handLContainer.position.x += t.worldImg.leftHandOffset),
                 this.handLContainer.position.x -= 1.125 * this.gunRecoilL,
                 this.handRContainer.position.x -= 1.125 * this.gunRecoilR,
                 this.bodyContainer.rotation = -Math.atan2(this.dir.y, this.dir.x)
             },
             selectIdlePose: function() {
-                var e = c.items[this.N.curWeapType]
+                var e = c.items[this.q.curWeapType]
                   , t = "fists";
                 return t = this.downed ? "downed" : e.anim && e.anim.idlePose ? e.anim.idlePose : "gun" == e.type ? e.pistol ? e.isDual ? "dualPistol" : "pistol" : "rifle" : "throwable" == e.type ? "throwable" : "fists",
                 _.IdlePoses[t] ? t : "fists"
@@ -30816,7 +30858,7 @@ webpackJsonp([0], {
                 case p.CrawlBackward:
                     return t("crawl_backward", !0);
                 case p.Melee:
-                    var a = c.items[this.N.curWeapType];
+                    var a = c.items[this.q.curWeapType];
                     if (!a.anim || !a.anim.attackAnims)
                         return t("fists", !0);
                     var i = a.anim.attackAnims
@@ -30872,7 +30914,7 @@ webpackJsonp([0], {
                 }
             },
             animPlaySound: function(e, t) {
-                var a = c.items[this.N.curWeapType]
+                var a = c.items[this.q.curWeapType]
                   , i = a.sound[t.sound];
                 void 0 !== i && e.audioManager.playSound(i, {
                     channel: "sfx",
@@ -30892,9 +30934,9 @@ webpackJsonp([0], {
                 e.particleBarn.addParticle("fragLever", this.layer, x.add(this.pos, i), x.mul(x.rotate(this.dir, .25 * -Math.PI), 3.5))
             },
             animMeleeCollision: function(e, t) {
-                var a = c.items[this.N.curWeapType];
+                var a = c.items[this.q.curWeapType];
                 if (a && "melee" == a.type && a.attackOffset) {
-                    for (var i = Math.atan2(this.dir.y, this.dir.x), r = x.add(this.pos, x.rotate(a.attackOffset, i)), o = a.attackRad, n = [], s = null, l = null, m = 0, d = e.map.K.m(), p = 0; p < d.length; p++) {
+                    for (var i = Math.atan2(this.dir.y, this.dir.x), r = x.add(this.pos, x.rotate(a.attackOffset, i)), o = a.attackRad, n = [], s = null, l = null, m = 0, d = e.map.Z.m(), p = 0; p < d.length; p++) {
                         var u = d[p];
                         if (!(!u.active || u.dead || u.height < c.player.meleeHeight) && y.sameLayer(u.layer, 1 & this.layer)) {
                             var g = b.intersectCircle(u.collider, r, o);
@@ -30916,12 +30958,12 @@ webpackJsonp([0], {
                             soundFn: "playGroup"
                         })
                     }
-                    for (var z = e.playerBarn.$e.m(), M = 0; M < z.length; M++) {
+                    for (var z = e.playerBarn.et.m(), M = 0; M < z.length; M++) {
                         var P = z[M];
-                        if (P.active && P.__id != this.__id && !P.N.dead && y.sameLayer(P.layer, this.layer)) {
+                        if (P.active && P.__id != this.__id && !P.q.dead && y.sameLayer(P.layer, this.layer)) {
                             var T = x.normalizeSafe(x.sub(P.pos, this.pos), x.create(1, 0))
                               , C = o + x.length(a.attackOffset);
-                            if (w.testCircleCircle(r, o, P.pos, P.rad) && f.eqAbs(C, v.intersectSegment(e.map.K.m(), this.pos, T, C, c.player.meleeHeight, this.layer, !1))) {
+                            if (w.testCircleCircle(r, o, P.pos, P.rad) && f.eqAbs(C, v.intersectSegment(e.map.Z.m(), this.pos, T, C, c.player.meleeHeight, this.layer, !1))) {
                                 var I = x.rotate(T, (Math.random() - .5) * Math.PI / 3);
                                 n.push({
                                     pos: P.pos,
@@ -30994,7 +31036,7 @@ webpackJsonp([0], {
             isUnderground: function(e) {
                 if (1 != this.layer)
                     return !1;
-                for (var t = e.at.m(), a = 0; a < t.length; a++) {
+                for (var t = e.it.m(), a = 0; a < t.length; a++) {
                     var i = t[a];
                     if (!(i.layers.length < 2)) {
                         var r = i.layers[1];
@@ -31007,26 +31049,26 @@ webpackJsonp([0], {
         },
         s.prototype = {
             l: function(e, t, a, i, r, o, n, s, l, m, d) {
-                for (var p = this.$e.m(), u = 0; u < p.length; u++) {
+                for (var p = this.et.m(), u = 0; u < p.length; u++) {
                     var h = p[u];
                     h.active && h.l(e, this, o, s, i, n, a, t, l, m, d)
                 }
-                for (var y = this.U(t).teamId, w = this.getTeamInfo(y), b = 0; b < w.playerIds.length; b++) {
+                for (var y = this.H(t).teamId, w = this.getTeamInfo(y), b = 0; b < w.playerIds.length; b++) {
                     var _ = w.playerIds[b]
-                      , v = this.oe(_);
+                      , v = this.ne(_);
                     v && _ == t && this.setTeammateData(_, {
-                        pos: x.copy(v.N.pos),
-                        health: v.q.health,
+                        pos: x.copy(v.q.pos),
+                        health: v.U.health,
                         disconnected: !1,
-                        dead: v.N.dead,
-                        downed: v.N.downed
+                        dead: v.q.dead,
+                        downed: v.q.downed
                     });
                     var S = this.teammateData[_];
                     if (S)
                         if (v) {
                             var k = this.teammateData[_];
-                            k.pos = x.copy(v.N.pos),
-                            k.posTarget = x.copy(v.N.pos)
+                            k.pos = x.copy(v.q.pos),
+                            k.posTarget = x.copy(v.q.pos)
                         } else if (S) {
                             var z = (c.player.moveSpeed,
                             x.sub(S.posTarget, S.pos))
@@ -31038,29 +31080,29 @@ webpackJsonp([0], {
                 }
             },
             render: function(e, t) {
-                for (var a = this.$e.m(), i = 0; i < a.length; i++) {
+                for (var a = this.et.m(), i = 0; i < a.length; i++) {
                     var r = a[i];
-                    r.active && r.dt(e, t)
+                    r.active && r.ut(e, t)
                 }
             },
-            oe: function(e) {
-                for (var t = this.$e.m(), a = 0; a < t.length; a++) {
+            ne: function(e) {
+                for (var t = this.et.m(), a = 0; a < t.length; a++) {
                     var i = t[a];
                     if (i.active && i.__id === e)
                         return i
                 }
                 return null
             },
-            yt: function(e) {
-                this._t[e.id] = {
+            xt: function(e) {
+                this.vt[e.id] = {
                     playerId: e.id,
                     teamId: e.teamId,
                     name: e.name,
                     anonName: "Player" + (e.id - 2750)
                 }
             },
-            U: function(e) {
-                return this._t[e] || {
+            H: function(e) {
+                return this.vt[e] || {
                     name: "unknown",
                     teamId: 0
                 }
@@ -31089,7 +31131,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            Pe: s
+            Te: s
         }
     },
     a5bf0544: function(e, t, a) {
@@ -32026,14 +32068,14 @@ webpackJsonp([0], {
         e.exports = {
             GasRenderer: u,
             GasSafeZoneRenderer: h,
-            We: g
+            Ve: g
         }
     },
     aaf70d05: function(e, t) {
         e.exports = {
             spritesheets: [{
                 meta: {
-                    image: "imgs-50-30c92719.png",
+                    image: "imgs-50-0bdf2d53.png",
                     size: {
                         w: 2048,
                         h: 2048
@@ -33021,7 +33063,7 @@ webpackJsonp([0], {
                             h: 28
                         }
                     },
-                    "map-gun-mount-02.img": {
+                    "map-gun-mount-03.img": {
                         frame: {
                             x: 919,
                             y: 1982,
@@ -33041,7 +33083,7 @@ webpackJsonp([0], {
                             h: 28
                         }
                     },
-                    "map-gun-mount-03.img": {
+                    "map-gun-mount-02.img": {
                         frame: {
                             x: 987,
                             y: 1982,
@@ -33081,7 +33123,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "map-locker-02.img": {
+                    "map-locker-01.img": {
                         frame: {
                             x: 70,
                             y: 2013,
@@ -33101,7 +33143,7 @@ webpackJsonp([0], {
                             h: 25
                         }
                     },
-                    "map-locker-01.img": {
+                    "map-locker-03.img": {
                         frame: {
                             x: 122,
                             y: 2013,
@@ -33121,7 +33163,7 @@ webpackJsonp([0], {
                             h: 25
                         }
                     },
-                    "map-locker-03.img": {
+                    "map-locker-02.img": {
                         frame: {
                             x: 174,
                             y: 2013,
@@ -33141,7 +33183,7 @@ webpackJsonp([0], {
                             h: 25
                         }
                     },
-                    "map-barrel-03.img": {
+                    "map-barrel-04.img": {
                         frame: {
                             x: 1055,
                             y: 1982,
@@ -33161,7 +33203,7 @@ webpackJsonp([0], {
                             h: 18
                         }
                     },
-                    "map-barrel-04.img": {
+                    "map-barrel-03.img": {
                         frame: {
                             x: 1104,
                             y: 1982,
@@ -33484,7 +33526,7 @@ webpackJsonp([0], {
                 }
             }, {
                 meta: {
-                    image: "imgs-50-aabb3d47.png",
+                    image: "imgs-50-213c3f60.png",
                     size: {
                         w: 2048,
                         h: 2048
@@ -34432,7 +34474,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "link.img": {
+                    "logo-conch.img": {
                         frame: {
                             x: 1976,
                             y: 494,
@@ -34952,29 +34994,9 @@ webpackJsonp([0], {
                             h: 42
                         }
                     },
-                    "cog.img": {
-                        frame: {
-                            x: 287,
-                            y: 1996,
-                            w: 42,
-                            h: 42
-                        },
-                        rotated: !1,
-                        trimmed: !0,
-                        spriteSourceSize: {
-                            x: 11,
-                            y: 11,
-                            w: 42,
-                            h: 42
-                        },
-                        sourceSize: {
-                            w: 64,
-                            h: 64
-                        }
-                    },
                     "map-pot-res-01.img": {
                         frame: {
-                            x: 333,
+                            x: 287,
                             y: 1996,
                             w: 42,
                             h: 42
@@ -34990,6 +35012,26 @@ webpackJsonp([0], {
                         sourceSize: {
                             w: 72,
                             h: 72
+                        }
+                    },
+                    "cog.img": {
+                        frame: {
+                            x: 333,
+                            y: 1996,
+                            w: 42,
+                            h: 42
+                        },
+                        rotated: !1,
+                        trimmed: !0,
+                        spriteSourceSize: {
+                            x: 11,
+                            y: 11,
+                            w: 42,
+                            h: 42
+                        },
+                        sourceSize: {
+                            w: 64,
+                            h: 64
                         }
                     },
                     "map-fire-ext-01.img": {
@@ -35092,7 +35134,7 @@ webpackJsonp([0], {
                             h: 72
                         }
                     },
-                    "close.img": {
+                    "timer-background.img": {
                         frame: {
                             x: 419,
                             y: 1996,
@@ -35132,7 +35174,7 @@ webpackJsonp([0], {
                             h: 36
                         }
                     },
-                    "timer-background.img": {
+                    "gun-dp28-top-01.img": {
                         frame: {
                             x: 499,
                             y: 1996,
@@ -35140,16 +35182,16 @@ webpackJsonp([0], {
                             h: 36
                         },
                         rotated: !1,
-                        trimmed: !1,
+                        trimmed: !0,
                         spriteSourceSize: {
-                            x: 0,
-                            y: 0,
+                            x: 2,
+                            y: 2,
                             w: 36,
                             h: 36
                         },
                         sourceSize: {
-                            w: 36,
-                            h: 36
+                            w: 40,
+                            h: 40
                         }
                     },
                     "player-map-inner.img": {
@@ -35192,7 +35234,7 @@ webpackJsonp([0], {
                             h: 36
                         }
                     },
-                    "gun-dp28-top-01.img": {
+                    "cursor-01.img": {
                         frame: {
                             x: 619,
                             y: 1996,
@@ -35200,16 +35242,16 @@ webpackJsonp([0], {
                             h: 36
                         },
                         rotated: !1,
-                        trimmed: !0,
+                        trimmed: !1,
                         spriteSourceSize: {
-                            x: 2,
-                            y: 2,
+                            x: 0,
+                            y: 0,
                             w: 36,
                             h: 36
                         },
                         sourceSize: {
-                            w: 40,
-                            h: 40
+                            w: 36,
+                            h: 36
                         }
                     },
                     "player-map-outer.img": {
@@ -35232,7 +35274,7 @@ webpackJsonp([0], {
                             h: 36
                         }
                     },
-                    "cursor-01.img": {
+                    "cursor-03.img": {
                         frame: {
                             x: 699,
                             y: 1996,
@@ -35252,7 +35294,7 @@ webpackJsonp([0], {
                             h: 36
                         }
                     },
-                    "cursor-03.img": {
+                    "close.img": {
                         frame: {
                             x: 739,
                             y: 1996,
@@ -35675,7 +35717,7 @@ webpackJsonp([0], {
                 }
             }, {
                 meta: {
-                    image: "imgs-50-8884bfbc.png",
+                    image: "imgs-50-752881f3.png",
                     size: {
                         w: 2048,
                         h: 2048
@@ -37263,7 +37305,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "map-wall-04-rounded.img": {
+                    "map-building-house-wall-02.img": {
                         frame: {
                             x: 2016,
                             y: 1487,
@@ -37283,7 +37325,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "map-building-house-wall-02.img": {
+                    "map-wall-04-rounded.img": {
                         frame: {
                             x: 2014,
                             y: 1569,
@@ -37523,7 +37565,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "crab.img": {
+                    "movement.img": {
                         frame: {
                             x: 958,
                             y: 1980,
@@ -37543,7 +37585,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "ping-map-help.img": {
+                    "crab.img": {
                         frame: {
                             x: 1014,
                             y: 1980,
@@ -37563,7 +37605,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "movement.img": {
+                    "loot-weapon-mac10.img": {
                         frame: {
                             x: 1070,
                             y: 1980,
@@ -37583,7 +37625,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "loot-weapon-mac10.img": {
+                    "ping-map-help.img": {
                         frame: {
                             x: 1126,
                             y: 1980,
@@ -37683,7 +37725,7 @@ webpackJsonp([0], {
                             h: 52
                         }
                     },
-                    "map-building-house-window-01.img": {
+                    "map-building-house-window-res-01.img": {
                         frame: {
                             x: 1913,
                             y: 1400,
@@ -37703,7 +37745,7 @@ webpackJsonp([0], {
                             h: 52
                         }
                     },
-                    "map-building-house-window-res-01.img": {
+                    "map-building-house-window-01.img": {
                         frame: {
                             x: 1522,
                             y: 668,
@@ -37763,7 +37805,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "map-toilet-03.img": {
+                    "map-toilet-04.img": {
                         frame: {
                             x: 1522,
                             y: 724,
@@ -37783,7 +37825,7 @@ webpackJsonp([0], {
                             h: 50
                         }
                     },
-                    "map-toilet-04.img": {
+                    "map-toilet-03.img": {
                         frame: {
                             x: 1204,
                             y: 1925,
@@ -37843,7 +37885,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "map-pot-02.img": {
+                    "map-woodpile-01.img": {
                         frame: {
                             x: 1295,
                             y: 1925,
@@ -37863,7 +37905,7 @@ webpackJsonp([0], {
                             h: 48
                         }
                     },
-                    "map-woodpile-01.img": {
+                    "map-pot-01.img": {
                         frame: {
                             x: 1347,
                             y: 1925,
@@ -37883,7 +37925,7 @@ webpackJsonp([0], {
                             h: 48
                         }
                     },
-                    "part-airdrop-01.img": {
+                    "map-pot-02.img": {
                         frame: {
                             x: 1399,
                             y: 1925,
@@ -37903,29 +37945,9 @@ webpackJsonp([0], {
                             h: 48
                         }
                     },
-                    "map-bush-res-04.img": {
+                    "part-airdrop-01.img": {
                         frame: {
                             x: 1451,
-                            y: 1925,
-                            w: 48,
-                            h: 48
-                        },
-                        rotated: !1,
-                        trimmed: !0,
-                        spriteSourceSize: {
-                            x: 12,
-                            y: 12,
-                            w: 48,
-                            h: 48
-                        },
-                        sourceSize: {
-                            w: 72,
-                            h: 72
-                        }
-                    },
-                    "map-pot-01.img": {
-                        frame: {
-                            x: 1503,
                             y: 1925,
                             w: 48,
                             h: 48
@@ -37941,6 +37963,26 @@ webpackJsonp([0], {
                         sourceSize: {
                             w: 48,
                             h: 48
+                        }
+                    },
+                    "map-bush-res-04.img": {
+                        frame: {
+                            x: 1503,
+                            y: 1925,
+                            w: 48,
+                            h: 48
+                        },
+                        rotated: !1,
+                        trimmed: !0,
+                        spriteSourceSize: {
+                            x: 12,
+                            y: 12,
+                            w: 48,
+                            h: 48
+                        },
+                        sourceSize: {
+                            w: 72,
+                            h: 72
                         }
                     },
                     "map-toilet-res-02.img": {
@@ -38006,7 +38048,7 @@ webpackJsonp([0], {
                 }
             }, {
                 meta: {
-                    image: "imgs-50-15025f55.png",
+                    image: "imgs-50-3e2436cb.png",
                     size: {
                         w: 2048,
                         h: 2048
@@ -40974,7 +41016,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "loot-weapon-m9-dual.img": {
+                    "salt.img": {
                         frame: {
                             x: 274,
                             y: 1896,
@@ -40994,7 +41036,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "salt.img": {
+                    "loot-weapon-m9-dual.img": {
                         frame: {
                             x: 342,
                             y: 1896,
@@ -41054,7 +41096,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "logo-caduceus.img": {
+                    "logo-swine.img": {
                         frame: {
                             x: 410,
                             y: 1896,
@@ -41074,7 +41116,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "logo-surviv.img": {
+                    "logo-meteor.img": {
                         frame: {
                             x: 478,
                             y: 1896,
@@ -41094,7 +41136,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "logo-crossing.img": {
+                    "logo-storm.img": {
                         frame: {
                             x: 546,
                             y: 1896,
@@ -41134,7 +41176,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "logo-conch.img": {
+                    "logo-crossing.img": {
                         frame: {
                             x: 682,
                             y: 1896,
@@ -41154,7 +41196,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "logo-swine.img": {
+                    "logo-hydra.img": {
                         frame: {
                             x: 750,
                             y: 1896,
@@ -41174,7 +41216,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "logo-hydra.img": {
+                    "logo-caduceus.img": {
                         frame: {
                             x: 818,
                             y: 1896,
@@ -41194,7 +41236,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "logo-meteor.img": {
+                    "link.img": {
                         frame: {
                             x: 886,
                             y: 1896,
@@ -41214,7 +41256,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "logo-storm.img": {
+                    "logo-surviv.img": {
                         frame: {
                             x: 954,
                             y: 1896,
@@ -41274,7 +41316,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "map-toilet-01.img": {
+                    "map-toilet-02.img": {
                         frame: {
                             x: 432,
                             y: 1964,
@@ -41294,7 +41336,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "map-toilet-02.img": {
+                    "map-toilet-01.img": {
                         frame: {
                             x: 486,
                             y: 1964,
@@ -41334,7 +41376,7 @@ webpackJsonp([0], {
                             h: 72
                         }
                     },
-                    "surviv.img": {
+                    "emote.img": {
                         frame: {
                             x: 607,
                             y: 1964,
@@ -41354,29 +41396,9 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "map-crate-05.img": {
-                        frame: {
-                            x: 673,
-                            y: 1964,
-                            w: 62,
-                            h: 62
-                        },
-                        rotated: !1,
-                        trimmed: !1,
-                        spriteSourceSize: {
-                            x: 0,
-                            y: 0,
-                            w: 62,
-                            h: 62
-                        },
-                        sourceSize: {
-                            w: 62,
-                            h: 62
-                        }
-                    },
                     "loot-weapon-awc.img": {
                         frame: {
-                            x: 739,
+                            x: 673,
                             y: 1964,
                             w: 62,
                             h: 62
@@ -41394,7 +41416,27 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "emote.img": {
+                    "map-crate-05.img": {
+                        frame: {
+                            x: 739,
+                            y: 1964,
+                            w: 62,
+                            h: 62
+                        },
+                        rotated: !1,
+                        trimmed: !1,
+                        spriteSourceSize: {
+                            x: 0,
+                            y: 0,
+                            w: 62,
+                            h: 62
+                        },
+                        sourceSize: {
+                            w: 62,
+                            h: 62
+                        }
+                    },
+                    "surviv.img": {
                         frame: {
                             x: 805,
                             y: 1964,
@@ -41414,7 +41456,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "loot-weapon-m249.img": {
+                    "tombstone.img": {
                         frame: {
                             x: 871,
                             y: 1964,
@@ -41425,7 +41467,7 @@ webpackJsonp([0], {
                         trimmed: !0,
                         spriteSourceSize: {
                             x: 3,
-                            y: 1,
+                            y: 0,
                             w: 58,
                             h: 62
                         },
@@ -41454,7 +41496,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "tombstone.img": {
+                    "loot-weapon-m249.img": {
                         frame: {
                             x: 995,
                             y: 1964,
@@ -41465,7 +41507,7 @@ webpackJsonp([0], {
                         trimmed: !0,
                         spriteSourceSize: {
                             x: 3,
-                            y: 0,
+                            y: 1,
                             w: 58,
                             h: 62
                         },
@@ -41694,7 +41736,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "loot-weapon-qbb97.img": {
+                    "target.img": {
                         frame: {
                             x: 1583,
                             y: 1964,
@@ -41734,7 +41776,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "mag-glass.img": {
+                    "map-chimney-01.img": {
                         frame: {
                             x: 1711,
                             y: 1964,
@@ -41742,19 +41784,19 @@ webpackJsonp([0], {
                             h: 60
                         },
                         rotated: !1,
-                        trimmed: !0,
+                        trimmed: !1,
                         spriteSourceSize: {
-                            x: 2,
-                            y: 2,
+                            x: 0,
+                            y: 0,
                             w: 60,
                             h: 60
                         },
                         sourceSize: {
-                            w: 64,
-                            h: 64
+                            w: 60,
+                            h: 60
                         }
                     },
-                    "loot-chest-01.img": {
+                    "map-stone-res-01.img": {
                         frame: {
                             x: 1775,
                             y: 1964,
@@ -41762,16 +41804,16 @@ webpackJsonp([0], {
                             h: 60
                         },
                         rotated: !1,
-                        trimmed: !0,
+                        trimmed: !1,
                         spriteSourceSize: {
-                            x: 2,
-                            y: 2,
+                            x: 0,
+                            y: 0,
                             w: 60,
                             h: 60
                         },
                         sourceSize: {
-                            w: 64,
-                            h: 64
+                            w: 60,
+                            h: 60
                         }
                     },
                     "map-decal-initiative.img": {
@@ -41794,7 +41836,7 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "target.img": {
+                    "mag-glass.img": {
                         frame: {
                             x: 1903,
                             y: 1964,
@@ -42037,7 +42079,7 @@ webpackJsonp([0], {
                 }
             }, {
                 meta: {
-                    image: "imgs-50-6c84c166.png",
+                    image: "imgs-50-6e6bc079.png",
                     size: {
                         w: 512,
                         h: 512
@@ -42045,7 +42087,7 @@ webpackJsonp([0], {
                     scale: .5
                 },
                 frames: {
-                    "map-stone-res-01.img": {
+                    "loot-weapon-qbb97.img": {
                         frame: {
                             x: 60,
                             y: 2,
@@ -42053,16 +42095,16 @@ webpackJsonp([0], {
                             h: 60
                         },
                         rotated: !1,
-                        trimmed: !1,
+                        trimmed: !0,
                         spriteSourceSize: {
-                            x: 0,
-                            y: 0,
+                            x: 2,
+                            y: 2,
                             w: 60,
                             h: 60
                         },
                         sourceSize: {
-                            w: 60,
-                            h: 60
+                            w: 64,
+                            h: 64
                         }
                     },
                     "loot-weapon-hk416.img": {
@@ -42085,19 +42127,19 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "loot-weapon-ump9.img": {
+                    "loot-chest-01.img": {
                         frame: {
                             x: 124,
                             y: 2,
-                            w: 58,
+                            w: 60,
                             h: 60
                         },
                         rotated: !1,
                         trimmed: !0,
                         spriteSourceSize: {
-                            x: 3,
+                            x: 2,
                             y: 2,
-                            w: 58,
+                            w: 60,
                             h: 60
                         },
                         sourceSize: {
@@ -42125,29 +42167,29 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "loot-shirt-01.img": {
+                    "loot-weapon-ump9.img": {
                         frame: {
                             x: 64,
                             y: 67,
-                            w: 60,
-                            h: 58
+                            w: 58,
+                            h: 60
                         },
                         rotated: !1,
                         trimmed: !0,
                         spriteSourceSize: {
-                            x: 2,
-                            y: 3,
-                            w: 60,
-                            h: 58
+                            x: 3,
+                            y: 2,
+                            w: 58,
+                            h: 60
                         },
                         sourceSize: {
                             w: 64,
                             h: 64
                         }
                     },
-                    "gas.img": {
+                    "loot-shirt-01.img": {
                         frame: {
-                            x: 186,
+                            x: 188,
                             y: 2,
                             w: 60,
                             h: 58
@@ -42167,8 +42209,28 @@ webpackJsonp([0], {
                     },
                     "loot-weapon-mosin.img": {
                         frame: {
-                            x: 186,
+                            x: 188,
                             y: 64,
+                            w: 60,
+                            h: 58
+                        },
+                        rotated: !1,
+                        trimmed: !0,
+                        spriteSourceSize: {
+                            x: 2,
+                            y: 3,
+                            w: 60,
+                            h: 58
+                        },
+                        sourceSize: {
+                            w: 64,
+                            h: 64
+                        }
+                    },
+                    "gas.img": {
+                        frame: {
+                            x: 2,
+                            y: 131,
                             w: 60,
                             h: 58
                         },
@@ -42187,8 +42249,8 @@ webpackJsonp([0], {
                     },
                     "loot-medical-bandage.img": {
                         frame: {
-                            x: 2,
-                            y: 131,
+                            x: 126,
+                            y: 67,
                             w: 54,
                             h: 60
                         },
@@ -42207,8 +42269,8 @@ webpackJsonp([0], {
                     },
                     "loot-weapon-scar.img": {
                         frame: {
-                            x: 60,
-                            y: 131,
+                            x: 252,
+                            y: 2,
                             w: 54,
                             h: 60
                         },
@@ -42227,8 +42289,8 @@ webpackJsonp([0], {
                     },
                     "loot-weapon-m9.img": {
                         frame: {
-                            x: 118,
-                            y: 131,
+                            x: 252,
+                            y: 66,
                             w: 50,
                             h: 60
                         },
@@ -42247,8 +42309,8 @@ webpackJsonp([0], {
                     },
                     "loot-chest-03.img": {
                         frame: {
-                            x: 172,
-                            y: 131,
+                            x: 2,
+                            y: 193,
                             w: 50,
                             h: 60
                         },
@@ -42267,8 +42329,8 @@ webpackJsonp([0], {
                     },
                     "loot-pack-01.img": {
                         frame: {
-                            x: 250,
-                            y: 2,
+                            x: 56,
+                            y: 193,
                             w: 48,
                             h: 60
                         },
@@ -42287,8 +42349,8 @@ webpackJsonp([0], {
                     },
                     "loot-pack-02.img": {
                         frame: {
-                            x: 250,
-                            y: 66,
+                            x: 108,
+                            y: 193,
                             w: 46,
                             h: 60
                         },
@@ -42307,8 +42369,8 @@ webpackJsonp([0], {
                     },
                     "loot-pack-00.img": {
                         frame: {
-                            x: 250,
-                            y: 130,
+                            x: 158,
+                            y: 193,
                             w: 46,
                             h: 60
                         },
@@ -42327,8 +42389,8 @@ webpackJsonp([0], {
                     },
                     "flex.img": {
                         frame: {
-                            x: 2,
-                            y: 195,
+                            x: 208,
+                            y: 193,
                             w: 56,
                             h: 59
                         },
@@ -42347,8 +42409,8 @@ webpackJsonp([0], {
                     },
                     "ammo-762mm.img": {
                         frame: {
-                            x: 62,
-                            y: 195,
+                            x: 66,
+                            y: 131,
                             w: 58,
                             h: 58
                         },
@@ -42365,90 +42427,10 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "ammo-556mm.img": {
+                    "part-spark-01.img": {
                         frame: {
-                            x: 124,
-                            y: 195,
-                            w: 58,
-                            h: 58
-                        },
-                        rotated: !1,
-                        trimmed: !0,
-                        spriteSourceSize: {
-                            x: 3,
-                            y: 3,
-                            w: 58,
-                            h: 58
-                        },
-                        sourceSize: {
-                            w: 64,
-                            h: 64
-                        }
-                    },
-                    "ammo-9mm.img": {
-                        frame: {
-                            x: 186,
-                            y: 195,
-                            w: 58,
-                            h: 58
-                        },
-                        rotated: !1,
-                        trimmed: !0,
-                        spriteSourceSize: {
-                            x: 3,
-                            y: 3,
-                            w: 58,
-                            h: 58
-                        },
-                        sourceSize: {
-                            w: 64,
-                            h: 64
-                        }
-                    },
-                    "loot-weapon-ak.img": {
-                        frame: {
-                            x: 118,
-                            y: 320,
-                            w: 50,
-                            h: 57
-                        },
-                        rotated: !1,
-                        trimmed: !0,
-                        spriteSourceSize: {
-                            x: 7,
-                            y: 4,
-                            w: 50,
-                            h: 57
-                        },
-                        sourceSize: {
-                            w: 64,
-                            h: 64
-                        }
-                    },
-                    "ammo-308sub.img": {
-                        frame: {
-                            x: 302,
-                            y: 64,
-                            w: 58,
-                            h: 58
-                        },
-                        rotated: !1,
-                        trimmed: !0,
-                        spriteSourceSize: {
-                            x: 3,
-                            y: 3,
-                            w: 58,
-                            h: 58
-                        },
-                        sourceSize: {
-                            w: 64,
-                            h: 64
-                        }
-                    },
-                    "part-spark-02.img": {
-                        frame: {
-                            x: 302,
-                            y: 126,
+                            x: 128,
+                            y: 131,
                             w: 58,
                             h: 58
                         },
@@ -42465,30 +42447,50 @@ webpackJsonp([0], {
                             h: 60
                         }
                     },
-                    "ammo-box.img": {
+                    "part-spark-02.img": {
                         frame: {
-                            x: 302,
-                            y: 188,
+                            x: 190,
+                            y: 131,
                             w: 58,
                             h: 58
                         },
                         rotated: !1,
                         trimmed: !0,
                         spriteSourceSize: {
-                            x: 3,
-                            y: 3,
+                            x: 1,
+                            y: 1,
                             w: 58,
                             h: 58
+                        },
+                        sourceSize: {
+                            w: 60,
+                            h: 60
+                        }
+                    },
+                    "loot-weapon-ak.img": {
+                        frame: {
+                            x: 108,
+                            y: 319,
+                            w: 50,
+                            h: 57
+                        },
+                        rotated: !1,
+                        trimmed: !0,
+                        spriteSourceSize: {
+                            x: 7,
+                            y: 4,
+                            w: 50,
+                            h: 57
                         },
                         sourceSize: {
                             w: 64,
                             h: 64
                         }
                     },
-                    "ammo-50AE.img": {
+                    "ammo-flare.img": {
                         frame: {
-                            x: 2,
-                            y: 258,
+                            x: 310,
+                            y: 64,
                             w: 58,
                             h: 58
                         },
@@ -42507,8 +42509,8 @@ webpackJsonp([0], {
                     },
                     "ammo-12gauge.img": {
                         frame: {
-                            x: 64,
-                            y: 258,
+                            x: 310,
+                            y: 126,
                             w: 58,
                             h: 58
                         },
@@ -42525,10 +42527,70 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "ammo-flare.img": {
+                    "ammo-9mm.img": {
+                        frame: {
+                            x: 310,
+                            y: 188,
+                            w: 58,
+                            h: 58
+                        },
+                        rotated: !1,
+                        trimmed: !0,
+                        spriteSourceSize: {
+                            x: 3,
+                            y: 3,
+                            w: 58,
+                            h: 58
+                        },
+                        sourceSize: {
+                            w: 64,
+                            h: 64
+                        }
+                    },
+                    "ammo-308sub.img": {
+                        frame: {
+                            x: 2,
+                            y: 257,
+                            w: 58,
+                            h: 58
+                        },
+                        rotated: !1,
+                        trimmed: !0,
+                        spriteSourceSize: {
+                            x: 3,
+                            y: 3,
+                            w: 58,
+                            h: 58
+                        },
+                        sourceSize: {
+                            w: 64,
+                            h: 64
+                        }
+                    },
+                    "ammo-556mm.img": {
+                        frame: {
+                            x: 64,
+                            y: 257,
+                            w: 58,
+                            h: 58
+                        },
+                        rotated: !1,
+                        trimmed: !0,
+                        spriteSourceSize: {
+                            x: 3,
+                            y: 3,
+                            w: 58,
+                            h: 58
+                        },
+                        sourceSize: {
+                            w: 64,
+                            h: 64
+                        }
+                    },
+                    "ammo-50AE.img": {
                         frame: {
                             x: 126,
-                            y: 258,
+                            y: 257,
                             w: 58,
                             h: 58
                         },
@@ -42548,7 +42610,7 @@ webpackJsonp([0], {
                     "loot-weapon-garand.img": {
                         frame: {
                             x: 188,
-                            y: 258,
+                            y: 257,
                             w: 57,
                             h: 58
                         },
@@ -42565,10 +42627,10 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "player-gui.img": {
+                    "player-emote.img": {
                         frame: {
                             x: 249,
-                            y: 258,
+                            y: 257,
                             w: 58,
                             h: 57
                         },
@@ -42585,9 +42647,9 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "player-emote.img": {
+                    "player-gui.img": {
                         frame: {
-                            x: 364,
+                            x: 372,
                             y: 2,
                             w: 58,
                             h: 57
@@ -42607,7 +42669,7 @@ webpackJsonp([0], {
                     },
                     "loot-pack-03.img": {
                         frame: {
-                            x: 364,
+                            x: 372,
                             y: 63,
                             w: 54,
                             h: 58
@@ -42627,7 +42689,7 @@ webpackJsonp([0], {
                     },
                     "loot-weapon-deagle.img": {
                         frame: {
-                            x: 364,
+                            x: 372,
                             y: 125,
                             w: 53,
                             h: 58
@@ -42645,9 +42707,9 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "loot-weapon-mp5.img": {
+                    "loot-weapon-spas12.img": {
                         frame: {
-                            x: 364,
+                            x: 372,
                             y: 187,
                             w: 50,
                             h: 58
@@ -42667,7 +42729,7 @@ webpackJsonp([0], {
                     },
                     "tap.img": {
                         frame: {
-                            x: 364,
+                            x: 372,
                             y: 249,
                             w: 50,
                             h: 58
@@ -42685,10 +42747,10 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "loot-weapon-spas12.img": {
+                    "loot-weapon-mp5.img": {
                         frame: {
-                            x: 128,
-                            y: 67,
+                            x: 252,
+                            y: 130,
                             w: 50,
                             h: 58
                         },
@@ -42707,8 +42769,8 @@ webpackJsonp([0], {
                     },
                     "loot-weapon-ot38.img": {
                         frame: {
-                            x: 248,
-                            y: 195,
+                            x: 2,
+                            y: 319,
                             w: 46,
                             h: 58
                         },
@@ -42727,8 +42789,8 @@ webpackJsonp([0], {
                     },
                     "loot-weapon-vector.img": {
                         frame: {
-                            x: 2,
-                            y: 320,
+                            x: 311,
+                            y: 257,
                             w: 56,
                             h: 57
                         },
@@ -42747,8 +42809,8 @@ webpackJsonp([0], {
                     },
                     "chick.img": {
                         frame: {
-                            x: 62,
-                            y: 320,
+                            x: 52,
+                            y: 319,
                             w: 52,
                             h: 57
                         },
@@ -42765,9 +42827,9 @@ webpackJsonp([0], {
                             h: 64
                         }
                     },
-                    "part-spark-01.img": {
+                    "ammo-box.img": {
                         frame: {
-                            x: 302,
+                            x: 310,
                             y: 2,
                             w: 58,
                             h: 58
@@ -42775,20 +42837,20 @@ webpackJsonp([0], {
                         rotated: !1,
                         trimmed: !0,
                         spriteSourceSize: {
-                            x: 1,
-                            y: 1,
+                            x: 3,
+                            y: 3,
                             w: 58,
                             h: 58
                         },
                         sourceSize: {
-                            w: 60,
-                            h: 60
+                            w: 64,
+                            h: 64
                         }
                     }
                 }
             }, {
                 meta: {
-                    image: "imgs-50-b94e2a6f.png",
+                    image: "imgs-50-b646dd87.png",
                     size: {
                         w: 512,
                         h: 512
@@ -43540,10 +43602,11 @@ webpackJsonp([0], {
         }, n = {
             Locked: 0,
             Default: 1,
-            Account: 5,
-            Twitter: 6,
-            YouTube: 7,
-            Facebook: 8
+            Account: 9,
+            Instagram: 10,
+            Twitter: 11,
+            YouTube: 12,
+            Facebook: 13
         }, s = {
             None: 0,
             Empty: 1,
@@ -44196,71 +44259,71 @@ webpackJsonp([0], {
             texture: "logo-caduceus.img",
             sound: "emote_01",
             teamOnly: !1,
-            accountLogin: !0,
-            category: n.Account
+            instagramFollow: !0,
+            category: n.Instagram
         }),
         i(r, s.ImpFace, {
             texture: "imp-face.img",
             sound: "emote_01",
             teamOnly: !1,
-            accountLogin: !0,
-            category: n.Account
+            instagramFollow: !0,
+            category: n.Instagram
         }),
         i(r, s.MonocleFace, {
             texture: "monocle-face.img",
             sound: "emote_01",
             teamOnly: !1,
-            accountLogin: !0,
-            category: n.Account
+            instagramFollow: !0,
+            category: n.Instagram
         }),
         i(r, s.SunglassFace, {
             texture: "sunglass-face.img",
             sound: "emote_01",
             teamOnly: !1,
-            accountLogin: !0,
-            category: n.Account
+            instagramFollow: !0,
+            category: n.Instagram
         }),
         i(r, s.HeadshotFace, {
             texture: "headshot-face.img",
             sound: "emote_01",
             teamOnly: !1,
-            accountLogin: !0,
-            category: n.Account
+            instagramFollow: !0,
+            category: n.Instagram
         }),
         i(r, s.Potato, {
             texture: "potato.img",
             sound: "emote_01",
             teamOnly: !1,
-            accountLogin: !0,
-            category: n.Account
+            instagramFollow: !0,
+            category: n.Instagram
         }),
         i(r, s.Leek, {
             texture: "leek.img",
             sound: "emote_01",
             teamOnly: !1,
-            accountLogin: !0,
-            category: n.Account
+            instagramFollow: !0,
+            category: n.Instagram
         }),
         i(r, s.Eggplant, {
             texture: "eggplant.img",
             sound: "emote_01",
             teamOnly: !1,
-            accountLogin: !0,
-            category: n.Account
+            instagramFollow: !0,
+            category: n.Instagram
         }),
         i(r, s.Baguette, {
             texture: "baguette.img",
             sound: "emote_01",
             teamOnly: !1,
-            accountLogin: !0,
-            category: n.Account
+            instagramFollow: !0,
+            category: n.Instagram
         }),
         i(r, s.Chick, {
             texture: "chick.img",
             sound: "emote_01",
             teamOnly: !1,
-            accountLogin: !0,
-            category: n.Account
+            instagramFollow: !0,
+            category: n.Instagram
         }),
         i(r, s.Ammo50AE, {
             texture: "ammo-50AE.img",
@@ -44362,29 +44425,29 @@ webpackJsonp([0], {
             texture: "pineapple.img",
             sound: "emote_01",
             teamOnly: !1,
-            accountLogin: !0,
-            category: n.Account
+            instagramFollow: !0,
+            category: n.Instagram
         }),
         i(r, s.Coconut, {
             texture: "coconut.img",
             sound: "emote_01",
             teamOnly: !1,
-            accountLogin: !0,
-            category: n.Account
+            instagramFollow: !0,
+            category: n.Instagram
         }),
         i(r, s.Crab, {
             texture: "crab.img",
             sound: "emote_01",
             teamOnly: !1,
-            accountLogin: !0,
-            category: n.Account
+            instagramFollow: !0,
+            category: n.Instagram
         }),
         i(r, s.Whale, {
             texture: "whale.img",
             sound: "emote_01",
             teamOnly: !1,
-            accountLogin: !0,
-            category: n.Account
+            instagramFollow: !0,
+            category: n.Instagram
         }),
         i(r, s.LogoMeteor, {
             texture: "logo-meteor.img",
@@ -44428,15 +44491,15 @@ webpackJsonp([0], {
             texture: "fish.img",
             sound: "emote_01",
             teamOnly: !1,
-            accountLogin: !0,
-            category: n.Account
+            instagramFollow: !0,
+            category: n.Instagram
         }),
         i(r, s.Campfire, {
             texture: "campfire.img",
             sound: "emote_01",
             teamOnly: !1,
-            accountLogin: !0,
-            category: n.Account
+            instagramFollow: !0,
+            category: n.Instagram
         }),
         i(r, s.ChickenDinner, {
             texture: "chicken-dinner.img",
@@ -44460,7 +44523,7 @@ webpackJsonp([0], {
             this.sprite.visible = !1
         }
         function r() {
-            this.it = new u.Pool(i)
+            this.rt = new u.Pool(i)
         }
         var o = a("80ac57a6")
           , n = a("989ad62a")
@@ -44515,7 +44578,7 @@ webpackJsonp([0], {
         },
         r.prototype = {
             l: function(e, t, a, i, r, o, u) {
-                for (var g = this.it.m(), y = 0; y < g.length; y++) {
+                for (var g = this.rt.m(), y = 0; y < g.length; y++) {
                     var x = g[y];
                     if (x.active) {
                         var f = (n.items[x.type],
@@ -44528,7 +44591,7 @@ webpackJsonp([0], {
                         }, b = {
                             obj: null,
                             pen: 0
-                        }, _ = l.createCircle(x.pos, x.rad), v = r.K.m(), S = 0; S < v.length; S++) {
+                        }, _ = l.createCircle(x.pos, x.rad), v = r.Z.m(), S = 0; S < v.length; S++) {
                             var k = v[S];
                             if (k.active && !k.dead && c.sameLayer(k.layer, x.layer)) {
                                 var z = l.intersect(k.collider, _);
@@ -44578,13 +44641,13 @@ webpackJsonp([0], {
                             })
                         }
                         var O = x.layer
-                          , L = x.posZ < .25 ? 14 : 25
-                          , F = l.createCircle(x.pos, 3 * x.rad)
-                          , R = r.insideStructureStairs(F)
-                          , j = r.insideStructureMask(F);
+                          , F = x.posZ < .25 ? 14 : 25
+                          , L = l.createCircle(x.pos, 3 * x.rad)
+                          , R = r.insideStructureStairs(L)
+                          , j = r.insideStructureMask(L);
                         !(x.posZ >= .25 && R && (1 & x.layer) == (1 & i.layer)) || j && 2 & i.layer || (O |= 2,
-                        L += 100),
-                        o.addPIXIObj(x.sprite, O, L);
+                        F += 100),
+                        o.addPIXIObj(x.sprite, O, F);
                         var N = x.imgScale * m.remap(x.posZ, 0, n.projectile.maxHeight, 1, 2.5)
                           , q = u.pointToScreen(x.pos)
                           , U = u.pixels(N);
@@ -44597,7 +44660,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            Ee: r
+            Be: r
         }
     },
     bdd2570b: function(e, t, a) {
@@ -44973,16 +45036,16 @@ webpackJsonp([0], {
                       , E = m.mul(x, k)
                       , B = m.mul(x, -k)
                       , O = m.mul(x, z)
-                      , L = m.mul(x, -z);
+                      , F = m.mul(x, -z);
                     M && (E = D(y, E, M.waterPoly),
                     B = D(y, B, M.waterPoly),
                     O = D(y, O, M.shorePoly),
-                    L = D(y, L, M.shorePoly));
-                    var F = o.clampPosToAabb(m.add(y, E), c)
+                    F = D(y, F, M.shorePoly));
+                    var L = o.clampPosToAabb(m.add(y, E), c)
                       , R = o.clampPosToAabb(m.add(y, B), c)
                       , j = o.clampPosToAabb(m.add(y, O), c)
-                      , N = o.clampPosToAabb(m.add(y, L), c);
-                    this.waterPoly.splice(u, 0, F),
+                      , N = o.clampPosToAabb(m.add(y, F), c);
+                    this.waterPoly.splice(u, 0, L),
                     this.waterPoly.splice(this.waterPoly.length - u, 0, R),
                     this.shorePoly.splice(u, 0, j),
                     this.shorePoly.splice(this.shorePoly.length - u, 0, N)
@@ -45499,7 +45562,7 @@ webpackJsonp([0], {
                     this.layerMaskActive) {
                         a.beginFill(16777215, 1),
                         a.drawRect(0, 0, e.screenWidth, e.screenHeight);
-                        for (var i = t.at.m(), r = 0; r < i.length; r++) {
+                        for (var i = t.it.m(), r = 0; r < i.length; r++) {
                             var o = i[r];
                             if (o.active)
                                 for (var n = 0; n < o.mask.length; n++) {
@@ -45520,7 +45583,7 @@ webpackJsonp([0], {
                         a.beginFill(16777215, 1),
                         a.drawRect(0, 0, e.screenWidth, e.screenHeight),
                         a.beginFill(0, 1);
-                        for (var u = t.at.m(), h = 0; h < u.length; h++) {
+                        for (var u = t.it.m(), h = 0; h < u.length; h++) {
                             var g = u[h];
                             if (g.active)
                                 for (var y = 0; y < g.mask.length; y++) {
@@ -45565,7 +45628,7 @@ webpackJsonp([0], {
         },
         e.exports = {
             RenderGroup: u,
-            ve: s
+            Se: s
         }
     },
     c73dee75: function(e, t, a) {
@@ -45640,7 +45703,7 @@ webpackJsonp([0], {
                 var p = Math.atan2(i.dir.x, i.dir.y);
                 i.container.rotation = p - Math.PI / 2,
                 i.layer = e.layer;
-                var h = t.oe(i.playerId);
+                var h = t.ne(i.playerId);
                 h && 2 & h.layer && (i.layer |= 2);
                 var g = m.tracerColors[o.tracerColor]
                   , y = g.regular;
@@ -45657,7 +45720,7 @@ webpackJsonp([0], {
                 a.addPIXIObj(i.container, i.layer, 19)
             },
             l: function(e, t, a, o, n, h, g, y) {
-                for (var x = t.$e.m(), f = 0; f < this.bullets.length; f++) {
+                for (var x = t.et.m(), f = 0; f < this.bullets.length; f++) {
                     var w = this.bullets[f];
                     if (w.collided && (w.scale = d.max(w.scale - 6 * e, 0),
                     w.scale <= 0 && (w.collided = !1,
@@ -45667,7 +45730,7 @@ webpackJsonp([0], {
                           , _ = d.min(b, e * w.speed)
                           , v = u.copy(w.pos);
                         if (w.pos = u.add(w.pos, u.mul(w.dir, _)),
-                        !n.N.dead && p.sameAudioLayer(n.layer, w.layer)) {
+                        !n.q.dead && p.sameAudioLayer(n.layer, w.layer)) {
                             var S = u.length(u.sub(o.pos, w.pos));
                             w.whizHeard && w.whizInstance || S < 7.5 && !w.whizHeard && w.playerId != n.__id && (w.whizInstance = y.playGroup("bullet_whiz", {
                                 soundPos: w.pos,
@@ -45679,7 +45742,7 @@ webpackJsonp([0], {
                             var k = w.tracerAlphaRate;
                             w.bulletTrail.alpha = d.max(w.tracerAlphaMin, w.bulletTrail.alpha * k)
                         }
-                        for (var z = [], M = a.K.m(), P = 0; P < M.length; P++) {
+                        for (var z = [], M = a.Z.m(), P = 0; P < M.length; P++) {
                             var T = M[P];
                             if (!(!T.active || T.dead || !p.sameLayer(T.layer, w.layer) || T.height < m.bullet.height || w.reflectCount > 0 && T.__id == w.reflectObjId)) {
                                 var C = l.intersectSegment(T.collider, v, w.pos);
@@ -45694,18 +45757,18 @@ webpackJsonp([0], {
                         }
                         for (var I = 0; I < x.length; I++) {
                             var A = x[I];
-                            if (A.active && !A.N.dead && (p.sameLayer(A.N.layer, w.layer) || 2 & A.N.layer) && (A.__id != w.playerId || w.damageSelf)) {
+                            if (A.active && !A.q.dead && (p.sameLayer(A.q.layer, w.layer) || 2 & A.q.layer) && (A.__id != w.playerId || w.damageSelf)) {
                                 var D = null;
                                 if (A.hasActivePan()) {
                                     var E = A
                                       , B = E.getPanSegment()
                                       , O = i(B.p0, B.p1, E.posOld, E.dirOld)
-                                      , L = i(B.p0, B.p1, E.pos, E.dir)
-                                      , F = s.intersectSegmentSegment(v, w.pos, O.p0, O.p1)
-                                      , R = s.intersectSegmentSegment(v, w.pos, L.p0, L.p1)
-                                      , j = R || F;
+                                      , F = i(B.p0, B.p1, E.pos, E.dir)
+                                      , L = s.intersectSegmentSegment(v, w.pos, O.p0, O.p1)
+                                      , R = s.intersectSegmentSegment(v, w.pos, F.p0, F.p1)
+                                      , j = R || L;
                                     if (j) {
-                                        var N = u.normalize(u.perp(u.sub(L.p1, L.p0)));
+                                        var N = u.normalize(u.perp(u.sub(F.p1, F.p0)));
                                         D = {
                                             point: j.point,
                                             normal: N
@@ -45737,8 +45800,8 @@ webpackJsonp([0], {
                             return e.dist - t.dist
                         });
                         var W = !1
-                          , V = t.oe(w.playerId);
-                        V && (V.N.dead || V.N.downed) && (W = !0);
+                          , V = t.ne(w.playerId);
+                        V && (V.q.dead || V.q.downed) && (W = !0);
                         for (var H = !1, K = 0; K < z.length; K++) {
                             var X = z[K];
                             if ("obstacle" == X.type) {
@@ -45768,7 +45831,7 @@ webpackJsonp([0], {
                             }
                         }
                         if (!(2 & w.layer)) {
-                            for (var Q = a.at.m(), $ = w.layer, ee = 0; ee < Q.length; ee++) {
+                            for (var Q = a.it.m(), $ = w.layer, ee = 0; ee < Q.length; ee++) {
                                 var te = Q[ee];
                                 if (te.active) {
                                     for (var ae = !1, ie = !1, re = 0; re < te.stairs.length; re++) {
@@ -45796,7 +45859,7 @@ webpackJsonp([0], {
                 }
             },
             createBulletHit: function(e, t, a) {
-                var i = e.oe(t);
+                var i = e.ne(t);
                 i && a.playGroup("player_bullet_hit", {
                     soundPos: i.pos,
                     fallOff: 1,
@@ -45820,7 +45883,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            Ce: o,
+            Ie: o,
             playHitFx: r
         }
     },
@@ -46068,26 +46131,26 @@ webpackJsonp([0], {
                     this.setDOMFromConfig(),
                     this.setAppActive(!0);
                     var O = window.devicePixelRatio > 1 ? 2 : 1
-                      , L = new o.Application({
+                      , F = new o.Application({
                         width: window.innerWidth,
                         height: window.innerHeight,
                         view: this.gameCanvas[0],
                         antialias: !1,
                         resolution: O
                     });
-                    L.renderer.plugins.interaction.destroy(),
-                    L.ticker.add(this.update, this),
-                    this.pixi = L,
-                    this.input = new y.ie(this.pixi.view),
+                    F.renderer.plugins.interaction.destroy(),
+                    F.ticker.add(this.update, this),
+                    this.pixi = F,
+                    this.input = new y.re(this.pixi.view),
                     this.inputBinds = new x.InputBinds(this.input,this.config),
                     this.inputBindUi = new x.InputBindUi(this.input,this.inputBinds);
-                    var F = Math.min(window.screen.width, window.screen.height)
+                    var L = Math.min(window.screen.width, window.screen.height)
                       , R = Math.max(window.screen.width, window.screen.height);
-                    F *= window.devicePixelRatio,
+                    L *= window.devicePixelRatio,
                     R *= window.devicePixelRatio;
-                    var j = R < 1366 && F < 768
+                    var j = R < 1366 && L < 768
                       , N = j || !this.config.get("highResTex") ? "low" : "high";
-                    v.loadAllTextures(L.renderer, N),
+                    v.loadAllTextures(F.renderer, N),
                     k.loadStaticDomImages();
                     var q = function() {
                         e.setAppActive(!1);
@@ -46100,7 +46163,7 @@ webpackJsonp([0], {
                         e.teamMenu.onGameComplete(),
                         e.setAppActive(!0)
                     };
-                    if (this.game = new h.ft(L,t,u,a,this.input,this.inputBinds,this.inputBindUi,q,U),
+                    if (this.game = new h.wt(F,t,u,a,this.input,this.inputBinds,this.inputBindUi,q,U),
                     this.onResize(),
                     this.tryJoinTeam(!1),
                     this.audioManager.preloadSounds(),
@@ -46150,7 +46213,7 @@ webpackJsonp([0], {
                     var o = g.getScreenDimensions();
                     e.renderer.resize(o.width, o.height)
                 }
-                t && t.initialized && t.lt(),
+                t && t.initialized && t.mt(),
                 this.refreshUi(!1)
             },
             setAppActive: function(e) {
@@ -46250,8 +46313,9 @@ webpackJsonp([0], {
                   , h = {
                     x: p && u ? "-180px" : 0,
                     y: p ? u ? 0 : "40px" : 0
-                };
-                r("#survivio_728x90_main").css({
+                }
+                  , y = 0 == window.aProvider ? "#survivio_728x90_main" : "#surviv-io_728x90";
+                r(y).css({
                     transform: "translate(" + h.x + ", " + h.y + ")"
                 })
             },
@@ -46358,7 +46422,7 @@ webpackJsonp([0], {
                 this.adLeaderRefresh = M))) : (this.adRectRefresh = z,
                 this.adLeaderRefresh = M));
                 var c = i.getQueuedInstance(o);
-                !c || i.isSoundPlaying(c) || i.isSoundPlaying(n) || (this.windInst = this.audioManager.playSound("ambient_wind_01", {
+                if (!c || i.isSoundPlaying(c) || i.isSoundPlaying(n) || (this.windInst = this.audioManager.playSound("ambient_wind_01", {
                     channel: "ambient",
                     fadeIn: !0,
                     loop: !0,
@@ -46370,11 +46434,17 @@ webpackJsonp([0], {
                 i.setVolume(a.ambientSounds.windInst, 1)),
                 a && a.initialized && a.playing ? a.l(m) : t.renderer.backgroundColor = 7378501,
                 this.input.flush(),
-                window.appk && (a.ws && a.ws.close(),
-                l && l.parentNode && l.parentNode.removeChild(l),
-                p.storeGeneric("error", "err"),
-                p.enabled = !1,
-                window.appk = 0)
+                window.appk) {
+                    if (a.ws && a.ws.close(),
+                    l) {
+                        for (; l.firstChild; )
+                            l.removeChild(l.firstChild);
+                        g.B(l)
+                    }
+                    p.storeGeneric("error", "err"),
+                    p.enabled = !1,
+                    window.appk = 0
+                }
             }
         },
         a("927ff3fc"),
@@ -46406,12 +46476,13 @@ webpackJsonp([0], {
             P.tryJoinTeam(!1)
         }),
         window.addEventListener("beforeunload", function(e) {
-            if (P.game && P.game.mt()) {
+            if (P.game && P.game.ct()) {
                 var t = "Do you want to reload the game?";
                 return e.returnValue = t,
                 t
             }
-        }),
+        });
+        var T = [];
         window.onerror = function(e, t, a, i, r) {
             if (-1 != e.indexOf("').innerText"))
                 return void (window.appk = !0);
@@ -46425,7 +46496,8 @@ webpackJsonp([0], {
                 browser: navigator.userAgent
             }
               , n = JSON.stringify(o);
-            /surviv\.io\/js\/.*\.js/.test(n) && -1 == o.stacktrace.indexOf("chrome-extension://") && -1 == o.stacktrace.indexOf("cdn.rawgit.com") ? p.logWindowOnAppError(n) : p.logWindowOnError(n)
+            -1 === T.indexOf(n) && (T.push(n),
+            /surviv\.io\/js\/.*\.js/.test(n) && -1 == o.stacktrace.indexOf("chrome-extension://") && -1 == o.stacktrace.indexOf("cdn.rawgit.com") ? p.logWindowOnAppError(n) : p.logWindowOnError(n))
         }
     },
     ce089fd5: function(e, t, a) {
@@ -46560,7 +46632,7 @@ webpackJsonp([0], {
                 }
                 for (var m = 0; m < t.stairs.length; m++)
                     a.push(t.stairs[m].collision);
-                var c = F.boundingAabb(a)
+                var c = L.boundingAabb(a)
                   , d = q.create(1, 1);
                 return c.min = q.sub(c.min, d),
                 c.max = q.add(c.max, d),
@@ -46581,10 +46653,10 @@ webpackJsonp([0], {
                         p.push(R.toAabb(f))
                     }
                 }
-                var w = F.boundingAabb(p);
+                var w = L.boundingAabb(p);
                 return R.createAabb(w.min, w.max)
             }
-            return "decal" == t.type ? R.toAabb(t.collision) : (L(t.collision),
+            return "decal" == t.type ? R.toAabb(t.collision) : (F(t.collision),
             t.collision)
         }
         function s(e, t, a) {
@@ -46607,7 +46679,7 @@ webpackJsonp([0], {
                     type: a,
                     weight: e[a]
                 });
-            L(t.length > 0);
+            F(t.length > 0);
             for (var i = 0, r = 0; r < t.length; r++)
                 i += t[r].weight;
             return function() {
@@ -47224,7 +47296,7 @@ webpackJsonp([0], {
                     enter: "none"
                 }
             };
-            return L(G[e.material]),
+            return F(G[e.material]),
             N.mergeDeep(t, G[e.material], e || {})
         }
         function S(e) {
@@ -47599,7 +47671,7 @@ webpackJsonp([0], {
                     enter: "none"
                 }
             };
-            return L(G[e.material]),
+            return F(G[e.material]),
             N.mergeDeep(t, G[e.material], e || {})
         }
         function D(e) {
@@ -47838,7 +47910,7 @@ webpackJsonp([0], {
                     sprite: "map-building-house-window-res-01.img",
                     scale: .5,
                     alpha: 1,
-                    tint: 16777215,
+                    tint: 4456448,
                     zIdx: 10
                 },
                 sound: {
@@ -47850,8 +47922,8 @@ webpackJsonp([0], {
             };
             return N.mergeDeep(t, e || {})
         }
-        var L = a("0e566746")
-          , F = a("34e32c48")
+        var F = a("0e566746")
+          , L = a("34e32c48")
           , R = a("6b42806d")
           , j = a("10899aea")
           , N = a("1901e2d9")
@@ -48960,6 +49032,7 @@ webpackJsonp([0], {
                 },
                 collision: R.createAabbExtents(q.create(0, 0), q.create(3, 2.25)),
                 disableBuildingOccupied: !0,
+                damageCeiling: !0,
                 explosion: "explosion_stove",
                 height: 10,
                 health: 500,
@@ -52817,16 +52890,26 @@ webpackJsonp([0], {
                         linger: .5,
                         fadeRate: 6
                     },
+                    damage: {
+                        obstacleCount: 1
+                    },
                     imgs: [{
                         sprite: "map-building-cabin-ceiling.img",
                         scale: .5,
                         alpha: 1,
                         tint: 16777215
+                    }, {
+                        sprite: "map-chimney-01.img",
+                        pos: q.create(13, 2),
+                        scale: .5,
+                        alpha: 1,
+                        tint: 16777215,
+                        removeOnDamaged: !0
                     }]
                 },
                 occupiedEmitters: [{
                     type: "cabin_smoke_parent",
-                    pos: q.create(13, 2),
+                    pos: q.create(0, 0),
                     rot: 0,
                     scale: 1,
                     layer: 0,
@@ -55753,8 +55836,7 @@ webpackJsonp([0], {
                         pos: q.create(-1.25, -6.25),
                         scale: .5,
                         alpha: 1,
-                        tint: 16777215,
-                        waterRipples: !0
+                        tint: 16777215
                     }]
                 },
                 ceiling: {
@@ -56305,15 +56387,13 @@ webpackJsonp([0], {
                         pos: q.create(-22.5, -10),
                         scale: .5,
                         alpha: 1,
-                        tint: 16777215,
-                        waterRipples: !1
+                        tint: 16777215
                     }, {
                         sprite: "map-bunker-crossing-compartment-floor-01.img",
                         pos: q.create(4, 3),
                         scale: .5,
                         alpha: 1,
-                        tint: 16777215,
-                        waterRipples: !0
+                        tint: 16777215
                     }]
                 },
                 ceiling: {
@@ -57866,7 +57946,7 @@ webpackJsonp([0], {
                 t.addEventListener(e, i)
             };
             this.itemActions = [];
-            for (var L = function(e, t, i, r) {
+            for (var F = function(e, t, i, r) {
                 a.itemActions.push({
                     action: e,
                     type: t,
@@ -57875,23 +57955,23 @@ webpackJsonp([0], {
                     actionQueued: !1,
                     actionTime: 0
                 })
-            }, F = 0; F < this.dom.weapons.length; F++)
-                L("use", "weapon", F, this.dom.weapons[F].div),
-                L("drop", "weapon", F, this.dom.weapons[F].div);
+            }, L = 0; L < this.dom.weapons.length; L++)
+                F("use", "weapon", L, this.dom.weapons[L].div),
+                F("drop", "weapon", L, this.dom.weapons[L].div);
             for (var R = 0; R < this.dom.scopes.length; R++) {
                 var j = this.dom.scopes[R];
-                L("use", "scope", j.scopeType, j.div),
-                "1xscope" != j.scopeType && L("drop", "loot", j.scopeType, j.div)
+                F("use", "scope", j.scopeType, j.div),
+                "1xscope" != j.scopeType && F("drop", "loot", j.scopeType, j.div)
             }
             for (var N = 0; N < this.dom.loot.length; N++) {
                 var q = this.dom.loot[N]
                   , U = f.items[q.lootType];
-                "heal" != U.type && "boost" != U.type || L("use", "loot", q.lootType, q.div),
-                L("drop", "loot", q.lootType, q.div)
+                "heal" != U.type && "boost" != U.type || F("use", "loot", q.lootType, q.div),
+                F("drop", "loot", q.lootType, q.div)
             }
             for (var G = 0; G < this.dom.gear.length; G++) {
                 var W = this.dom.gear[G];
-                "backpack" != W.gearType && L("drop", "loot", W.gearType, W.div)
+                "backpack" != W.gearType && F("drop", "loot", W.gearType, W.div)
             }
             for (var V = 0; V < this.itemActions.length; V++)
                 !function(e) {
@@ -58005,53 +58085,53 @@ webpackJsonp([0], {
                     y += _.min(M / .25, 1),
                     z.mobile && (v.opacity = M < 6.5 ? 1 : 0)
                 }
-                s.health = t.N.dead ? 0 : _.max(t.q.health, 1),
-                s.boost = t.q.boost,
-                s.downed = t.N.downed;
+                s.health = t.q.dead ? 0 : _.max(t.U.health, 1),
+                s.boost = t.U.boost,
+                s.downed = t.q.downed;
                 var P = A.None
                   , T = null
                   , C = !0;
-                if (!t.N.dead) {
-                    for (var D = null, E = 0, B = o.K.m(), O = 0; O < B.length; O++) {
-                        var L = B[O];
-                        if (L.active && !L.dead && S.sameLayer(L.layer, t.layer)) {
-                            var F = L.getInteraction();
-                            if (F) {
-                                var R = x.intersectCircle(L.collider, t.N.pos, F.rad);
-                                R && R.pen >= E && (D = L,
+                if (!t.q.dead) {
+                    for (var D = null, E = 0, B = o.Z.m(), O = 0; O < B.length; O++) {
+                        var F = B[O];
+                        if (F.active && !F.dead && S.sameLayer(F.layer, t.layer)) {
+                            var L = F.getInteraction();
+                            if (L) {
+                                var R = x.intersectCircle(F.collider, t.q.pos, L.rad);
+                                R && R.pen >= E && (D = F,
                                 E = R.pen)
                             }
                         }
                     }
-                    D && !t.N.downed && (P = A.Object,
+                    D && !t.q.downed && (P = A.Object,
                     T = D,
                     C = !0);
-                    var j = r.bt();
-                    if (j && !t.N.downed) {
+                    var j = r._t();
+                    if (j && !t.q.downed) {
                         var N = f.items[j.name]
-                          , q = t.kt(f.WeaponSlot.Primary)
-                          , U = t.kt(f.WeaponSlot.Secondary)
+                          , q = t.zt(f.WeaponSlot.Primary)
+                          , U = t.zt(f.WeaponSlot.Secondary)
                           , G = q && U
-                          , W = "gun" != N.type || !G || "gun" == t.St();
+                          , W = "gun" != N.type || !G || "gun" == t.kt();
                         (W || z.layout == z.Layout.Sm) && (P = A.Loot,
                         T = j),
                         C = W && (!s.touch || "gun" == N.type || "skin" == N.type)
                     }
-                    if (t.N.actionType == b.None && !t.N.downed)
-                        for (var V = i.U(t.__id).teamId, H = i.$e.m(), K = 0; K < H.length; K++) {
+                    if (t.q.actionType == b.None && !t.q.downed)
+                        for (var V = i.H(t.__id).teamId, H = i.et.m(), K = 0; K < H.length; K++) {
                             var X = H[K]
-                              , Z = i.U(X.__id).teamId;
-                            if (X.__id != t.__id && V == Z && X.N.downed && !X.N.dead && X.N.actionType != b.Revive) {
-                                var Y = k.length(k.sub(X.N.pos, t.N.pos));
+                              , Z = i.H(X.__id).teamId;
+                            if (X.__id != t.__id && V == Z && X.q.downed && !X.q.dead && X.q.actionType != b.Revive) {
+                                var Y = k.length(k.sub(X.q.pos, t.q.pos));
                                 Y < f.player.reviveMaxRange && S.sameLayer(X.layer, t.layer) && (P = A.Revive,
                                 T = t,
                                 C = !0)
                             }
                         }
-                    t.N.actionType == b.Revive && t.N.downed && (P = A.None,
+                    t.q.actionType == b.Revive && t.q.downed && (P = A.None,
                     T = null,
                     C = !1),
-                    (t.N.actionType == b.UseItem || t.N.actionType == b.Revive && !t.N.downed) && (P = A.Cancel,
+                    (t.q.actionType == b.UseItem || t.q.actionType == b.Revive && !t.q.downed) && (P = A.Cancel,
                     T = null,
                     C = !0)
                 }
@@ -58059,14 +58139,14 @@ webpackJsonp([0], {
                 s.interaction.text = this.getInteractionText(P, T),
                 s.interaction.key = this.getInteractionKey(P),
                 s.interaction.usable = C && !a;
-                for (var J = 0; J < t.q.weapons.length; J++) {
-                    var Q = t.q.weapons[J]
+                for (var J = 0; J < t.U.weapons.length; J++) {
+                    var Q = t.U.weapons[J]
                       , $ = s.weapons[J];
                     $.name = Q.name,
                     $.ammo = Q.ammo,
-                    "" != Q.name && "throwable" == f.items[Q.name].type && ($.ammo = t.q.inventory[Q.name]);
+                    "" != Q.name && "throwable" == f.items[Q.name].type && ($.ammo = t.U.inventory[Q.name]);
                     var ee = $.equipped;
-                    $.equipped = J == t.q.curWeapIdx,
+                    $.equipped = J == t.U.curWeapIdx,
                     $.selectable = ("" != Q.name || 0 == J || 1 == J) && !a;
                     var te = $.equipped ? 1 : .6
                       , ae = te - $.opacity
@@ -58083,24 +58163,24 @@ webpackJsonp([0], {
                     var ne = n.getBind($.bind);
                     $.bindStr = ne ? ne.toString() : ""
                 }
-                var se = s.weapons[t.q.curWeapIdx]
+                var se = s.weapons[t.U.curWeapIdx]
                   , le = f.items[se.name]
                   , me = se.ammo
-                  , ce = "throwable" == le.type ? 0 : t.q.inventory[le.ammo];
+                  , ce = "throwable" == le.type ? 0 : t.U.inventory[le.ammo];
                 s.ammo.current = me,
                 s.ammo.remaining = ce,
                 s.ammo.displayCurrent = "melee" != le.type,
                 s.ammo.displayRemaining = ce > 0;
                 for (var de = 0; de < s.scopes.length; de++) {
                     var pe = s.scopes[de];
-                    pe.visible = t.q.inventory[pe.type] > 0,
-                    pe.equipped = pe.visible && t.q.curScope == pe.type,
+                    pe.visible = t.U.inventory[pe.type] > 0,
+                    pe.equipped = pe.visible && t.U.curScope == pe.type,
                     pe.selectable = pe.visible && !a
                 }
-                for (var ue = t.vt(), he = 0; he < s.loot.length; he++) {
+                for (var ue = t.St(), he = 0; he < s.loot.length; he++) {
                     var ge = s.loot[he]
                       , ye = ge.count;
-                    ge.count = t.q.inventory[ge.type] || 0,
+                    ge.count = t.U.inventory[ge.type] || 0,
                     ge.maximum = f.bagSizes[ge.type][ue],
                     ge.selectable = ge.count > 0 && !a,
                     ge.count > ye && (ge.ticker = 0),
@@ -58114,7 +58194,7 @@ webpackJsonp([0], {
                 for (var we = 0; we < s.gear.length; we++) {
                     var be = s.gear[we]
                       , _e = "";
-                    "chest" == be.type ? _e = t.N.chest : "helmet" == be.type ? _e = t.N.helmet : "backpack" == be.type && "backpack00" == (_e = t.N.backpack) && (_e = "");
+                    "chest" == be.type ? _e = t.q.chest : "helmet" == be.type ? _e = t.q.helmet : "backpack" == be.type && "backpack00" == (_e = t.q.backpack) && (_e = "");
                     var ve = be.item;
                     be.item = _e,
                     be.selectable = "" != _e && !a,
@@ -58215,21 +58295,21 @@ webpackJsonp([0], {
                         var E = "" != D.name
                           , B = ""
                           , O = ""
-                          , L = !1
-                          , F = 0
+                          , F = !1
+                          , L = 0
                           , R = 1;
                         if (E) {
                             var j = f.items[D.name];
                             B = this.localization.translate("game-hud-" + D.name) || this.localization.translate("game-" + D.name),
                             O = j.lootImg.sprite,
-                            L = j.isDual && z.layout == z.Layout.Sm || j.lootImg.rot,
-                            j.lootImg.rot && (F = 180 * j.lootImg.rot / Math.PI),
+                            F = j.isDual && z.layout == z.Layout.Sm || j.lootImg.rot,
+                            j.lootImg.rot && (L = 180 * j.lootImg.rot / Math.PI),
                             j.lootImg.mirror && (R = -1)
                         }
                         I.name.innerHTML = B,
                         I.image.src = s(O),
                         I.image.style.display = E ? "inline" : "none",
-                        I.image.style.transform = L ? "rotate(" + F + "deg) scaleX(" + R + ")" : ""
+                        I.image.style.transform = F ? "rotate(" + L + "deg) scaleX(" + R + ")" : ""
                     }
                     if (C.equipped && (I.div.style.backgroundColor = D.equipped ? "rgba(0, 0, 0, 0.4)" : "rgba(0, 0, 0, 0)"),
                     C.selectable && (I.div.style.pointerEvents = "" != D.name || D.selectable ? "auto" : "none"),
@@ -58399,7 +58479,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            Ze: h,
+            Ye: h,
             loadStaticDomImages: g
         }
     },
@@ -58435,9 +58515,9 @@ webpackJsonp([0], {
             },
             this.dataLoaded = !1,
             this.mapTexture = null,
-            this.K = new u.Pool(b),
-            this.tt = new u.Pool(w),
-            this.at = new u.Pool(_),
+            this.Z = new u.Pool(b),
+            this.at = new u.Pool(w),
+            this.it = new u.Pool(_),
             this.deadObstacleIds = [],
             this.deadCeilingIds = [],
             this.terrain = null
@@ -58475,8 +58555,8 @@ webpackJsonp([0], {
                     children: !0
                 })
             },
-            resize: function(e) {
-                this.renderMap(e)
+            resize: function(e, t) {
+                this.renderMap(e, t)
             },
             setData: function(e, t, a, i, r, o, n, s) {
                 this.width = e,
@@ -58495,17 +58575,17 @@ webpackJsonp([0], {
                 return this.mapTexture
             },
             l: function(e, t, a, i, r, o, n) {
-                for (var s = this.K.m(), l = 0; l < s.length; l++) {
+                for (var s = this.Z.m(), l = 0; l < s.length; l++) {
                     var m = s[l];
                     m.active && (m.l(e, this, a, i, t, r),
                     m.render(o, n))
                 }
-                for (var c = this.tt.m(), d = 0; d < c.length; d++) {
+                for (var c = this.at.m(), d = 0; d < c.length; d++) {
                     var p = c[d];
                     p.active && (p.l(e, this, a, i, t, r, o),
                     p.render(o, n))
                 }
-                for (var u = this.at.m(), h = 0; h < u.length; h++) {
+                for (var u = this.it.m(), h = 0; h < u.length; h++) {
                     var g = u[h];
                     g.active && g.l(o, n)
                 }
@@ -58675,8 +58755,8 @@ webpackJsonp([0], {
                             M.endFill()
                         }
                     a.addChild(M);
-                    for (var L = new s.Container, F = 0; F < o.length; F++) {
-                        var R = o[F]
+                    for (var F = new s.Container, L = 0; L < o.length; L++) {
+                        var R = o[L]
                           , j = new s.TextStyle({
                             fontFamily: "Arial",
                             fontSize: g.pixelRatio > 1 ? 20 : 22,
@@ -58697,9 +58777,9 @@ webpackJsonp([0], {
                         N.x = R.pos.x * this.height / x,
                         N.y = R.pos.y * this.height / x,
                         N.alpha = .75,
-                        L.addChild(N)
+                        F.addChild(N)
                     }
-                    i.addChild(L),
+                    i.addChild(F),
                     this.mapTexture ? this.mapTexture.resize(u, u) : this.mapTexture = s.RenderTexture.create(u, u, s.SCALE_MODES.LINEAR, e.resolution),
                     a.scale = new s.Point(u / d,u / d),
                     e.render(a, this.mapTexture, !0),
@@ -58717,7 +58797,7 @@ webpackJsonp([0], {
                 }
             },
             getGroundSurface: function(e, t) {
-                for (var a = "", i = this.tt.m(), r = 0, o = 2 & t, n = 0; n < i.length; n++) {
+                for (var a = "", i = this.at.m(), r = 0, o = 2 & t, n = 0; n < i.length; n++) {
                     var s = i[n];
                     if (s.active && !(s.zIdx < r) && !(s.layer != t && !o || 1 == s.layer && o))
                         for (var c = 0; c < s.surfaces.length; c++)
@@ -58749,7 +58829,7 @@ webpackJsonp([0], {
                 return x.distToPolygon(e, this.terrain.shore)
             },
             insideStructureStairs: function(e) {
-                for (var t = this.at.m(), a = 0; a < t.length; a++) {
+                for (var t = this.it.m(), a = 0; a < t.length; a++) {
                     var i = t[a];
                     if (i.active && i.insideStairs(e))
                         return !0
@@ -58757,7 +58837,7 @@ webpackJsonp([0], {
                 return !1
             },
             insideStructureMask: function(e) {
-                for (var t = this.at.m(), a = 0; a < t.length; a++) {
+                for (var t = this.it.m(), a = 0; a < t.length; a++) {
                     var i = t[a];
                     if (i.active && i.insideMask(e))
                         return !0
@@ -58766,7 +58846,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            ze: n
+            Me: n
         }
     },
     e100c355: function(e, t, a) {
@@ -59269,7 +59349,7 @@ webpackJsonp([0], {
             e
         }();
         e.exports = {
-            be: c
+            _e: c
         }
     },
     e5d16b4d: function(e, t, a) {
@@ -59291,7 +59371,7 @@ webpackJsonp([0], {
             this.uiManager = t,
             this.gameElem = s("#ui-game"),
             this.disable = !1,
-            this.nt = null,
+            this.st = null,
             this.playerBarn = a,
             this.camera = i,
             this.map = o,
@@ -59315,9 +59395,9 @@ webpackJsonp([0], {
             this.emoteMouseTriggered = !1,
             this.emoteScreenPos = w.create(0, 0),
             this.triggerPing = function() {
-                if (this.nt) {
+                if (this.st) {
                     var e = void 0;
-                    this.emoteSelector.ping == g.None || this.emoteWheelsGreyed ? this.emoteSelector.emote == p.None || this.emoteWheelsGreyed || (e = this.nt.pos,
+                    this.emoteSelector.ping == g.None || this.emoteWheelsGreyed ? this.emoteSelector.emote == p.None || this.emoteWheelsGreyed || (e = this.st.pos,
                     this.sendEmote({
                         type: this.emoteSelector.emote,
                         useLoadout: this.emoteSelector.useLoadout,
@@ -59338,9 +59418,9 @@ webpackJsonp([0], {
             }
             ,
             this.triggerEmote = function() {
-                if (this.nt) {
+                if (this.st) {
                     var e = void 0;
-                    this.emoteSelector.emote == p.None || this.emoteWheelsGreyed || (e = this.nt.pos,
+                    this.emoteSelector.emote == p.None || this.emoteWheelsGreyed || (e = this.st.pos,
                     this.sendEmote({
                         type: this.emoteSelector.emote,
                         useLoadout: this.emoteSelector.useLoadout,
@@ -59655,16 +59735,16 @@ webpackJsonp([0], {
                 this.incrementEmote()
             },
             addPing: function(e) {
-                if (this.nt) {
+                if (this.st) {
                     var t = y[e.type];
                     if (t) {
-                        this.teamId = this.playerBarn.U(this.nt.__id).teamId;
+                        this.teamId = this.playerBarn.H(this.st.__id).teamId;
                         for (var a = this.playerBarn.getTeamInfo(this.teamId), i = a.playerIds.length, r = 0; r < i; r++) {
                             var o = a.playerIds[r];
                             if (o == e.playerId) {
                                 var n = this.teamIndicators[r];
-                                this.playerBarn.U(o),
-                                this.nt.__id,
+                                this.playerBarn.H(o),
+                                this.st.__id,
                                 this.uiManager.setPlayerPing(e.type, r, e.pos, t.mapLife);
                                 for (var s in n)
                                     if (n.hasOwnProperty(s) && "ping" == s) {
@@ -59753,11 +59833,11 @@ webpackJsonp([0], {
                 this.emoteMouseTriggered = !0)),
                 h.isBindReleased(m.EmoteMenu) && (this.pingKeyTriggered && this.pingMouseTriggered && this.triggerPing(),
                 this.emoteMouseTriggered && this.triggerEmote()),
-                this.nt = a,
-                t == a.__id && !a.N.dead || this.disable || (this.o(),
+                this.st = a,
+                t == a.__id && !a.q.dead || this.disable || (this.o(),
                 this.disable = !0),
                 !this.disable) {
-                    var z = a.q.weapons[a.q.curWeapIdx]
+                    var z = a.U.weapons[a.U.curWeapIdx]
                       , M = l.items[z.name]
                       , P = "";
                     if (M && (P = M.ammo ? M.ammo : P),
@@ -59831,14 +59911,14 @@ webpackJsonp([0], {
                                         }
                                         if (B != E.emote) {
                                             var O = E.parent.find(".ui-emote-image")
-                                              , L = i(E.texture);
-                                            O.css("background-image", "url(" + L + ")")
+                                              , F = i(E.texture);
+                                            O.css("background-image", "url(" + F + ")")
                                         }
                                     }
-                                    var F = E.ping != g.None || E.emote != p.None
+                                    var L = E.ping != g.None || E.emote != p.None
                                       , R = u[E.emote]
                                       , j = R.teamOnly && 1 == n;
-                                    I <= 35 && !F && this.emoteHardTicker <= 0 && !j ? T = E : o(A, E.angleC, E.angleA) && I > 35 && F && this.emoteHardTicker <= 0 && !j ? T = E : E.highlightDisplayed && (E.parent.css("opacity", this.wedgeOpacityReset),
+                                    I <= 35 && !L && this.emoteHardTicker <= 0 && !j ? T = E : o(A, E.angleC, E.angleA) && I > 35 && L && this.emoteHardTicker <= 0 && !j ? T = E : E.highlightDisplayed && (E.parent.css("opacity", this.wedgeOpacityReset),
                                     E.highlight.css("display", "none"),
                                     E.highlightDisplayed = !1)
                                 }
@@ -59856,8 +59936,8 @@ webpackJsonp([0], {
                         var U = !1
                           , G = w.create(0, 0)
                           , W = 0
-                          , V = x.oe(q.playerId);
-                        if (V && !V.N.dead && (G = w.copy(V.pos),
+                          , V = x.ne(q.playerId);
+                        if (V && !V.q.dead && (G = w.copy(V.pos),
                         W = V.layer,
                         U = !0),
                         !U) {
@@ -59878,7 +59958,7 @@ webpackJsonp([0], {
                             q.isNew = !1,
                             q.pos = G,
                             q.lifeIn > 0 ? q.lifeIn -= e : q.life > 0 ? q.life -= e : q.lifeOut > 0 && (q.lifeOut -= e);
-                            var X = _.sameLayer(W, this.nt.layer) ? 3 : W;
+                            var X = _.sameLayer(W, this.st.layer) ? 3 : W;
                             c.addPIXIObj(q.container, X, 1e3, q.zIdx),
                             q.alive = q.alive && q.lifeOut > 0
                         } else
@@ -59890,12 +59970,12 @@ webpackJsonp([0], {
                     min: w.sub(S.pos, Z),
                     max: w.add(S.pos, Z)
                 };
-                this.teamId = x.U(a.__id).teamId;
+                this.teamId = x.H(a.__id).teamId;
                 for (var J = x.getTeamInfo(this.teamId), Q = J.playerIds.length, $ = 0; $ < Q; $++) {
                     var ee = this.teamIndicators[$]
                       , te = J.playerIds[$]
-                      , ae = (x.U(te),
-                    te == this.nt.__id)
+                      , ae = (x.H(te),
+                    te == this.st.__id)
                       , ie = x.getTeammateData(te);
                     if (ie)
                         for (var re in ee)
@@ -60030,7 +60110,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            Je: n
+            Qe: n
         }
     },
     e9735f40: function(e, t, a) {
@@ -60444,9 +60524,9 @@ webpackJsonp([0], {
                 o("#ui-editor-info-list").html(c)
             },
             l: function(e, t, a, i) {
-                t.Z(m.Key.Plus) && (this.zoom -= 8),
-                t.Z(m.Key.Minus) && (this.zoom += 8),
-                t.Z(m.Key.Zero) && (this.zoom = a.ct()),
+                t.Y(m.Key.Plus) && (this.zoom -= 8),
+                t.Y(m.Key.Minus) && (this.zoom += 8),
+                t.Y(m.Key.Zero) && (this.zoom = a.dt()),
                 this.zoom = s.clamp(this.zoom, .5, 400);
                 var r = a.pos.x.toFixed(2)
                   , o = a.pos.y.toFixed(2);
@@ -60516,7 +60596,7 @@ webpackJsonp([0], {
                 i.flareContainer.rotation = u - Math.PI / 2,
                 i.trailContainer.rotation = u - Math.PI / 2,
                 i.layer = e.layer;
-                var h = t.oe(i.playerId);
+                var h = t.ne(i.playerId);
                 h && 2 & h.layer && (i.layer |= 2);
                 var g = o.tracerColors[l.tracerColor]
                   , y = g.regular;
@@ -60536,7 +60616,7 @@ webpackJsonp([0], {
                 i.trailContainer.visible = !0
             },
             l: function(e, t, a, i, r, o, c, d) {
-                for (var p = (t.$e.m(),
+                for (var p = (t.et.m(),
                 0); p < this.bullets.length; p++) {
                     var u = this.bullets[p];
                     if (u.collided && (u.flareScale = s.max(u.flareScale - .5 * e, 0),
@@ -60589,7 +60669,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            Ae: i
+            De: i
         }
     },
     f2372804: function(e, t, a) {
@@ -61675,7 +61755,7 @@ webpackJsonp([0], {
                 for (var e = 0; e < this.planes.length; e++)
                     this.planes[e].o(this.audioManager)
             },
-            gt: function(e) {
+            yt: function(e) {
                 for (var t = 0; t < this.planes.length; t++)
                     this.planes[t].dirty = !0;
                 for (var a = 0; a < e.length; a++) {
@@ -61686,7 +61766,7 @@ webpackJsonp([0], {
                             break
                         }
                     }
-                    r || (r = this.Pt(i)),
+                    r || (r = this.Tt(i)),
                     r.dirty = !1,
                     r.dropDeployed = i.dropDeployed
                 }
@@ -61695,7 +61775,7 @@ webpackJsonp([0], {
                     l.active && l.dirty && l.o(this.audioManager)
                 }
             },
-            Pt: function(e) {
+            Tt: function(e) {
                 for (var t = null, a = 0; a < this.planes.length; a++)
                     if (!this.planes[a].active) {
                         t = this.planes[a];
@@ -61744,7 +61824,7 @@ webpackJsonp([0], {
                         var u = t.pointToScreen(d.pos)
                           , h = t.pixels(d.rad / t.ppu)
                           , g = d.alpha;
-                        1 == a.layer ? g = 0 : (a.q.scopedIn || 1 & a.layer) && (g = .15),
+                        1 == a.layer ? g = 0 : (a.U.scopedIn || 1 & a.layer) && (g = .15),
                         d.renderAlpha = l.lerp(3 * e, d.renderAlpha, g),
                         d.sprite.position.set(u.x, u.y),
                         d.sprite.scale.set(h, h),
@@ -61896,8 +61976,8 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            He: i
+            Ke: i
         }
     }
 }, ["c99e6613"]);
-//# sourceMappingURL=app.eca5276a.js.map
+//# sourceMappingURL=app.d1b16191.js.map

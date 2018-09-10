@@ -363,7 +363,7 @@ var codeInjector = (function(){
 				if(opt.options !== undefined) {
 					options = opt.options;	
 				} else options = null;
-			});	
+			});
 
 			chrome.storage.local.get(['appCode'], function(appCode) {
 				if(appCode.appCode === undefined) {
