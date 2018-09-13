@@ -18,6 +18,7 @@ This is a Surviv.io cheat loaded as a Chrome extension. It was originally develo
 * Auto heal
 * Auto fire(Just press the left mouse button)
 * Planes tracking + visibility of air drop on minimap has been extended
+* autoDodge [beta]
 
 ### :information_source: Instructions
 
