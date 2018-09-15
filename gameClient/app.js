@@ -341,24 +341,24 @@ webpackJsonp([0], {
         a("af8ba00f"),
         a("753d6e4b"));
         i.prototype = {
-            a: function() {},
-            o: function() {
+            t: function() {},
+            a: function() {
                 this.particle.fadeOut(),
                 this.particle = null
             },
-            n: function(e, t, a, i) {
+            o: function(e, t, a, i) {
                 this.type = e.type,
                 this.pos = c.copy(e.pos),
                 this.rad = e.rad,
                 t && (this.layer = e.layer),
                 a && (this.particle = i.smokeBarn.allocParticle(),
-                this.particle.a(this.pos, this.rad, this.layer)),
+                this.particle.t(this.pos, this.rad, this.layer)),
                 this.particle.posTarget = c.copy(this.pos),
                 this.particle.radTarget = this.rad
             }
         },
         r.prototype = {
-            a: function(e, t, a) {
+            t: function(e, t, a) {
                 this.pos = c.copy(e),
                 this.posTarget = c.copy(this.pos),
                 this.rad = t,
@@ -388,8 +388,8 @@ webpackJsonp([0], {
                 e.zIdx = this.zIdx--,
                 e
             },
-            l: function(e, t, a, i, r) {
-                for (var o = this.e.m(), n = 0; n < o.length; n++)
+            n: function(e, t, a, i, r) {
+                for (var o = this.e.l(), n = 0; n < o.length; n++)
                     o[n].active;
                 for (var c = 0; c < this.particles.length; c++) {
                     var d = this.particles[c];
@@ -417,7 +417,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            c: o
+            m: o
         }
     },
     "0c8ffd27": function(e, t, a) {
@@ -435,12 +435,12 @@ webpackJsonp([0], {
           , m = a("c2a798c8");
         a("af8ba00f"),
         i.prototype = {
-            a: function() {
+            t: function() {
                 this.isNew = !1,
                 this.smokeEmitter = null,
                 this.img = ""
             },
-            o: function() {
+            a: function() {
                 this.sprite.visible = !1,
                 this.sprite.parent && this.sprite.parent.removeChild(this.sprite),
                 this.isDoor && this.door.casingSprite && (this.door.casingSprite.parent && this.door.casingSprite.parent.removeChild(this.door.casingSprite),
@@ -448,7 +448,7 @@ webpackJsonp([0], {
                 this.smokeEmitter && (this.smokeEmitter.stop(),
                 this.smokeEmitter = null)
             },
-            n: function(e, t, a, i) {
+            o: function(e, t, a, i) {
                 t && (this.type = e.type,
                 this.layer = e.layer,
                 this.healthT = e.healthT,
@@ -550,7 +550,7 @@ webpackJsonp([0], {
                     object: ""
                 } : null
             },
-            l: function(e, t, a, i, r, c) {
+            n: function(e, t, a, i, r, c) {
                 if (this.isButton) {
                     var d = this.button;
                     if (d.seq != d.seqOld) {
@@ -2193,7 +2193,7 @@ webpackJsonp([0], {
             }
         };
         n.prototype = {
-            a: function(e, t, a, i, n, s, l, c) {
+            t: function(e, t, a, i, n, s, l, c) {
                 var d = u[t];
                 this.active = !0,
                 this.ticker = 0,
@@ -2225,7 +2225,7 @@ webpackJsonp([0], {
                 this.sprite.tint = o(d.color),
                 this.sprite.visible = !1
             },
-            o: function() {
+            a: function() {
                 this.active = !1,
                 this.sprite.visible = !1
             },
@@ -2234,7 +2234,7 @@ webpackJsonp([0], {
             }
         },
         s.prototype = {
-            a: function(e, t, a, i, r, o, n) {
+            t: function(e, t, a, i, r, o, n) {
                 this.active = !0,
                 this.enabled = !0,
                 this.type = e,
@@ -2248,7 +2248,7 @@ webpackJsonp([0], {
                 this.spawnCount = 0,
                 this.parent = n
             },
-            o: function() {
+            a: function() {
                 this.active = !1
             },
             stop: function() {
@@ -2256,7 +2256,7 @@ webpackJsonp([0], {
             }
         },
         l.prototype = {
-            o: function() {
+            a: function() {
                 for (var e = 0; e < this.particles.length; e++) {
                     var t = this.particles[e].sprite;
                     t.parent && t.parent.removeChild(t),
@@ -2275,7 +2275,7 @@ webpackJsonp([0], {
                 this.particles.push(l)),
                 r = void 0 !== r ? r : 1,
                 o = void 0 !== o ? o : Math.random() * Math.PI * 2,
-                l.a(this.renderer, e, t, a, i, r, o, s),
+                l.t(this.renderer, e, t, a, i, r, o, s),
                 l
             },
             addEmitter: function(e, t, a, i, r, o, n) {
@@ -2286,10 +2286,10 @@ webpackJsonp([0], {
                     }
                 return l || (l = new s,
                 this.emitters.push(l)),
-                l.a(e, t, a, i, r, o, n),
+                l.t(e, t, a, i, r, o, n),
                 l
             },
-            l: function(e, t, a) {
+            n: function(e, t, a) {
                 for (var i = 0; i < this.emitters.length; i++) {
                     var o = this.emitters[i];
                     if (o.active && o.enabled) {
@@ -2306,7 +2306,7 @@ webpackJsonp([0], {
                             o.nextSpawn += r(n.rate),
                             o.spawnCount++
                         }
-                        o.ticker >= o.duration && o.o()
+                        o.ticker >= o.duration && o.a()
                     }
                 }
                 for (var g = 0; g < this.particles.length; g++) {
@@ -2330,13 +2330,13 @@ webpackJsonp([0], {
                         y.sprite.rotation = y.rot,
                         y.sprite.alpha = b,
                         y.sprite.visible = !0,
-                        x >= 1 && y.o()
+                        x >= 1 && y.a()
                     }
                 }
             }
         },
         e.exports = {
-            d: l
+            c: l
         }
     },
     "14a25ec1": function(e, t, a) {
@@ -3247,7 +3247,7 @@ webpackJsonp([0], {
             this.sprite.visible = !1
         }
         function r() {
-            this.p = new m.Pool(i)
+            this.d = new m.Pool(i)
         }
         var o = a("80ac57a6")
           , n = a("6b42806d")
@@ -3257,13 +3257,13 @@ webpackJsonp([0], {
         a("ce29f17f"),
         a("753d6e4b"));
         i.prototype = {
-            a: function() {
+            t: function() {
                 this.imgScale = 1
             },
-            o: function() {
+            a: function() {
                 this.sprite.visible = !1
             },
-            n: function(e, t, a, i) {
+            o: function(e, t, a, i) {
                 var r = s.Defs[e.type];
                 if (this.type = e.type,
                 this.pos = l.copy(e.pos),
@@ -3290,8 +3290,8 @@ webpackJsonp([0], {
             }
         },
         r.prototype = {
-            l: function(e, t, a) {
-                for (var i = this.p.m(), r = 0; r < i.length; r++) {
+            n: function(e, t, a) {
+                for (var i = this.d.l(), r = 0; r < i.length; r++) {
                     var o = i[r];
                     if (o.active) {
                         var n = a.pointToScreen(o.pos)
@@ -3305,7 +3305,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            u: r
+            p: r
         }
     },
     "1901e2d9": function(e, t, a) {
@@ -3468,7 +3468,7 @@ webpackJsonp([0], {
             this.pos = o.create(0, 0),
             this.ppu = 16,
             this.zoom = 1.5,
-            this.f = 1.5,
+            this.u = 1.5,
             this.screenWidth = 1,
             this.screenHeight = 1,
             this.shakeEnabled = !0,
@@ -3512,7 +3512,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            _: i
+            f: i
         }
     },
     "26be8056": function(e, t, a) {
@@ -3706,7 +3706,7 @@ webpackJsonp([0], {
                 if (r.length > 0) {
                     var n = r.shift();
                     _() && console.log("Joining game", n, t.zone),
-                    e.k(t.data, n, o)
+                    e._(t.data, n, o)
                 } else
                     a()
             }(n)
@@ -3725,8 +3725,8 @@ webpackJsonp([0], {
           , I = (a("f398b7c7"),
         document.createElement("canvas"));
         e.exports = {
-            I: i,
-            B: r,
+            k: i,
+            I: r,
             getParameterByName: o,
             getCookie: n,
             sanitizeNameInput: s,
@@ -3759,7 +3759,7 @@ webpackJsonp([0], {
             this.sprite.visible = !1
         }
         function r() {
-            this.O = new d.Pool(i)
+            this.B = new d.Pool(i)
         }
         var o = a("80ac57a6")
           , n = a("6b42806d")
@@ -3770,7 +3770,7 @@ webpackJsonp([0], {
           , d = (a("af8ba00f"),
         a("753d6e4b"));
         i.prototype = {
-            a: function() {
+            t: function() {
                 this.playedLandFx = !1,
                 this.landed = !1,
                 this.fallInstance = null,
@@ -3780,12 +3780,12 @@ webpackJsonp([0], {
                 this.isNew = !1,
                 this.fallTicker = 0
             },
-            o: function() {
+            a: function() {
                 this.fallInstance && this.fallInstance.stop(),
                 this.fallInstance = null,
                 this.sprite.visible = !1
             },
-            n: function(e, t, a, i) {
+            o: function(e, t, a, i) {
                 a && (this.isNew = !0,
                 this.fallTicker = e.fallT * s.airdrop.fallTime),
                 t && (this.pos = c.copy(e.pos)),
@@ -3793,12 +3793,12 @@ webpackJsonp([0], {
             }
         },
         r.prototype = {
-            o: function() {
-                for (var e = this.O.m(), t = 0; t < e.length; t++)
-                    e[t].o()
+            a: function() {
+                for (var e = this.B.l(), t = 0; t < e.length; t++)
+                    e[t].a()
             },
-            l: function(e, t, a, i, r, o, d) {
-                for (var p = this.O.m(), u = 0; u < p.length; u++) {
+            n: function(e, t, a, i, r, o, d) {
+                for (var p = this.B.l(), u = 0; u < p.length; u++) {
                     var h = p[u];
                     if (h.active) {
                         h.fallTicker += e;
@@ -3867,7 +3867,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            j: r
+            O: r
         }
     },
     "29d4cdc4": function(e, t, a) {
@@ -5282,246 +5282,257 @@ webpackJsonp([0], {
             (t > 0 || a > 0) && (r += a + "m "),
             r += i + "s"
         }
-        function o(e, t, a, r, o, n, c, u, x) {
-            var w = this;
+        function o(e) {
+            C++;
+            var t = Date.now()
+              , a = e.get("gamesPlayedTime");
+            (!a || t - a > 6e4) && (e.set("gamesPlayed", 0),
+            e.set("gamesPlayedTime", t));
+            var i = (e.get("gamesPlayed") || 0) + 1;
+            e.set("gamesPlayed", i),
+            v.storeGeneric("gamesThisSession", C),
+            v.storeGeneric("gamesToday", i)
+        }
+        function n(e, t, a, r, o, n, s, d, h) {
+            var f = this;
             this.game = e,
             this.particleBarn = r,
             this.localization = o,
-            this.touch = c,
-            this.inputBinds = u,
-            this.inputBindUi = x,
-            this.gameElem = l("#ui-game"),
-            this.statsMain = l("#ui-stats"),
-            this.statsElem = l("#ui-stats-bg"),
-            this.statsContents = l("#ui-stats-contents-inner"),
-            this.statsHeader = l("#ui-stats-header"),
-            this.statsInfoBox = l("#ui-stats-info-box"),
-            this.statsOptions = l("#ui-stats-options"),
-            this.statsAds = l(".ui-stats-ad-container"),
-            this.mainMedRectAd = l("#survivio_300x250_main"),
-            this.mainLeaderBotAd = l("#survivio_728x90_main"),
-            this.killElem = l("#ui-kills"),
-            this.killText = l("#ui-kill-text"),
-            this.killCount = l("#ui-kill-count"),
+            this.touch = s,
+            this.inputBinds = d,
+            this.inputBindUi = h,
+            this.gameElem = m("#ui-game"),
+            this.statsMain = m("#ui-stats"),
+            this.statsElem = m("#ui-stats-bg"),
+            this.statsContents = m("#ui-stats-contents-inner"),
+            this.statsHeader = m("#ui-stats-header"),
+            this.statsInfoBox = m("#ui-stats-info-box"),
+            this.statsOptions = m("#ui-stats-options"),
+            this.statsAds = m(".ui-stats-ad-container"),
+            this.mainMedRectAd = m("#survivio_300x250_main"),
+            this.mainLeaderBotAd = m("#survivio_728x90_main"),
+            this.killElem = m("#ui-kills"),
+            this.killText = m("#ui-kill-text"),
+            this.killCount = m("#ui-kill-count"),
             this.killTimeout = null,
-            this.escMenuElem = l("#ui-game-menu"),
+            this.escMenuElem = m("#ui-game-menu"),
             this.escMenuDisplayed = !1,
-            this.topLeft = l("#ui-top-left"),
-            this.topCenter = l("#ui-top-center-scopes"),
+            this.topLeft = m("#ui-top-left"),
+            this.topCenter = m("#ui-top-center-scopes"),
             this.waitingForPlayers = !0,
-            this.waitingText = l("#ui-waiting-text"),
+            this.waitingText = m("#ui-waiting-text"),
             this.spectating = !1,
             this.prevSpectatorCount = 0,
             this.spectatorCount = 0,
             this.spectatorCounterDisplayed = !1,
-            this.spectatorCounterContainer = l("#ui-spec-counter"),
-            this.spectatorCounter = l("#ui-spec-counter-number"),
-            this.spectateMode = l(".ui-spectate-mode"),
-            this.spectatedPlayerText = l("#ui-spectate-text"),
+            this.spectatorCounterContainer = m("#ui-spec-counter"),
+            this.spectatorCounter = m("#ui-spec-counter-number"),
+            this.spectateMode = m(".ui-spectate-mode"),
+            this.spectatedPlayerText = m("#ui-spectate-text"),
             this.spectatedPlayerName = "",
             this.spectatedPlayerId = null,
-            this.spectateModeStats = l("#ui-spectate-stats"),
-            this.spectateModeStatsData = l("#ui-spectate-stats-data"),
-            this.spectateOptionsWrapper = l("#ui-spectate-options-wrapper"),
-            this.rightCenter = l("#ui-right-center"),
-            this.playersAlive = l(".js-ui-players-alive"),
-            this.playerKills = l(".js-ui-player-kills"),
-            this.announcement = l("#ui-announcement"),
-            this.mapContainer = l("#ui-map-container"),
+            this.spectateModeStats = m("#ui-spectate-stats"),
+            this.spectateModeStatsData = m("#ui-spectate-stats-data"),
+            this.spectateOptionsWrapper = m("#ui-spectate-options-wrapper"),
+            this.rightCenter = m("#ui-right-center"),
+            this.playersAlive = m(".js-ui-players-alive"),
+            this.playerKills = m(".js-ui-player-kills"),
+            this.announcement = m("#ui-announcement"),
+            this.mapContainer = m("#ui-map-container"),
             this.mapContainerBottom = 52,
-            this.mapInfo = l("#ui-map-info"),
+            this.mapInfo = m("#ui-map-info"),
             this.mapInfoBottom = 218,
             this.gasState = {},
-            this.gasIcon = l("#ui-gas-icon"),
-            this.gasTimer = l("#ui-gas-timer"),
-            this.mapMinimizeButton = l("#ui-map-minimize"),
-            this.menuDisplayButton = l("#ui-menu-display"),
-            this.bottomCenterRight = l("#ui-bottom-center-right"),
-            l("#ui-map-wrapper").css("display", "block"),
-            l("#ui-team").css("display", "block"),
+            this.gasIcon = m("#ui-gas-icon"),
+            this.gasTimer = m("#ui-gas-timer"),
+            this.mapMinimizeButton = m("#ui-map-minimize"),
+            this.menuDisplayButton = m("#ui-menu-display"),
+            this.bottomCenterRight = m("#ui-bottom-center-right"),
+            m("#ui-map-wrapper").css("display", "block"),
+            m("#ui-team").css("display", "block"),
             this.curAction = {
-                type: y.None
+                type: x.None
             },
             this.displayMapDirty = !1,
             this.displayMapClear = !1,
-            l(".ui-map-expand").on("mousedown", function(e) {
+            m(".ui-map-expand").on("mousedown", function(e) {
                 e.stopPropagation()
             }),
-            l(".ui-map-expand").on("click", function(e) {
-                b.touch ? w.bigmapDisplayed || w.displayMapLarge() : b.layout == b.Layout.Lg && w.displayMapLarge(w.bigmapDisplayed)
+            m(".ui-map-expand").on("click", function(e) {
+                _.touch ? f.bigmapDisplayed || f.displayMapLarge() : _.layout == _.Layout.Lg && f.displayMapLarge(f.bigmapDisplayed)
             }),
-            l("#ui-map-minimize").on("mousedown", function(e) {
+            m("#ui-map-minimize").on("mousedown", function(e) {
                 e.stopPropagation()
             }),
-            l("#ui-map-minimize").on("click", function(e) {
+            m("#ui-map-minimize").on("click", function(e) {
                 e.stopPropagation(),
-                w.toggleMiniMap()
+                f.toggleMiniMap()
             }),
-            l("#ui-menu-display").on("click", function(e) {
+            m("#ui-menu-display").on("click", function(e) {
                 e.stopPropagation(),
-                w.toggleEscMenu()
+                f.toggleEscMenu()
             }),
-            this.bigmap = l("#big-map"),
-            this.bigmapCollision = l("#big-map-collision"),
-            this.moveStyleButton = l("#btn-game-move-style"),
+            this.bigmap = m("#big-map"),
+            this.bigmapCollision = m("#big-map-collision"),
+            this.moveStyleButton = m("#btn-game-move-style"),
             this.moveStyleButton.on("touchstart", function() {
-                c.toggleMoveStyle()
+                s.toggleMoveStyle()
             }),
-            this.aimStyleButton = l("#btn-game-aim-style"),
+            this.aimStyleButton = m("#btn-game-aim-style"),
             this.aimStyleButton.on("touchstart", function() {
-                c.toggleAimStyle()
+                s.toggleAimStyle()
             }),
-            l(document).on("keyup", function(e) {
+            m(document).on("keyup", function(e) {
                 var t = e.which || e.keyCode
-                  , a = w.inputBinds.getBind(p.Fullscreen);
-                a && t == a.code && !w.game.gameOver && z.toggleFullScreen()
+                  , a = f.inputBinds.getBind(u.Fullscreen);
+                a && t == a.code && !f.game.gameOver && M.toggleFullScreen()
             }),
             this.onTouchScreen = function(e) {
-                "cvs" == e.target.id && w.toggleEscMenu(!0)
+                "cvs" == e.target.id && f.toggleEscMenu(!0)
             }
             ,
-            l(document).on("touchstart", this.onTouchScreen),
-            this.bigmapClose = l("#big-map-close"),
+            m(document).on("touchstart", this.onTouchScreen),
+            this.bigmapClose = m("#big-map-close"),
             this.bigmapClose.on("touchend", function(e) {
                 e.stopPropagation(),
-                w.displayMapLarge(!0)
+                f.displayMapLarge(!0)
             }),
             this.bigmapClose.on("mousedown", function(e) {
                 e.stopPropagation()
             }),
             this.bigmapClose.on("click", function(e) {
                 e.stopPropagation(),
-                w.displayMapLarge(!0)
+                f.displayMapLarge(!0)
             }),
-            this.gameTabs = l(".ui-game-tab"),
-            this.gameTabBtns = l(".btn-game-tab-select"),
-            this.gameKeybindBtns = l(".btn-keybind-desc"),
+            this.gameTabs = m(".ui-game-tab"),
+            this.gameTabBtns = m(".btn-game-tab-select"),
+            this.gameKeybindBtns = m(".btn-keybind-desc"),
             this.currentGameTab = "settings",
             this.gameTabBtns.on("click", function(e) {
-                w.setCurrentGameTab(l(e.target).data("tab"))
+                f.setCurrentGameTab(m(e.target).data("tab"))
             }),
             this.setCurrentGameTab(this.currentGameTab),
-            this.fullScreenButton = l("#btn-game-fullscreen"),
+            this.fullScreenButton = m("#btn-game-fullscreen"),
             this.fullScreenButton.on("mousedown", function(e) {
                 e.stopPropagation()
             }),
             this.fullScreenButton.on("click", function() {
-                z.toggleFullScreen(),
-                w.toggleEscMenu()
+                M.toggleFullScreen(),
+                f.toggleEscMenu()
             }),
-            this.resumeButton = l("#btn-game-resume"),
+            this.resumeButton = m("#btn-game-resume"),
             this.resumeButton.on("mousedown", function(e) {
                 e.stopPropagation()
             }),
             this.resumeButton.on("click", function() {
-                w.toggleEscMenu()
+                f.toggleEscMenu()
             }),
-            l("#btn-spectate-quit").on("click", function() {
-                w.doQuitGame(!0)
+            m("#btn-spectate-quit").on("click", function() {
+                f.doQuitGame(!0)
             }),
-            l("#btn-game-quit").on("mousedown", function(e) {
+            m("#btn-game-quit").on("mousedown", function(e) {
                 e.stopPropagation()
             }),
-            l("#btn-game-quit").on("click", function() {
-                w.doQuitGame(!0)
+            m("#btn-game-quit").on("click", function() {
+                f.doQuitGame(!0)
             }),
-            this.specStatsButton = l("#btn-spectate-view-stats"),
+            this.specStatsButton = m("#btn-spectate-view-stats"),
             this.specStatsButton.on("click", function() {
-                w.toggleLocalStats()
+                f.toggleLocalStats()
             }),
             this.beginSpectating = !1,
             this.specNext = !1,
             this.specPrev = !1,
-            this.specNextButton = l("#btn-spectate-next-player"),
+            this.specNextButton = m("#btn-spectate-next-player"),
             this.specNextButton.on("click", function() {
-                w.specNext = !0
+                f.specNext = !0
             }),
-            this.specPrevButton = l("#btn-spectate-prev-player"),
+            this.specPrevButton = m("#btn-spectate-prev-player"),
             this.specPrevButton.on("click", function() {
-                w.specPrev = !0
+                f.specPrev = !0
             }),
-            this.interactionElems = l("#ui-interaction-press, #ui-interaction"),
+            this.interactionElems = m("#ui-interaction-press, #ui-interaction"),
             this.interactionTouched = !1,
             this.interactionElems.css("pointer-events", "auto"),
             this.interactionElems.on("touchstart", function(e) {
                 e.stopPropagation(),
-                w.interactionTouched = !0
+                f.interactionTouched = !0
             }),
-            this.reloadElems = l("#ui-current-clip, #ui-remaining-ammo, #ui-reload-button"),
+            this.reloadElems = m("#ui-current-clip, #ui-remaining-ammo, #ui-reload-button"),
             this.reloadTouched = !1,
             this.reloadElems.css("pointer-events", "auto"),
             this.reloadElems.on("touchstart", function(e) {
                 e.stopPropagation(),
-                w.reloadTouched = !0
+                f.reloadTouched = !0
             }),
-            this.healthRed = new s(255,0,0),
-            this.healthDarkpink = new s(255,45,45),
-            this.healthLightpink = new s(255,112,112),
-            this.healthWhite = new s(255,255,255),
-            this.healthGrey = new s(179,179,179),
+            this.healthRed = new l(255,0,0),
+            this.healthDarkpink = new l(255,45,45),
+            this.healthLightpink = new l(255,112,112),
+            this.healthWhite = new l(255,255,255),
+            this.healthGrey = new l(179,179,179),
             this.minimapDisplayed = !0,
             this.visibilityMode = 0,
             this.hudVisible = !0,
-            this.gasRenderer = new S(n,0),
-            this.gasSafeZoneRenderer = new k;
-            var _ = this;
+            this.gasRenderer = new k(n,0),
+            this.gasSafeZoneRenderer = new z;
+            var b = this;
             this.weapsDirty = !1,
-            this.weapSwitches = l("#ui-weapon-id-1, #ui-weapon-id-2"),
-            this.weapNoSwitches = l("#ui-weapon-id-3, #ui-weapon-id-4"),
+            this.weapSwitches = m("#ui-weapon-id-1, #ui-weapon-id-2"),
+            this.weapNoSwitches = m("#ui-weapon-id-3, #ui-weapon-id-4"),
             this.weapDraggedId = 0,
             this.swapWeapSlots = !1,
             this.weapDraggedDiv = null,
             this.weapDragging = !1,
             this.weapDropped = !1,
             this.resetWeapSlotStyling = function() {
-                _.weapDraggedDiv && (_.weapSwitches.css({
+                b.weapDraggedDiv && (b.weapSwitches.css({
                     left: "",
                     top: ""
                 }),
-                l("#ui-game").css({
+                m("#ui-game").css({
                     "pointer-events": ""
                 })),
-                _.weapDraggedDiv = null,
-                _.weapDragging = !1,
-                _.weapDropped = !1,
-                _.weapSwitches.hasClass("ui-weapon-dragged") && _.weapSwitches.removeClass("ui-weapon-dragged"),
-                _.weapNoSwitches.hasClass("ui-outline-hover") || _.weapNoSwitches.addClass("ui-outline-hover")
+                b.weapDraggedDiv = null,
+                b.weapDragging = !1,
+                b.weapDropped = !1,
+                b.weapSwitches.hasClass("ui-weapon-dragged") && b.weapSwitches.removeClass("ui-weapon-dragged"),
+                b.weapNoSwitches.hasClass("ui-outline-hover") || b.weapNoSwitches.addClass("ui-outline-hover")
             }
             ,
-            b.touch || (this.weapSwitches.on("mousedown", function(e) {
-                0 == e.button && (_.weapDraggedDiv = l(this),
-                _.weapDraggedId = l(this).data("slot"))
+            _.touch || (this.weapSwitches.on("mousedown", function(e) {
+                0 == e.button && (b.weapDraggedDiv = m(this),
+                b.weapDraggedId = m(this).data("slot"))
             }),
-            l("#ui-game").on("mousemove", function(e) {
-                _.weapDraggedDiv && !_.weapDropped && (_.weapDragging ? (_.weapDraggedDiv.css({
+            m("#ui-game").on("mousemove", function(e) {
+                b.weapDraggedDiv && !b.weapDropped && (b.weapDragging ? (b.weapDraggedDiv.css({
                     left: e.pageX - 80,
                     top: e.pageY - 30
                 }),
-                _.weapDraggedDiv.addClass("ui-weapon-dragged")) : (l("#ui-game").css({
+                b.weapDraggedDiv.addClass("ui-weapon-dragged")) : (m("#ui-game").css({
                     "pointer-events": "initial"
                 }),
-                _.weapNoSwitches.removeClass("ui-outline-hover"),
-                _.weapDragging = !0))
+                b.weapNoSwitches.removeClass("ui-outline-hover"),
+                b.weapDragging = !0))
             }),
-            l("#ui-game, #ui-weapon-id-1, #ui-weapon-id-2").on("mouseup", function(e) {
-                0 == e.button && null != _.weapDraggedDiv && (_.weapSwitches.each(function() {
-                    var e = l(this).data("slot");
-                    l(this).is(":hover") && _.weapDraggedId != e && (_.swapWeapSlots = !0,
-                    _.weapDropped = !0)
+            m("#ui-game, #ui-weapon-id-1, #ui-weapon-id-2").on("mouseup", function(e) {
+                0 == e.button && null != b.weapDraggedDiv && (b.weapSwitches.each(function() {
+                    var e = m(this).data("slot");
+                    m(this).is(":hover") && b.weapDraggedId != e && (b.swapWeapSlots = !0,
+                    b.weapDropped = !0)
                 }),
-                _.swapWeapSlots || _.resetWeapSlotStyling())
+                b.swapWeapSlots || b.resetWeapSlotStyling())
             })),
-            this.container = new m.Container,
-            this.container.mask = new m.Graphics,
+            this.container = new c.Container,
+            this.container.mask = new c.Graphics,
             this.display = {
                 gas: this.gasRenderer.display,
                 gasSafeZone: this.gasSafeZoneRenderer.display,
-                teammates: new m.Container,
-                player: new m.Container,
-                border: new m.Graphics
+                teammates: new c.Container,
+                player: new c.Container,
+                border: new c.Graphics
             },
-            this.mapSprite = new m.Sprite(m.Texture.EMPTY),
-            this.mapSprite.anchor = new m.Point(.5,.5),
+            this.mapSprite = new c.Sprite(c.Texture.EMPTY),
+            this.mapSprite.anchor = new c.Point(.5,.5),
             this.container.addChild(this.mapSprite),
             this.container.addChild(this.display.gas),
             this.container.addChild(this.display.gasSafeZone),
@@ -5532,89 +5543,89 @@ webpackJsonp([0], {
             this.mapWidth = 0,
             this.bigmapDisplayed = !1,
             this.screenScaleFactor = 1;
-            var v = (z.getScreenDimensions().width,
+            var v = (M.getScreenDimensions().width,
             this.getMinimapMargin())
-              , M = this.getMinimapSize();
-            this.minimapPos = f.create(v + M / 2, e.N.screenHeight - M / 2 - v),
-            this.playerOuter = m.Sprite.fromImage("player-map-outer.img"),
-            this.playerOuter.anchor = new m.Point(.5,.5),
-            this.playerOuterBaseScale = new m.Point(b.layout == b.Layout.Sm ? .25 : .3,b.layout == b.Layout.Sm ? .25 : .3),
+              , S = this.getMinimapSize();
+            this.minimapPos = w.create(v + S / 2, e.j.screenHeight - S / 2 - v),
+            this.playerOuter = c.Sprite.fromImage("player-map-outer.img"),
+            this.playerOuter.anchor = new c.Point(.5,.5),
+            this.playerOuterBaseScale = new c.Point(_.layout == _.Layout.Sm ? .25 : .3,_.layout == _.Layout.Sm ? .25 : .3),
             this.playerOuter.scale = this.playerOuterBaseScale,
             this.playerOuter.tint = 16777215,
-            this.player = m.Sprite.fromImage("player-map-inner.img"),
-            this.player.anchor = new m.Point(.5,.5),
-            this.playerBaseScale = new m.Point(b.layout == b.Layout.Sm ? .15 : .2,b.layout == b.Layout.Sm ? .15 : .2),
+            this.player = c.Sprite.fromImage("player-map-inner.img"),
+            this.player.anchor = new c.Point(.5,.5),
+            this.playerBaseScale = new c.Point(_.layout == _.Layout.Sm ? .15 : .2,_.layout == _.Layout.Sm ? .15 : .2),
             this.player.scale = this.playerBaseScale,
             this.player.tint = 16777215,
             this.dead = !1,
             this.audioManager = t,
             this.actionSoundInstance = !1,
-            this.muteButton = l("#ui-mute-ingame"),
+            this.muteButton = m("#ui-mute-ingame"),
             this.muteButtonImage = this.muteButton.find("img"),
             this.muteOffImg = "audio-off.img",
             this.muteOnImg = "audio-on.img";
-            var T = this.audioManager.mute;
-            this.muteButtonImage.attr("src", T ? this.muteOffImg : this.muteOnImg),
+            var P = this.audioManager.mute;
+            this.muteButtonImage.attr("src", P ? this.muteOffImg : this.muteOnImg),
             this.muteButton.on("mousedown", function(e) {
                 e.stopPropagation()
             }),
             this.muteButton.on("click", function(e) {
-                var t = w.audioManager.muteToggle();
-                w.muteButtonImage.attr("src", t ? w.muteOffImg : w.muteOnImg),
+                var t = f.audioManager.muteToggle();
+                f.muteButtonImage.attr("src", t ? f.muteOffImg : f.muteOnImg),
                 t = null
             }),
             this.pieTimer = a,
             this.displayingStats = !1,
-            this.teamMemberHealthBarWidth = parseInt(l(".ui-team-member-health").find(".ui-bar-inner").css("width")),
+            this.teamMemberHealthBarWidth = parseInt(m(".ui-team-member-health").find(".ui-bar-inner").css("width")),
             this.teamMemberHeight = 48,
             this.teamPlayerCount = 0,
             this.teamSelectors = [];
             for (var C = 0; C < 4; C++) {
-                var I, A = this.topLeft, D = C, E = m.Sprite.fromImage("ping-map-pulse.img");
+                var I, A = this.topLeft, D = C, E = c.Sprite.fromImage("ping-map-pulse.img");
                 E.anchor = this.playerOuter.anchor,
-                E.scale = new m.Point(0,0),
-                E.tint = d.teamColors[C],
+                E.scale = new c.Point(0,0),
+                E.tint = p.teamColors[C],
                 E.visible = !1,
                 this.display.teammates.addChild(E);
-                var B = m.Sprite.fromImage("ping-map-coming.img");
+                var B = c.Sprite.fromImage("ping-map-coming.img");
                 B.anchor = this.player.anchor,
                 B.scale = this.playerBaseScale,
-                B.tint = d.teamColors[C],
+                B.tint = p.teamColors[C],
                 B.visible = !1,
                 this.display.teammates.addChild(B);
-                var O = m.Sprite.fromImage("ping-map-danger.img");
+                var O = c.Sprite.fromImage("ping-map-danger.img");
                 O.anchor = this.player.anchor,
                 O.scale = this.playerBaseScale,
-                O.tint = d.teamColors[C],
+                O.tint = p.teamColors[C],
                 O.visible = !1,
                 this.display.teammates.addChild(O);
-                var F = m.Sprite.fromImage("ping-map-help.img");
+                var F = c.Sprite.fromImage("ping-map-help.img");
                 F.anchor = this.player.anchor,
                 F.scale = this.playerBaseScale,
-                F.tint = d.teamColors[C],
+                F.tint = p.teamColors[C],
                 F.visible = !1,
                 this.display.teammates.addChild(F);
-                var L = m.Sprite.fromImage("player-map-outer.img");
+                var L = c.Sprite.fromImage("player-map-outer.img");
                 L.anchor = this.playerOuter.anchor,
                 L.scale = this.playerOuterBaseScale,
                 L.tint = this.playerOuter.tint,
                 L.visible = !1,
                 this.display.teammates.addChild(L);
-                var R = m.Sprite.fromImage("player-map-inner.img");
+                var R = c.Sprite.fromImage("player-map-inner.img");
                 R.anchor = this.player.anchor,
                 R.scale = this.playerBaseScale,
-                R.tint = d.teamColors[C],
+                R.tint = p.teamColors[C],
                 R.visible = !1,
                 this.display.teammates.addChild(R),
                 this.teamSelectors.push({
                     teamNameHtml: "",
-                    teamId: l(A).find("[data-id=" + D + "]"),
+                    teamId: m(A).find("[data-id=" + D + "]"),
                     teamIdDisplayed: !1,
-                    teamName: l(A).find("[data-id=" + D + "]").find(".ui-team-member-name"),
-                    teamIcon: l(A).find("[data-id=" + D + "]").find(".ui-team-member-icon"),
-                    teamStatus: l(A).find("[data-id=" + D + "]").find(".ui-team-member-status"),
-                    teamHealthInner: l(A).find("[data-id=" + D + "]").find(".ui-health-actual"),
-                    teamHealthDepleted: l(A).find("[data-id=" + D + "]").find(".ui-health-depleted"),
+                    teamName: m(A).find("[data-id=" + D + "]").find(".ui-team-member-name"),
+                    teamIcon: m(A).find("[data-id=" + D + "]").find(".ui-team-member-icon"),
+                    teamStatus: m(A).find("[data-id=" + D + "]").find(".ui-team-member-status"),
+                    teamHealthInner: m(A).find("[data-id=" + D + "]").find(".ui-health-actual"),
+                    teamHealthDepleted: m(A).find("[data-id=" + D + "]").find(".ui-health-depleted"),
                     prevHealth: 0,
                     prevStatus: {
                         disconnected: !1,
@@ -5623,28 +5634,28 @@ webpackJsonp([0], {
                     },
                     indicators: {
                         main: {
-                            elem: l("#ui-team-indicators").find(".ui-indicator-main[data-id=" + D + "]"),
+                            elem: m("#ui-team-indicators").find(".ui-indicator-main[data-id=" + D + "]"),
                             displayed: !1
                         }
                     },
                     mapSprites: (I = {
                         outer: {
                             sprite: L,
-                            position: f.create(0, 0),
+                            position: w.create(0, 0),
                             usePlayerPosition: !0,
                             showOnDeath: !1,
                             displayed: !0
                         },
                         inner: {
                             sprite: R,
-                            position: f.create(0, 0),
+                            position: w.create(0, 0),
                             usePlayerPosition: !0,
                             showOnDeath: !0,
                             displayed: !0
                         },
                         pingPulseWave: {
                             sprite: E,
-                            position: f.create(0, 0),
+                            position: w.create(0, 0),
                             usePlayerPosition: !1,
                             showOnDeath: !0,
                             displayed: !1,
@@ -5655,27 +5666,27 @@ webpackJsonp([0], {
                             maxLife: 0
                         }
                     },
-                    i(I, h.Coming, {
+                    i(I, g.Coming, {
                         sprite: B,
-                        position: f.create(0, 0),
+                        position: w.create(0, 0),
                         usePlayerPosition: !1,
                         showOnDeath: !0,
                         displayed: !1,
                         life: 0,
                         maxLife: 0
                     }),
-                    i(I, h.Danger, {
+                    i(I, g.Danger, {
                         sprite: O,
-                        position: f.create(0, 0),
+                        position: w.create(0, 0),
                         usePlayerPosition: !1,
                         showOnDeath: !0,
                         displayed: !1,
                         life: 0,
                         maxLife: 0
                     }),
-                    i(I, h.Help, {
+                    i(I, g.Help, {
                         sprite: F,
-                        position: f.create(0, 0),
+                        position: w.create(0, 0),
                         usePlayerPosition: !1,
                         showOnDeath: !0,
                         displayed: !1,
@@ -5688,24 +5699,24 @@ webpackJsonp([0], {
             }
             this.airdropSprites = [],
             this.airdropSpriteIdx = 0;
-            for (var j = 0; j < P; j++) {
-                var N = m.Sprite.fromImage("ping-map-airdrop.img");
+            for (var j = 0; j < T; j++) {
+                var N = c.Sprite.fromImage("ping-map-airdrop.img");
                 N.anchor = this.player.anchor,
                 N.scale = this.playerBaseScale,
-                N.tint = g[h.Airdrop].tint,
+                N.tint = y[g.Airdrop].tint,
                 N.alpha = 0,
                 N.visible = !1,
                 this.display.teammates.addChild(N);
-                var q = m.Sprite.fromImage("ping-map-pulse.img");
+                var q = c.Sprite.fromImage("ping-map-pulse.img");
                 q.anchor = this.playerOuter.anchor,
-                q.scale = new m.Point(0,0),
-                q.tint = g[h.Airdrop].tint,
+                q.scale = new c.Point(0,0),
+                q.tint = y[g.Airdrop].tint,
                 q.alpha = 0,
                 q.visible = !1,
                 this.display.teammates.addChild(q);
                 var U = {
                     sprite: N,
-                    position: f.create(0, 0),
+                    position: w.create(0, 0),
                     usePlayerPosition: !1,
                     showOnDeath: !0,
                     displayed: !1,
@@ -5714,7 +5725,7 @@ webpackJsonp([0], {
                 }
                   , G = {
                     sprite: q,
-                    position: f.create(0, 0),
+                    position: w.create(0, 0),
                     usePlayerPosition: !1,
                     showOnDeath: !0,
                     displayed: !1,
@@ -5729,15 +5740,15 @@ webpackJsonp([0], {
                     pingPulseWave: G
                 })
             }
-            this.a()
+            this.t()
         }
-        function n(e, t, a, i) {
+        function s(e, t, a, i) {
             var r = e
               , o = t
               , n = r + (o - r) / a * i;
             return Math.floor(n)
         }
-        function s(e, t, a) {
+        function l(e, t, a) {
             var i, r, o;
             !function(e, t, a) {
                 i = e,
@@ -5752,74 +5763,75 @@ webpackJsonp([0], {
                 }
             }
         }
-        var l = a("8ee62bea")
-          , m = a("80ac57a6")
-          , c = a("34e32c48")
-          , d = (a("6b42806d"),
+        var m = a("8ee62bea")
+          , c = a("80ac57a6")
+          , d = a("34e32c48")
+          , p = (a("6b42806d"),
         a("989ad62a"))
-          , p = d.Input
-          , u = a("b198b546")
-          , h = u.PingType
-          , g = u.PingData
-          , y = d.Action
-          , x = d.GasMode
-          , f = (a("300e2704"),
+          , u = p.Input
+          , h = a("b198b546")
+          , g = h.PingType
+          , y = h.PingData
+          , x = p.Action
+          , f = p.GasMode
+          , w = (a("300e2704"),
         a("c2a798c8"))
-          , w = a("10899aea")
-          , b = (a("1901e2d9"),
+          , b = a("10899aea")
+          , _ = (a("1901e2d9"),
         a("2bb110d0"),
         a("ce29f17f"))
-          , _ = a("f398b7c7")
-          , v = a("a7f094a3")
-          , S = v.GasRenderer
-          , k = v.GasSafeZoneRenderer
-          , z = a("26be8056")
-          , M = (a("d306eab6"),
+          , v = a("f398b7c7")
+          , S = a("a7f094a3")
+          , k = S.GasRenderer
+          , z = S.GasSafeZoneRenderer
+          , M = a("26be8056")
+          , P = (a("d306eab6"),
         a("119e8c4c"),
         a("6e43d1d7"))
-          , P = 20;
-        o.prototype = {
-            o: function() {
+          , T = 20
+          , C = 0;
+        n.prototype = {
+            a: function() {
                 this.gasRenderer.free(),
                 this.clearUI(),
-                l(document).off("keyup"),
-                l(".ui-map-expand").off("mousedown"),
-                l(".ui-map-expand").off("click"),
-                l("#ui-map-minimize").off("mousedown"),
-                l("#ui-map-minimize").off("click"),
-                l("#ui-menu-display").off("click"),
+                m(document).off("keyup"),
+                m(".ui-map-expand").off("mousedown"),
+                m(".ui-map-expand").off("click"),
+                m("#ui-map-minimize").off("mousedown"),
+                m("#ui-map-minimize").off("click"),
+                m("#ui-menu-display").off("click"),
                 this.muteButton.off("mousedown"),
                 this.muteButton.off("click"),
                 this.fullScreenButton.off("mousedown"),
                 this.fullScreenButton.off("click"),
                 this.resumeButton.off("mousedown"),
                 this.resumeButton.off("click"),
-                l("#btn-spectate-quit").off("click"),
-                l("#btn-game-quit").off("mousedown"),
-                l("#btn-game-quit").off("click"),
+                m("#btn-spectate-quit").off("click"),
+                m("#btn-game-quit").off("mousedown"),
+                m("#btn-game-quit").off("click"),
                 this.specStatsButton.off("click"),
                 this.specPrevButton.off("click"),
                 this.specNextButton.off("click"),
                 this.bigmapClose.off("mousedown"),
                 this.bigmapClose.off("click"),
                 this.weapSwitches.off("mousedown"),
-                l("#ui-game").off("mousemove"),
-                l("#ui-game").off("mouseup"),
-                l("#ui-weapon-id-1").off("mouseup"),
-                l("#ui-weapon-id-2").off("mouseup"),
+                m("#ui-game").off("mousemove"),
+                m("#ui-game").off("mouseup"),
+                m("#ui-weapon-id-1").off("mouseup"),
+                m("#ui-weapon-id-2").off("mouseup"),
                 this.moveStyleButton.off("touchstart"),
                 this.interactionElems.off("touchstart"),
                 this.reloadElems.off("touchstart"),
                 this.bigmapClose.off("touchend"),
-                l(document).off("touchstart", this.onTouchScreen),
-                l(".ui-team-member-health").find(".ui-bar-inner").css("width", this.teamMemberHealthBarWidth),
-                l("#ui-center").off("mouseenter mouseleave"),
+                m(document).off("touchstart", this.onTouchScreen),
+                m(".ui-team-member-health").find(".ui-bar-inner").css("width", this.teamMemberHealthBarWidth),
+                m("#ui-center").off("mouseenter mouseleave"),
                 this.inputBinds.menuHovered = !1,
                 this.hudVisible || this.cycleHud(),
-                this.a()
+                this.t()
             },
-            a: function() {
-                l(".js-ui-map-hidden").css("display", "block"),
+            t: function() {
+                m(".js-ui-map-hidden").css("display", "block"),
                 this.clearStatsElems(),
                 this.setSpectating(!1),
                 this.updateSpectatorCountDisplay(!0),
@@ -5827,46 +5839,47 @@ webpackJsonp([0], {
                 this.dead = !1
             },
             doQuitGame: function(e) {
-                0 == window.aProvider ? this.refreshMainPageAdsFreestar() : 1 == window.aProvider && this.refreshMainPageAdsAIP(),
+                e && 0 == window.aProvider ? this.refreshMainPageAdsFreestar() : 1 == window.aProvider && this.refreshMainPageAdsAIP(),
+                e || o(this.game.config),
                 this.game.gameOver = !0,
                 this.game.onQuit()
             },
-            l: function(e, t, a, i, r, o, n, s, l) {
-                var p = this
-                  , u = t.q
-                  , h = t.U
+            n: function(e, t, a, i, r, o, n, s, l) {
+                var m = this
+                  , u = t.N
+                  , h = t.q
                   , g = t;
                 this.mapWidth = i.width,
                 this.mapHeight = i.height,
                 this.weapsDirty && this.resetWeapSlotStyling(),
                 this.weapsDirty = !1,
-                this.mapSprite.texture == m.Texture.EMPTY && null != i.getMapTexture() && (this.mapSprite.texture = i.getMapTexture(),
+                this.mapSprite.texture == c.Texture.EMPTY && null != i.getMapTexture() && (this.mapSprite.texture = i.getMapTexture(),
                 this.redraw(s));
-                var v = w.max(Math.floor(r.duration * (1 - r.circleT)), 0)
+                var y = b.max(Math.floor(r.duration * (1 - r.circleT)), 0)
                   , S = {
                     mode: r.mode,
-                    time: v
+                    time: y
                 };
                 if (this.gasState.mode != S.mode || this.gasState.time != S.time) {
                     this.gasState = S;
-                    var k = this.gasState.mode == x.Moving;
+                    var k = this.gasState.mode == f.Moving;
                     this.mapInfo.removeClass("icon-pulse"),
                     this.gasIcon.removeClass("gas-icon"),
                     this.gasIcon.removeClass("danger-icon"),
                     k && this.mapInfo.addClass("icon-pulse"),
                     this.gasIcon.addClass(k ? "danger-icon" : "gas-icon");
-                    var P = Math.floor(this.gasState.time / 60)
+                    var z = Math.floor(this.gasState.time / 60)
                       , T = this.gasState.time % 60
                       , C = ("0" + T).slice(-2);
-                    this.gasTimer.html(P + ":" + C)
+                    this.gasTimer.html(z + ":" + C)
                 }
                 this.spectatorCount = h.spectatorCount,
                 this.updateSpectatorCountDisplay(!1),
                 u.dead && !this.dead && (this.dead = !0,
-                this.pieTimer.o(!0)),
+                this.pieTimer.a(!0)),
                 (g.downed || this.dead) && this.resetWeapSlotStyling();
                 var I = h.action
-                  , A = w.eqAbs(w.clamp(I.time, 0, I.duration), I.duration, .2);
+                  , A = b.eqAbs(b.clamp(I.time, 0, I.duration), I.duration, .2);
                 if (!(this.curAction.type == I.type && this.curAction.item == I.item && this.curAction.duration == I.duration || A || this.displayingStats)) {
                     this.curAction = {
                         type: I.type,
@@ -5874,62 +5887,62 @@ webpackJsonp([0], {
                         time: I.time,
                         duration: I.duration
                     };
-                    var D = I.type != y.Reload;
-                    if (this.pieTimer.o(D),
+                    var D = I.type != x.Reload;
+                    if (this.pieTimer.a(D),
                     this.actionSoundInstance && (this.audioManager.stopSound(this.actionSoundInstance),
                     this.actionSoundInstance = !1),
-                    I.type != y.None) {
+                    I.type != x.None) {
                         var E = ""
                           , B = ""
                           , O = ""
                           , F = null
                           , L = !1;
                         switch (I.type) {
-                        case y.Reload:
+                        case x.Reload:
                             if ("" != I.item) {
-                                var R = d.items[I.item];
+                                var R = p.items[I.item];
                                 B = this.localization.translate("game-reloading"),
                                 F = R.sound.reload,
                                 L = "reload" == R.caseTiming
                             }
                             break;
-                        case y.UseItem:
+                        case x.UseItem:
                             if ("" != I.item) {
-                                var j = d.items[I.item];
+                                var j = p.items[I.item];
                                 B = this.localization.translate("game-using"),
                                 O = this.localization.translate("game-" + I.item),
                                 F = j.sound.use
                             }
                             break;
-                        case y.Revive:
-                            var N = n.H(I.targetId).name;
+                        case x.Revive:
+                            var N = n.U(I.targetId).name;
                             B = this.localization.translate("game-reviving"),
                             O = g.downed ? "" : N
                         }
                         if ("" == B && "" == O || ("svo" == this.localization.translate("word-order") ? (E += B || "",
                         E += O ? " " + O : "") : "sov" == this.localization.translate("word-order") && (E += O ? O + " " : "",
                         E += B ? " " + B : ""),
-                        this.pieTimer.a(function() {
-                            p.curAction.type = y.None
+                        this.pieTimer.t(function() {
+                            m.curAction.type = x.None
                         }, this.curAction.duration - this.curAction.time, E, !1)),
                         F && (this.actionSoundInstance = this.audioManager.playSound(F),
                         this.audioManager.stopLocalActionSound()),
                         L && "" != I.item)
-                            for (var q = d.items[I.item], U = 0; U < q.maxClip; U++) {
+                            for (var q = p.items[I.item], U = 0; U < q.maxClip; U++) {
                                 var G = U % 2 == 0 ? -1 : 1
                                   , W = Math.PI + Math.PI / 4 * G;
-                                M.createCasingParticle(I.item, W, t.pos, t.dir, t.q.layer, this.particleBarn)
+                                P.createCasingParticle(I.item, W, t.pos, t.dir, t.N.layer, this.particleBarn)
                             }
                     }
                 }
                 this.bigmapDisplayed || (this.mapSprite.x = this.minimapPos.x + this.mapSprite.width / 2 - t.pos.x / i.width * this.mapSprite.width,
                 this.mapSprite.y = this.minimapPos.y - this.mapSprite.height / 2 + t.pos.y / i.height * this.mapSprite.height);
-                var V = f.create(.5 * s.screenWidth / s.z(), .5 * s.screenHeight / s.z())
+                var V = w.create(.5 * s.screenWidth / s.z(), .5 * s.screenHeight / s.z())
                   , H = {
-                    min: f.sub(s.pos, V),
-                    max: f.add(s.pos, V)
+                    min: w.sub(s.pos, V),
+                    max: w.add(s.pos, V)
                 }
-                  , K = n.H(t.__id).teamId
+                  , K = n.U(t.__id).teamId
                   , X = n.getTeamInfo(K);
                 if (!X) {
                     var Z = {
@@ -5939,9 +5952,9 @@ webpackJsonp([0], {
                         playing: this.game.playingTicker,
                         teamInfo: n.teamInfo
                     };
-                    _.logError("badTeamInfo_1: " + JSON.stringify(Z))
+                    v.logError("badTeamInfo_1: " + JSON.stringify(Z))
                 }
-                for (var Y = b.layout == b.Layout.Sm, J = 0; J < this.airdropSprites.length; J++) {
+                for (var Y = _.layout == _.Layout.Sm, J = 0; J < this.airdropSprites.length; J++) {
                     var Q = this.airdropSprites[J].mapSprite;
                     if (Q.displayed) {
                         var $ = Q.sprite
@@ -5958,7 +5971,7 @@ webpackJsonp([0], {
                 for (var te = X.playerIds.length, ae = 0; ae < te; ae++) {
                     var ie = this.teamSelectors[ae]
                       , re = X.playerIds[ae]
-                      , oe = n.H(re)
+                      , oe = n.U(re)
                       , ne = re == g.__id
                       , se = n.getTeammateData(re);
                     if (se) {
@@ -5978,7 +5991,7 @@ webpackJsonp([0], {
                         l > 1) {
                             ie.teamIdDisplayed || (ie.teamId.css("display", "block"),
                             ie.teamIdDisplayed = !0),
-                            this.updateTeam(ae, z.htmlEscape(oe.name), se.health, {
+                            this.updateTeam(ae, M.htmlEscape(oe.name), se.health, {
                                 disconnected: se.disconnected,
                                 dead: se.dead,
                                 downed: se.downed
@@ -5990,11 +6003,11 @@ webpackJsonp([0], {
                                       , ye = !0;
                                     if (!ne || he.displayAll) {
                                         var xe = se.pos
-                                          , fe = f.normalizeSafe(f.sub(xe, s.pos), f.create(1, 0))
-                                          , we = c.intersectRayAabb(s.pos, fe, H.min, H.max)
+                                          , fe = w.normalizeSafe(w.sub(xe, s.pos), w.create(1, 0))
+                                          , we = d.intersectRayAabb(s.pos, fe, H.min, H.max)
                                           , be = Math.atan2(fe.y, -fe.x) + .5 * Math.PI
                                           , _e = s.pointToScreen(we)
-                                          , ve = c.testCircleAabb(xe, d.player.radius, H.min, H.max);
+                                          , ve = d.testCircleAabb(xe, p.player.radius, H.min, H.max);
                                         if (!se.dead && !ve) {
                                             var Se = 32
                                               , ke = "translate(-50%, -50%) rotate(" + be + "rad)";
@@ -6002,8 +6015,8 @@ webpackJsonp([0], {
                                             ke += " scale(0.5)"),
                                             ye = !1,
                                             ge.css({
-                                                left: w.clamp(_e.x, Se, s.screenWidth - Se),
-                                                top: w.clamp(_e.y, Se, s.screenHeight - Se),
+                                                left: b.clamp(_e.x, Se, s.screenWidth - Se),
+                                                top: b.clamp(_e.y, Se, s.screenHeight - Se),
                                                 transform: ke
                                             }),
                                             he.displayed || (ge.css("display", "block"),
@@ -6040,31 +6053,31 @@ webpackJsonp([0], {
                         Me.teamIdDisplayed = !1
                     }
                 }
-                l > 1 && this.teamPlayerCount != te && b.layout == b.Layout.Lg && (this.teamPlayerCount = te,
+                l > 1 && this.teamPlayerCount != te && _.layout == _.Layout.Lg && (this.teamPlayerCount = te,
                 this.spectateOptionsWrapper.css({
                     top: this.teamPlayerCount * this.teamMemberHeight + 12
                 }))
             },
             getMinimapMargin: function() {
-                return b.layout == b.Layout.Sm ? 4 : 16
+                return _.layout == _.Layout.Sm ? 4 : 16
             },
             getMinimapSize: function() {
-                return b.layout == b.Layout.Sm ? 192 : 256
+                return _.layout == _.Layout.Sm ? 192 : 256
             },
             getMinimapBorderWidth: function() {
-                return b.layout == b.Layout.Sm ? 1 : 4
+                return _.layout == _.Layout.Sm ? 1 : 4
             },
             setPlayerPing: function(e, t, a, i) {
                 var r = this.teamSelectors[t];
                 if (r) {
                     var o = void 0
                       , n = void 0;
-                    if (e == h.Airdrop) {
+                    if (e == g.Airdrop) {
                         var s = this.airdropSpriteIdx;
                         o = this.airdropSprites[s].mapSprite,
                         n = this.airdropSprites[s].pingPulseWave,
                         this.airdropSpriteIdx++,
-                        this.airdropSpriteIdx = this.airdropSpriteIdx == P ? 0 : this.airdropSpriteIdx
+                        this.airdropSpriteIdx = this.airdropSpriteIdx == T ? 0 : this.airdropSpriteIdx
                     } else
                         o = r.mapSprites[e],
                         n = r.mapSprites.pingPulseWave;
@@ -6088,7 +6101,7 @@ webpackJsonp([0], {
             updateMapSprite: function(e, t, a) {
                 e.displayed && (void 0 != e.life && (e.life -= a,
                 e.displayed = e.life > 0,
-                e.maxLife - e.life < .1 ? t.alpha = (e.maxLife - e.life) / .1 : e.life < .5 ? t.alpha = w.max(e.life / .5, 0) : t.alpha = 1),
+                e.maxLife - e.life < .1 ? t.alpha = (e.maxLife - e.life) / .1 : e.life < .5 ? t.alpha = b.max(e.life / .5, 0) : t.alpha = 1),
                 e.pulse && e.displayed && (e.scale = e.scale + a / 2.5,
                 t.scale.set(e.scale, e.scale)),
                 t.visible = t.alpha > 0)
@@ -6096,15 +6109,15 @@ webpackJsonp([0], {
             getMapPosFromWorldPos: function(e, t) {
                 var a = this.mapSprite.x - this.mapSprite.width / 2 + e.x / t.width * this.mapSprite.width
                   , i = this.mapSprite.y + this.mapSprite.height / 2 - e.y / t.height * this.mapSprite.height;
-                return f.create(a, i)
+                return w.create(a, i)
             },
             getWorldPosFromMapPos: function(e, t, a) {
                 var i = !1;
-                if (z.getScreenDimensions().width,
+                if (M.getScreenDimensions().width,
                 this.bigmapDisplayed) {
                     var r = (a.screenWidth - this.mapSprite.width) / 2
                       , o = (a.screenHeight - this.mapSprite.height) / 2;
-                    b.layout != b.Layout.Sm || z.isLandscape() || (o = 0),
+                    _.layout != _.Layout.Sm || M.isLandscape() || (o = 0),
                     i = e.x > r && e.x < a.screenWidth - r && e.y > o && e.y < a.screenHeight - o
                 } else if (this.minimapDisplayed) {
                     var n = this.getMinimapSize()
@@ -6114,10 +6127,10 @@ webpackJsonp([0], {
                     i = e.x > this.minimapPos.x - m && e.x < this.minimapPos.x + m && e.y > this.minimapPos.y - m && e.y < this.minimapPos.y + m
                 }
                 if (i) {
-                    var c = f.create(this.mapSprite.x - this.mapSprite.width / 2, this.mapSprite.y + this.mapSprite.height / 2)
+                    var c = w.create(this.mapSprite.x - this.mapSprite.width / 2, this.mapSprite.y + this.mapSprite.height / 2)
                       , d = (e.x - c.x) / this.mapSprite.width * this.mapWidth
                       , p = (c.y - e.y) / this.mapSprite.height * this.mapHeight;
-                    return f.create(d, p)
+                    return w.create(d, p)
                 }
                 return !1
             },
@@ -6133,7 +6146,7 @@ webpackJsonp([0], {
                 else if (window.aiptag) {
                     var e = [];
                     e.push("surviv-io_300x250"),
-                    b.mobile ? e.push("surviv-io_300x250_mobile_2") : (e.push("surviv-io_300x250_2"),
+                    _.mobile ? e.push("surviv-io_300x250_mobile_2") : (e.push("surviv-io_300x250_2"),
                     e.push("surviv-io_728x90"));
                     for (var t = 0; t < e.length; t++)
                         !function(t) {
@@ -6150,17 +6163,18 @@ webpackJsonp([0], {
                         placementName: "survivio_300x250_main",
                         slotId: "survivio_300x250_main"
                     }];
-                    b.mobile || t.push({
+                    _.mobile || t.push({
                         placementName: "survivio_728x90_main",
                         slotId: "survivio_728x90_main"
                     }),
+                    e && t.push(e),
                     window.freestar.newAdSlots(t)
                 }
             },
             refreshMainPageAdsAIP: function() {
                 if (window.aiptag) {
                     var e = ["surviv-io_300x250"];
-                    b.mobile || e.push("surviv-io_728x90");
+                    _.mobile || e.push("surviv-io_728x90");
                     for (var t = 0; t < e.length; t++)
                         !function(t) {
                             var a = e[t];
@@ -6192,9 +6206,9 @@ webpackJsonp([0], {
                 var r = this
                   , o = i ? t.name : this.localization.translate("game-you").toUpperCase()
                   , n = e.name;
-                e.damageType == d.DamageType.Gas ? n = this.localization.translate("game-the-red-zone") : e.damageType == d.DamageType.Airdrop && (n = this.localization.translate("game-the-air-drop")),
+                e.damageType == p.DamageType.Gas ? n = this.localization.translate("game-the-red-zone") : e.damageType == p.DamageType.Airdrop && (n = this.localization.translate("game-the-air-drop")),
                 this.killText.text(n + " knocked " + o + " out"),
-                a && e.damageType == d.DamageType.Player && this.killText.append(" " + this.localization.translate("game-with") + " " + a),
+                a && e.damageType == p.DamageType.Player && this.killText.append(" " + this.localization.translate("game-with") + " " + a),
                 this.killCount.text(""),
                 this.killTimeout && clearTimeout(this.killTimeout),
                 this.killElem.stop(!0),
@@ -6204,9 +6218,9 @@ webpackJsonp([0], {
                 }, 6e3)
             },
             clearUI: function() {
-                this.pieTimer.o(!0),
+                this.pieTimer.a(!0),
                 this.curAction = {
-                    type: y.None
+                    type: x.None
                 },
                 this.displayMapLarge(!0),
                 this.displayMiniMap(),
@@ -6270,12 +6284,12 @@ webpackJsonp([0], {
                             n += e.stats[s].kills;
                         return r += '<div class="ui-stats-header-left"><span class="ui-stats-header-stat">' + a.localization.translate("game-team-kills") + " </span>",
                         r += '<span class="ui-stats-header-value">' + n + "</span></div>",
-                        l("<div/>", {
+                        m("<div/>", {
                             class: ""
-                        }).append(l("<div/>", {
+                        }).append(m("<div/>", {
                             class: "ui-stats-header-title",
                             html: t || i
-                        })).append(l("<div/>", {
+                        })).append(m("<div/>", {
                             class: "ui-stats-header-overview",
                             html: r
                         }))
@@ -6288,52 +6302,52 @@ webpackJsonp([0], {
                         i += ".";
                         var r = '<div><span class="ui-stats-header-stat">' + o + " </span>";
                         return r += '<span class="ui-stats-header-value">#' + e.teamRank + "</span></div>",
-                        l("<div/>", {
+                        m("<div/>", {
                             class: ""
-                        }).append(l("<div/>", {
+                        }).append(m("<div/>", {
                             class: "ui-stats-header-title",
                             html: t || i
-                        })).append(l("<div/>", {
+                        })).append(m("<div/>", {
                             class: "ui-stats-header-overview",
                             html: r
                         }))
                     }(n)),
-                    this.pieTimer.o(!0),
+                    this.pieTimer.a(!0),
                     this.displayingStats = !0;
                     var s = function(e, t) {
-                        return l("<div/>", {
+                        return m("<div/>", {
                             class: "ui-stats-info"
-                        }).append(l("<div/>", {
+                        }).append(m("<div/>", {
                             html: e
-                        })).append(l("<div/>", {
+                        })).append(m("<div/>", {
                             html: t
                         }))
                     }
-                      , m = b.layout == b.Layout.Sm ? 125 : 250
+                      , l = _.layout == _.Layout.Sm ? 125 : 250
                       , c = 0;
-                    c -= (e.stats.length - 1) * m / 2,
+                    c -= (e.stats.length - 1) * l / 2,
                     c -= 10 * (e.stats.length - 1);
                     for (var d = 0; d < e.stats.length; d++) {
                         var p = e.stats[d]
-                          , u = t.H(p.playerId)
+                          , u = t.U(p.playerId)
                           , h = r(p.timeAlive)
                           , g = "ui-stats-info-player";
                         g += p.dead ? " ui-stats-info-status" : "";
                         var y = function(e) {
-                            return l("<div/>", {
+                            return m("<div/>", {
                                 class: e
                             })
                         }(g);
                         y.css("left", c),
-                        y.append(l("<div/>", {
+                        y.append(m("<div/>", {
                             class: "ui-stats-info-player-name",
-                            html: z.htmlEscape(u.name)
+                            html: M.htmlEscape(u.name)
                         })),
                         y.append(s(this.localization.translate("game-kills"), "" + p.kills)).append(s(this.localization.translate("game-damage-dealt"), p.damageDealt)).append(s(this.localization.translate("game-damage-taken"), p.damageTaken)).append(s(this.localization.translate("game-survived"), h)),
                         this.statsInfoBox.append(y),
                         c += 10
                     }
-                    var x = l("<a/>", {
+                    var x = m("<a/>", {
                         class: "ui-stats-restart btn-green btn-darken menu-option",
                         html: this.localization.translate("game-play-new-game")
                     });
@@ -6343,13 +6357,13 @@ webpackJsonp([0], {
                     this.statsOptions.append(x),
                     e.gameOver || this.waitingForPlayers)
                         x.css({
-                            width: b.layout != b.Layout.Sm || b.tablet ? 225 : 130
+                            width: _.layout != _.Layout.Sm || _.tablet ? 225 : 130
                         });
                     else {
                         x.css({
-                            left: b.layout != b.Layout.Sm || b.tablet ? -72 : -46
+                            left: _.layout != _.Layout.Sm || _.tablet ? -72 : -46
                         });
-                        var f = l("<a/>", {
+                        var f = m("<a/>", {
                             class: "btn-green btn-darken menu-option",
                             id: "ui-stats-spectate",
                             html: this.localization.translate("game-spectate")
@@ -6360,55 +6374,54 @@ webpackJsonp([0], {
                         }),
                         this.statsOptions.append(f)
                     }
-                    var v = i - 150;
+                    var w = i - 150;
                     setTimeout(function() {
-                        _.storeGeneric("statsAdDisplayed", !window.adsBlocked)
-                    }, v),
+                        v.storeGeneric("statsAdDisplayed", !window.adsBlocked)
+                    }, w),
                     0 == window.aProvider && window.freestar && void 0 !== window.freestar.newAdSlots ? setTimeout(function() {
                         a.killElem.stop(),
                         a.killElem.hide(),
-                        l(b.mobile ? "#ui-stats-ad-container-mobile" : "#ui-stats-ad-container-desktop").css("display", "inline-block");
-                        var e = b.mobile ? "survivio_300x250_respawn_mobile " : "survivio_300x250_gameover"
-                          , t = b.mobile ? "surviv-io_300x250_mobile_2" : "survivio_300x250_gameover"
-                          , i = [{
+                        m(_.mobile ? "#ui-stats-ad-container-mobile" : "#ui-stats-ad-container-desktop").css("display", "inline-block");
+                        var e = _.mobile ? "survivio_300x250_respawn_mobile " : "survivio_300x250_gameover"
+                          , t = _.mobile ? "surviv-io_300x250_mobile_2" : "survivio_300x250_gameover";
+                        a.refreshMainPageAdsFreestar({
                             placementName: e,
                             slotId: t
-                        }];
-                        window.freestar.newAdSlots(i)
-                    }, v) : 1 == window.aProvider && window.aiptag && setTimeout(function() {
+                        })
+                    }, w) : 1 == window.aProvider && window.aiptag && setTimeout(function() {
                         a.killElem.stop(),
                         a.killElem.hide(),
-                        l(b.mobile ? "#ui-stats-ad-container-mobile" : "#ui-stats-ad-container-desktop").css("display", "inline-block");
-                        var e = b.mobile ? "surviv-io_300x250_mobile_2" : "surviv-io_300x250_2";
+                        m(_.mobile ? "#ui-stats-ad-container-mobile" : "#ui-stats-ad-container-desktop").css("display", "inline-block");
+                        var e = _.mobile ? "surviv-io_300x250_mobile_2" : "surviv-io_300x250_2";
                         window.aiptag.cmd.display.push(function() {
                             aipDisplayTag.display(e)
                         })
-                    }, v);
+                    }, w);
                     var S = 0
-                      , k = 250 / w.max(1, e.stats.length)
-                      , M = 750 / w.max(1, e.stats.length);
+                      , k = 250 / b.max(1, e.stats.length)
+                      , z = 750 / b.max(1, e.stats.length);
                     this.statsInfoBox.children().each(function(e, t) {
-                        var a = l(t);
+                        var a = m(t);
                         a.css("opacity", 0),
-                        a.delay(i + M + (S + e) * k).animate({
+                        a.delay(i + z + (S + e) * k).animate({
                             opacity: 1
                         }, 500, function() {
                             a.children().each(function(e, t) {
-                                l(t).delay(e * k).animate({
+                                m(t).delay(e * k).animate({
                                     opacity: 1
                                 }, 500)
                             })
                         }),
                         a.children().each(function(e, t) {
-                            l(t).css("opacity", 0),
+                            m(t).css("opacity", 0),
                             S++
                         }),
                         S++
                     }),
                     this.statsOptions.children().each(function(e, t) {
-                        var a = l(t);
+                        var a = m(t);
                         a.hide(),
-                        a.delay(i + M + (S + e) * k).fadeIn(500),
+                        a.delay(i + z + (S + e) * k).fadeIn(500),
                         S++
                     }),
                     this.statsElem.stop(),
@@ -6449,17 +6462,17 @@ webpackJsonp([0], {
                         var t = this.game.teamMode <= 2;
                         this.specPrevButton.css("display", t ? "none" : "block"),
                         this.specNextButton.css("display", t ? "none" : "block"),
-                        l(".ui-zoom").removeClass("ui-zoom-hover")
+                        m(".ui-zoom").removeClass("ui-zoom-hover")
                     } else
                         this.spectateMode.css("display", "none")
             },
             setSpectatedPlayer: function(e, t) {
-                t = z.htmlEscape(t),
+                t = M.htmlEscape(t),
                 this.spectatedPlayerId != e && (this.spectatedPlayerText.find("#spectate-player").html(t),
                 this.spectatedPlayerName = t,
                 this.spectatedPlayerId = e,
                 this.curAction = {
-                    type: y.None
+                    type: x.None
                 })
             },
             setLocalStats: function(e) {
@@ -6493,12 +6506,12 @@ webpackJsonp([0], {
             displayMapLarge: function(e) {
                 this.bigmapDisplayed = !e && !this.bigmapDisplayed,
                 this.bigmapDisplayed ? this.container.alpha = 1 : this.container.alpha = this.minimapDisplayed ? 1 : 0;
-                var t = b.layout == b.Layout.Sm ? ".js-ui-mobile-map-hidden" : "js-ui-desktop-map-hidden";
+                var t = _.layout == _.Layout.Sm ? ".js-ui-mobile-map-hidden" : "js-ui-desktop-map-hidden";
                 t += ", .js-ui-map-hidden",
-                l(2 == this.visibilityMode ? ".js-ui-hud-show" : t).css("display", this.bigmapDisplayed ? "none" : "block"),
-                l(".js-ui-map-show").css("display", this.bigmapDisplayed ? "block" : "none"),
+                m(2 == this.visibilityMode ? ".js-ui-hud-show" : t).css("display", this.bigmapDisplayed ? "none" : "block"),
+                m(".js-ui-map-show").css("display", this.bigmapDisplayed ? "block" : "none"),
                 this.updateSpectatorCountDisplay(!0),
-                this.redraw(this.game.N)
+                this.redraw(this.game.j)
             },
             updateSpectatorCountDisplay: function(e) {
                 var t = !this.bigmapDisplayed && this.spectatorCount > 0;
@@ -6541,7 +6554,7 @@ webpackJsonp([0], {
             },
             displayMiniMap: function() {
                 if (!this.bigmapDisplayed) {
-                    var e = b.layout == b.Layout.Sm;
+                    var e = _.layout == _.Layout.Sm;
                     this.minimapDisplayed = !0,
                     this.container.alpha = 1,
                     this.mapInfo.css("bottom", this.mapInfoBottom),
@@ -6554,7 +6567,7 @@ webpackJsonp([0], {
             displayAnnouncement: function(e, t) {
                 var a = "";
                 switch (e) {
-                case x.Waiting:
+                case f.Waiting:
                     a = this.localization.translate("game-red-zone-advances");
                     var i = Math.floor(t / 60)
                       , r = t - 60 * i;
@@ -6562,13 +6575,13 @@ webpackJsonp([0], {
                     a += 1 == i ? " " + i + " " + this.localization.translate("game-minute") : "",
                     a += r > 0 ? " " + Math.floor(r) + " " + this.localization.translate("game-seconds") : "";
                     break;
-                case x.Moving:
+                case f.Moving:
                     a = this.localization.translate("game-red-zone-advancing")
                 }
                 a.length > 0 && (this.announcement.html(a),
                 this.announcement.fadeIn(400, function() {
                     setTimeout(function() {
-                        l("#ui-announcement").fadeOut(800)
+                        m("#ui-announcement").fadeOut(800)
                     }, 3e3)
                 }))
             },
@@ -6579,13 +6592,13 @@ webpackJsonp([0], {
             render: function(e, t, a, i) {
                 var r = t.getCircle()
                   , o = this.getMapPosFromWorldPos(r.pos, i)
-                  , n = this.getMapPosFromWorldPos(f.add(r.pos, f.create(r.rad, 0)), i)
-                  , s = f.length(f.sub(n, o));
+                  , n = this.getMapPosFromWorldPos(w.add(r.pos, w.create(r.rad, 0)), i)
+                  , s = w.length(w.sub(n, o));
                 this.gasRenderer.render(o, s, t.isActive());
                 var l = t.circleNew
                   , m = this.getMapPosFromWorldPos(l.pos, i)
-                  , c = this.getMapPosFromWorldPos(f.add(l.pos, f.create(l.rad, 0)), i)
-                  , d = f.length(f.sub(c, m))
+                  , c = this.getMapPosFromWorldPos(w.add(l.pos, w.create(l.rad, 0)), i)
+                  , d = w.length(w.sub(c, m))
                   , p = this.getMapPosFromWorldPos(e, i)
                   , u = t.isActive()
                   , h = t.isActive() && !this.bigmapDisplayed;
@@ -6594,27 +6607,27 @@ webpackJsonp([0], {
             updateHealthBar: function(e, t, a, i) {
                 var r = e
                   , o = .01 * i.health * r;
-                o = i.dead ? 0 : w.max(o, 1),
+                o = i.dead ? 0 : b.max(o, 1),
                 t.css("width", o),
                 o > 0 ? a.css("width", o) : a.css("display", "none");
-                var s = i.health
+                var n = i.health
                   , l = this.healthRed
                   , m = this.healthDarkpink;
-                if (s > 25) {
+                if (n > 25) {
                     if (i.downed)
                         t.css({
                             backgroundColor: "red"
                         });
                     else {
-                        w.eqAbs(s, 100, .2) ? (l = this.healthGrey,
-                        m = this.healthGrey) : w.eqAbs(s, 75, .2) || s >= 75 ? (l = this.healthWhite,
+                        b.eqAbs(n, 100, .2) ? (l = this.healthGrey,
+                        m = this.healthGrey) : b.eqAbs(n, 75, .2) || n >= 75 ? (l = this.healthWhite,
                         m = this.healthWhite) : (l = this.healthDarkpink,
                         m = this.healthLightpink);
                         var c = l.getColors()
                           , d = m.getColors()
-                          , p = n(c.r, d.r, 45, s)
-                          , u = n(c.g, d.g, 45, s)
-                          , h = n(c.b, d.b, 45, s);
+                          , p = s(c.r, d.r, 45, n)
+                          , u = s(c.g, d.g, 45, n)
+                          , h = s(c.b, d.b, 45, n);
                         t.css({
                             backgroundColor: "rgba(" + p + "," + u + "," + h + ",1)"
                         })
@@ -6630,7 +6643,7 @@ webpackJsonp([0], {
                   , s = this.teamSelectors[e].prevStatus
                   , l = i.dead != s.dead || i.disconnected != s.disconnected || i.downed != s.downed;
                 if (this.teamSelectors[e].teamNameHtml != t || a != n || l) {
-                    var c = (this.teamSelectors[e].teamIcon,
+                    var m = (this.teamSelectors[e].teamIcon,
                     this.teamSelectors[e].teamStatus)
                       , d = this.teamSelectors[e].teamHealthInner
                       , p = this.teamSelectors[e].teamHealthDepleted;
@@ -6641,10 +6654,10 @@ webpackJsonp([0], {
                         dead: i.dead,
                         downed: i.downed
                     }),
-                    l && (c.attr("class", "ui-team-member-status"),
-                    i.disconnected ? c.addClass("ui-team-member-status-disconnected") : i.dead ? c.addClass("ui-team-member-status-dead") : i.downed && c.addClass("ui-team-member-status-downed").addClass("icon-pulse"),
-                    i.dead && (this.teamSelectors[e].mapSprites.inner.sprite.texture = m.Texture.fromImage("skull-team-outlined.img"),
-                    this.teamSelectors[e].mapSprites.inner.sprite.scale = f.mul(this.playerBaseScale, 1.5)),
+                    l && (m.attr("class", "ui-team-member-status"),
+                    i.disconnected ? m.addClass("ui-team-member-status-disconnected") : i.dead ? m.addClass("ui-team-member-status-dead") : i.downed && m.addClass("ui-team-member-status-downed").addClass("icon-pulse"),
+                    i.dead && (this.teamSelectors[e].mapSprites.inner.sprite.texture = c.Texture.fromImage("skull-team-outlined.img"),
+                    this.teamSelectors[e].mapSprites.inner.sprite.scale = w.mul(this.playerBaseScale, 1.5)),
                     (i.disconnected || i.dead) && o.css("opacity", .3)),
                     r.css("display", "block"),
                     this.teamSelectors[e].prevStatus = i,
@@ -6652,15 +6665,15 @@ webpackJsonp([0], {
                 }
             },
             clearTeamUI: function() {
-                l(".ui-team-member").css("display", "none"),
-                l(".ui-team-indicator").css("display", "none"),
-                l(".ui-team-member-name").removeAttr("style"),
-                l(".ui-team-member-status").removeAttr("style"),
-                l(".ui-team-member-status").removeClass("ui-team-member-status-downed ui-team-member-status-dead ui-team-member-status-disconnected icon-pulse"),
+                m(".ui-team-member").css("display", "none"),
+                m(".ui-team-indicator").css("display", "none"),
+                m(".ui-team-member-name").removeAttr("style"),
+                m(".ui-team-member-status").removeAttr("style"),
+                m(".ui-team-member-status").removeClass("ui-team-member-status-downed ui-team-member-status-dead ui-team-member-status-disconnected icon-pulse"),
                 this.teamSelectors = []
             },
             resize: function(e) {
-                this.screenScaleFactor = b.layout == b.Layout.Sm ? .5626 : w.min(1, w.clamp(e.screenWidth / 1280, .75, 1) * w.clamp(e.screenHeight / 1024, .75, 1)),
+                this.screenScaleFactor = _.layout == _.Layout.Sm ? .5626 : b.min(1, b.clamp(e.screenWidth / 1280, .75, 1) * b.clamp(e.screenHeight / 1024, .75, 1)),
                 this.pieTimer.resize(this.touch, this.screenScaleFactor),
                 this.gasRenderer.resize(),
                 this.redraw(e)
@@ -6671,11 +6684,11 @@ webpackJsonp([0], {
                   , i = this.getMinimapMargin()
                   , r = this.getMinimapSize()
                   , o = this.getMinimapBorderWidth()
-                  , n = b.layout == b.Layout.Sm;
+                  , n = _.layout == _.Layout.Sm;
                 if (this.display.border.clear(),
                 this.container.mask.clear(),
                 this.bigmapDisplayed) {
-                    var s = w.min(t, a);
+                    var s = b.min(t, a);
                     this.mapSprite.width = s,
                     this.mapSprite.height = s,
                     this.mapSprite.x = t / 2,
@@ -6684,13 +6697,13 @@ webpackJsonp([0], {
                     this.container.mask.beginFill(16777215, 1),
                     this.container.mask.drawRect(this.mapSprite.x - this.mapSprite.width / 2, this.mapSprite.y - this.mapSprite.height / 2, this.mapSprite.width, this.mapSprite.height),
                     this.container.mask.endFill(),
-                    b.touch && this.bigmapCollision.css({
+                    _.touch && this.bigmapCollision.css({
                         width: a,
                         height: t
                     })
                 } else {
                     var l = 1600 * this.screenScaleFactor / 1.2
-                      , c = r * this.screenScaleFactor;
+                      , m = r * this.screenScaleFactor;
                     this.mapSprite.width = l,
                     this.mapSprite.height = l,
                     this.mapSprite.alpha = .8;
@@ -6704,18 +6717,18 @@ webpackJsonp([0], {
                     })),
                     this.mapContainer.css(d),
                     this.mapContainer.css("bottom", this.mapContainerBottom * this.screenScaleFactor);
-                    var p = n ? c / 2 + i : a - c / 2 - i;
-                    this.minimapPos.x = i + c / 2,
+                    var p = n ? m / 2 + i : a - m / 2 - i;
+                    this.minimapPos.x = i + m / 2,
                     this.minimapPos.y = p,
-                    this.player.position = new m.Point(this.minimapPos.x,this.minimapPos.y),
+                    this.player.position = new c.Point(this.minimapPos.x,this.minimapPos.y),
                     this.display.border.lineStyle(o, 0),
                     this.display.border.beginFill(0, 0);
-                    var u = n ? i + o / 2 : a - c - i + o / 2;
-                    this.display.border.drawRect(i + o / 2, u, c - o, c - o),
+                    var u = n ? i + o / 2 : a - m - i + o / 2;
+                    this.display.border.drawRect(i + o / 2, u, m - o, m - o),
                     this.display.border.endFill();
-                    var h = n ? i : a - c - i;
+                    var h = n ? i : a - m - i;
                     this.container.mask.beginFill(16777215, 1),
-                    this.container.mask.drawRect(i, h - .5, c, c),
+                    this.container.mask.drawRect(i, h - .5, m, m),
                     this.container.mask.endFill()
                 }
             },
@@ -6727,14 +6740,14 @@ webpackJsonp([0], {
                         return this.escMenuDisplayed = !1,
                         this.escMenuElem.css("display", "none"),
                         this.setCurrentGameTab("settings"),
-                        l("#ui-center").off("mouseenter mouseleave"),
+                        m("#ui-center").off("mouseenter mouseleave"),
                         void (this.inputBinds.menuHovered = !1);
                     if (this.bigmapDisplayed)
                         return void this.displayMapLarge(!0);
                     2 == this.visibilityMode && this.cycleVisibilityMode(),
                     this.escMenuDisplayed = !0,
                     this.escMenuElem.css("display", "block"),
-                    l("#ui-center").hover(function() {
+                    m("#ui-center").hover(function() {
                         e.inputBinds.menuHovered = !0
                     }, function() {
                         e.inputBinds.menuHovered = !1
@@ -6746,13 +6759,13 @@ webpackJsonp([0], {
                 this.currentGameTab = e,
                 this.gameTabs.css("display", "none"),
                 this.gameTabBtns.removeClass("btn-game-menu-selected"),
-                l("#ui-game-tab-" + this.currentGameTab).css("display", "block"),
-                l("#btn-game-" + this.currentGameTab).addClass("btn-game-menu-selected"),
+                m("#ui-game-tab-" + this.currentGameTab).css("display", "block"),
+                m("#btn-game-" + this.currentGameTab).addClass("btn-game-menu-selected"),
                 "keybinds" == this.currentGameTab ? this.inputBindUi.refresh() : this.inputBindUi.cancelBind()
             }
         },
         e.exports = {
-            K: o
+            H: n
         }
     },
     "33375c30": function(e, t, a) {
@@ -6777,14 +6790,14 @@ webpackJsonp([0], {
         a("c347b8dd"),
         a("af8ba00f"),
         r.prototype = {
-            a: function() {
+            t: function() {
                 this.isNew = !1,
                 this.residue = null,
                 this.ceilingDead = !1,
                 this.ceilingDamaged = !1,
                 this.playedCeilingDeadFx = !1
             },
-            o: function() {
+            a: function() {
                 for (var e = 0; e < this.sprites.length; e++) {
                     var t = this.sprites[e];
                     t.active = !1,
@@ -6811,7 +6824,7 @@ webpackJsonp([0], {
                 }),
                 a
             },
-            n: function(e, t, a, i) {
+            o: function(e, t, a, i) {
                 var r = this;
                 if (t && (this.type = e.type,
                 this.pos = m.copy(e.pos),
@@ -6909,7 +6922,7 @@ webpackJsonp([0], {
                     }
                 }
             },
-            l: function(e, t, a, r, n, l, m) {
+            n: function(e, t, a, r, n, l, m) {
                 if (this.ceilingDead && !this.playedCeilingDeadFx && (t.deadCeilingIds.push(this.__id),
                 this.playedCeilingDeadFx = !0,
                 this.isNew || this.destroyCeilingFx(a, r)),
@@ -6930,7 +6943,7 @@ webpackJsonp([0], {
                 var u = this.ceiling;
                 u.visionTicker -= e;
                 for (var h = !1, g = u.vision, y = 0; y < u.scopeIn.length; y++)
-                    if (c.scanCollider(u.scopeIn[y], t.Z.m(), n.pos, n.layer, .5, 2 * g.width, g.dist, 5)) {
+                    if (c.scanCollider(u.scopeIn[y], t.K.l(), n.pos, n.layer, .5, 2 * g.width, g.dist, 5)) {
                         h = !0;
                         break
                     }
@@ -8217,7 +8230,7 @@ webpackJsonp([0], {
                 this.totalSoundsLoaded += 1,
                 this.totalSoundsLoaded == this.totalSounds && (this.loadComplete = !0)
             },
-            l: function(e) {
+            n: function(e) {
                 if (this.loadComplete) {
                     for (var t = 0; t < this.queuedSounds.length; t++) {
                         var a = this.queuedSounds[t]
@@ -8667,7 +8680,7 @@ webpackJsonp([0], {
             Cancel: 3
         });
         o.prototype = {
-            o: function() {
+            a: function() {
                 window.removeEventListener("focus", this.bOnWindowFocus),
                 window.removeEventListener("blur", this.bOnWindowFocus),
                 window.removeEventListener("keydown", this.bOnKeyDown),
@@ -8712,11 +8725,11 @@ webpackJsonp([0], {
             isInputValuePressed: function(e) {
                 switch (e.type) {
                 case c.Key:
-                    return this.Y(e.code);
+                    return this.Z(e.code);
                 case c.MouseButton:
-                    return this.J(e.code);
+                    return this.Y(e.code);
                 case c.MouseWheel:
-                    return this.$() == e.code;
+                    return this.J() == e.code;
                 default:
                     return !1
                 }
@@ -8724,11 +8737,11 @@ webpackJsonp([0], {
             isInputValueReleased: function(e) {
                 switch (e.type) {
                 case c.Key:
-                    return this.ee(e.code);
+                    return this.$(e.code);
                 case c.MouseButton:
-                    return this.te(e.code);
+                    return this.ee(e.code);
                 case c.MouseWheel:
-                    return this.$() == e.code;
+                    return this.J() == e.code;
                 default:
                     return !1
                 }
@@ -8736,11 +8749,11 @@ webpackJsonp([0], {
             isInputValueDown: function(e) {
                 switch (e.type) {
                 case c.Key:
-                    return this.ae(e.code);
+                    return this.te(e.code);
                 case c.MouseButton:
-                    return this.ie(e.code);
+                    return this.ae(e.code);
                 case c.MouseWheel:
-                    return this.$() == e.code;
+                    return this.J() == e.code;
                 default:
                     return !1
                 }
@@ -8753,13 +8766,13 @@ webpackJsonp([0], {
             onKeyUp: function(e) {
                 this.keys[e.keyCode] = !1
             },
-            ae: function(e) {
+            te: function(e) {
                 return !!this.keys[e]
             },
-            Y: function(e) {
+            Z: function(e) {
                 return !this.keysOld[e] && !!this.keys[e]
             },
-            ee: function(e) {
+            $: function(e) {
                 return !!this.keysOld[e] && !this.keys[e]
             },
             onMouseMove: function(e) {
@@ -8781,16 +8794,16 @@ webpackJsonp([0], {
                 var t = e.deltaY < 0 ? m.Up : m.Down;
                 this.checkCaptureInput(e, c.MouseWheel, t) || (this.mouseWheelState = t)
             },
-            ie: function(e) {
+            ae: function(e) {
                 return !!this.mouseButtons[e]
             },
-            J: function(e) {
+            Y: function(e) {
                 return !this.mouseButtonsOld[e] && !!this.mouseButtons[e]
             },
-            te: function(e) {
+            ee: function(e) {
                 return !!this.mouseButtonsOld[e] && !this.mouseButtons[e]
             },
-            $: function() {
+            J: function() {
                 return this.mouseWheelState
             },
             onTouchShared: function(e, t) {
@@ -8839,7 +8852,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            re: o,
+            ie: o,
             InputType: c,
             InputValue: h,
             Key: s,
@@ -9502,7 +9515,7 @@ webpackJsonp([0], {
             }
         });
         i.prototype = {
-            a: function(e, t, a) {
+            t: function(e, t, a) {
                 var i = o.explosions[e].explosionType
                   , r = m[i];
                 this.active = !0,
@@ -9515,10 +9528,10 @@ webpackJsonp([0], {
                 this.soundInstance = null,
                 this.soundUpdateThrottle = 0
             },
-            o: function() {
+            a: function() {
                 this.active = !1
             },
-            l: function(e, t, a, i, r) {
+            n: function(e, t, a, i, r) {
                 var c = o.explosions[this.type].explosionType
                   , d = m[c];
                 if (0 == this.ticker) {
@@ -9559,18 +9572,18 @@ webpackJsonp([0], {
                     }
                 r || (r = new i(this),
                 this.explosions.push(r)),
-                r.a(e, t, a)
+                r.t(e, t, a)
             },
-            l: function(e, t, a, i, r) {
+            n: function(e, t, a, i, r) {
                 for (var o = 0; o < this.explosions.length; o++) {
                     var n = this.explosions[o];
-                    n.active && (n.l(e, i, r, t, a),
-                    n.active || n.o())
+                    n.active && (n.n(e, i, r, t, a),
+                    n.active || n.a())
                 }
             }
         },
         e.exports = {
-            oe: r
+            re: r
         }
     },
     "61fc98e9": function(e, t, a) {
@@ -22370,13 +22383,13 @@ webpackJsonp([0], {
                 l.ticker = 0,
                 l.pullDelay = void 0 !== c.pullDelay ? .45 * c.pullDelay : 0
             },
-            l: function(e, t, a, r, n) {
+            n: function(e, t, a, r, n) {
                 for (var s = 0; s < this.shots.length; s++) {
                     var l = this.shots[s];
                     if (l.active) {
                         var m = o.items[l.weaponType];
                         if (0 == l.ticker) {
-                            var c = a.ne(l.playerId)
+                            var c = a.oe(l.playerId)
                               , d = l.lastShot ? m.sound.shootLast : m.sound.shoot;
                             if (n.playSound(d, {
                                 channel: l.playerId == t ? "activePlayer" : "otherPlayers",
@@ -22387,7 +22400,7 @@ webpackJsonp([0], {
                             }),
                             c) {
                                 if (c.__id == t && "single" == m.fireMode && m.pullDelay) {
-                                    var p = c.U.weapons[c.U.curWeapIdx].ammo
+                                    var p = c.q.weapons[c.q.curWeapIdx].ammo
                                       , u = p > 0 ? m.sound.cycle : m.sound.pull;
                                     n.localActionSoundInstance = n.playSound(u)
                                 }
@@ -22399,8 +22412,8 @@ webpackJsonp([0], {
                         }
                         if (l.ticker += e,
                         l.ticker >= l.pullDelay) {
-                            var y = a.ne(l.playerId);
-                            y && !y.q.dead && y.q.curWeapType == l.weaponType && "shoot" == m.caseTiming && i(l.weaponType, Math.PI / 2 * -1, y.q.pos, y.q.dir, y.layer, r),
+                            var y = a.oe(l.playerId);
+                            y && !y.N.dead && y.N.curWeapType == l.weaponType && "shoot" == m.caseTiming && i(l.weaponType, Math.PI / 2 * -1, y.N.pos, y.N.dir, y.layer, r),
                             l.active = !1
                         }
                     }
@@ -22409,7 +22422,7 @@ webpackJsonp([0], {
         },
         e.exports = {
             createCasingParticle: i,
-            se: r
+            ne: r
         }
     },
     "6ffe8b70": function(e, t, a) {
@@ -22566,7 +22579,7 @@ webpackJsonp([0], {
             this.container.visible = this.sprite
         }
         function o(e) {
-            this.le = new d.Pool(r),
+            this.se = new d.Pool(r),
             this.anonPlayerNames = e
         }
         var n = (a("0e566746"),
@@ -22580,11 +22593,11 @@ webpackJsonp([0], {
           , d = (a("af8ba00f"),
         a("753d6e4b"));
         r.prototype = {
-            a: function() {},
-            o: function() {
+            t: function() {},
+            a: function() {
                 this.container.visible = !1
             },
-            n: function(e, t, a, i) {
+            o: function(e, t, a, i) {
                 this.pos = m.copy(e.pos),
                 t && (this.layer = e.layer,
                 this.playerId = e.playerId),
@@ -22593,16 +22606,16 @@ webpackJsonp([0], {
             }
         },
         o.prototype = {
-            l: function(e, t, a, i, r, o) {
-                for (var n = this, l = this.le.m(), m = 0; m < l.length; m++) {
+            n: function(e, t, a, i, r, o) {
+                for (var n = this, l = this.se.l(), m = 0; m < l.length; m++) {
                     var c = l[m];
                     if (c.active) {
                         c.nameTextSet || function() {
                             c.nameTextSet = !0;
-                            var e = t.H(c.playerId)
-                              , i = t.H(a.__id).teamId;
+                            var e = t.U(c.playerId)
+                              , i = t.U(a.__id).teamId;
                             n.anonPlayerNames ? function(e) {
-                                return e.playerId == n.me || e.teamId == i
+                                return e.playerId == n.le || e.teamId == i
                             }(e) || (c.nameText.text = e.anonName) : c.nameText.text = e.name
                         }();
                         var d = s.createCircle(c.pos, 1)
@@ -22620,7 +22633,7 @@ webpackJsonp([0], {
                 }
             },
             getDeadBodyById: function(e) {
-                for (var t = this.le.m(), a = 0; a < t.length; a++) {
+                for (var t = this.se.l(), a = 0; a < t.length; a++) {
                     var i = t[a];
                     if (i.active && i.playerId == e)
                         return i
@@ -22629,7 +22642,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            ce: o
+            me: o
         }
     },
     "7510cc08": function(e, t, a) {
@@ -22669,7 +22682,7 @@ webpackJsonp([0], {
             this.creator = {
                 type: e
             },
-            this.de = [],
+            this.ce = [],
             this.activeCount = 0
         }
         function r(e) {
@@ -22681,30 +22694,30 @@ webpackJsonp([0], {
           , n = a("f398b7c7");
         i.prototype = {
             alloc: function() {
-                for (var e = null, t = 0; t < this.de.length; t++)
-                    if (!this.de[t].active) {
-                        e = this.de[t];
+                for (var e = null, t = 0; t < this.ce.length; t++)
+                    if (!this.ce[t].active) {
+                        e = this.ce[t];
                         break
                     }
                 return e || (e = new this.creator.type,
-                this.de.push(e)),
+                this.ce.push(e)),
                 e.active = !0,
-                e.a(),
+                e.t(),
                 this.activeCount++,
                 e
             },
             free: function(e) {
-                if (e.o(),
+                if (e.a(),
                 e.active = !1,
                 this.activeCount--,
-                this.de.length > 128 && this.activeCount < this.de.length / 2) {
-                    for (var t = [], a = 0; a < this.de.length; a++)
-                        this.de[a].active && t.push(this.de[a]);
-                    this.de = t
+                this.ce.length > 128 && this.activeCount < this.ce.length / 2) {
+                    for (var t = [], a = 0; a < this.ce.length; a++)
+                        this.ce[a].active && t.push(this.ce[a]);
+                    this.ce = t
                 }
             },
-            m: function() {
-                return this.de
+            l: function() {
+                return this.ce
             }
         },
         r.prototype = {
@@ -22738,12 +22751,12 @@ webpackJsonp([0], {
                 this.idToObj[t] = r,
                 this.seenCount++,
                 o = !0),
-                r.n(a, !0, o, i),
+                r.o(a, !0, o, i),
                 r
             },
             updateObjPart: function(e, t, a) {
                 var i = this.getObjById(e);
-                i ? i.n(t, !1, !1, a) : (console.log("updateObjPart, missing object", e),
+                i ? i.o(t, !1, !1, a) : (console.log("updateObjPart, missing object", e),
                 n.storeGeneric("objectPoolErr", "updateObjPart"))
             },
             deleteObj: function(e) {
@@ -28074,8 +28087,8 @@ webpackJsonp([0], {
                     switchDelay: .25,
                     barrelLength: 2.2,
                     recoilTime: 1e10,
-                    moveSpread: 10,
-                    shotSpread: 10,
+                    moveSpread: 6,
+                    shotSpread: 7,
                     bulletCount: 1,
                     burstCount: 3,
                     bulletType: "bullet_m93r",
@@ -29074,14 +29087,14 @@ webpackJsonp([0], {
             this.onJoin = s,
             this.onQuit = l,
             this.pixi = e,
-            this.pe = t,
+            this.de = t,
             this.ambientSounds = {},
             this.victoryMusic = null,
             this.localization = a,
             this.config = i,
-            this.ue = r,
-            this.he = o,
-            this.ge = n,
+            this.pe = r,
+            this.ue = o,
+            this.he = n,
             this.ws = null,
             this.connecting = !1,
             this.connected = !1
@@ -29129,7 +29142,7 @@ webpackJsonp([0], {
           , U = a("3160ea28")
           , G = a("d3da5587");
         r.prototype = {
-            k: function(e, t, a) {
+            _: function(e, t, a) {
                 var i = this;
                 if (!(this.connecting || this.connected || this.initialized)) {
                     this.ws && (this.ws.onerror = function() {}
@@ -29154,7 +29167,7 @@ webpackJsonp([0], {
                         this.ws.onopen = function() {
                             i.connecting = !1,
                             i.connected = !0,
-                            i.a();
+                            i.t();
                             var t = new u.JoinMsg;
                             t.protocol = n.protocolVersion,
                             t.privData = e,
@@ -29162,7 +29175,7 @@ webpackJsonp([0], {
                             t.emotes = i.emoteLoadout,
                             t.useTouch = y.touch,
                             t.bot = !1,
-                            i.ye(u.Msg.Join, t)
+                            i.ge(u.Msg.Join, t)
                         }
                         ,
                         this.ws.onmessage = function(e) {
@@ -29170,7 +29183,7 @@ webpackJsonp([0], {
                                 var a = t.deserializeMsgType();
                                 if (a == u.Msg.None)
                                     break;
-                                i.xe(a, t.getStream())
+                                i.ye(a, t.getStream())
                             }
                         }
                         ,
@@ -29194,51 +29207,51 @@ webpackJsonp([0], {
                     }
                 }
             },
-            a: function() {
+            t: function() {
                 var e;
                 this.canvasMode = this.pixi.renderer.type == o.RENDERER_TYPE.CANVAS,
+                this.xe = 0,
                 this.fe = 0,
-                this.we = 0,
-                this.I = !1,
-                this.be = new q._e(this.ue,this.config),
-                this.N = new b._,
-                this.ve = new R.Se(this.canvasMode),
-                this.ke = new E.d(this.ve),
-                this.ze = new A.Me,
-                this.Pe = new F.Te,
-                this.Ce = new w.Ie,
-                this.Ae = new P.De,
-                this.Ee = new L.Be,
-                this.Oe = new z.oe,
-                this.Fe = new O.Le(this.pe),
-                this.Re = new f.j,
-                this.je = new N.c,
-                this.Ne = new _.ce(this.config.get("anonPlayerNames")),
-                this.qe = new S.u,
-                this.Ue = new I.Ge,
-                this.We = new T.Ve(this.canvasMode),
-                this.He = new B.Ke,
-                this.Xe = new U.K(this,this.pe,this.He,this.ke,this.localization,this.canvasMode,this.be,this.he,this.ge),
-                this.Ze = new G.Ye(this.localization,this.he),
-                this.Je = new k.Qe(this.pe,this.Xe,this.Pe,this.N,this.ze),
-                this.$e = new j.se(this.ke,this.pe,this.Xe);
+                this.k = !1,
+                this.we = new q.be(this.pe,this.config),
+                this.j = new b.f,
+                this._e = new R.ve(this.canvasMode),
+                this.Se = new E.c(this._e),
+                this.ke = new A.ze,
+                this.Me = new F.Pe,
+                this.Te = new w.Ce,
+                this.Ie = new P.Ae,
+                this.De = new L.Ee,
+                this.Be = new z.re,
+                this.Oe = new O.Fe(this.de),
+                this.Le = new f.O,
+                this.Re = new N.m,
+                this.je = new _.me(this.config.get("anonPlayerNames")),
+                this.Ne = new S.p,
+                this.qe = new I.Ue,
+                this.Ge = new T.We(this.canvasMode),
+                this.Ve = new B.He,
+                this.Ke = new U.H(this,this.de,this.Ve,this.Se,this.localization,this.canvasMode,this.we,this.ue,this.he),
+                this.Xe = new G.Ze(this.localization,this.ue),
+                this.Ye = new k.Je(this.de,this.Ke,this.Me,this.j,this.ke),
+                this.Qe = new j.ne(this.Se,this.de,this.Ke);
                 var t = (e = {},
-                i(e, l.Type.Player, this.Pe.et),
-                i(e, l.Type.Obstacle, this.ze.Z),
-                i(e, l.Type.Loot, this.Ue.tt),
-                i(e, l.Type.DeadBody, this.Ne.le),
-                i(e, l.Type.Building, this.ze.at),
-                i(e, l.Type.Structure, this.ze.it),
-                i(e, l.Type.Decal, this.qe.p),
-                i(e, l.Type.Projectile, this.Ee.rt),
-                i(e, l.Type.Smoke, this.je.e),
-                i(e, l.Type.Airdrop, this.Re.O),
+                i(e, l.Type.Player, this.Me.$e),
+                i(e, l.Type.Obstacle, this.ke.K),
+                i(e, l.Type.Loot, this.qe.et),
+                i(e, l.Type.DeadBody, this.je.se),
+                i(e, l.Type.Building, this.ke.tt),
+                i(e, l.Type.Structure, this.ke.at),
+                i(e, l.Type.Decal, this.Ne.d),
+                i(e, l.Type.Projectile, this.De.it),
+                i(e, l.Type.Smoke, this.Re.e),
+                i(e, l.Type.Airdrop, this.Le.B),
                 e);
-                this.ot = new D.Creator;
+                this.rt = new D.Creator;
                 for (var a in t)
-                    t.hasOwnProperty(a) && this.ot.registerType(a, t[a]);
+                    t.hasOwnProperty(a) && this.rt.registerType(a, t[a]);
                 this.debugDisplay = new o.Graphics;
-                for (var r = [this.ze.display.ground, this.ve.layers[0], this.ve.ground, this.ve.layers[1], this.ve.layers[2], this.ve.layers[3], this.debugDisplay, this.We.gasRenderer.display, this.be.container, this.Je.container, this.Xe.container, this.Je.indContainer, this.He.container], n = 0; n < r.length; n++) {
+                for (var r = [this.ke.display.ground, this._e.layers[0], this._e.ground, this._e.layers[1], this._e.layers[2], this._e.layers[3], this.debugDisplay, this.Ge.gasRenderer.display, this.we.container, this.Ye.container, this.Ke.container, this.Ye.indContainer, this.Ve.container], n = 0; n < r.length; n++) {
                     var s = r[n];
                     s && (s.interactiveChildren = !1,
                     this.pixi.stage.addChild(s))
@@ -29250,11 +29263,11 @@ webpackJsonp([0], {
                 this.inputMsgTimeout = 0,
                 this.prevInputMsg = new u.InputMsg,
                 this.playingTicker = 0,
-                this.nt = 0,
-                this.me = 0,
-                this.st = null,
-                this.lt = !1,
-                this.f = 1,
+                this.ot = 0,
+                this.le = 0,
+                this.nt = null,
+                this.st = !1,
+                this.u = 1,
                 this.debugZoom = 1,
                 this.useDebugZoom = !1,
                 this.soundUpdateThrottle = 0,
@@ -29263,7 +29276,7 @@ webpackJsonp([0], {
                 this.seqSendTime = 0,
                 this.pings = [],
                 this.debugPingTime = 0,
-                this.N.setShakeEnabled(this.config.get("screenShake")),
+                this.j.setShakeEnabled(this.config.get("screenShake")),
                 this.name = this.config.get("playerName"),
                 this.anonPlayerNames = this.config.get("anonPlayerNames");
                 var m = {
@@ -29282,28 +29295,27 @@ webpackJsonp([0], {
                       , v = p.clamp(y, 1, 255);
                     this.emoteLoadout[m[g]] = v
                 }
-                this.Je.updateEmoteWheel(this.emoteLoadout),
-                this.ambientSounds.wavesInst || (this.ambientSounds.wavesInst = this.pe.playSound("ambient_waves_01", {
+                this.Ye.updateEmoteWheel(this.emoteLoadout),
+                this.ambientSounds.wavesInst || (this.ambientSounds.wavesInst = this.de.playSound("ambient_waves_01", {
                     channel: "ambient",
                     startSilent: !0,
                     loop: !0,
                     forceStart: !0
                 })),
-                this.ambientSounds.riverInst || (this.ambientSounds.riverInst = this.pe.playSound("ambient_stream_01", {
+                this.ambientSounds.riverInst || (this.ambientSounds.riverInst = this.de.playSound("ambient_stream_01", {
                     channel: "ambient",
                     startSilent: !0,
                     loop: !0,
                     forceStart: !0
                 })),
-                document.hasFocus() || this.pe.playSound("notification_start_01", {
+                document.hasFocus() || this.de.playSound("notification_start_01", {
                     channel: "ui"
                 }),
                 x.removeConsent(),
-                M.storeGeneric("language", this.config.get("language")),
-                this.mt(),
+                this.lt(),
                 this.initialized = !0
             },
-            o: function() {
+            a: function() {
                 if (this.ws && (this.ws.onmessage = function() {}
                 ,
                 this.ws.close(),
@@ -29312,363 +29324,361 @@ webpackJsonp([0], {
                 this.connected = !1,
                 this.initialized) {
                     for (this.initialized = !1,
-                    this.Je.o(),
-                    this.Ze.o(),
-                    this.Xe.o(),
-                    this.He.destroy(),
-                    this.We.free(),
-                    this.Re.o(),
-                    this.Fe.o(),
-                    this.ze.o(),
-                    this.ke.o(),
-                    this.ve.o(),
-                    this.pe.stopAll(); this.pixi.stage.children.length > 0; ) {
+                    this.Ye.a(),
+                    this.Xe.a(),
+                    this.Ke.a(),
+                    this.Ve.destroy(),
+                    this.Ge.free(),
+                    this.Le.a(),
+                    this.Oe.a(),
+                    this.ke.a(),
+                    this.Se.a(),
+                    this._e.a(),
+                    this.de.stopAll(); this.pixi.stage.children.length > 0; ) {
                         var e = this.pixi.stage.children[0];
                         this.pixi.stage.removeChild(e),
                         e.destroy({
                             children: !0
                         })
                     }
-                    M.storeGeneric("socketTimeout", this.I)
+                    M.storeGeneric("socketTimeout", this.k)
                 }
             },
-            ct: function() {
-                return this.initialized && this.playing && !this.spectating && !this.Xe.displayingStats
+            mt: function() {
+                return this.initialized && this.playing && !this.spectating && !this.Ke.displayingStats
             },
-            l: function(e) {
-                this.fe++;
-                var t = this.je.particles
-                  , a = this.ze.Z.m()
-                  , i = d.t
-                  , r = 0
-                  , o = {};
-                if (o.render = o.render || {},
+            n: function(e) {
+                this.xe++;
+                var t = this.Re.particles
+                  , a = this.ke.K.l()
+                  , i = 0
+                  , r = {};
+                if (r.render = r.render || {},
                 this.playing && (this.playingTicker += e),
-                this.Pe.l(e, this.me, this.ve, this.ke, this.N, this.ze, this.he, this.pe, this.Je.wheelKeyTriggered, this.gameOver, this.spectating),
+                this.Me.n(e, this.le, this._e, this.Se, this.j, this.ke, this.ue, this.de, this.Ye.wheelKeyTriggered, this.gameOver, this.spectating),
                 this.soundUpdateThrottle -= e,
                 this.soundUpdateThrottle < 0) {
                     this.soundUpdateThrottle = .2;
-                    var l = this.st.pos
+                    var o = this.nt.pos
+                      , l = 0
                       , m = 0
-                      , c = 0
-                      , g = 1;
-                    if (this.ze.isInOcean(l))
-                        m = 1,
-                        c = 0,
-                        g = 0;
-                    else {
-                        var f = this.ze.distanceToShore(l);
-                        m = p.delerp(f, 50, 0),
+                      , c = 1;
+                    if (this.ke.isInOcean(o))
+                        l = 1,
+                        m = 0,
                         c = 0;
-                        for (var w = 0; w < this.ze.terrain.rivers.length; w++) {
-                            var b = this.ze.terrain.rivers[w]
-                              , _ = b.spline.getClosestTtoPoint(l)
-                              , v = b.spline.getPos(_)
-                              , S = h.length(h.sub(v, l))
-                              , k = b.waterWidth + 2
-                              , z = p.delerp(S, 30 + k, k)
-                              , M = p.clamp(b.waterWidth / 8, .25, 1);
-                            c = p.max(z * M, c)
+                    else {
+                        var g = this.ke.distanceToShore(o);
+                        l = p.delerp(g, 50, 0),
+                        m = 0;
+                        for (var f = 0; f < this.ke.terrain.rivers.length; f++) {
+                            var w = this.ke.terrain.rivers[f]
+                              , b = w.spline.getClosestTtoPoint(o)
+                              , _ = w.spline.getPos(b)
+                              , v = h.length(h.sub(_, o))
+                              , S = w.waterWidth + 2
+                              , k = p.delerp(v, 30 + S, S)
+                              , z = p.clamp(w.waterWidth / 8, .25, 1);
+                            m = p.max(k * z, m)
                         }
-                        c *= 1 - m,
-                        1 == this.st.layer && (c = 0),
-                        g = p.clamp(1 - (m + c), 0, 1)
+                        m *= 1 - l,
+                        1 == this.nt.layer && (m = 0),
+                        c = p.clamp(1 - (l + m), 0, 1)
                     }
-                    this.pe.setVolume(this.ambientSounds.wavesInst, m),
-                    this.pe.setVolume(this.ambientSounds.riverInst, c),
-                    this.pe.setVolume(this.ambientSounds.windInst, g)
+                    this.de.setVolume(this.ambientSounds.wavesInst, l),
+                    this.de.setVolume(this.ambientSounds.riverInst, m),
+                    this.de.setVolume(this.ambientSounds.windInst, c)
                 }
-                this.N.pos = h.copy(this.st.pos),
-                this.N.applyShake();
-                var P = this.st.dt()
-                  , T = p.min(this.N.screenWidth, this.N.screenHeight)
-                  , I = p.max(this.N.screenWidth, this.N.screenHeight)
-                  , A = p.max(T * (16 / 9), I);
-                this.N.f = .5 * A / (P * this.N.ppu);
-                var D = this.st.zoomFast ? 3 : 2
-                  , E = this.st.zoomFast ? 3 : 1.4
-                  , B = this.N.f > this.N.zoom ? D : E;
-                this.N.zoom = p.lerp(e * B, this.N.zoom, this.N.f),
-                this.pe.cameraPos = h.copy(this.N.pos),
-                this.ue.Y(C.Key.Escape) && this.Xe.toggleEscMenu(),
-                (this.he.isBindPressed(s.ToggleMap) || this.ue.Y(C.Key.G) && !this.he.isKeyBound(C.Key.G)) && this.Xe.displayMapLarge(!1),
-                this.he.isBindPressed(s.CycleUIMode) && this.Xe.cycleVisibilityMode(),
-                (this.he.isBindPressed(s.HideUI) || this.ue.Y(C.Key.Escape) && !this.Xe.hudVisible) && this.Xe.cycleHud();
-                var O = this.st.pos
-                  , F = this.N.screenToPoint(this.ue.mousePos)
-                  , L = h.sub(F, O)
-                  , R = h.length(L)
-                  , j = R > 1e-5 ? h.div(L, R) : h.create(1, 0);
-                this.Je.wheelDisplayed && (R = this.prevInputMsg.toMouseLen,
-                j = this.prevInputMsg.toMouseDir);
-                var N = new u.InputMsg;
-                if (N.seq = this.seq,
+                this.j.pos = h.copy(this.nt.pos),
+                this.j.applyShake();
+                var M = this.nt.ct()
+                  , P = p.min(this.j.screenWidth, this.j.screenHeight)
+                  , T = p.max(this.j.screenWidth, this.j.screenHeight)
+                  , I = p.max(P * (16 / 9), T);
+                this.j.u = .5 * I / (M * this.j.ppu);
+                var A = this.nt.zoomFast ? 3 : 2
+                  , D = this.nt.zoomFast ? 3 : 1.4
+                  , E = this.j.u > this.j.zoom ? A : D;
+                this.j.zoom = p.lerp(e * E, this.j.zoom, this.j.u),
+                this.de.cameraPos = h.copy(this.j.pos),
+                this.pe.Z(C.Key.Escape) && this.Ke.toggleEscMenu(),
+                (this.ue.isBindPressed(s.ToggleMap) || this.pe.Z(C.Key.G) && !this.ue.isKeyBound(C.Key.G)) && this.Ke.displayMapLarge(!1),
+                this.ue.isBindPressed(s.CycleUIMode) && this.Ke.cycleVisibilityMode(),
+                (this.ue.isBindPressed(s.HideUI) || this.pe.Z(C.Key.Escape) && !this.Ke.hudVisible) && this.Ke.cycleHud();
+                var B = this.nt.pos
+                  , O = this.j.screenToPoint(this.pe.mousePos)
+                  , F = h.sub(O, B)
+                  , L = h.length(F)
+                  , R = L > 1e-5 ? h.div(F, L) : h.create(1, 0);
+                this.Ye.wheelDisplayed && (L = this.prevInputMsg.toMouseLen,
+                R = this.prevInputMsg.toMouseDir);
+                var j = new u.InputMsg;
+                if (j.seq = this.seq,
                 !this.spectating) {
-                    var q = this.be.getTouchMovement(this.N);
-                    if (this.be.moveDetected) {
-                        var U = 255 * p.clamp(q.moveLen, 0, 1);
-                        N.moveLeft = q.left,
-                        N.moveRight = q.right,
-                        N.moveUp = q.up,
-                        N.moveDown = q.down,
-                        N.moveLen = U
+                    var N = this.we.getTouchMovement(this.j);
+                    if (this.we.moveDetected) {
+                        var q = 255 * p.clamp(N.moveLen, 0, 1);
+                        j.moveLeft = N.left,
+                        j.moveRight = N.right,
+                        j.moveUp = N.up,
+                        j.moveDown = N.down,
+                        j.moveLen = q
                     } else
-                        N.moveLeft = this.he.isBindDown(s.MoveLeft) || this.ue.ae(C.Key.Left) && !this.he.isKeyBound(C.Key.Left),
-                        N.moveRight = this.he.isBindDown(s.MoveRight) || this.ue.ae(C.Key.Right) && !this.he.isKeyBound(C.Key.Right),
-                        N.moveUp = this.he.isBindDown(s.MoveUp) || this.ue.ae(C.Key.Up) && !this.he.isKeyBound(C.Key.Up),
-                        N.moveDown = this.he.isBindDown(s.MoveDown) || this.ue.ae(C.Key.Down) && !this.he.isKeyBound(C.Key.Down),
-                        N.moveLen = 255;
+                        j.moveLeft = this.ue.isBindDown(s.MoveLeft) || this.pe.te(C.Key.Left) && !this.ue.isKeyBound(C.Key.Left),
+                        j.moveRight = this.ue.isBindDown(s.MoveRight) || this.pe.te(C.Key.Right) && !this.ue.isKeyBound(C.Key.Right),
+                        j.moveUp = this.ue.isBindDown(s.MoveUp) || this.pe.te(C.Key.Up) && !this.ue.isKeyBound(C.Key.Up),
+                        j.moveDown = this.ue.isBindDown(s.MoveDown) || this.pe.te(C.Key.Down) && !this.ue.isKeyBound(C.Key.Down),
+                        j.moveLen = 255;
                     if (y.touch) {
-                        var G = this.st.U.curWeapIdx == n.WeaponSlot.Throwable
-                          , W = this.be.getAimMovement(G, this.N);
-                        N.toMouseDir = W.toAimDir;
-                        var V = W.toAimLen / 10;
-                        N.toMouseLen = V
+                        var U = this.nt.q.curWeapIdx == n.WeaponSlot.Throwable
+                          , G = this.we.getAimMovement(U, this.j);
+                        j.toMouseDir = G.toAimDir;
+                        var W = G.toAimLen / 10;
+                        j.toMouseLen = W
                     } else
-                        N.toMouseDir = h.copy(j),
-                        N.toMouseLen = R;
-                    N.toMouseDir = h.normalizeSafe(N.toMouseDir, h.create(1, 0)),
-                    N.toMouseLen = p.clamp(N.toMouseLen, 0, u.kMouseMaxLen),
-                    N.shootStart = this.he.isBindPressed(s.Fire) || this.be.shotDetected,
-                    N.shootHold = this.he.isBindDown(s.Fire) || this.be.shotDetected,
-                    N.portrait = this.N.screenWidth < this.N.screenHeight;
-                    for (var H = [s.Reload, s.Revive, s.Use, s.Loot, s.Cancel, s.EquipPrimary, s.EquipSecondary, s.EquipThrowable, s.EquipMelee, s.EquipNextWeap, s.EquipPrevWeap, s.EquipLastWeap, s.EquipOtherGun, s.EquipPrevScope, s.EquipNextScope, s.StowWeapons], K = 0; K < H.length; K++) {
-                        var X = H[K];
-                        this.he.isBindPressed(X) && N.addInput(X)
+                        j.toMouseDir = h.copy(R),
+                        j.toMouseLen = L;
+                    j.toMouseDir = h.normalizeSafe(j.toMouseDir, h.create(1, 0)),
+                    j.toMouseLen = p.clamp(j.toMouseLen, 0, u.kMouseMaxLen),
+                    j.shootStart = this.ue.isBindPressed(s.Fire) || this.we.shotDetected,
+                    j.shootHold = this.ue.isBindDown(s.Fire) || this.we.shotDetected,
+                    j.portrait = this.j.screenWidth < this.j.screenHeight;
+                    for (var V = [s.Reload, s.Revive, s.Use, s.Loot, s.Cancel, s.EquipPrimary, s.EquipSecondary, s.EquipThrowable, s.EquipMelee, s.EquipNextWeap, s.EquipPrevWeap, s.EquipLastWeap, s.EquipOtherGun, s.EquipPrevScope, s.EquipNextScope, s.StowWeapons], H = 0; H < V.length; H++) {
+                        var K = V[H];
+                        this.ue.isBindPressed(K) && j.addInput(K)
                     }
-                    if (this.he.isBindPressed(s.Interact)) {
-                        for (var Z = [s.Revive, s.Use, s.Loot], Y = [], J = 0; J < Z.length; J++) {
-                            var Q = Z[J];
-                            this.he.getBind(Q) || Y.push(Q)
+                    if (this.ue.isBindPressed(s.Interact)) {
+                        for (var X = [s.Revive, s.Use, s.Loot], Z = [], Y = 0; Y < X.length; Y++) {
+                            var J = X[Y];
+                            this.ue.getBind(J) || Z.push(J)
                         }
-                        if (Y.length == Z.length)
-                            N.addInput(s.Interact);
+                        if (Z.length == X.length)
+                            j.addInput(s.Interact);
                         else
-                            for (var $ = 0; $ < Y.length; $++)
-                                N.addInput(Y[$])
+                            for (var Q = 0; Q < Z.length; Q++)
+                                j.addInput(Z[Q])
                     }
-                    (this.he.isBindPressed(s.SwapWeapSlots) || this.Xe.swapWeapSlots) && (N.addInput(s.SwapWeapSlots),
-                    this.st.gunSwitchCooldown = 0),
-                    this.Xe.reloadTouched && N.addInput(s.Reload),
-                    this.Xe.interactionTouched && (N.addInput(s.Interact),
-                    N.addInput(s.Cancel));
-                    for (var ee = 0; ee < this.Ze.uiEvents.length; ee++) {
-                        var te = this.Ze.uiEvents[ee];
-                        if ("use" == te.action)
-                            if ("weapon" == te.type) {
-                                var ae = {
+                    (this.ue.isBindPressed(s.SwapWeapSlots) || this.Ke.swapWeapSlots) && (j.addInput(s.SwapWeapSlots),
+                    this.nt.gunSwitchCooldown = 0),
+                    this.Ke.reloadTouched && j.addInput(s.Reload),
+                    this.Ke.interactionTouched && (j.addInput(s.Interact),
+                    j.addInput(s.Cancel));
+                    for (var $ = 0; $ < this.Xe.uiEvents.length; $++) {
+                        var ee = this.Xe.uiEvents[$];
+                        if ("use" == ee.action)
+                            if ("weapon" == ee.type) {
+                                var te = {
                                     0: s.EquipPrimary,
                                     1: s.EquipSecondary,
                                     2: s.EquipMelee,
                                     3: s.EquipThrowable
                                 }
-                                  , ie = ae[te.data];
-                                ie && N.addInput(ie)
+                                  , ae = te[ee.data];
+                                ae && j.addInput(ae)
                             } else
-                                N.useItem = te.data
+                                j.useItem = ee.data
                     }
-                    this.he.isBindPressed(s.UseBandage) ? N.useItem = "bandage" : this.he.isBindPressed(s.UseHealthKit) ? N.useItem = "healthkit" : this.he.isBindPressed(s.UseSoda) ? N.useItem = "soda" : this.he.isBindPressed(s.UsePainkiller) && (N.useItem = "painkiller");
-                    for (var re = !1, oe = 0; oe < this.Ze.uiEvents.length; oe++) {
-                        var ne = this.Ze.uiEvents[oe];
-                        if ("drop" == ne.action) {
-                            var se = new u.DropItemMsg;
-                            if ("weapon" == ne.type) {
-                                var le = this.st.U.weapons;
-                                se.item = le[ne.data].name,
-                                se.weapIdx = ne.data
+                    this.ue.isBindPressed(s.UseBandage) ? j.useItem = "bandage" : this.ue.isBindPressed(s.UseHealthKit) ? j.useItem = "healthkit" : this.ue.isBindPressed(s.UseSoda) ? j.useItem = "soda" : this.ue.isBindPressed(s.UsePainkiller) && (j.useItem = "painkiller");
+                    for (var ie = !1, re = 0; re < this.Xe.uiEvents.length; re++) {
+                        var oe = this.Xe.uiEvents[re];
+                        if ("drop" == oe.action) {
+                            var ne = new u.DropItemMsg;
+                            if ("weapon" == oe.type) {
+                                var se = this.nt.q.weapons;
+                                ne.item = se[oe.data].name,
+                                ne.weapIdx = oe.data
                             } else {
-                                var me = "";
-                                me = "helmet" == ne.data ? this.st.q.helmet : "chest" == ne.data ? this.st.q.chest : ne.data,
-                                se.item = me
+                                var le = "";
+                                le = "helmet" == oe.data ? this.nt.N.helmet : "chest" == oe.data ? this.nt.N.chest : oe.data,
+                                ne.item = le
                             }
-                            "" != se.item && (this.ye(u.Msg.DropItem, se),
-                            re = !0)
+                            "" != ne.item && (this.ge(u.Msg.DropItem, ne),
+                            ie = !0)
                         }
                     }
-                    re && this.pe.playSound("loot_drop_01", {
+                    ie && this.de.playSound("loot_drop_01", {
                         channel: "ui"
                     })
                 }
-                var ce = this.Xe.specNext || this.spectating && this.ue.Y(C.Key.Right)
-                  , de = this.Xe.specPrev || this.spectating && this.ue.Y(C.Key.Left);
-                if (this.Xe.beginSpectating || ce || de) {
+                var me = this.Ke.specNext || this.spectating && this.pe.Z(C.Key.Right)
+                  , ce = this.Ke.specPrev || this.spectating && this.pe.Z(C.Key.Left);
+                if (this.Ke.beginSpectating || me || ce) {
                     this.gameOver = !1;
-                    var pe = new u.SpectateMsg;
-                    pe.specNext = ce,
-                    pe.specPrev = de,
-                    this.ye(u.Msg.Spectate, pe)
+                    var de = new u.SpectateMsg;
+                    de.specNext = me,
+                    de.specPrev = ce,
+                    this.ge(u.Msg.Spectate, de)
                 }
-                this.Xe.beginSpectating = !1,
-                this.Xe.specNext = !1,
-                this.Xe.specPrev = !1,
-                this.Xe.reloadTouched = !1,
-                this.Xe.interactionTouched = !1,
-                this.Xe.swapWeapSlots = !1;
-                var ue = !1;
-                for (var he in N)
-                    if (N.hasOwnProperty(he)) {
-                        if ("inputs" == he)
-                            ue = N[he].length > 0;
-                        else if ("toMouseDir" == he) {
-                            var ge = p.clamp(h.dot(N[he], this.prevInputMsg[he]), -1, 1)
-                              , ye = p.rad2deg(Math.acos(ge));
-                            ue = ye > .4
+                this.Ke.beginSpectating = !1,
+                this.Ke.specNext = !1,
+                this.Ke.specPrev = !1,
+                this.Ke.reloadTouched = !1,
+                this.Ke.interactionTouched = !1,
+                this.Ke.swapWeapSlots = !1;
+                var pe = !1;
+                for (var ue in j)
+                    if (j.hasOwnProperty(ue)) {
+                        if ("inputs" == ue)
+                            pe = j[ue].length > 0;
+                        else if ("toMouseDir" == ue) {
+                            var he = p.clamp(h.dot(j[ue], this.prevInputMsg[ue]), -1, 1)
+                              , ge = p.rad2deg(Math.acos(he));
+                            pe = ge > .4
                         } else
-                            "toMouseLen" == he ? ue = Math.abs(this.prevInputMsg[he] - N[he]) > .5 : "shootStart" == he ? ue = N[he] || N[he] != this.prevInputMsg[he] : this.prevInputMsg[he] != N[he] && (ue = !0);
-                        if (ue)
+                            "toMouseLen" == ue ? pe = Math.abs(this.prevInputMsg[ue] - j[ue]) > .5 : "shootStart" == ue ? pe = j[ue] || j[ue] != this.prevInputMsg[ue] : this.prevInputMsg[ue] != j[ue] && (pe = !0);
+                        if (pe)
                             break
                     }
                 this.inputMsgTimeout -= e,
-                (ue || this.inputMsgTimeout < 0) && (this.seqInFlight || (this.seq = (this.seq + 1) % 256,
+                (pe || this.inputMsgTimeout < 0) && (this.seqInFlight || (this.seq = (this.seq + 1) % 256,
                 this.seqSendTime = Date.now(),
                 this.seqInFlight = !0,
-                N.seq = this.seq),
-                this.ye(u.Msg.Input, N),
+                j.seq = this.seq),
+                this.ge(u.Msg.Input, j),
                 this.inputMsgTimeout = 1,
-                this.prevInputMsg = N),
-                this.Ze.flushInput(),
-                this.ze.l(e, this.st, this.ke, this.pe, this.ve, this.N, o),
-                this.Ue.l(e, this.st, this.N, o),
-                this.Ce.l(e, this.Pe, this.ze, this.N, this.st, this.ve, this.ke, this.pe),
-                this.Ae.l(e, this.Pe, this.ze, this.N, this.st, this.ve, this.ke, this.pe),
-                this.Ee.l(e, this.ke, this.pe, this.st, this.ze, this.ve, this.N),
-                this.Oe.l(e, this.ze, this.N, this.ke, this.pe),
-                this.Re.l(e, this.st, this.N, this.ze, this.ke, this.ve, this.pe),
-                this.Fe.l(e, this.N, this.st, this.ze, this.ve),
-                this.je.l(e, this.N, this.st, this.ze, this.ve),
-                this.$e.l(e, this.me, this.Pe, this.ke, this.pe),
-                this.ke.l(e, this.N, o),
-                this.Ne.l(e, this.Pe, this.st, this.ze, this.N, this.ve),
-                this.qe.l(e, this.ze, this.N),
-                this.He.l(e, this.st, this.N),
-                this.Xe.l(e, this.st, this.me == this.nt, this.ze, this.We, this.Ue, this.Pe, this.N, this.teamMode),
-                this.Ze.l(e, this.st, this.spectating, this.Pe, this.Ue, this.ze, this.he),
-                this.Je.l(e, this.nt, this.st, this.teamMode, this.Ne, this.ve, this.ue, this.he, this.gameOver),
-                this.be.updateDisplay(),
-                this.ve.l(e, this.N, this.ze);
-                for (var xe = 0; xe < this.Je.newPings.length; xe++) {
-                    var fe = this.Je.newPings[xe]
-                      , we = new u.EmoteMsg;
-                    we.type = fe.type,
-                    we.pos = fe.pos,
-                    we.useLoadout = !1,
-                    we.teamOnly = !0,
-                    we.isPing = !0,
-                    this.ye(u.Msg.Emote, we)
+                this.prevInputMsg = j),
+                this.Xe.flushInput(),
+                this.ke.n(e, this.nt, this.Se, this.de, this._e, this.j, r),
+                this.qe.n(e, this.nt, this.j, r),
+                this.Te.n(e, this.Me, this.ke, this.j, this.nt, this._e, this.Se, this.de),
+                this.Ie.n(e, this.Me, this.ke, this.j, this.nt, this._e, this.Se, this.de),
+                this.De.n(e, this.Se, this.de, this.nt, this.ke, this._e, this.j),
+                this.Be.n(e, this.ke, this.j, this.Se, this.de),
+                this.Le.n(e, this.nt, this.j, this.ke, this.Se, this._e, this.de),
+                this.Oe.n(e, this.j, this.nt, this.ke, this._e),
+                this.Re.n(e, this.j, this.nt, this.ke, this._e),
+                this.Qe.n(e, this.le, this.Me, this.Se, this.de),
+                this.Se.n(e, this.j, r),
+                this.je.n(e, this.Me, this.nt, this.ke, this.j, this._e),
+                this.Ne.n(e, this.ke, this.j),
+                this.Ve.n(e, this.nt, this.j),
+                this.Ke.n(e, this.nt, this.le == this.ot, this.ke, this.Ge, this.qe, this.Me, this.j, this.teamMode),
+                this.Xe.n(e, this.nt, this.spectating, this.Me, this.qe, this.ke, this.ue),
+                this.Ye.n(e, this.ot, this.nt, this.teamMode, this.je, this._e, this.pe, this.ue, this.gameOver),
+                this.we.updateDisplay(),
+                this._e.n(e, this.j, this.ke);
+                for (var ye = 0; ye < this.Ye.newPings.length; ye++) {
+                    var xe = this.Ye.newPings[ye]
+                      , fe = new u.EmoteMsg;
+                    fe.type = xe.type,
+                    fe.pos = xe.pos,
+                    fe.useLoadout = !1,
+                    fe.teamOnly = !0,
+                    fe.isPing = !0,
+                    this.ge(u.Msg.Emote, fe)
                 }
-                this.Je.newPings = [];
-                for (var be = 0; be < this.Je.newEmotes.length; be++) {
-                    var _e = this.Je.newEmotes[be]
-                      , ve = new u.EmoteMsg;
-                    ve.type = _e.type,
-                    ve.pos = _e.pos,
-                    ve.useLoadout = _e.useLoadout,
-                    ve.teamOnly = !1,
-                    ve.isPing = !1,
-                    this.ye(u.Msg.Emote, ve)
+                this.Ye.newPings = [];
+                for (var we = 0; we < this.Ye.newEmotes.length; we++) {
+                    var be = this.Ye.newEmotes[we]
+                      , _e = new u.EmoteMsg;
+                    _e.type = be.type,
+                    _e.pos = be.pos,
+                    _e.useLoadout = be.useLoadout,
+                    _e.teamOnly = !1,
+                    _e.isPing = !1,
+                    this.ge(u.Msg.Emote, _e)
                 }
-                if (this.Je.newEmotes = [],
-                this.ut(e, o),
-                ++this.we % 30 == 0) {
-                    for (var Se = (Date.now(),
-                    0); Se < t.length; Se++) {
+                if (this.Ye.newEmotes = [],
+                this.dt(e, r),
+                ++this.fe % 30 == 0) {
+                    for (var ve = d.ut, Se = 0; Se < t.length; Se++) {
                         var ke = t[Se];
-                        ke.active && !ke.fade && i(ke, .8) && r++
+                        ke.active && !ke.fade && ve(ke, d.ht) && i++
                     }
                     for (var ze = 0; ze < a.length; ze++) {
                         var Me = a[ze];
-                        Me.active && !Me.dead && i(Me, .9) && r++
+                        Me.active && !Me.dead && ve(Me, d.gt) && i++
                     }
-                    r && (this.I = !0),
-                    r && this.lt && x.I()
+                    i && (this.k = !0),
+                    i && this.st && x.k()
                 }
             },
-            ut: function(e, t) {
+            dt: function(e, t) {
                 this.pixi.renderer.backgroundColor = g.grass,
-                this.Pe.render(this.N, t),
-                this.Ce.render(this.N, t),
-                this.Ae.render(this.N),
-                this.ze.render(this.N),
-                this.We.render(this.N),
-                this.Xe.render(this.st.pos, this.We, this.N, this.ze),
-                this.Je.render(this.N),
-                this.He.render(this.N),
+                this.Me.render(this.j, t),
+                this.Te.render(this.j, t),
+                this.Ie.render(this.j),
+                this.ke.render(this.j),
+                this.Ge.render(this.j),
+                this.Ke.render(this.nt.pos, this.Ge, this.j, this.ke),
+                this.Ye.render(this.j),
+                this.Ve.render(this.j),
                 v.flush()
             },
-            mt: function() {
+            lt: function() {
                 var e = x.getScreenDimensions()
                   , t = e.width;
                 x.isLandscape() || (t = e.height),
                 y.layout = t <= 850 || y.mobile ? y.Layout.Sm : y.Layout.Lg,
-                this.N.screenWidth = e.width,
-                this.N.screenHeight = e.height,
-                this.ze.resize(this.pixi.renderer, this.canvasMode),
-                this.We.resize(),
-                this.Xe.resize(this.N),
-                this.be.resize(),
-                this.ve.resize(this.N)
+                this.j.screenWidth = e.width,
+                this.j.screenHeight = e.height,
+                this.ke.resize(this.pixi.renderer, this.canvasMode),
+                this.Ge.resize(),
+                this.Ke.resize(this.j),
+                this.we.resize(),
+                this._e.resize(this.j)
             },
-            ht: function(e) {
+            yt: function(e) {
                 for (var t = {
-                    audioManager: this.pe,
-                    renderer: this.ve,
-                    particleBarn: this.ke,
-                    map: this.ze,
-                    smokeBarn: this.je
+                    audioManager: this.de,
+                    renderer: this._e,
+                    particleBarn: this.Se,
+                    map: this.ke,
+                    smokeBarn: this.Re
                 }, a = 0; a < e.delObjIds.length; a++)
                     e.delObjIds[a],
-                    this.ot.deleteObj(e.delObjIds[a]);
+                    this.rt.deleteObj(e.delObjIds[a]);
                 for (var i = 0; i < e.fullObjects.length; i++) {
                     var r = e.fullObjects[i];
-                    this.ot.updateObjFull(r.__type, r.__id, r, t)
+                    this.rt.updateObjFull(r.__type, r.__id, r, t)
                 }
                 for (var o = 0; o < e.partObjects.length; o++) {
                     var s = e.partObjects[o];
-                    this.ot.updateObjPart(s.__id, s, t)
+                    this.rt.updateObjPart(s.__id, s, t)
                 }
-                if (e.activePlayerIdDirty && (this.me = e.activePlayerId),
-                this.spectating = this.me != this.nt,
-                this.st = this.Pe.ne(this.me),
-                this.st.gt(e.activePlayerData, this.Pe),
-                e.activePlayerData.weapsDirty && (this.Xe.weapsDirty = !0),
+                if (e.activePlayerIdDirty && (this.le = e.activePlayerId),
+                this.spectating = this.le != this.ot,
+                this.nt = this.Me.oe(this.le),
+                this.nt.xt(e.activePlayerData, this.Me),
+                e.activePlayerData.weapsDirty && (this.Ke.weapsDirty = !0),
                 this.spectating) {
-                    this.Xe.setSpectating(!0);
-                    var l = this.Pe.H(this.me)
+                    this.Ke.setSpectating(!0);
+                    var l = this.Me.U(this.le)
                       , m = this.anonPlayerNames && 1 == this.teamMode ? l.anonName : l.name;
-                    this.Xe.setSpectatedPlayer(this.me, m),
-                    this.be.hideAll()
+                    this.Ke.setSpectatedPlayer(this.le, m),
+                    this.we.hideAll()
                 }
-                this.st.layer = this.st.q.layer,
-                this.ve.setActiveLayer(this.st.layer),
-                this.pe.activeLayer = this.st.layer;
-                var c = this.st.isUnderground(this.ze);
-                this.ve.setUnderground(c),
-                this.pe.underground = c,
-                e.aliveDirty && this.Xe.updatePlayersAlive(e.aliveCount),
-                this.We.setProgress(e.gasT),
-                e.gasDirty && this.We.setFullState(e.gasT, e.gasData, this.ze, this.Xe);
+                this.nt.layer = this.nt.N.layer,
+                this._e.setActiveLayer(this.nt.layer),
+                this.de.activeLayer = this.nt.layer;
+                var c = this.nt.isUnderground(this.ke);
+                this._e.setUnderground(c),
+                this.de.underground = c,
+                e.aliveDirty && this.Ke.updatePlayersAlive(e.aliveCount),
+                this.Ge.setProgress(e.gasT),
+                e.gasDirty && this.Ge.setFullState(e.gasT, e.gasData, this.ke, this.Ke);
                 for (var d = 0; d < e.teams.length; d++)
-                    this.Pe.setTeamInfo(e.teams[d]);
-                for (var p = this.Pe.H(this.me).teamId, u = this.Pe.getTeamInfo(p), h = 0; h < e.teamData.length; h++) {
+                    this.Me.setTeamInfo(e.teams[d]);
+                for (var p = this.Me.U(this.le).teamId, u = this.Me.getTeamInfo(p), h = 0; h < e.teamData.length; h++) {
                     var g = e.teamData[h];
-                    this.Pe.setTeammateData(u.playerIds[g.playerIdx], g)
+                    this.Me.setTeammateData(u.playerIds[g.playerIdx], g)
                 }
                 for (var y = 0; y < e.bullets.length; y++) {
                     var x = e.bullets[y];
-                    n.bullets[x.bulletType].addFlare ? this.Ae.addFlare(x, this.Pe, this.ve) : this.Ce.addBullet(x, this.Pe, this.ve),
-                    x.shotFx && this.$e.addShot(x.pos, x.layer, x.playerId, x.shotSourceType, x.shotOffhand, x.lastShot)
+                    n.bullets[x.bulletType].addFlare ? this.Ie.addFlare(x, this.Me, this._e) : this.Te.addBullet(x, this.Me, this._e),
+                    x.shotFx && this.Qe.addShot(x.pos, x.layer, x.playerId, x.shotSourceType, x.shotOffhand, x.lastShot)
                 }
                 for (var f = 0; f < e.explosions.length; f++) {
                     var w = e.explosions[f];
-                    this.Oe.addExplosion(w.type, w.pos, w.layer)
+                    this.Be.addExplosion(w.type, w.pos, w.layer)
                 }
                 for (var b = 0; b < e.emotes.length; b++) {
                     var _ = e.emotes[b];
-                    _.isPing ? this.Je.addPing(_) : this.Je.addEmote(_)
+                    _.isPing ? this.Ye.addPing(_) : this.Ye.addEmote(_)
                 }
-                this.Fe.yt(e.planes)
+                this.Oe.ft(e.planes)
             },
-            xe: function(e, t) {
+            ye: function(e, t) {
                 var a = this;
                 switch (e) {
                 case u.Msg.Joined:
@@ -29676,52 +29686,52 @@ webpackJsonp([0], {
                     i.deserialize(t),
                     this.onJoin(),
                     this.teamMode = i.teamMode,
-                    this.nt = i.playerId,
-                    this.lt = 2 & i.gameOpts;
+                    this.ot = i.playerId,
+                    this.st = 2 & i.gameOpts;
                     for (var r = 0; r < i.playerInfoMsgs.length; r++) {
                         var o = i.playerInfoMsgs[r];
-                        this.Pe.xt(o),
-                        this.Pe.ne(o.id)
+                        this.Me.wt(o),
+                        this.Me.oe(o.id)
                     }
-                    i.started || this.Xe.setWaitingForPlayers(!0),
-                    this.Xe.removeAds(),
+                    i.started || this.Ke.setWaitingForPlayers(!0),
+                    this.Ke.removeAds(),
                     this.victoryMusic && (this.victoryMusic.stop(),
                     this.victoryMusic = null);
                     break;
                 case u.Msg.PlayerInfo:
                     var s = new u.PlayerInfoMsg;
                     s.deserialize(t),
-                    this.Pe.xt(s);
+                    this.Me.wt(s);
                     break;
                 case u.Msg.Map:
                     var l = new u.MapMsg;
                     l.deserialize(t),
-                    this.ze.setData(l.width, l.height, l.seed, l.rivers, l.places, l.objects, this.N, this.canvasMode),
-                    this.ze.renderMap(this.pixi.renderer, this.canvasMode);
+                    this.ke.setData(l.width, l.height, l.seed, l.rivers, l.places, l.objects, this.j, this.canvasMode),
+                    this.ke.renderMap(this.pixi.renderer, this.canvasMode);
                     break;
                 case u.Msg.Update:
                     var m = new u.UpdateMsg;
-                    m.deserialize(t, this.ot),
+                    m.deserialize(t, this.rt),
                     this.playing = !0,
-                    this.ht(m);
+                    this.yt(m);
                     break;
                 case u.Msg.Kill:
                     var c = new u.KillMsg;
                     c.deserialize(t);
-                    var d = (this.Pe.ne(c.targetId),
-                    this.Pe.H(c.targetId))
-                      , p = this.Pe.H(c.killCreditId)
+                    var d = (this.Me.oe(c.targetId),
+                    this.Me.U(c.targetId))
+                      , p = this.Me.U(c.killCreditId)
                       , h = c.itemSourceType || c.mapSourceType
                       , g = this.localization.translate("game-" + h)
-                      , y = this.Pe.H(this.me).teamId
+                      , y = this.Me.U(this.le).teamId
                       , f = c.downed && !c.killed || c.damageType == n.DamageType.Gas || c.damageType == n.DamageType.Bleeding || c.damageType == n.DamageType.Airdrop
-                      , w = f ? p : this.Pe.H(c.killerId)
+                      , w = f ? p : this.Me.U(c.killerId)
                       , b = d.name
                       , _ = p.name
                       , v = w.name;
                     if (this.anonPlayerNames) {
                         var S = function(e) {
-                            return e.playerId == a.me || e.teamId == y
+                            return e.playerId == a.le || e.teamId == y
                         };
                         S(d) || (b = d.anonName),
                         S(p) || (_ = p.anonName),
@@ -29730,47 +29740,47 @@ webpackJsonp([0], {
                     b = x.htmlEscape(b),
                     _ = x.htmlEscape(_),
                     v = x.htmlEscape(v),
-                    c.killCreditId == this.me ? this.Xe.showKill({
+                    c.killCreditId == this.le ? this.Ke.showKill({
                         name: _,
                         kills: c.killerKills,
-                        completeKill: c.killerId == this.me
+                        completeKill: c.killerId == this.le
                     }, {
                         name: b,
                         suicide: c.killerId == c.targetId || c.killCreditId == c.targetId,
                         killed: c.killed,
                         downed: c.downed,
                         teamKill: d.teamId == p.teamId
-                    }, g, this.spectating) : c.targetId == this.me && c.downed && !c.killed && this.Xe.showDowned({
+                    }, g, this.spectating) : c.targetId == this.le && c.downed && !c.killed && this.Ke.showDowned({
                         name: _,
                         damageType: c.damageType
                     }, {
                         name: b,
                         suicide: c.killerId == c.targetId || c.killCreditId == c.targetId
                     }, g, this.spectating);
-                    var k = this.Ze.getKillFeedText(b, 0 == w.teamId ? "" : v, g, c.damageType, c.downed && !c.killed)
-                      , z = this.Ze.getKillFeedColor(y, d.teamId, p.teamId);
-                    this.Ze.addKillFeed(k, z),
-                    c.type == n.DamageType.Player && this.Ce.createBulletHit(this.Pe, c.targetId, this.pe);
+                    var k = this.Xe.getKillFeedText(b, 0 == w.teamId ? "" : v, g, c.damageType, c.downed && !c.killed)
+                      , z = this.Xe.getKillFeedColor(y, d.teamId, p.teamId);
+                    this.Xe.addKillFeed(k, z),
+                    c.type == n.DamageType.Player && this.Te.createBulletHit(this.Me, c.targetId, this.de);
                     break;
                 case u.Msg.PlayerStats:
                     var M = new u.PlayerStatsMsg;
                     M.deserialize(t),
-                    this.Xe.setLocalStats(M.playerStats);
+                    this.Ke.setLocalStats(M.playerStats);
                     break;
                 case u.Msg.GameOver:
                     var P = new u.GameOverMsg;
                     P.deserialize(t),
                     this.gameOver = P.gameOver,
-                    this.Xe.showStats({
+                    this.Ke.showStats({
                         victory: P.victory,
                         spectating: this.spectating,
                         gameOver: P.gameOver,
                         stats: P.playerStats,
                         teamRank: P.teamRank,
                         teamMode: this.teamMode
-                    }, this.Pe),
-                    this.be.hideAll(),
-                    P.victory && (!this.spectating || this.teamMode > 1) && (this.victoryMusic = this.pe.playSound("menu_music", {
+                    }, this.Me),
+                    this.we.hideAll(),
+                    P.victory && (!this.spectating || this.teamMode > 1) && (this.victoryMusic = this.de.playSound("menu_music", {
                         channel: "music",
                         delay: 1300,
                         forceStart: !0
@@ -29781,12 +29791,12 @@ webpackJsonp([0], {
                     if (T.deserialize(t),
                     T.type == u.PickupMsgType.Success && T.item) {
                         var C = n.items[T.item];
-                        this.pe.playSound(C.sound.pickup, {
+                        this.de.playSound(C.sound.pickup, {
                             channel: "ui"
                         }),
-                        "throwable" == C.type && (this.st.lastThrowablePickupSfxTicker = .3)
+                        "throwable" == C.type && (this.nt.lastThrowablePickupSfxTicker = .3)
                     } else
-                        this.Ze.displayPickupMessage(T.type);
+                        this.Xe.displayPickupMessage(T.type);
                     break;
                 case u.Msg.Disconnect:
                     var I = new u.DisconnectMsg;
@@ -29794,12 +29804,12 @@ webpackJsonp([0], {
                     this.disconnectMsg = this.localization.translate(I.reason)
                 }
             },
-            ye: function(e, t) {
+            ge: function(e, t) {
                 var a = new u.MsgStream(new ArrayBuffer(4096));
                 a.serializeMsg(e, t),
-                this.ft(a)
+                this.bt(a)
             },
-            ft: function(e) {
+            bt: function(e) {
                 if (this.ws && this.ws.readyState == this.ws.OPEN)
                     try {
                         this.ws.send(e.getBuffer())
@@ -29810,7 +29820,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            wt: r
+            _t: r
         }
     },
     "9e5281a7": function(e, t, a) {
@@ -30065,8 +30075,8 @@ webpackJsonp([0], {
             this.container.addChild(this.sprite)
         }
         function r() {
-            this.tt = new c.Pool(i),
-            this.bt = null
+            this.et = new c.Pool(i),
+            this.vt = null
         }
         var o = a("80ac57a6")
           , n = a("989ad62a")
@@ -30076,13 +30086,13 @@ webpackJsonp([0], {
           , c = (a("af8ba00f"),
         a("753d6e4b"));
         i.prototype = {
-            a: function() {
+            t: function() {
                 this.updatedData = !1
             },
-            o: function() {
+            a: function() {
                 this.container.visible = !1
             },
-            n: function(e, t, a, i) {
+            o: function(e, t, a, i) {
                 if (this.updatedData = !0,
                 this.pos = m.copy(e.pos),
                 t && (this.layer = e.layer,
@@ -30113,9 +30123,9 @@ webpackJsonp([0], {
             }
         },
         r.prototype = {
-            l: function(e, t, a, i) {
-                this.bt = null;
-                for (var r = Number.MAX_VALUE, o = this.tt.m(), n = 0; n < o.length; n++) {
+            n: function(e, t, a, i) {
+                this.vt = null;
+                for (var r = Number.MAX_VALUE, o = this.et.l(), n = 0; n < o.length; n++) {
                     var c = o[n];
                     if (c.active) {
                         if (l.sameLayer(c.layer, t.layer)) {
@@ -30124,7 +30134,7 @@ webpackJsonp([0], {
                               , u = m.sub(t.pos, d)
                               , h = m.lengthSqr(u);
                             h < p * p && h < r && (r = h,
-                            this.bt = c)
+                            this.vt = c)
                         }
                         c.ticker += e;
                         var g = s.delerp(c.ticker, 0, 1)
@@ -30136,12 +30146,12 @@ webpackJsonp([0], {
                     }
                 }
             },
-            _t: function() {
-                return this.bt
+            St: function() {
+                return this.vt
             }
         },
         e.exports = {
-            Ge: r
+            Ue: r
         }
     },
     a508b62a: function(e, t, a) {
@@ -30272,8 +30282,8 @@ webpackJsonp([0], {
             this.isNearDoorError = !1,
             this.doorErrorTicker = 0,
             this.noCeilingRevealTicker = 0,
-            this.q = {},
-            this.U = {
+            this.N = {},
+            this.q = {
                 action: {
                     type: d.None
                 },
@@ -30287,8 +30297,8 @@ webpackJsonp([0], {
             this.layer = 0
         }
         function s() {
-            this.et = new k.Pool(n),
-            this.vt = {},
+            this.$e = new k.Pool(n),
+            this.kt = {},
             this.teamInfo = {},
             this.teammateData = {}
         }
@@ -30381,18 +30391,18 @@ webpackJsonp([0], {
             e
         }();
         n.prototype = {
-            a: function() {
+            t: function() {
                 this.isNew = !1,
                 this.wasInsideObstacle = !1,
                 this.insideObstacleType = "",
                 this.lastInsideObstacleTime = 0,
                 this.playAnim(p.None, 0)
             },
-            o: function() {
+            a: function() {
                 this.container.visible = !1
             },
-            n: function(e, t, a, i) {
-                var r = this.q;
+            o: function(e, t, a, i) {
+                var r = this.N;
                 r.pos = x.copy(e.pos),
                 r.dir = x.copy(e.dir),
                 t && (r.layer = e.layer,
@@ -30408,18 +30418,18 @@ webpackJsonp([0], {
                 r.chest = e.chest,
                 r.curWeapType = e.curWeapType,
                 r.wearingPan = e.wearingPan,
-                this.q.animSeq != this.anim.seq && this.playAnim(this.q.animType, this.q.animSeq),
+                this.N.animSeq != this.anim.seq && this.playAnim(this.N.animType, this.N.animSeq),
                 this.visualsDirty = !0),
                 a && (this.isNew = !0)
             },
-            gt: function(e, t) {
-                var a = this.U.curScope
-                  , i = this.U;
+            xt: function(e, t) {
+                var a = this.q.curScope
+                  , i = this.q;
                 if (i.scopedIn = e.scopedIn,
                 i.health = e.health,
                 e.boostDirty && (i.boost = e.boost),
                 i.action = {
-                    type: this.q.actionType
+                    type: this.N.actionType
                 },
                 e.hasAction && (i.action.time = e.action.time,
                 i.action.duration = e.action.duration,
@@ -30442,53 +30452,53 @@ webpackJsonp([0], {
                     }
                 }
                 e.spectatorCountDirty && (i.spectatorCount = e.spectatorCount),
-                this.U.curScope != a && (this.zoomFast = !0),
-                this.U.scopedIn && (this.zoomFast = !1)
+                this.q.curScope != a && (this.zoomFast = !0),
+                this.q.scopedIn && (this.zoomFast = !1)
             },
-            dt: function() {
-                var e = this.q.downed || this.U.scopedIn ? "1xscope" : this.U.curScope;
+            ct: function() {
+                var e = this.N.downed || this.q.scopedIn ? "1xscope" : this.q.curScope;
                 return c.scopeZoomRadius[e]
             },
-            St: function() {
-                return c.items[this.q.backpack].level
+            zt: function() {
+                return c.items[this.N.backpack].level
             },
-            kt: function() {
-                return c.items[this.q.curWeapType].type
+            Mt: function() {
+                return c.items[this.N.curWeapType].type
             },
-            zt: function(e) {
-                return "" !== this.U.weapons[e].name
+            Pt: function(e) {
+                return "" !== this.q.weapons[e].name
             },
             hasActivePan: function() {
-                return this.q.wearingPan || "pan" == this.q.curWeapType && this.currentAnim() != p.Melee
+                return this.N.wearingPan || "pan" == this.N.curWeapType && this.currentAnim() != p.Melee
             },
             getPanSegment: function() {
-                var e = this.q.wearingPan ? "unequipped" : "equipped";
+                var e = this.N.wearingPan ? "unequipped" : "equipped";
                 return c.items.pan.reflectSurface[e]
             },
-            l: function(e, t, a, i, r, o, n, s, l, m, g) {
-                var w = c.items[this.q.curWeapType]
+            n: function(e, t, a, i, r, o, n, s, l, m, g) {
+                var w = c.items[this.N.curWeapType]
                   , S = this.__id == s
-                  , k = t.ne(s);
+                  , k = t.oe(s);
                 this.posOld = x.copy(this.pos),
                 this.dirOld = x.copy(this.dir),
-                this.pos = x.copy(this.q.pos),
-                this.dir = x.copy(this.q.dir),
-                this.layer = this.q.layer,
-                this.downed = this.q.downed;
-                var M = this.weapType != this.q.curWeapType;
-                this.weapType = this.q.curWeapType,
+                this.pos = x.copy(this.N.pos),
+                this.dir = x.copy(this.N.dir),
+                this.layer = this.N.layer,
+                this.downed = this.N.downed;
+                var M = this.weapType != this.N.curWeapType;
+                this.weapType = this.N.curWeapType,
                 this.lastThrowablePickupSfxTicker -= e,
                 this.noCeilingRevealTicker -= e;
-                var P = t.vt[s].teamId
-                  , T = t.vt[this.__id].teamId == P;
+                var P = t.kt[s].teamId
+                  , T = t.kt[this.__id].teamId == P;
                 if (this.isNew) {
-                    var C = t.H(this.__id);
+                    var C = t.U(this.__id);
                     this.nameText.text = C.name,
                     this.nameText.visible = !S && T
                 }
-                for (var I = null, A = null, D = a.Z.m(), E = 0; E < D.length; E++) {
+                for (var I = null, A = null, D = a.K.l(), E = 0; E < D.length; E++) {
                     var B = D[E];
-                    if (B.active && !B.dead && B.layer == this.q.layer)
+                    if (B.active && !B.dead && B.layer == this.N.layer)
                         if (B.isBush) {
                             var O = .25 * this.rad;
                             b.intersectCircle(B.collider, this.pos, O) && (I = B)
@@ -30554,7 +30564,7 @@ webpackJsonp([0], {
                 })),
                 this.wasInWater = Y,
                 this.bleedTicker -= e,
-                this.q.downed && !this.q.dead && this.q.actionType == d.None && this.bleedTicker < 0) {
+                this.N.downed && !this.N.dead && this.N.actionType == d.None && this.bleedTicker < 0) {
                     this.bleedTicker = c.player.bleedTickRate;
                     var J = x.mul(this.dir, 1);
                     J = x.rotate(J, (Math.random() - .5) * Math.PI / 3),
@@ -30568,24 +30578,24 @@ webpackJsonp([0], {
                     })
                 }
                 if (S && !g) {
-                    var Q = this.U.curWeapIdx
-                      , $ = this.U.weapons[Q]
+                    var Q = this.q.curWeapIdx
+                      , $ = this.q.weapons[Q]
                       , ee = c.items[$.name];
-                    if (!this.playedDryFire && "gun" == this.kt() && (o.isBindPressed(u.Fire) || o.isBindDown(u.Fire) && "auto" == ee.fireMode) && 0 === this.U.action.type && !l) {
-                        var te = this.U.inventory[ee.ammo]
+                    if (!this.playedDryFire && "gun" == this.Mt() && (o.isBindPressed(u.Fire) || o.isBindDown(u.Fire) && "auto" == ee.fireMode) && 0 === this.q.action.type && !l) {
+                        var te = this.q.inventory[ee.ammo]
                           , ae = $.ammo;
                         0 === te && 0 === ae && (i.playSound(ee.sound.empty),
                         this.playedDryFire = !0)
                     }
                     o.isBindDown(u.Fire) || (this.playedDryFire = !1)
                 }
-                var ie = this.q.actionType;
+                var ie = this.N.actionType;
                 if (!S && this.curAction.type != ie) {
                     i.stopSound(this.actionSoundInstance);
                     var re = null;
                     switch (ie) {
                     case d.Reload:
-                        var oe = this.q.curWeapType;
+                        var oe = this.N.curWeapType;
                         "" != oe && (re = c.items[oe].sound.reload)
                     }
                     re && (this.actionSoundInstance = i.playSound(re, {
@@ -30599,9 +30609,9 @@ webpackJsonp([0], {
                 }
                 if (this.gunSwitchCooldown -= e,
                 this.fireDelay -= e,
-                S && (M || this.curWeapIdx != this.U.curWeapIdx)) {
+                S && (M || this.curWeapIdx != this.q.curWeapIdx)) {
                     var ne = this.curWeapIdx;
-                    this.curWeapIdx = this.U.curWeapIdx;
+                    this.curWeapIdx = this.q.curWeapIdx;
                     var se = c.items[this.weapType];
                     if ("melee" == se.type || "throwable" == se.type)
                         ("throwable" != se.type || this.lastThrowablePickupSfxTicker <= 0) && i.playSound(se.sound.deploy, {
@@ -30613,7 +30623,7 @@ webpackJsonp([0], {
                         var le = "gun_switch_01"
                           , me = !1;
                         if ((0 == ne || 1 == ne) && (0 == this.curWeapIdx || 1 == this.curWeapIdx) && this.fireDelay > 0) {
-                            var ce = c.items[this.U.weapons[ne].name];
+                            var ce = c.items[this.q.weapons[ne].name];
                             se && ce && void 0 !== se.deployGroup && void 0 !== ce.deployGroup && se.deployGroup == ce.deployGroup && (me = !0)
                         }
                         this.gunSwitchCooldown > 0 || me ? le = se.sound.deploy : this.gunSwitchCooldown = c.player.freeSwitchCooldown,
@@ -30641,11 +30651,11 @@ webpackJsonp([0], {
                       , xe = this.anim.bones[ge];
                     xe.weight > 0 ? this.bones[he].copy(z.lerp(xe.weight, ye, xe.pose)) : this.bones[he].copy(ye)
                 }
-                (this.visualsDirty || this.throwableStatePrev != this.throwableState) && this.Mt(),
+                (this.visualsDirty || this.throwableStatePrev != this.throwableState) && this.Tt(),
                 this.visualsDirty = !1,
                 this.throwableStatePrev = this.throwableState,
-                this.Pt();
-                for (var fe = this.layer, we = b.createCircle(this.pos, c.player.maxVisualRadius), be = !1, _e = !1, ve = !1, Se = a.it.m(), ke = 0; ke < Se.length; ke++) {
+                this.Ct();
+                for (var fe = this.layer, we = b.createCircle(this.pos, c.player.maxVisualRadius), be = !1, _e = !1, ve = !1, Se = a.at.l(), ke = 0; ke < Se.length; ke++) {
                     var ze = Se[ke];
                     if (ze.active) {
                         for (var Me = 0; Me < ze.stairs.length; Me++) {
@@ -30657,7 +30667,7 @@ webpackJsonp([0], {
                                   , Ie = x.sub(Ce, this.pos)
                                   , Ae = x.length(Ie);
                                 Ie = Ae > 1e-4 ? x.div(Ie, Ae) : x.create(1, 0),
-                                ve = v.intersectSegment(a.Z.m(), this.pos, Ie, Ae, .5, this.layer, !1) < Ae
+                                ve = v.intersectSegment(a.K.l(), this.pos, Ie, Ae, .5, this.layer, !1) < Ae
                             }
                             S && Pe.noCeilingReveal && Te && 0 != this.layer && (this.noCeilingRevealTicker = .25)
                         }
@@ -30672,19 +30682,19 @@ webpackJsonp([0], {
                 _e && (1 & fe && (1 & k.layer || !ve) || 2 & k.layer && !be) && (fe |= 2),
                 (1 & fe) != (1 & k.layer) || !_e || be && 0 != k.layer || (fe |= 2,
                 Ee += 100);
-                var Be = this.__id + (this.q.downed ? 0 : 131072) + (S ? 65536 : 0);
+                var Be = this.__id + (this.N.downed ? 0 : 131072) + (S ? 65536 : 0);
                 n.addPIXIObj(this.container, fe, Ee, Be),
                 this.isNew = !1
             },
-            ut: function(e, t) {
+            dt: function(e, t) {
                 var a = e.pointToScreen(this.pos)
                   , i = e.pixels(1);
                 this.container.position.set(a.x, a.y),
                 this.container.scale.set(i, i),
-                this.container.visible = !this.q.dead
+                this.container.visible = !this.N.dead
             },
-            Mt: function() {
-                var e = c.items[this.q.skin]
+            Tt: function() {
+                var e = c.items[this.N.skin]
                   , t = e.skinImg;
                 this.bodySprite.texture = m.Texture.fromImage(t.baseSprite),
                 this.bodySprite.tint = t.baseTint,
@@ -30707,19 +30717,19 @@ webpackJsonp([0], {
                 };
                 if (i(this.footLSprite, t.footTint, this.downed),
                 i(this.footRSprite, t.footTint, this.downed),
-                "" == this.q.chest || e.camo)
+                "" == this.N.chest || e.camo)
                     this.chestSprite.visible = !1;
                 else {
-                    var r = c.items[this.q.chest];
+                    var r = c.items[this.N.chest];
                     this.chestSprite.texture = m.Texture.fromImage("player-armor-base-01.img"),
                     this.chestSprite.scale.set(.25, .25),
                     this.chestSprite.tint = r.tint,
                     this.chestSprite.visible = !0
                 }
-                if ("" == this.q.helmet || e.camo)
+                if ("" == this.N.helmet || e.camo)
                     this.helmetSprite.visible = !1;
                 else {
-                    var o = c.items[this.q.helmet]
+                    var o = c.items[this.N.helmet]
                       , n = 3.33 * (this.downed ? 1 : -1);
                     this.helmetSprite.texture = m.Texture.fromImage("player-circle-base-01.img"),
                     this.helmetSprite.position.set(n, 0),
@@ -30727,10 +30737,10 @@ webpackJsonp([0], {
                     this.helmetSprite.tint = o.tint,
                     this.helmetSprite.visible = !0
                 }
-                if (this.St() > 0 && !e.camo && !this.downed) {
-                    var s = (c.items[this.q.backpack],
+                if (this.zt() > 0 && !e.camo && !this.downed) {
+                    var s = (c.items[this.N.backpack],
                     [10.25, 11.5, 12.75])
-                      , l = this.St()
+                      , l = this.zt()
                       , d = s[f.min(l - 1, s.length - 1)]
                       , u = .5 * (.4 + .03 * l);
                     this.backpackSprite.texture = m.Texture.fromImage("player-circle-base-01.img"),
@@ -30744,7 +30754,7 @@ webpackJsonp([0], {
                     }(this.backpackSprite, t.backpackSprite, t.backpackTint)
                 } else
                     this.backpackSprite.visible = !1;
-                if (this.q.wearingPan) {
+                if (this.N.wearingPan) {
                     var h = c.items.pan.hipImg;
                     this.hipSprite.texture = m.Texture.fromImage(h.sprite),
                     this.hipSprite.position.set(h.pos.x, h.pos.y),
@@ -30754,11 +30764,11 @@ webpackJsonp([0], {
                     this.hipSprite.visible = !0
                 } else
                     this.hipSprite.visible = !1;
-                var g = c.items[this.q.curWeapType];
+                var g = c.items[this.N.curWeapType];
                 if ("gun" == g.type) {
-                    this.gunRSprites.setType(this.q.curWeapType),
+                    this.gunRSprites.setType(this.N.curWeapType),
                     this.gunRSprites.setVisible(!0),
-                    g.isDual ? (this.gunLSprites.setType(this.q.curWeapType),
+                    g.isDual ? (this.gunLSprites.setType(this.N.curWeapType),
                     this.gunLSprites.setVisible(!0)) : this.gunLSprites.setVisible(!1);
                     var y = this.bodyContainer.getChildIndex(this.handRContainer)
                       , x = y + 1;
@@ -30768,7 +30778,7 @@ webpackJsonp([0], {
                 } else
                     this.gunLSprites.setVisible(!1),
                     this.gunRSprites.setVisible(!1);
-                if ("melee" == g.type && "fists" != this.q.curWeapType) {
+                if ("melee" == g.type && "fists" != this.N.curWeapType) {
                     var w = g.worldImg;
                     this.meleeSprite.texture = m.Texture.fromImage(w.sprite),
                     this.meleeSprite.pivot.set(-w.pos.x, -w.pos.y),
@@ -30815,7 +30825,7 @@ webpackJsonp([0], {
                         this.bodyContainer.addChild(this.handLContainer),
                         this.bodyContainer.addChild(this.handRContainer)
             },
-            Pt: function() {
+            Ct: function() {
                 var e = function(e, t) {
                     e.position.set(t.pos.x, t.pos.y),
                     e.pivot.set(-t.pivot.x, -t.pivot.y),
@@ -30825,14 +30835,14 @@ webpackJsonp([0], {
                 e(this.handRContainer, this.bones[M.HandR]),
                 e(this.footLContainer, this.bones[M.FootL]),
                 e(this.footRContainer, this.bones[M.FootR]);
-                var t = c.items[this.q.curWeapType];
+                var t = c.items[this.N.curWeapType];
                 !this.downed && this.currentAnim() != p.Revive && "gun" == t.type && t.worldImg.leftHandOffset && (this.handLContainer.position.x += t.worldImg.leftHandOffset),
                 this.handLContainer.position.x -= 1.125 * this.gunRecoilL,
                 this.handRContainer.position.x -= 1.125 * this.gunRecoilR,
                 this.bodyContainer.rotation = -Math.atan2(this.dir.y, this.dir.x)
             },
             selectIdlePose: function() {
-                var e = c.items[this.q.curWeapType]
+                var e = c.items[this.N.curWeapType]
                   , t = "fists";
                 return t = this.downed ? "downed" : e.anim && e.anim.idlePose ? e.anim.idlePose : "gun" == e.type ? e.pistol ? e.isDual ? "dualPistol" : "pistol" : "rifle" : "throwable" == e.type ? "throwable" : "fists",
                 _.IdlePoses[t] ? t : "fists"
@@ -30858,7 +30868,7 @@ webpackJsonp([0], {
                 case p.CrawlBackward:
                     return t("crawl_backward", !0);
                 case p.Melee:
-                    var a = c.items[this.q.curWeapType];
+                    var a = c.items[this.N.curWeapType];
                     if (!a.anim || !a.anim.attackAnims)
                         return t("fists", !0);
                     var i = a.anim.attackAnims
@@ -30914,7 +30924,7 @@ webpackJsonp([0], {
                 }
             },
             animPlaySound: function(e, t) {
-                var a = c.items[this.q.curWeapType]
+                var a = c.items[this.N.curWeapType]
                   , i = a.sound[t.sound];
                 void 0 !== i && e.audioManager.playSound(i, {
                     channel: "sfx",
@@ -30934,9 +30944,9 @@ webpackJsonp([0], {
                 e.particleBarn.addParticle("fragLever", this.layer, x.add(this.pos, i), x.mul(x.rotate(this.dir, .25 * -Math.PI), 3.5))
             },
             animMeleeCollision: function(e, t) {
-                var a = c.items[this.q.curWeapType];
+                var a = c.items[this.N.curWeapType];
                 if (a && "melee" == a.type && a.attackOffset) {
-                    for (var i = Math.atan2(this.dir.y, this.dir.x), r = x.add(this.pos, x.rotate(a.attackOffset, i)), o = a.attackRad, n = [], s = null, l = null, m = 0, d = e.map.Z.m(), p = 0; p < d.length; p++) {
+                    for (var i = Math.atan2(this.dir.y, this.dir.x), r = x.add(this.pos, x.rotate(a.attackOffset, i)), o = a.attackRad, n = [], s = null, l = null, m = 0, d = e.map.K.l(), p = 0; p < d.length; p++) {
                         var u = d[p];
                         if (!(!u.active || u.dead || u.height < c.player.meleeHeight) && y.sameLayer(u.layer, 1 & this.layer)) {
                             var g = b.intersectCircle(u.collider, r, o);
@@ -30958,12 +30968,12 @@ webpackJsonp([0], {
                             soundFn: "playGroup"
                         })
                     }
-                    for (var z = e.playerBarn.et.m(), M = 0; M < z.length; M++) {
+                    for (var z = e.playerBarn.$e.l(), M = 0; M < z.length; M++) {
                         var P = z[M];
-                        if (P.active && P.__id != this.__id && !P.q.dead && y.sameLayer(P.layer, this.layer)) {
+                        if (P.active && P.__id != this.__id && !P.N.dead && y.sameLayer(P.layer, this.layer)) {
                             var T = x.normalizeSafe(x.sub(P.pos, this.pos), x.create(1, 0))
                               , C = o + x.length(a.attackOffset);
-                            if (w.testCircleCircle(r, o, P.pos, P.rad) && f.eqAbs(C, v.intersectSegment(e.map.Z.m(), this.pos, T, C, c.player.meleeHeight, this.layer, !1))) {
+                            if (w.testCircleCircle(r, o, P.pos, P.rad) && f.eqAbs(C, v.intersectSegment(e.map.K.l(), this.pos, T, C, c.player.meleeHeight, this.layer, !1))) {
                                 var I = x.rotate(T, (Math.random() - .5) * Math.PI / 3);
                                 n.push({
                                     pos: P.pos,
@@ -31036,7 +31046,7 @@ webpackJsonp([0], {
             isUnderground: function(e) {
                 if (1 != this.layer)
                     return !1;
-                for (var t = e.it.m(), a = 0; a < t.length; a++) {
+                for (var t = e.at.l(), a = 0; a < t.length; a++) {
                     var i = t[a];
                     if (!(i.layers.length < 2)) {
                         var r = i.layers[1];
@@ -31048,27 +31058,27 @@ webpackJsonp([0], {
             }
         },
         s.prototype = {
-            l: function(e, t, a, i, r, o, n, s, l, m, d) {
-                for (var p = this.et.m(), u = 0; u < p.length; u++) {
+            n: function(e, t, a, i, r, o, n, s, l, m, d) {
+                for (var p = this.$e.l(), u = 0; u < p.length; u++) {
                     var h = p[u];
-                    h.active && h.l(e, this, o, s, i, n, a, t, l, m, d)
+                    h.active && h.n(e, this, o, s, i, n, a, t, l, m, d)
                 }
-                for (var y = this.H(t).teamId, w = this.getTeamInfo(y), b = 0; b < w.playerIds.length; b++) {
+                for (var y = this.U(t).teamId, w = this.getTeamInfo(y), b = 0; b < w.playerIds.length; b++) {
                     var _ = w.playerIds[b]
-                      , v = this.ne(_);
+                      , v = this.oe(_);
                     v && _ == t && this.setTeammateData(_, {
-                        pos: x.copy(v.q.pos),
-                        health: v.U.health,
+                        pos: x.copy(v.N.pos),
+                        health: v.q.health,
                         disconnected: !1,
-                        dead: v.q.dead,
-                        downed: v.q.downed
+                        dead: v.N.dead,
+                        downed: v.N.downed
                     });
                     var S = this.teammateData[_];
                     if (S)
                         if (v) {
                             var k = this.teammateData[_];
-                            k.pos = x.copy(v.q.pos),
-                            k.posTarget = x.copy(v.q.pos)
+                            k.pos = x.copy(v.N.pos),
+                            k.posTarget = x.copy(v.N.pos)
                         } else if (S) {
                             var z = (c.player.moveSpeed,
                             x.sub(S.posTarget, S.pos))
@@ -31080,29 +31090,29 @@ webpackJsonp([0], {
                 }
             },
             render: function(e, t) {
-                for (var a = this.et.m(), i = 0; i < a.length; i++) {
+                for (var a = this.$e.l(), i = 0; i < a.length; i++) {
                     var r = a[i];
-                    r.active && r.ut(e, t)
+                    r.active && r.dt(e, t)
                 }
             },
-            ne: function(e) {
-                for (var t = this.et.m(), a = 0; a < t.length; a++) {
+            oe: function(e) {
+                for (var t = this.$e.l(), a = 0; a < t.length; a++) {
                     var i = t[a];
                     if (i.active && i.__id === e)
                         return i
                 }
                 return null
             },
-            xt: function(e) {
-                this.vt[e.id] = {
+            wt: function(e) {
+                this.kt[e.id] = {
                     playerId: e.id,
                     teamId: e.teamId,
                     name: e.name,
                     anonName: "Player" + (e.id - 2750)
                 }
             },
-            H: function(e) {
-                return this.vt[e] || {
+            U: function(e) {
+                return this.kt[e] || {
                     name: "unknown",
                     teamId: 0
                 }
@@ -31131,7 +31141,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            Te: s
+            Pe: s
         }
     },
     a5bf0544: function(e, t, a) {
@@ -32068,7 +32078,7 @@ webpackJsonp([0], {
         e.exports = {
             GasRenderer: u,
             GasSafeZoneRenderer: h,
-            Ve: g
+            We: g
         }
     },
     aaf70d05: function(e, t) {
@@ -44523,7 +44533,7 @@ webpackJsonp([0], {
             this.sprite.visible = !1
         }
         function r() {
-            this.rt = new u.Pool(i)
+            this.it = new u.Pool(i)
         }
         var o = a("80ac57a6")
           , n = a("989ad62a")
@@ -44542,11 +44552,11 @@ webpackJsonp([0], {
             water: "frag_water"
         };
         i.prototype = {
-            a: function() {},
-            o: function() {
+            t: function() {},
+            a: function() {
                 this.sprite.visible = !1
             },
-            n: function(e, t, a, i) {
+            o: function(e, t, a, i) {
                 var r = this.sprite;
                 if (t) {
                     var s = n.items[e.type];
@@ -44577,8 +44587,8 @@ webpackJsonp([0], {
             }
         },
         r.prototype = {
-            l: function(e, t, a, i, r, o, u) {
-                for (var g = this.rt.m(), y = 0; y < g.length; y++) {
+            n: function(e, t, a, i, r, o, u) {
+                for (var g = this.it.l(), y = 0; y < g.length; y++) {
                     var x = g[y];
                     if (x.active) {
                         var f = (n.items[x.type],
@@ -44591,7 +44601,7 @@ webpackJsonp([0], {
                         }, b = {
                             obj: null,
                             pen: 0
-                        }, _ = l.createCircle(x.pos, x.rad), v = r.Z.m(), S = 0; S < v.length; S++) {
+                        }, _ = l.createCircle(x.pos, x.rad), v = r.K.l(), S = 0; S < v.length; S++) {
                             var k = v[S];
                             if (k.active && !k.dead && c.sameLayer(k.layer, x.layer)) {
                                 var z = l.intersect(k.collider, _);
@@ -44660,7 +44670,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            Be: r
+            Ee: r
         }
     },
     bdd2570b: function(e, t, a) {
@@ -45527,7 +45537,7 @@ webpackJsonp([0], {
             t
         }(c.Container);
         s.prototype = {
-            o: function() {
+            a: function() {
                 this.layerMask.parent && this.layerMask.parent.removeChild(this.layerMark),
                 this.layerMask.destroy(!0)
             },
@@ -45562,7 +45572,7 @@ webpackJsonp([0], {
                     this.layerMaskActive) {
                         a.beginFill(16777215, 1),
                         a.drawRect(0, 0, e.screenWidth, e.screenHeight);
-                        for (var i = t.it.m(), r = 0; r < i.length; r++) {
+                        for (var i = t.at.l(), r = 0; r < i.length; r++) {
                             var o = i[r];
                             if (o.active)
                                 for (var n = 0; n < o.mask.length; n++) {
@@ -45583,7 +45593,7 @@ webpackJsonp([0], {
                         a.beginFill(16777215, 1),
                         a.drawRect(0, 0, e.screenWidth, e.screenHeight),
                         a.beginFill(0, 1);
-                        for (var u = t.it.m(), h = 0; h < u.length; h++) {
+                        for (var u = t.at.l(), h = 0; h < u.length; h++) {
                             var g = u[h];
                             if (g.active)
                                 for (var y = 0; y < g.mask.length; y++) {
@@ -45602,7 +45612,7 @@ webpackJsonp([0], {
                     a.scale.set(_, -_)
                 }
             },
-            l: function(e, t, a) {
+            n: function(e, t, a) {
                 var i = this.layer > 0 ? 1 : 0;
                 this.layerAlpha += n(this.layerAlpha, i, 12 * e);
                 var r = 1 == this.layer && this.underground ? 1 : 0;
@@ -45628,7 +45638,7 @@ webpackJsonp([0], {
         },
         e.exports = {
             RenderGroup: u,
-            Se: s
+            ve: s
         }
     },
     c73dee75: function(e, t, a) {
@@ -45703,7 +45713,7 @@ webpackJsonp([0], {
                 var p = Math.atan2(i.dir.x, i.dir.y);
                 i.container.rotation = p - Math.PI / 2,
                 i.layer = e.layer;
-                var h = t.ne(i.playerId);
+                var h = t.oe(i.playerId);
                 h && 2 & h.layer && (i.layer |= 2);
                 var g = m.tracerColors[o.tracerColor]
                   , y = g.regular;
@@ -45719,8 +45729,8 @@ webpackJsonp([0], {
                 i.container.visible = !0,
                 a.addPIXIObj(i.container, i.layer, 19)
             },
-            l: function(e, t, a, o, n, h, g, y) {
-                for (var x = t.et.m(), f = 0; f < this.bullets.length; f++) {
+            n: function(e, t, a, o, n, h, g, y) {
+                for (var x = t.$e.l(), f = 0; f < this.bullets.length; f++) {
                     var w = this.bullets[f];
                     if (w.collided && (w.scale = d.max(w.scale - 6 * e, 0),
                     w.scale <= 0 && (w.collided = !1,
@@ -45730,7 +45740,7 @@ webpackJsonp([0], {
                           , _ = d.min(b, e * w.speed)
                           , v = u.copy(w.pos);
                         if (w.pos = u.add(w.pos, u.mul(w.dir, _)),
-                        !n.q.dead && p.sameAudioLayer(n.layer, w.layer)) {
+                        !n.N.dead && p.sameAudioLayer(n.layer, w.layer)) {
                             var S = u.length(u.sub(o.pos, w.pos));
                             w.whizHeard && w.whizInstance || S < 7.5 && !w.whizHeard && w.playerId != n.__id && (w.whizInstance = y.playGroup("bullet_whiz", {
                                 soundPos: w.pos,
@@ -45742,7 +45752,7 @@ webpackJsonp([0], {
                             var k = w.tracerAlphaRate;
                             w.bulletTrail.alpha = d.max(w.tracerAlphaMin, w.bulletTrail.alpha * k)
                         }
-                        for (var z = [], M = a.Z.m(), P = 0; P < M.length; P++) {
+                        for (var z = [], M = a.K.l(), P = 0; P < M.length; P++) {
                             var T = M[P];
                             if (!(!T.active || T.dead || !p.sameLayer(T.layer, w.layer) || T.height < m.bullet.height || w.reflectCount > 0 && T.__id == w.reflectObjId)) {
                                 var C = l.intersectSegment(T.collider, v, w.pos);
@@ -45757,7 +45767,7 @@ webpackJsonp([0], {
                         }
                         for (var I = 0; I < x.length; I++) {
                             var A = x[I];
-                            if (A.active && !A.q.dead && (p.sameLayer(A.q.layer, w.layer) || 2 & A.q.layer) && (A.__id != w.playerId || w.damageSelf)) {
+                            if (A.active && !A.N.dead && (p.sameLayer(A.N.layer, w.layer) || 2 & A.N.layer) && (A.__id != w.playerId || w.damageSelf)) {
                                 var D = null;
                                 if (A.hasActivePan()) {
                                     var E = A
@@ -45800,8 +45810,8 @@ webpackJsonp([0], {
                             return e.dist - t.dist
                         });
                         var W = !1
-                          , V = t.ne(w.playerId);
-                        V && (V.q.dead || V.q.downed) && (W = !0);
+                          , V = t.oe(w.playerId);
+                        V && (V.N.dead || V.N.downed) && (W = !0);
                         for (var H = !1, K = 0; K < z.length; K++) {
                             var X = z[K];
                             if ("obstacle" == X.type) {
@@ -45831,7 +45841,7 @@ webpackJsonp([0], {
                             }
                         }
                         if (!(2 & w.layer)) {
-                            for (var Q = a.it.m(), $ = w.layer, ee = 0; ee < Q.length; ee++) {
+                            for (var Q = a.at.l(), $ = w.layer, ee = 0; ee < Q.length; ee++) {
                                 var te = Q[ee];
                                 if (te.active) {
                                     for (var ae = !1, ie = !1, re = 0; re < te.stairs.length; re++) {
@@ -45859,7 +45869,7 @@ webpackJsonp([0], {
                 }
             },
             createBulletHit: function(e, t, a) {
-                var i = e.ne(t);
+                var i = e.oe(t);
                 i && a.playGroup("player_bullet_hit", {
                     soundPos: i.pos,
                     fallOff: 1,
@@ -45883,7 +45893,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            Ie: o,
+            Ce: o,
             playHitFx: r
         }
     },
@@ -45968,7 +45978,7 @@ webpackJsonp([0], {
           , z = 30
           , M = 60;
         i.prototype = {
-            a: function() {
+            t: function() {
                 var e = this
                   , t = this.audioManager
                   , a = this.config
@@ -46100,7 +46110,7 @@ webpackJsonp([0], {
                     }),
                     m.on("click", function() {
                         window.history && window.history.replaceState("", "", "/"),
-                        e.game && e.game.o(),
+                        e.game && e.game.a(),
                         I.leave()
                     }),
                     "WebSocket"in window)
@@ -46141,7 +46151,7 @@ webpackJsonp([0], {
                     F.renderer.plugins.interaction.destroy(),
                     F.ticker.add(this.update, this),
                     this.pixi = F,
-                    this.input = new y.re(this.pixi.view),
+                    this.input = new y.ie(this.pixi.view),
                     this.inputBinds = new x.InputBinds(this.input,this.config),
                     this.inputBindUi = new x.InputBindUi(this.input,this.inputBinds);
                     var L = Math.min(window.screen.width, window.screen.height)
@@ -46158,12 +46168,12 @@ webpackJsonp([0], {
                         p.storeGeneric("socketOn", t)
                     }
                       , U = function(t) {
-                        e.game.o(),
+                        e.game.a(),
                         e.errorMessage = t || "",
                         e.teamMenu.onGameComplete(),
                         e.setAppActive(!0)
                     };
-                    if (this.game = new h.wt(F,t,u,a,this.input,this.inputBinds,this.inputBindUi,q,U),
+                    if (this.game = new h._t(F,t,u,a,this.input,this.inputBinds,this.inputBindUi,q,U),
                     this.onResize(),
                     this.tryJoinTeam(!1),
                     this.audioManager.preloadSounds(),
@@ -46213,7 +46223,7 @@ webpackJsonp([0], {
                     var o = g.getScreenDimensions();
                     e.renderer.resize(o.width, o.height)
                 }
-                t && t.initialized && t.mt(),
+                t && t.initialized && t.lt(),
                 this.refreshUi(!1)
             },
             setAppActive: function(e) {
@@ -46412,7 +46422,7 @@ webpackJsonp([0], {
                   , l = document.body
                   , m = s.clamp(t.ticker.elapsedMS / 1e3, .001, 1 / 8);
                 e.update(m),
-                i.l(m),
+                i.n(m),
                 r.update(m),
                 window.freestar && (this.active ? document.hasFocus() && (this.adRectRefresh -= m,
                 this.adRectRefresh < 0 && (g.reloadFreestarAd("survivio_300x250_main"),
@@ -46432,14 +46442,14 @@ webpackJsonp([0], {
                 i.isSoundPlaying(c) && a.playing && i.stopSound(c),
                 this.active && a.ambientSounds.windInst && a.ambientSounds.riverInst && a.ambientSounds.riverInst.volume > .01 && (i.setVolume(a.ambientSounds.riverInst, 0),
                 i.setVolume(a.ambientSounds.windInst, 1)),
-                a && a.initialized && a.playing ? a.l(m) : t.renderer.backgroundColor = 7378501,
+                a && a.initialized && a.playing ? a.n(m) : t.renderer.backgroundColor = 7378501,
                 this.input.flush(),
                 window.appk) {
                     if (a.ws && a.ws.close(),
                     l) {
                         for (; l.firstChild; )
                             l.removeChild(l.firstChild);
-                        g.B(l)
+                        g.I(l)
                     }
                     p.storeGeneric("error", "err"),
                     p.enabled = !1,
@@ -46459,12 +46469,12 @@ webpackJsonp([0], {
         var P = new i;
         document.addEventListener("DOMContentLoaded", function(e) {
             setTimeout(function() {
-                P.a()
+                P.t()
             }, 0)
         }),
         window.addEventListener("load", function() {
             setTimeout(function() {
-                P.a()
+                P.t()
             }, 0)
         }),
         "#_=_" == window.location.hash && (window.location.hash = "",
@@ -46476,7 +46486,7 @@ webpackJsonp([0], {
             P.tryJoinTeam(!1)
         }),
         window.addEventListener("beforeunload", function(e) {
-            if (P.game && P.game.ct()) {
+            if (P.game && P.game.mt()) {
                 var t = "Do you want to reload the game?";
                 return e.returnValue = t,
                 t
@@ -46511,9 +46521,9 @@ webpackJsonp([0], {
         a("c347b8dd"),
         a("af8ba00f"),
         i.prototype = {
+            t: function() {},
             a: function() {},
-            o: function() {},
-            n: function(e, t, a, i) {
+            o: function(e, t, a, i) {
                 if (t) {
                     this.type = e.type,
                     this.layer = 0,
@@ -46557,7 +46567,7 @@ webpackJsonp([0], {
                     i.renderer.layerMaskDirty = !0
                 }
             },
-            l: function(e, t) {},
+            n: function(e, t) {},
             insideStairs: function(e) {
                 for (var t = 0; t < this.stairs.length; t++)
                     if (o.intersect(this.stairs[t].collision, e))
@@ -57390,8 +57400,17 @@ webpackJsonp([0], {
             oriToRad: i,
             radToOri: r,
             getBoundingCollider: o,
-            t: function(e, t) {
+            ht: .8,
+            gt: .9,
+            ut: function(e, t) {
                 return e.sprite && e.sprite.visible && e.sprite.alpha < t
+            },
+            It: function() {
+                for (var e = Object.keys(W), t = 0; t < e.length; t++) {
+                    var a = e[t]
+                      , i = W[a];
+                    "obstacle" == i.type && i.img.alpha <= .9 && F(!1, "Invalid obstacle alpha: " + a)
+                }
             }
         }
     },
@@ -58040,7 +58059,7 @@ webpackJsonp([0], {
         i(y, f.WeaponSlot.Throwable, w.EquipThrowable),
         y);
         h.prototype = {
-            o: function() {
+            a: function() {
                 for (var e = 0; e < this.eventListeners.length; e++) {
                     var t = this.eventListeners[e];
                     t.elem.removeEventListener(t.event, t.fn)
@@ -58058,7 +58077,7 @@ webpackJsonp([0], {
             flushInput: function() {
                 this.uiEvents = []
             },
-            l: function(e, t, a, i, r, o, n) {
+            n: function(e, t, a, i, r, o, n) {
                 var s = this.newState;
                 if (s.mobile = z.mobile,
                 s.touch = z.touch,
@@ -58085,53 +58104,53 @@ webpackJsonp([0], {
                     y += _.min(M / .25, 1),
                     z.mobile && (v.opacity = M < 6.5 ? 1 : 0)
                 }
-                s.health = t.q.dead ? 0 : _.max(t.U.health, 1),
-                s.boost = t.U.boost,
-                s.downed = t.q.downed;
+                s.health = t.N.dead ? 0 : _.max(t.q.health, 1),
+                s.boost = t.q.boost,
+                s.downed = t.N.downed;
                 var P = A.None
                   , T = null
                   , C = !0;
-                if (!t.q.dead) {
-                    for (var D = null, E = 0, B = o.Z.m(), O = 0; O < B.length; O++) {
+                if (!t.N.dead) {
+                    for (var D = null, E = 0, B = o.K.l(), O = 0; O < B.length; O++) {
                         var F = B[O];
                         if (F.active && !F.dead && S.sameLayer(F.layer, t.layer)) {
                             var L = F.getInteraction();
                             if (L) {
-                                var R = x.intersectCircle(F.collider, t.q.pos, L.rad);
+                                var R = x.intersectCircle(F.collider, t.N.pos, L.rad);
                                 R && R.pen >= E && (D = F,
                                 E = R.pen)
                             }
                         }
                     }
-                    D && !t.q.downed && (P = A.Object,
+                    D && !t.N.downed && (P = A.Object,
                     T = D,
                     C = !0);
-                    var j = r._t();
-                    if (j && !t.q.downed) {
+                    var j = r.St();
+                    if (j && !t.N.downed) {
                         var N = f.items[j.name]
-                          , q = t.zt(f.WeaponSlot.Primary)
-                          , U = t.zt(f.WeaponSlot.Secondary)
+                          , q = t.Pt(f.WeaponSlot.Primary)
+                          , U = t.Pt(f.WeaponSlot.Secondary)
                           , G = q && U
-                          , W = "gun" != N.type || !G || "gun" == t.kt();
+                          , W = "gun" != N.type || !G || "gun" == t.Mt();
                         (W || z.layout == z.Layout.Sm) && (P = A.Loot,
                         T = j),
                         C = W && (!s.touch || "gun" == N.type || "skin" == N.type)
                     }
-                    if (t.q.actionType == b.None && !t.q.downed)
-                        for (var V = i.H(t.__id).teamId, H = i.et.m(), K = 0; K < H.length; K++) {
+                    if (t.N.actionType == b.None && !t.N.downed)
+                        for (var V = i.U(t.__id).teamId, H = i.$e.l(), K = 0; K < H.length; K++) {
                             var X = H[K]
-                              , Z = i.H(X.__id).teamId;
-                            if (X.__id != t.__id && V == Z && X.q.downed && !X.q.dead && X.q.actionType != b.Revive) {
-                                var Y = k.length(k.sub(X.q.pos, t.q.pos));
+                              , Z = i.U(X.__id).teamId;
+                            if (X.__id != t.__id && V == Z && X.N.downed && !X.N.dead && X.N.actionType != b.Revive) {
+                                var Y = k.length(k.sub(X.N.pos, t.N.pos));
                                 Y < f.player.reviveMaxRange && S.sameLayer(X.layer, t.layer) && (P = A.Revive,
                                 T = t,
                                 C = !0)
                             }
                         }
-                    t.q.actionType == b.Revive && t.q.downed && (P = A.None,
+                    t.N.actionType == b.Revive && t.N.downed && (P = A.None,
                     T = null,
                     C = !1),
-                    (t.q.actionType == b.UseItem || t.q.actionType == b.Revive && !t.q.downed) && (P = A.Cancel,
+                    (t.N.actionType == b.UseItem || t.N.actionType == b.Revive && !t.N.downed) && (P = A.Cancel,
                     T = null,
                     C = !0)
                 }
@@ -58139,14 +58158,14 @@ webpackJsonp([0], {
                 s.interaction.text = this.getInteractionText(P, T),
                 s.interaction.key = this.getInteractionKey(P),
                 s.interaction.usable = C && !a;
-                for (var J = 0; J < t.U.weapons.length; J++) {
-                    var Q = t.U.weapons[J]
+                for (var J = 0; J < t.q.weapons.length; J++) {
+                    var Q = t.q.weapons[J]
                       , $ = s.weapons[J];
                     $.name = Q.name,
                     $.ammo = Q.ammo,
-                    "" != Q.name && "throwable" == f.items[Q.name].type && ($.ammo = t.U.inventory[Q.name]);
+                    "" != Q.name && "throwable" == f.items[Q.name].type && ($.ammo = t.q.inventory[Q.name]);
                     var ee = $.equipped;
-                    $.equipped = J == t.U.curWeapIdx,
+                    $.equipped = J == t.q.curWeapIdx,
                     $.selectable = ("" != Q.name || 0 == J || 1 == J) && !a;
                     var te = $.equipped ? 1 : .6
                       , ae = te - $.opacity
@@ -58163,24 +58182,24 @@ webpackJsonp([0], {
                     var ne = n.getBind($.bind);
                     $.bindStr = ne ? ne.toString() : ""
                 }
-                var se = s.weapons[t.U.curWeapIdx]
+                var se = s.weapons[t.q.curWeapIdx]
                   , le = f.items[se.name]
                   , me = se.ammo
-                  , ce = "throwable" == le.type ? 0 : t.U.inventory[le.ammo];
+                  , ce = "throwable" == le.type ? 0 : t.q.inventory[le.ammo];
                 s.ammo.current = me,
                 s.ammo.remaining = ce,
                 s.ammo.displayCurrent = "melee" != le.type,
                 s.ammo.displayRemaining = ce > 0;
                 for (var de = 0; de < s.scopes.length; de++) {
                     var pe = s.scopes[de];
-                    pe.visible = t.U.inventory[pe.type] > 0,
-                    pe.equipped = pe.visible && t.U.curScope == pe.type,
+                    pe.visible = t.q.inventory[pe.type] > 0,
+                    pe.equipped = pe.visible && t.q.curScope == pe.type,
                     pe.selectable = pe.visible && !a
                 }
-                for (var ue = t.St(), he = 0; he < s.loot.length; he++) {
+                for (var ue = t.zt(), he = 0; he < s.loot.length; he++) {
                     var ge = s.loot[he]
                       , ye = ge.count;
-                    ge.count = t.U.inventory[ge.type] || 0,
+                    ge.count = t.q.inventory[ge.type] || 0,
                     ge.maximum = f.bagSizes[ge.type][ue],
                     ge.selectable = ge.count > 0 && !a,
                     ge.count > ye && (ge.ticker = 0),
@@ -58194,7 +58213,7 @@ webpackJsonp([0], {
                 for (var we = 0; we < s.gear.length; we++) {
                     var be = s.gear[we]
                       , _e = "";
-                    "chest" == be.type ? _e = t.q.chest : "helmet" == be.type ? _e = t.q.helmet : "backpack" == be.type && "backpack00" == (_e = t.q.backpack) && (_e = "");
+                    "chest" == be.type ? _e = t.N.chest : "helmet" == be.type ? _e = t.N.helmet : "backpack" == be.type && "backpack00" == (_e = t.N.backpack) && (_e = "");
                     var ve = be.item;
                     be.item = _e,
                     be.selectable = "" != _e && !a,
@@ -58479,7 +58498,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            Ye: h,
+            Ze: h,
             loadStaticDomImages: g
         }
     },
@@ -58515,9 +58534,9 @@ webpackJsonp([0], {
             },
             this.dataLoaded = !1,
             this.mapTexture = null,
-            this.Z = new u.Pool(b),
-            this.at = new u.Pool(w),
-            this.it = new u.Pool(_),
+            this.K = new u.Pool(b),
+            this.tt = new u.Pool(w),
+            this.at = new u.Pool(_),
             this.deadObstacleIds = [],
             this.deadCeilingIds = [],
             this.terrain = null
@@ -58549,7 +58568,7 @@ webpackJsonp([0], {
             this.river = a || null
         };
         n.prototype = {
-            o: function() {
+            a: function() {
                 this.mapTexture && this.mapTexture.destroy(!0),
                 this.display.ground.destroy({
                     children: !0
@@ -58574,20 +58593,20 @@ webpackJsonp([0], {
             getMapTexture: function() {
                 return this.mapTexture
             },
-            l: function(e, t, a, i, r, o, n) {
-                for (var s = this.Z.m(), l = 0; l < s.length; l++) {
+            n: function(e, t, a, i, r, o, n) {
+                for (var s = this.K.l(), l = 0; l < s.length; l++) {
                     var m = s[l];
-                    m.active && (m.l(e, this, a, i, t, r),
+                    m.active && (m.n(e, this, a, i, t, r),
                     m.render(o, n))
                 }
-                for (var c = this.at.m(), d = 0; d < c.length; d++) {
+                for (var c = this.tt.l(), d = 0; d < c.length; d++) {
                     var p = c[d];
-                    p.active && (p.l(e, this, a, i, t, r, o),
+                    p.active && (p.n(e, this, a, i, t, r, o),
                     p.render(o, n))
                 }
-                for (var u = this.it.m(), h = 0; h < u.length; h++) {
+                for (var u = this.at.l(), h = 0; h < u.length; h++) {
                     var g = u[h];
-                    g.active && g.l(o, n)
+                    g.active && g.n(o, n)
                 }
             },
             renderTerrain: function(e, t, a) {
@@ -58797,7 +58816,7 @@ webpackJsonp([0], {
                 }
             },
             getGroundSurface: function(e, t) {
-                for (var a = "", i = this.at.m(), r = 0, o = 2 & t, n = 0; n < i.length; n++) {
+                for (var a = "", i = this.tt.l(), r = 0, o = 2 & t, n = 0; n < i.length; n++) {
                     var s = i[n];
                     if (s.active && !(s.zIdx < r) && !(s.layer != t && !o || 1 == s.layer && o))
                         for (var c = 0; c < s.surfaces.length; c++)
@@ -58829,7 +58848,7 @@ webpackJsonp([0], {
                 return x.distToPolygon(e, this.terrain.shore)
             },
             insideStructureStairs: function(e) {
-                for (var t = this.it.m(), a = 0; a < t.length; a++) {
+                for (var t = this.at.l(), a = 0; a < t.length; a++) {
                     var i = t[a];
                     if (i.active && i.insideStairs(e))
                         return !0
@@ -58837,7 +58856,7 @@ webpackJsonp([0], {
                 return !1
             },
             insideStructureMask: function(e) {
-                for (var t = this.it.m(), a = 0; a < t.length; a++) {
+                for (var t = this.at.l(), a = 0; a < t.length; a++) {
                     var i = t[a];
                     if (i.active && i.insideMask(e))
                         return !0
@@ -58846,7 +58865,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            Me: n
+            ze: n
         }
     },
     e100c355: function(e, t, a) {
@@ -59349,7 +59368,7 @@ webpackJsonp([0], {
             e
         }();
         e.exports = {
-            _e: c
+            be: c
         }
     },
     e5d16b4d: function(e, t, a) {
@@ -59371,7 +59390,7 @@ webpackJsonp([0], {
             this.uiManager = t,
             this.gameElem = s("#ui-game"),
             this.disable = !1,
-            this.st = null,
+            this.nt = null,
             this.playerBarn = a,
             this.camera = i,
             this.map = o,
@@ -59395,9 +59414,9 @@ webpackJsonp([0], {
             this.emoteMouseTriggered = !1,
             this.emoteScreenPos = w.create(0, 0),
             this.triggerPing = function() {
-                if (this.st) {
+                if (this.nt) {
                     var e = void 0;
-                    this.emoteSelector.ping == g.None || this.emoteWheelsGreyed ? this.emoteSelector.emote == p.None || this.emoteWheelsGreyed || (e = this.st.pos,
+                    this.emoteSelector.ping == g.None || this.emoteWheelsGreyed ? this.emoteSelector.emote == p.None || this.emoteWheelsGreyed || (e = this.nt.pos,
                     this.sendEmote({
                         type: this.emoteSelector.emote,
                         useLoadout: this.emoteSelector.useLoadout,
@@ -59418,9 +59437,9 @@ webpackJsonp([0], {
             }
             ,
             this.triggerEmote = function() {
-                if (this.st) {
+                if (this.nt) {
                     var e = void 0;
-                    this.emoteSelector.emote == p.None || this.emoteWheelsGreyed || (e = this.st.pos,
+                    this.emoteSelector.emote == p.None || this.emoteWheelsGreyed || (e = this.nt.pos,
                     this.sendEmote({
                         type: this.emoteSelector.emote,
                         useLoadout: this.emoteSelector.useLoadout,
@@ -59694,14 +59713,14 @@ webpackJsonp([0], {
         a("119e8c4c"),
         a("4b8d140f"),
         n.prototype = {
-            o: function() {
+            a: function() {
                 v.touch && (s(document).off("touchstart"),
                 this.emoteButtonElem.off("touchstart"),
                 this.emoteElems.off("touchstart"),
                 this.bigmapCollision.off("touchend")),
-                this.a()
+                this.t()
             },
-            a: function() {
+            t: function() {
                 this.emoteWheelsGreyed = !1,
                 this.emoteWheels.css("opacity", 1),
                 this.teamEmotesGreyed = !1,
@@ -59735,16 +59754,16 @@ webpackJsonp([0], {
                 this.incrementEmote()
             },
             addPing: function(e) {
-                if (this.st) {
+                if (this.nt) {
                     var t = y[e.type];
                     if (t) {
-                        this.teamId = this.playerBarn.H(this.st.__id).teamId;
+                        this.teamId = this.playerBarn.U(this.nt.__id).teamId;
                         for (var a = this.playerBarn.getTeamInfo(this.teamId), i = a.playerIds.length, r = 0; r < i; r++) {
                             var o = a.playerIds[r];
                             if (o == e.playerId) {
                                 var n = this.teamIndicators[r];
-                                this.playerBarn.H(o),
-                                this.st.__id,
+                                this.playerBarn.U(o),
+                                this.nt.__id,
                                 this.uiManager.setPlayerPing(e.type, r, e.pos, t.mapLife);
                                 for (var s in n)
                                     if (n.hasOwnProperty(s) && "ping" == s) {
@@ -59815,7 +59834,7 @@ webpackJsonp([0], {
             incrementEmote: function() {
                 ++this.emoteCounter >= l.player.emoteThreshold && (this.emoteHardTicker = this.emoteHardTicker > 0 ? this.emoteHardTicker : 1.5 * l.player.emoteHardCooldown)
             },
-            l: function(e, t, a, n, s, c, d, h, y) {
+            n: function(e, t, a, n, s, c, d, h, y) {
                 var x = this.playerBarn
                   , S = this.camera
                   , k = w.create(d.mousePos.x, d.mousePos.y);
@@ -59833,11 +59852,11 @@ webpackJsonp([0], {
                 this.emoteMouseTriggered = !0)),
                 h.isBindReleased(m.EmoteMenu) && (this.pingKeyTriggered && this.pingMouseTriggered && this.triggerPing(),
                 this.emoteMouseTriggered && this.triggerEmote()),
-                this.st = a,
-                t == a.__id && !a.q.dead || this.disable || (this.o(),
+                this.nt = a,
+                t == a.__id && !a.N.dead || this.disable || (this.a(),
                 this.disable = !0),
                 !this.disable) {
-                    var z = a.U.weapons[a.U.curWeapIdx]
+                    var z = a.q.weapons[a.q.curWeapIdx]
                       , M = l.items[z.name]
                       , P = "";
                     if (M && (P = M.ammo ? M.ammo : P),
@@ -59936,8 +59955,8 @@ webpackJsonp([0], {
                         var U = !1
                           , G = w.create(0, 0)
                           , W = 0
-                          , V = x.ne(q.playerId);
-                        if (V && !V.q.dead && (G = w.copy(V.pos),
+                          , V = x.oe(q.playerId);
+                        if (V && !V.N.dead && (G = w.copy(V.pos),
                         W = V.layer,
                         U = !0),
                         !U) {
@@ -59958,7 +59977,7 @@ webpackJsonp([0], {
                             q.isNew = !1,
                             q.pos = G,
                             q.lifeIn > 0 ? q.lifeIn -= e : q.life > 0 ? q.life -= e : q.lifeOut > 0 && (q.lifeOut -= e);
-                            var X = _.sameLayer(W, this.st.layer) ? 3 : W;
+                            var X = _.sameLayer(W, this.nt.layer) ? 3 : W;
                             c.addPIXIObj(q.container, X, 1e3, q.zIdx),
                             q.alive = q.alive && q.lifeOut > 0
                         } else
@@ -59970,12 +59989,12 @@ webpackJsonp([0], {
                     min: w.sub(S.pos, Z),
                     max: w.add(S.pos, Z)
                 };
-                this.teamId = x.H(a.__id).teamId;
+                this.teamId = x.U(a.__id).teamId;
                 for (var J = x.getTeamInfo(this.teamId), Q = J.playerIds.length, $ = 0; $ < Q; $++) {
                     var ee = this.teamIndicators[$]
                       , te = J.playerIds[$]
-                      , ae = (x.H(te),
-                    te == this.st.__id)
+                      , ae = (x.U(te),
+                    te == this.nt.__id)
                       , ie = x.getTeammateData(te);
                     if (ie)
                         for (var re in ee)
@@ -60110,7 +60129,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            Qe: n
+            Je: n
         }
     },
     e9735f40: function(e, t, a) {
@@ -60408,7 +60427,7 @@ webpackJsonp([0], {
         a("af8ba00f"),
         a("4b8d140f"));
         i.prototype = {
-            o: function() {},
+            a: function() {},
             onConfigModified: function(e) {
                 this.refreshUi()
             },
@@ -60523,10 +60542,10 @@ webpackJsonp([0], {
                 c.append(o("<li/>").append(m)),
                 o("#ui-editor-info-list").html(c)
             },
-            l: function(e, t, a, i) {
-                t.Y(m.Key.Plus) && (this.zoom -= 8),
-                t.Y(m.Key.Minus) && (this.zoom += 8),
-                t.Y(m.Key.Zero) && (this.zoom = a.dt()),
+            n: function(e, t, a, i) {
+                t.Z(m.Key.Plus) && (this.zoom -= 8),
+                t.Z(m.Key.Minus) && (this.zoom += 8),
+                t.Z(m.Key.Zero) && (this.zoom = a.ct()),
                 this.zoom = s.clamp(this.zoom, .5, 400);
                 var r = a.pos.x.toFixed(2)
                   , o = a.pos.y.toFixed(2);
@@ -60596,7 +60615,7 @@ webpackJsonp([0], {
                 i.flareContainer.rotation = u - Math.PI / 2,
                 i.trailContainer.rotation = u - Math.PI / 2,
                 i.layer = e.layer;
-                var h = t.ne(i.playerId);
+                var h = t.oe(i.playerId);
                 h && 2 & h.layer && (i.layer |= 2);
                 var g = o.tracerColors[l.tracerColor]
                   , y = g.regular;
@@ -60615,8 +60634,8 @@ webpackJsonp([0], {
                 i.flareContainer.visible = !0,
                 i.trailContainer.visible = !0
             },
-            l: function(e, t, a, i, r, o, c, d) {
-                for (var p = (t.et.m(),
+            n: function(e, t, a, i, r, o, c, d) {
+                for (var p = (t.$e.l(),
                 0); p < this.bullets.length; p++) {
                     var u = this.bullets[p];
                     if (u.collided && (u.flareScale = s.max(u.flareScale - .5 * e, 0),
@@ -60669,7 +60688,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            De: i
+            Ae: i
         }
     },
     f2372804: function(e, t, a) {
@@ -61729,7 +61748,7 @@ webpackJsonp([0], {
           , c = a("c2a798c8");
         a("af8ba00f"),
         i.prototype = {
-            a: function() {
+            t: function() {
                 this.id = null,
                 this.active = !0,
                 this.dirty = !1,
@@ -61744,18 +61763,18 @@ webpackJsonp([0], {
                 this.spriteUpdateTime = 0,
                 this.pos = c.create(0, 0)
             },
-            o: function(e) {
+            a: function(e) {
                 e.stopSound(this.soundInstance),
                 this.sprite.visible = !1,
                 this.active = !1
             }
         },
         r.prototype = {
-            o: function() {
+            a: function() {
                 for (var e = 0; e < this.planes.length; e++)
-                    this.planes[e].o(this.audioManager)
+                    this.planes[e].a(this.audioManager)
             },
-            yt: function(e) {
+            ft: function(e) {
                 for (var t = 0; t < this.planes.length; t++)
                     this.planes[t].dirty = !0;
                 for (var a = 0; a < e.length; a++) {
@@ -61766,16 +61785,16 @@ webpackJsonp([0], {
                             break
                         }
                     }
-                    r || (r = this.Tt(i)),
+                    r || (r = this.At(i)),
                     r.dirty = !1,
                     r.dropDeployed = i.dropDeployed
                 }
                 for (var s = 0; s < this.planes.length; s++) {
                     var l = this.planes[s];
-                    l.active && l.dirty && l.o(this.audioManager)
+                    l.active && l.dirty && l.a(this.audioManager)
                 }
             },
-            Tt: function(e) {
+            At: function(e) {
                 for (var t = null, a = 0; a < this.planes.length; a++)
                     if (!this.planes[a].active) {
                         t = this.planes[a];
@@ -61783,7 +61802,7 @@ webpackJsonp([0], {
                     }
                 t || (t = new i,
                 this.planes.push(t)),
-                t.a(),
+                t.t(),
                 t.id = e.id,
                 t.active = !0,
                 t.pos = c.copy(e.pos),
@@ -61793,7 +61812,7 @@ webpackJsonp([0], {
                 return t.sprite.rotation = r,
                 t
             },
-            l: function(e, t, a, i, r) {
+            n: function(e, t, a, i, r) {
                 for (var o = 0; o < this.planes.length; o++) {
                     var d = this.planes[o];
                     if (d.active) {
@@ -61824,7 +61843,7 @@ webpackJsonp([0], {
                         var u = t.pointToScreen(d.pos)
                           , h = t.pixels(d.rad / t.ppu)
                           , g = d.alpha;
-                        1 == a.layer ? g = 0 : (a.U.scopedIn || 1 & a.layer) && (g = .15),
+                        1 == a.layer ? g = 0 : (a.q.scopedIn || 1 & a.layer) && (g = .15),
                         d.renderAlpha = l.lerp(3 * e, d.renderAlpha, g),
                         d.sprite.position.set(u.x, u.y),
                         d.sprite.scale.set(h, h),
@@ -61836,7 +61855,7 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            Le: r
+            Fe: r
         }
     },
     feb8fc30: function(e, t, a) {
@@ -61898,7 +61917,7 @@ webpackJsonp([0], {
         a("ce29f17f"))
           , n = a("26be8056");
         i.prototype = {
-            a: function(e, t, a, i) {
+            t: function(e, t, a, i) {
                 this.active = !0,
                 this.clientData = {
                     label: a,
@@ -61930,18 +61949,18 @@ webpackJsonp([0], {
                 this.mobileOffset = n.isLandscape() ? e.mobileOffsetLandscape : e.mobileOffsetPortrait) : (this.container.scale = new r.Point(1,1),
                 this.mobileOffset = 0)
             },
-            o: function(e) {
+            a: function(e) {
                 this.active = !1,
                 e && (this.container.visible = !1,
                 this.container.clear())
             },
-            l: function(e, t, a) {
+            n: function(e, t, a) {
                 if (!this.active)
                     return void (this.container.alpha = this.clientData.keepAlive ? 1 : 0);
                 this.clientData.elapsed += e,
                 this.clientData.elapsed = Math.min(this.clientData.elapsed, this.clientData.duration),
                 (this.clientData.elapsed >= this.clientData.duration || t.dead) && (this.render(a),
-                this.o(),
+                this.a(),
                 this.callback && this.callback(t))
             },
             render: function(e) {
@@ -61976,8 +61995,8 @@ webpackJsonp([0], {
             }
         },
         e.exports = {
-            Ke: i
+            He: i
         }
     }
 }, ["c99e6613"]);
-//# sourceMappingURL=app.d1b16191.js.map
+//# sourceMappingURL=app.8cf7f0f5.js.map

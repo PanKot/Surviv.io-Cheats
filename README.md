@@ -32,16 +32,6 @@ This is a Surviv.io cheat loaded as a Chrome extension. It was originally develo
 - If you need to temporary disable auto aim, just hold Left shift key.
 - Now the auto aim will aim for enemy, closest to mouse pointer
 
-## Telemetry
-
-If an error occurs, it is sent to our servers. Thanks to this, we are able to repair them quickly.
-The data sent is:
-- browser version
-- extension ID
-- error data
-
-After fixing the error, the data is deleted. We do not collect any private data.
-
 ## 🔨 Installation
 
 1. Download [this repo as a ZIP file](https://github.com/PowerOfUniverse/Surviv.io-Cheats/archive/master.zip). 
