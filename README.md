@@ -1,5 +1,5 @@
 ![alt text](http://i67.tinypic.com/357hs47.png "Survivio Banner")
-# Welcome to Surviv.io-Cheats(Actual working on client: 0.5.1)(former account: Najlepszy56)!
+# Welcome to Surviv.io-Cheats(Actual working on client: 0.6.0)(former account: Najlepszy56)!
 This is a Surviv.io cheat loaded as a Chrome extension. It was originally developed by w3x731 and I've decided to continue the development of the code.
 
 
@@ -18,6 +18,8 @@ This is a Surviv.io cheat loaded as a Chrome extension. It was originally develo
 * Auto heal
 * Auto fire(Just press the left mouse button)
 * Planes tracking + visibility of air drop on minimap has been extended
+* AutoDodge [beta]
+* Triggerbot
 
 ### :information_source: Instructions
 
@@ -29,16 +31,6 @@ This is a Surviv.io cheat loaded as a Chrome extension. It was originally develo
 - Emotes are available after pressing the B key(instead right mouse key).
 - If you need to temporary disable auto aim, just hold Left shift key.
 - Now the auto aim will aim for enemy, closest to mouse pointer
-
-## Telemetry
-
-If an error occurs, it is sent to our servers. Thanks to this, we are able to repair them quickly.
-The data sent is:
-- browser version
-- extension ID
-- error data
-
-After fixing the error, the data is deleted. We do not collect any private data.
 
 ## 🔨 Installation
 
