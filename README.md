@@ -1,4 +1,4 @@
-### :warning: :warning: :warning: Source code
+### :warning: Source code :warning:
 It is possible to obtain the source code. The code is current with the latest version of the game. For more details:
 
 Discord: damianop5 # 5293
