@@ -1,11 +1,14 @@
+### :warning: :warning: :warning: Source code
+It is possible to obtain the source code. The code is current with the latest version of the game. For more details:
+
+Discord: damianop5 # 5293
+
+Email: damian.op@onet.eu
+
 ![alt text](http://i67.tinypic.com/357hs47.png "Survivio Banner")
 # Welcome to Surviv.io-Cheats(Actual working on client: 0.6.31)!
 This is a Surviv.io cheat loaded as a Chrome extension. It was originally developed by w3x731 and I've decided to continue the development of the code.
 
-###### ---- :warning: ---- Source code
-It is possible to obtain the source code. The code is current with the latest version of the game. For more details:
-Discord: damianop5 # 5293
-Email: damian.op@onet.eu
 
 ### 💪 Features
 
