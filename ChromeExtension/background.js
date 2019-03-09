@@ -1,7 +1,6 @@
 var generateVaribaleName = function() {
 	return '_' + Math.random().toString(36).substring(7);
 }
-
 var variableNames = {
 	game: generateVaribaleName(),
 	exports: generateVaribaleName(),
@@ -9,7 +8,6 @@ var variableNames = {
 	emitActionCb: generateVaribaleName(),
 	smokeAlpha: generateVaribaleName()
 }
-
 /*
 	When you working with options, its need to repatching code every time.
 */
